@@ -95,7 +95,7 @@ function Question() {
       setQuestions([]);
     } catch (error) {
       console.error("Error sending questions:", error.response || error.message);
-      alert("خطا در ارسال سوالات");
+      alert("خطا");
     }
   };
   
