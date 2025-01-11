@@ -18,7 +18,7 @@ function Profile() {
   const [isCityDropdownOpen, setIsCityDropdownOpen] = useState(false);
   const [provinceCityData, setProvinceCityData] = useState({ provinces: [], cities: {} });
   const [cookies] = useCookies(["access_token"]);
-
+            
   useEffect(() => {
     const fetchProvinceCityData = async () => {
       try {

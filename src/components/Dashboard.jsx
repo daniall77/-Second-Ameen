@@ -1,22 +1,23 @@
-import React from "react";
+import React  from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import Profile from "./Profile.jsx";
 import AdminProfile from "./AdminProfile.jsx";
 import EditorProfile from "./EditorProfile.jsx";
-import { useCookies } from "react-cookie"; 
+import { useCookies } from "react-cookie";
+import avator from '/image/1.png';
 
 function Dashboard() {
   const location = useLocation();
-  const [cookies] = useCookies(["userImage" , "role"]); 
+  const [cookies] = useCookies(["role"]);
 
-  const renderProfileComponent = () => {
+  const renderProfileComponent = () => { 
     if (cookies.role === "admin") {
       return <AdminProfile />;
     } else if (cookies.role === "editor") {
       return <EditorProfile />;
-    } else  {
+    } else {
       return <Profile />;
-    } 
+    }
   };
 
   return (
@@ -28,16 +29,17 @@ function Dashboard() {
       <div className="Dashboard_sidebar">
         <div className="Dashboard_sidebar_top">
           <Link to="Image">
-            <img   
-              src={cookies.userImage || "https://www.w3schools.com/howto/img_avatar.png"} 
+            <img
+              src={avator}
               alt="User Avatar"
+              style={{ width: "100px", height: "100px", borderRadius: "50%" }}
             />
-          </Link> 
+          </Link>
         </div>
         <div className="Dashboard_sidebar_bottom">
           <ul className="Dashboard_sidebar_menu">
             <li
-              className={`Dashboard_sidebar_item ${ 
+              className={`Dashboard_sidebar_item ${
                 location.pathname === "/Dashboard" ? "active" : ""
               }`}
             >
@@ -60,9 +62,9 @@ function Dashboard() {
               }`}
             >
               <Link to="Exam" className="Dashboard_sidebar_link">
-                     آزمون
+                آزمون
               </Link>
-            </li>   
+            </li>
             <li className="Dashboard_sidebar_item">
               <Link to="/Login" className="Dashboard_sidebar_link">
                 خروج
@@ -76,6 +78,15 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
+
+
+
+
+
+
+
+
 
 
 

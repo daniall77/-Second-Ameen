@@ -31,6 +31,8 @@ function Exam() {
         }
       );
 
+      
+
       alert(`آزمون با موفقیت ایجاد شد: ${response.data.title}`);
       setExamTitle("");
       setExamDuration("");

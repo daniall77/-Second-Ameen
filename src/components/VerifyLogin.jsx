@@ -78,7 +78,7 @@ function VerifyLogin() {
       if (response.data && response.data.access_token) {
         toast.success( 'با موفقیت وارد شدید' , { duration: 2000 });
 
-        setCookie('access_token', response.data.access_token, { path: '/'});
+        setCookie('access_token', response.data.access_token, { path: '/' , maxAge: 31536000});
 
         setTimeout(() => {
           navigate('/');
@@ -109,7 +109,7 @@ function VerifyLogin() {
       if (responseAgain.data && responseAgain.data.access_token) {
         toast.success('ثبت نام با موفقیت انجام شد', { duration: 2000 });
 
-        setCookie('access_token', responseAgain.data.access_token, { path: '/' });
+        setCookie('access_token', responseAgain.data.access_token, { path: '/' , maxAge: 31536000 });
      
         setTimeout(() => {
           navigate('/');
