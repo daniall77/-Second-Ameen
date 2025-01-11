@@ -1,8 +1,8 @@
 import React  from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import Profile from "./Profile.jsx";
-import AdminProfile from "./AdminProfile.jsx";
-import EditorProfile from "./EditorProfile.jsx";
+import UserDashboard from "./UserDashboard.jsx";
+import AdminDashboard from "./AdminDashboard.jsx";
+import EditorDashboard from "./EditorDashboard.jsx";
 import { useCookies } from "react-cookie";
 import avator from '/image/1.png';
 
@@ -12,11 +12,11 @@ function Dashboard() {
 
   const renderProfileComponent = () => { 
     if (cookies.role === "admin") {
-      return <AdminProfile />;
+      return <AdminDashboard />;
     } else if (cookies.role === "editor") {
-      return <EditorProfile />;
+      return <EditorDashboard />;
     } else {
-      return <Profile />;
+      return <UserDashboard />;
     }
   };
 

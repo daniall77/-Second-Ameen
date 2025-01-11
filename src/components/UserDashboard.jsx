@@ -3,7 +3,7 @@ import axios from "axios";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { useCookies } from "react-cookie";
 
-function Profile() {
+function UserDashboard() {
   
   const [province, setProvince] = useState("");
   const [city, setCity] = useState("");
@@ -206,8 +206,8 @@ function Profile() {
   };
 
   return (
-    <div className="Profile_container">
-      <h2 className="Profile_heading">ویرایش پروفایل</h2>
+    <div className="UserDashboard_container">
+      <h2 className="UserDashboard_heading">ویرایش پروفایل</h2>
 
      
       <div className="Profile_input_group">
@@ -348,7 +348,7 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default UserDashboard;
 
 
 
