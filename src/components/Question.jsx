@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 function Question() {
   const location = useLocation();
@@ -10,6 +12,7 @@ function Question() {
   const [options, setOptions] = useState(["", "", "", ""]);
   const [correctOption, setCorrectOption] = useState("");
   const [descriptiveScore, setDescriptiveScore] = useState("");
+  const [cookies] = useCookies(["access_token"]);
 
   const handleAddQuestion = () => {
     if (examType === "test") {
@@ -19,7 +22,7 @@ function Question() {
       }
       setQuestions([
         ...questions,
-        { question: currentQuestion, options: [...options], correct: correctOption, type: "test" },
+        { question_number: questions.length + 1, question_text: currentQuestion, options: [...options], correct_option: correctOption, type: "test" },
       ]);
     } else {
       if (!currentQuestion || !descriptiveScore || isNaN(descriptiveScore) || descriptiveScore <= 0) {
@@ -28,7 +31,7 @@ function Question() {
       }
       setQuestions([
         ...questions,
-        { question: currentQuestion, score: descriptiveScore, type: "descriptive" },
+        { question_number: questions.length + 1, question_text: currentQuestion, score: descriptiveScore, type: "descriptive" },
       ]);
     }
     setCurrentQuestion("");
@@ -37,21 +40,65 @@ function Question() {
     setDescriptiveScore("");
   };
 
-  const handleSendQuestions = () => {
+  const handleSendQuestions = async () => {
     if (questions.length === 0) {
       alert("لطفاً حداقل یک سوال اضافه کنید");
       return;
     }
-
   
-    const payload = { examId, questions };
-    console.log("Sending questions to server:", payload);
+    try {
+  
+      const testQuestions = questions.filter((q) => q.type === "test").map((q) => ({
+        exam_id: examId,
+        question_number: q.question_number,
+        question_text: q.question_text,
+        option_1: q.options[0],
+        option_2: q.options[1],
+        option_3: q.options[2],
+        option_4: q.options[3],
+        correct_option: parseInt(q.correct_option) + 1,
+      }));
+  
+      if (testQuestions.length > 0) {
+        const response = await axios.post("http://localhost:8000/questions/test", testQuestions, {
+          headers: {
+            Authorization: `Bearer ${cookies.access_token}`,
+          },
+        });
+        console.log("Test questions sent:", response.data);
+      }
+  
+      
+      const descriptiveQuestions = questions.filter((q) => q.type === "descriptive").map((q) => ({
+        exam_id: examId,
+        question_number: q.question_number,
+        question_text: q.question_text,
+        score: parseInt(q.score),
+      }));
 
-
-
-    alert("سوالات با موفقیت ارسال شدند");
-    setQuestions([]);
+      console.log(descriptiveQuestions);
+  
+      if (descriptiveQuestions.length > 0) {
+        const response = await axios.post(
+          "http://localhost:8000/questions/descriptive",
+          descriptiveQuestions,
+          {
+            headers: {
+              Authorization: `Bearer ${cookies.access_token}`,
+            },
+          }
+        );
+        console.log("Descriptive questions sent:", response.data);
+      }
+  
+      alert("سوالات با موفقیت ارسال شدند");
+      setQuestions([]);
+    } catch (error) {
+      console.error("Error sending questions:", error.response || error.message);
+      alert("ارسال سوالات با خطا مواجه شد.");
+    }
   };
+  
 
   return (
     <div className="question_container">
@@ -114,11 +161,11 @@ function Question() {
       <ul>
         {questions.map((q, index) => (
           <li key={index}>
-            <strong>سوال {index + 1}: {q.question}</strong>
+            <strong>سوال {q.question_number}: {q.question_text}</strong>
             {q.type === "test" && (
               <ul>
                 {q.options.map((opt, idx) => (
-                  <li key={idx} style={{ color: idx === parseInt(q.correct) ? "green" : "black" }}>
+                  <li key={idx} style={{ color: idx === parseInt(q.correct_option) ? "green" : "black" }}>
                     {opt}
                   </li>
                 ))}
@@ -137,6 +184,7 @@ function Question() {
 }
 
 export default Question;
+
 
 
 
