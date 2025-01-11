@@ -12,7 +12,7 @@ function Exam() {
 
   const handleCreateExam = async () => {
 
-    const examData = {
+    const examData = {  
       title: examTitle,
       description: examType,
       timer: parseInt(examDuration),
@@ -23,23 +23,25 @@ function Exam() {
     try {
       const response = await axios.post(
         "http://localhost:8000/exams",
-        examData,
+        examData,   
         {
           headers: {
             Authorization: `Bearer ${cookies.access_token}`,
           },
-        }
+        }   
       );
 
-      
 
-      alert(`آزمون با موفقیت ایجاد شد: ${response.data.title}`);
+      alert(`آزمون با موفقیت ایجاد شد: ${examData.title}`);
       setExamTitle("");
       setExamDuration("");
       setExamType("test");
+           
+      console.log(response.data);
+      const examId = response.data; 
 
     
-      navigate("/Dashboard/Exam/Question", { state: { examType } });
+      navigate("/Dashboard/Exam/Question", { state: { examType, examId } });
     } catch (error) {
       console.error("Error creating exam:", error.response || error.message);
 
@@ -89,7 +91,7 @@ function Exam() {
       ) : (
         <div className="user_editor_section">
           <h2>نمایش آزمون‌ها</h2>
-          <p>این بخش برای یوزر یا ادیتور طراحی می‌شود.</p>
+          <p>این بخش برای یوزر یا ادیتور طراحی می‌شود</p>
         </div>
       )}
     </div>

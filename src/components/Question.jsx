@@ -3,12 +3,13 @@ import { useLocation } from "react-router-dom";
 
 function Question() {
   const location = useLocation();
-  const examType = location.state?.examType || "test"; 
+  const examType = location.state?.examType || "test";
+  const examId = location.state?.examId; 
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
   const [correctOption, setCorrectOption] = useState("");
-  const [descriptiveScore, setDescriptiveScore] = useState(""); 
+  const [descriptiveScore, setDescriptiveScore] = useState("");
 
   const handleAddQuestion = () => {
     if (examType === "test") {
@@ -33,7 +34,7 @@ function Question() {
     setCurrentQuestion("");
     setOptions(["", "", "", ""]);
     setCorrectOption("");
-    setDescriptiveScore(""); 
+    setDescriptiveScore("");
   };
 
   const handleSendQuestions = () => {
@@ -42,7 +43,12 @@ function Question() {
       return;
     }
 
-    console.log("Sending questions to server:", questions);
+  
+    const payload = { examId, questions };
+    console.log("Sending questions to server:", payload);
+
+
+
     alert("سوالات با موفقیت ارسال شدند");
     setQuestions([]);
   };
@@ -51,6 +57,7 @@ function Question() {
     <div className="question_container">
       <h2>ایجاد سوالات</h2>
       <p>نوع آزمون: {examType === "test" ? "تستی" : "تشریحی"}</p>
+      <p>شناسه آزمون: {examId}</p>
 
       <div className="question_form">
         <label>متن سوال:</label>
