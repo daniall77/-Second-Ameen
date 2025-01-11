@@ -1,8 +1,8 @@
 @font-face {
   font-family: "vazir";
-  src: url("/public/font/Farsi-Digits-Without-Latin/Vazir-FD-WOL.woff") format("woff"),
-  url("/public/font/Farsi-Digits-Without-Latin/Vazir-FD-WOL.woff2") format("woff2"),
-  url("/public/font/Farsi-Digits-Without-Latin/Vazir-FD-WOL.ttf") ;
+  src: url("/font/Farsi-Digits-Without-Latin/Vazir-FD-WOL.woff") format("woff"),
+  url("/font/Farsi-Digits-Without-Latin/Vazir-FD-WOL.woff2") format("woff2"),
+  url("/font/Farsi-Digits-Without-Latin/Vazir-FD-WOL.ttf") ;
 }
 
 

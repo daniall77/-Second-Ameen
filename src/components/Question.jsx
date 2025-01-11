@@ -47,48 +47,48 @@ function Question() {
     }
   
     try {
+      for (const question of questions) {
+        if (question.type === "test") {
+          const testQuestionPayload = {
+            exam_id: examId,
+            question_number: question.question_number,
+            question_text: question.question_text,
+            option_1: question.options[0],
+            option_2: question.options[1],
+            option_3: question.options[2],
+            option_4: question.options[3],
+            correct_option: parseInt(question.correct_option) + 1,
+          };
   
-      const testQuestions = questions.filter((q) => q.type === "test").map((q) => ({
-        exam_id: examId,
-        question_number: q.question_number,
-        question_text: q.question_text,
-        option_1: q.options[0],
-        option_2: q.options[1],
-        option_3: q.options[2],
-        option_4: q.options[3],
-        correct_option: parseInt(q.correct_option) + 1,
-      }));
+          const response = await axios.post(
+            "http://localhost:8000/questions/test",
+            testQuestionPayload,
+            {
+              headers: {
+                Authorization: `Bearer ${cookies.access_token}`,
+              },
+            }
+          );
+          console.log("Test question sent:", response.data);
+        } else if (question.type === "descriptive") {
+          const descriptiveQuestionPayload = {
+            exam_id: examId,
+            question_number: question.question_number,
+            question_text: question.question_text,
+            score: parseInt(question.score),
+          };
   
-      if (testQuestions.length > 0) {
-        const response = await axios.post("http://localhost:8000/questions/test", testQuestions, {
-          headers: {
-            Authorization: `Bearer ${cookies.access_token}`,
-          },
-        });
-        console.log("Test questions sent:", response.data);
-      }
-  
-      
-      const descriptiveQuestions = questions.filter((q) => q.type === "descriptive").map((q) => ({
-        exam_id: examId,
-        question_number: q.question_number,
-        question_text: q.question_text,
-        score: parseInt(q.score),
-      }));
-
-      console.log(descriptiveQuestions);
-  
-      if (descriptiveQuestions.length > 0) {
-        const response = await axios.post(
-          "http://localhost:8000/questions/descriptive",
-          descriptiveQuestions,
-          {
-            headers: {
-              Authorization: `Bearer ${cookies.access_token}`,
-            },
-          }
-        );
-        console.log("Descriptive questions sent:", response.data);
+          const response = await axios.post(
+            "http://localhost:8000/questions/descriptive",
+            descriptiveQuestionPayload,
+            {
+              headers: {
+                Authorization: `Bearer ${cookies.access_token}`,
+              },
+            }
+          );
+          console.log("Descriptive question sent:", response.data);
+        }
       }
   
       alert("سوالات با موفقیت ارسال شدند");
@@ -184,7 +184,6 @@ function Question() {
 }
 
 export default Question;
-
 
 
 
