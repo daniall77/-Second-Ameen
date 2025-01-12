@@ -1,22 +1,46 @@
-import React  from "react";
+import React, { useState, useEffect } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import UserDashboard from "./UserDashboard.jsx";
 import AdminDashboard from "./AdminDashboard.jsx";
 import EditorDashboard from "./EditorDashboard.jsx";
+import axios from "axios";
 import { useCookies } from "react-cookie";
 import avator from '/image/1.png';
 
 function Dashboard() {
   const location = useLocation();
-  const [cookies] = useCookies(["role"]);
+  const [cookies] = useCookies(["role", "access_token"]);
+  const [profileImage, setProfileImage] = useState(avator); 
 
-  const renderProfileComponent = () => { 
+  useEffect(() => {
+    const fetchProfileImage = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/info", {
+          headers: {
+            Authorization: `Bearer ${cookies.access_token}`,
+          },
+        });
+        
+        if (response.status === 200 && response.data.photo_name) {
+          const imagePath = `http://localhost:8000/profiles/${response.data.photo_name}`;
+          setProfileImage(imagePath); 
+        }
+      } catch (error) {
+        console.error("خطا در دریافت تصویر پروفایل:", error);
+      }
+    };
+
+    fetchProfileImage();   
+     
+  }, [cookies.access_token]);
+
+  const renderProfileComponent = () => {
     if (cookies.role === "admin") {
       return <AdminDashboard />;
     } else if (cookies.role === "editor") {
       return <EditorDashboard />;
     } else {
-      return <UserDashboard />;
+      return <UserDashboard />; 
     }
   };
 
@@ -30,7 +54,7 @@ function Dashboard() {
         <div className="Dashboard_sidebar_top">
           <Link to="Image">
             <img
-              src={avator}
+              src={profileImage}
               alt="User Avatar"
               style={{ width: "100px", height: "100px", borderRadius: "50%" }}
             />
@@ -78,6 +102,7 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
 
 
 

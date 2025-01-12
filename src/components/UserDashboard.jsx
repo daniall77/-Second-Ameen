@@ -43,6 +43,8 @@ function UserDashboard() {
       }
     };
 
+
+
     const fetchUserInfo = async () => {
       try {
         const response = await axios.get("http://localhost:8000/info", {
@@ -50,19 +52,32 @@ function UserDashboard() {
             Authorization: `Bearer ${cookies.access_token}`,
           },
         });
-        console.log(response.data);
+    
         const userInfo = response.data;
-        setProvince(userInfo.province || "");
-        setCity(userInfo.city || "");
+    
+        setProvince(userInfo.province_id || "");
+        setCity(userInfo.city_id || "");
         setSchool(userInfo.school || "");
         setGrade(userInfo.grade || "");
         setBirthDate(userInfo.birthday || "");
-        setIsReadOnly(true);
-        setIsEditEnabled(true);
+    
+       
+        const isComplete =
+          userInfo.province_id &&
+          userInfo.city_id &&
+          userInfo.school &&
+          userInfo.grade &&
+          userInfo.birthday;
+    
+        setIsReadOnly(isComplete); 
+        setIsEditEnabled(isComplete); 
       } catch (error) {
         console.error("Error fetching user info:", error);
       }
     };
+    
+
+
 
     fetchProvinceCityData();
     fetchUserInfo();
