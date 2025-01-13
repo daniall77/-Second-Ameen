@@ -10,6 +10,7 @@ function VerifyLogin() {
   const [cookies, setCookie] = useCookies(['access_token']);
   const [timer, setTimer] = useState(120);
   const [isVerifyDisabled, setIsVerifyDisabled] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false); 
   const location = useLocation();
   const navigate = useNavigate();
   const phoneNumber = location.state?.phone_number;
@@ -19,12 +20,11 @@ function VerifyLogin() {
 
   useEffect(() => {
     if (!toastShown.current) {
-      toast.success(`کد تأیید به شماره ${phoneNumber} ارسال شد`, { duration: 9000 });
+      toast.success(`کد تأیید به شماره ${phoneNumber} ارسال شد`, { duration: 4000 });
       toastShown.current = true;
     }
 
     startTimer();
-    
     return () => clearInterval(timerRef.current);
   }, [phoneNumber]);
 
@@ -46,19 +46,23 @@ function VerifyLogin() {
 
   const handleInputChange = (index, value) => {
     if (/[^0-9]/.test(value)) return;
-
+  
     const newCode = [...verificationCode];
     newCode[index] = value;
     setVerificationCode(newCode);
-
+  
     if (value && index < 3) {
       inputsRef.current[index + 1].focus();
     }
-
+  
     if (index === 3 && newCode.every((digit) => digit)) {
-      handleVerify(newCode.join(''));
+      setIsLoading(true); 
+      setTimeout(() => {
+        handleVerify(newCode.join('')); 
+      }, 1000);
     }
   };
+  
 
   const handleVerify = async (code) => {
     if (isVerifyDisabled) return; 
@@ -68,21 +72,19 @@ function VerifyLogin() {
       return;
     }
 
+    setIsLoading(true); 
     try {
       const response = await axios.post(
         `http://localhost:8000/verify?phone_number=${encodeURIComponent(phoneNumber)}&verification_code=${encodeURIComponent(code)}`
       );
 
-      console.log('Verification response:', response.data);
-
       if (response.data && response.data.access_token) {
-        toast.success( 'با موفقیت وارد شدید' , { duration: 2000 });
-
-        setCookie('access_token', response.data.access_token, { path: '/' , maxAge: 31536000});
+        toast.success('با موفقیت وارد شدید', { duration: 1000 });
+        setCookie('access_token', response.data.access_token, { path: '/', maxAge: 31536000 });
 
         setTimeout(() => {
           navigate('/');
-        }, 2000);
+        }, 1000);
       }
     } catch (error) {
       console.error('Verification error:', error);
@@ -94,26 +96,29 @@ function VerifyLogin() {
         toast.error('خطایی رخ داده است. لطفاً دوباره تلاش کنید', { duration: 4000 });
         setErrorMessage('خطایی رخ داده است. لطفاً دوباره تلاش کنید');
       }
+    } finally {
+      setIsLoading(false); 
     }
+
   };
 
-  const handleResendCode = () => {
-    
+  const handleResendCode = async () => {
+
     try {
-      const responseAgain = axios.post(
+      const responseAgain =  await axios.post(
         `http://localhost:8000/login?phone_number=${encodeURIComponent(phoneNumber)}`
       );
 
       console.log('Verification response:', responseAgain.data);
 
       if (responseAgain.data && responseAgain.data.access_token) {
-        toast.success('ثبت نام با موفقیت انجام شد', { duration: 2000 });
+        toast.success('ثبت نام با موفقیت انجام شد', { duration: 1000 });
 
         setCookie('access_token', responseAgain.data.access_token, { path: '/' , maxAge: 31536000 });
-     
+
         setTimeout(() => {
           navigate('/');
-        }, 2000);
+        }, 1000);
       }
     } catch (error) {
       console.error('Verification error:', error);
@@ -127,14 +132,14 @@ function VerifyLogin() {
       }
     }
 
-    
     startTimer(); 
     toast.success(`کد تأیید جدید به شماره ${phoneNumber} ارسال شد`, { duration: 4000 });
   };
 
+  
   return (
     <div className="Verify_container">
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster className="Verify_Toaster" position="top-right" reverseOrder={false} />
       <div className="Verify_box">
         <h2 className="Verify_h">کد تأیید برای شماره موبایل {phoneNumber} ارسال شد</h2>
         <div className="Verify_input_container">
@@ -152,28 +157,32 @@ function VerifyLogin() {
           ))}
         </div>
         {timer > 0 ? (
-          <div style={{ color: 'gray', marginTop: '10px' }}>ارسال مجدد کد تا {timer} ثانیه دیگر</div>
+          <div className="Verify_text" >ارسال مجدد کد تا {timer} ثانیه دیگر</div>
         ) : (
-          <button type="button" className="ResendCodeButton" onClick={handleResendCode}>
-            ارسال مجدد کد
-          </button>
+          <div className="Verify_div_button_one">
+                    <button type="button" className="Verify_button_one" onClick={handleResendCode}>
+                         ارسال مجدد کد
+                    </button>
+          </div>
+
         )}
-        {errorMessage && <div style={{ color: 'red', marginTop: '10px' }}>{errorMessage}</div>}
-        <button
-          type="button"
-          className="Verify_submit"
-          onClick={() => handleVerify(verificationCode.join(''))}
-          disabled={isVerifyDisabled}
-        >
-          تأیید
-        </button>
+        {errorMessage && <div className="Verify_div_error" >{errorMessage}</div>}
+        <div className="Verify_div_button_two">
+                <button
+                      type="button"
+                      className="Verify_button_two"
+                      onClick={() => handleVerify(verificationCode.join(''))}
+                      disabled={isVerifyDisabled || isLoading} 
+                    >
+                      {isLoading ? 'در حال ورود...' : 'تأیید'}
+                </button>
+        </div>
       </div>
     </div>
   );
 }
 
 export default VerifyLogin;
-
 
 
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState }  from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function Register() {
   const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false); 
 
 
   const handleRegister = (data) => {
@@ -24,7 +25,8 @@ function Register() {
       first_name: firstName,
       last_name: lastName,
     };
-
+    
+    setIsLoading(true); 
     axios.post('http://localhost:8000/signup', requestData)
       .then((response) => {
         console.log('Response from server:', response.data);
@@ -42,6 +44,9 @@ function Register() {
         } else {
           alert('خطایی رخ داده است. لطفاً دوباره تلاش کنید');
         }
+      })
+      .finally(() => {
+        setIsLoading(false); 
       });
   };
 
@@ -64,8 +69,8 @@ function Register() {
     <div className="Register_container">
       <div className="Register_box">
         <h2 className="Register_h">ثبت‌نام</h2>
-        <form onSubmit={handleSubmit(handleRegister)}>
-          <div>
+        <form className="Register_form" onSubmit={handleSubmit(handleRegister)}>
+          <div className="Register_form_div" >
             <input
               type="text"
               placeholder="شماره موبایل"
@@ -82,11 +87,11 @@ function Register() {
               }}
             />
             {errors.username && (
-              <div style={{ color: 'red' }}>{errors.username.message}</div>
+              <div className="Register_div_errors" >{errors.username.message}</div>
             )}
           </div>
 
-          <div>
+          <div className="Register_form_div" >
             <input
               type="text"
               placeholder="نام"
@@ -96,11 +101,11 @@ function Register() {
               onInput={(e) => handleNameInput(e, 'firstName')}
             />
             {errors.firstName && (
-              <div style={{ color: 'red' }}>{errors.firstName.message}</div>
+              <div className="Register_div_errors" >{errors.firstName.message}</div>
             )}
           </div>
 
-          <div>
+          <div className="Register_form_div" >
             <input
               type="text"
               placeholder="نام خانوادگی"
@@ -110,11 +115,18 @@ function Register() {
               onInput={(e) => handleNameInput(e, 'lastName')}
             />
             {errors.lastName && (
-              <div style={{ color: 'red' }}>{errors.lastName.message}</div>
+              <div className="Register_div_errors" >{errors.lastName.message}</div>
             )}
           </div>
-
-          <button type="submit">ثبت‌نام</button>
+          <div className="Register_button_div">
+              <button
+                className="Register_button"
+                type="submit"
+                disabled={isLoading} 
+              >
+                    {isLoading ? 'در حال ارسال کد...' : 'ثبت‌نام'}
+              </button>
+          </div>
         </form>
       </div>
     </div>

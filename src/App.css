@@ -178,100 +178,6 @@ body {
 
 
 
-
-/* start page  VerifyRegister && VerifyLogin */
-
-
-.Verify_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f7f7f7;
-}
-
-.Verify_box {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 90%;
-  max-width: 400px;
-}
-
-.Verify_h {
-  font-size: 18px;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.Verify_input_container {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.Verify_input {
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  font-size: 20px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  transition: border-color 0.3s ease;
-}
-
-.Verify_input:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-.Verify_submit {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.Verify_submit:disabled {
-  background-color: #d6d6d6;
-  cursor: not-allowed;
-}
-
-.Verify_submit:hover:not(:disabled) {
-  background-color: #0056b3;
-}
-
-.ResendCodeButton {
-  padding: 8px 16px;
-  font-size: 14px;
-  color: #007bff;
-  background-color: transparent;
-  border: 1px solid #007bff;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 10px;
-}
-
-.ResendCodeButton:hover {
-  background-color: #007bff;
-  color: white;
-}
-
-
-
-/* end page  VerifyRegister  &&  VerifyLogin */
-
-
-
-
 /* start page  Dashboard */
 
 
@@ -596,3 +502,523 @@ body {
 
 
 /* end page  Hesab */
+
+
+
+
+/* start page Login  */
+
+
+.Login_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh; 
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #ffffff;
+  padding: 20px; 
+  position: relative; 
+  overflow: hidden;
+  font-family: "vazir";
+}
+
+
+.Login_background_circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  filter: blur(50px);
+  animation: move 15s infinite alternate ease-in-out;
+  z-index: 0;
+  font-family: "vazir";
+}
+
+.Login_background_circle.one {
+  width: 200px;
+  height: 200px;
+  top: 10%;
+  left: 20%;
+  font-family: "vazir";
+}
+
+.Login_background_circle.two {
+  width: 300px;
+  height: 300px;
+  bottom: 15%;
+  right: 10%;
+  font-family: "vazir";
+}
+
+
+@keyframes move {
+  from {
+    transform: translate(0, 0);
+    font-family: "vazir";
+  }
+  to {
+    transform: translate(20px, 20px);
+    font-family: "vazir";
+  }
+}
+
+
+.Login_box {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 1s ease-in-out;
+  z-index: 1; 
+  position: relative;
+  font-family: "vazir";
+}
+
+
+.Login_h {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: "vazir";
+}
+
+.Login_h_link {
+  color: #00c9ff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  font-family: "vazir";
+}
+
+.Login_h_link:hover {
+  color: #fff;
+  font-family: "vazir";
+}
+
+
+.Login_form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+  font-family: "vazir";
+}
+
+.Login_form_div {
+  position: relative;
+  font-family: "vazir";
+}
+
+.Login_form_input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  transition: box-shadow 0.3s ease;
+  font-family: "vazir";
+}
+
+.Login_form_input:focus {
+  box-shadow: 0 0 8px rgba(0, 201, 255, 0.8);
+  font-family: "vazir";
+}
+
+
+.Login_div_errors {
+  color: #ff4d4d;
+  font-size: 14px;
+  margin-top: 5px;
+  animation: fadeIn 0.3s ease;
+  font-family: "vazir";
+}
+
+
+.Login_button_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px; 
+  padding: 10px; 
+  width: 100%; 
+  font-family: "vazir";
+}
+
+.Login_button {
+  width: 100%; 
+  max-width: 400px; 
+  padding: 12px 0; 
+  font-size: 16px; 
+  font-weight: bold; 
+  color: #ffffff; 
+  background: linear-gradient(135deg, #00c9ff, #92fe9d); 
+  border: none; 
+  border-radius: 8px;
+  cursor: pointer; 
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease; 
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); 
+  text-align: center; 
+  display: inline-block; 
+  font-family: "vazir";
+}
+
+.Login_button:hover {
+  transform: translateY(-2px); 
+  box-shadow: 0 5px 15px rgba(0, 201, 255, 0.6); 
+  background: linear-gradient(135deg, #92fe9d, #00c9ff); 
+  font-family: "vazir";
+}
+
+.Login_button:active {
+  transform: translateY(1px); 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  font-family: "vazir"; 
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+    font-family: "vazir";
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    font-family: "vazir";
+  }
+}
+
+
+
+/* end page Login  */
+
+
+
+/* start page Register  */
+
+.Register_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  font-family: "vazir";
+}
+
+
+.Register_box {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  padding: 30px 40px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  font-family: "vazir";
+}
+
+
+.Register_h {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+
+.Register_form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: "vazir";
+}
+
+
+.Register_form_div {
+  position: relative;
+  font-family: "vazir";
+}
+
+.Register_form_input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  font-family: "vazir";
+}
+
+.Register_form_input:focus {
+  border: 1px solid #2575fc;
+  box-shadow: 0 0 8px rgba(37, 117, 252, 0.3);
+  font-family: "vazir";
+}
+
+
+.Register_div_errors {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: left;
+  font-family: "vazir";
+}
+
+
+.Register_button_div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  font-family: "vazir";
+}
+
+.Register_button {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+  font-family: "vazir";
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.Register_button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(106, 17, 203, 0.6);
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+  font-family: "vazir";
+}
+
+.Register_button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  font-family: "vazir";
+}
+
+
+@media (max-width: 480px) {
+  .Register_box {
+    padding: 20px 20px;
+    font-family: "vazir";
+  }
+
+  .Register_h {
+    font-size: 20px;
+    font-family: "vazir";
+  }
+
+  .Register_form_input {
+    font-size: 13px;
+    padding: 10px 12px;
+    font-family: "vazir";
+  }
+
+  .Register_button {
+    font-size: 14px;
+    padding: 10px 0;
+    font-family: "vazir";
+  }
+}
+
+
+/* end page Register  */
+
+
+
+
+
+
+
+/* start page  VerifyRegister && VerifyLogin */
+
+.Verify_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6a85b6, #bac8e0);
+  font-family: "Vazir" ;
+}
+
+
+.Verify_box {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  padding: 30px 40px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  font-family: "vazir";
+}
+
+
+.Verify_h {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  font-family: "vazir";
+}
+
+
+.Verify_input_container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+  font-family: "vazir";
+}
+
+.Verify_input {
+  width: 50px;
+  height: 60px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  font-family: "vazir";
+}
+
+.Verify_input:focus {
+  border: 2px solid #ff758c;
+  box-shadow: 0 0 8px rgba(255, 117, 140, 0.4);
+  font-family: "vazir";
+}
+
+
+.Verify_div_button_one {
+  margin-top: 15px;
+  font-family: "vazir";
+}
+
+.Verify_button_one {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+  font-family: "Vazir";
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.Verify_button_one:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 117, 140, 0.6);
+  font-family: "vazir";
+}
+
+.Verify_button_one:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  font-family: "vazir";
+}
+
+
+.Verify_div_button_two {
+  margin-top: 20px;
+  font-family: "vazir";
+}
+
+.Verify_button_two {
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+  font-family: "Vazir";
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.Verify_button_two:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(106, 17, 203, 0.5);
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+  font-family: "vazir";
+}
+
+.Verify_button_two:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  font-family: "vazir";
+}
+
+.Verify_button_two:disabled {
+  cursor: not-allowed;
+  background: #cccccc;
+  box-shadow: none;
+  font-family: "vazir";
+}
+
+
+.Verify_text {
+  font-size: 14px;
+  color: #666666;
+  margin-top: 10px;
+  font-family: "vazir";
+}
+
+
+.Verify_div_error {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 10px;
+  text-align: center;
+  font-family: "vazir";
+}
+
+
+@media (max-width: 480px) {
+  .Verify_box {
+    padding: 20px;
+    font-family: "vazir";
+  }
+
+  .Verify_h {
+    font-size: 18px;
+    font-family: "vazir";
+  }
+
+  .Verify_input {
+    width: 45px;
+    height: 55px;
+    font-size: 20px;
+    font-family: "vazir";
+  }
+
+  .Verify_button_one, .Verify_button_two {
+    font-size: 14px;
+    padding: 10px 15px;
+    font-family: "vazir";
+  }
+}
+
+/* end page  VerifyRegister && VerifyLogin */

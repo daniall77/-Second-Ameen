@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React , { useState }  from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 function Login() {
   const { register, handleSubmit, setError, formState: { errors } } = useForm();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); 
+
 
   const handleLogin = (data) => {
     const { username } = data;
@@ -28,7 +29,7 @@ function Login() {
       return;
     }
 
-    setIsLoading(true);  
+    setIsLoading(true);
 
     
     axios
@@ -38,7 +39,7 @@ function Login() {
       navigate("/VerifyLogin", { state: { phone_number: username } });
     })
     .catch((error) => {
-      setIsLoading(false);
+      
       if (error.response && error.response.status === 400) {
         setError("username", {
           type: "manual",
@@ -47,6 +48,9 @@ function Login() {
       } else {
         alert("خطای ناشناخته! لطفاً دوباره تلاش کنید");
       }
+    })
+    .finally(() => {
+      setIsLoading(false); 
     });
 
     
@@ -63,6 +67,10 @@ function Login() {
 
   return (
     <div className="Login_container">
+      
+      <div className="Login_background_circle one"></div>
+      <div className="Login_background_circle two"></div>
+  
       <div className="Login_box">
         <h2 className="Login_h">ورود</h2>
         <h2 className="Login_h">
@@ -71,8 +79,8 @@ function Login() {
             ثبت نام کنید
           </Link>
         </h2>
-        <form onSubmit={handleSubmit(handleLogin)}>
-          <div>
+        <form className="Login_form" onSubmit={handleSubmit(handleLogin)}>
+          <div className="Login_form_div">
             <input
               type="text"
               placeholder="شماره موبایل"
@@ -82,12 +90,18 @@ function Login() {
               onInput={handleInput}
             />
             {errors.username && (
-              <div style={{ color: "red" }}>{errors.username.message}</div>
+              <div className="Login_div_errors">{errors.username.message}</div>
             )}
           </div>
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? "در حال ارسال..." : "ورود"}
-          </button>
+          <div className="Login_button_div">
+                <button
+                  type="submit"
+                  className="Login_button"
+                  disabled={isLoading} 
+                >
+                          {isLoading ? "در حال ارسال کد..." : "ورود"}
+                </button>
+          </div>
         </form>
       </div>
     </div>
