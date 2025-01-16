@@ -3,6 +3,7 @@ import axios from "axios";
 import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { useCookies } from "react-cookie";
 
+
 function UserDashboard() {
   
   const [province, setProvince] = useState("");
@@ -225,17 +226,17 @@ function UserDashboard() {
       <h2 className="UserDashboard_heading">ویرایش پروفایل</h2>
 
      
-      <div className="Profile_input_group">
-        <label htmlFor="province" className="Profile_label">
+      <div className="UserDashboard_input_group">
+        <label htmlFor="province" className="UserDashboard_label">
           استان:
         </label>
         <select
           id="province"
           value={province}
           onChange={handleProvinceChange}
-          className="Profile_input"
+          className="UserDashboard_input"
         >
-          <option value="">انتخاب کنید</option>
+          <option  value="">انتخاب کنید</option>
           {provinceCityData.provinces.map((prov) => (
             <option key={prov} value={prov}>
               {prov}
@@ -245,28 +246,28 @@ function UserDashboard() {
       </div>
 
    
-      <div className="Profile_input_group">
-        <label htmlFor="city" className="Profile_label">
+      <div className="UserDashboard_input_group">
+        <label htmlFor="city" className="UserDashboard_label">
           شهرستان:
         </label>
         <div
-          className={`Profile_custom_select ${!province ? "disabled" : ""}`}
+          className={`UserDashboard_custom_select ${!province ? "disabled" : ""}`}
           onClick={() => province && setIsCityDropdownOpen(!isCityDropdownOpen)}
         >
-          <div className="Profile_selected_value">
+          <div className="UserDashboard_selected_value">
             {city || "انتخاب کنید"}
           </div>
           {isCityDropdownOpen && (
-            <div className="Profile_dropdown_menu">
+            <div className="UserDashboard_dropdown_menu">
               <input
                 type="text"
                 value={citySearch}
                 onChange={(e) => setCitySearch(e.target.value)}
                 placeholder="جستجوی شهرستان"
-                className="Profile_search_input"
+                className="UserDashboard_search_input"
                 autoFocus
               />
-              <div className="Profile_options">
+              <div className="UserDashboard_options">
                 {provinceCityData.cities[province]
                   ?.filter((ct) =>
                     ct.toLowerCase().includes(citySearch.toLowerCase())
@@ -274,7 +275,7 @@ function UserDashboard() {
                   .map((filteredCity) => (
                     <div
                       key={filteredCity}
-                      className="Profile_option"
+                      className="UserDashboard_option"
                       onClick={() => handleCitySelect(filteredCity)}
                     >
                       {filteredCity}
@@ -283,7 +284,7 @@ function UserDashboard() {
                 {provinceCityData.cities[province]?.filter((ct) =>
                   ct.toLowerCase().includes(citySearch.toLowerCase())
                 ).length === 0 && (
-                  <div className="Profile_no_option">شهرستانی یافت نشد</div>
+                  <div className="UserDashboard_no_option">شهرستانی یافت نشد</div>
                 )}
               </div>
             </div>
@@ -292,8 +293,8 @@ function UserDashboard() {
       </div>
 
 
-      <div className="Profile_input_group">
-        <label htmlFor="school" className="Profile_label">
+      <div className="UserDashboard_input_group">
+        <label htmlFor="school" className="UserDashboard_label">
           نام مدرسه:
         </label>
         <input
@@ -302,14 +303,14 @@ function UserDashboard() {
           value={school}
           onChange={handleSchoolChange}
           readOnly={isReadOnly}
-          className="Profile_input"
+          className="UserDashboard_input"
         />
-        {schoolError && <p className="Profile_error">{schoolError}</p>}
+        {schoolError && <p className="UserDashboard_error">{schoolError}</p>}
       </div>
 
 
-      <div className="Profile_input_group">
-        <label htmlFor="grade" className="Profile_label">
+      <div className="UserDashboard_input_group">
+        <label htmlFor="grade" className="UserDashboard_label">
           پایه تحصیلی:
         </label>
         <input
@@ -318,14 +319,14 @@ function UserDashboard() {
           value={grade}
           onChange={handleGradeChange}
           readOnly={isReadOnly}
-          className="Profile_input"
+          className="UserDashboard_input"
         />
-        {gradeError && <p className="Profile_error">{gradeError}</p>}
+        {gradeError && <p className="UserDashboard_error">{gradeError}</p>}
       </div>
 
  
-      <div className="Profile_input_group">
-        <label htmlFor="birthDate" className="Profile_label">
+      <div className="UserDashboard_input_group">
+        <label htmlFor="birthDate" className="UserDashboard_label">
           تاریخ تولد:
         </label>
         <input
@@ -339,21 +340,21 @@ function UserDashboard() {
             handleBirthDateChange({ target: { value: englishDigits } });
           }}
           readOnly={isReadOnly}
-          className="Profile_input"
+          className="UserDashboard_input"
           placeholder="YYYY/MM/DD"
         />
-        {error && <p className="Profile_error">{digitsEnToFa(error)}</p>}
+        {error && <p className="UserDashboard_error">{digitsEnToFa(error)}</p>}
       </div>
 
  
-      <div className="Profile_button_group">
-        <button onClick={handleSubmit} className="Profile_button submit">
+      <div className="UserDashboard_button_group">
+        <button onClick={handleSubmit} className="UserDashboard_button submit">
           ثبت
         </button>
 
         <button
           onClick={handleEdit}
-          className={`Profile_button edit ${isEditEnabled ? "enabled" : ""}`}
+          className={`UserDashboard_button edit ${isEditEnabled ? "enabled" : ""}`}
           disabled={!isEditEnabled}
         >
           ویرایش

@@ -33,21 +33,21 @@ function UserExam() {
 
   return (
     <div className="UserExam_container">
-      <h2>نمایش آزمون‌ها</h2>
+      <h2 className="UserExam_h">نمایش آزمون‌ها</h2>
       {error ? (
-        <p style={{ color: "red" }}>{error}</p>
+        <p className="UserExam_p" >{error}</p>
       ) : exams.length > 0 ? (
-        <div className="exams_list">
+        <div className="UserExam_div">
           {exams.map((exam) => (
-            <div key={exam.ID} className="exam_box">
-              <h3>{exam.Title}</h3>
-              <p>توضیحات: {exam.Description}</p>
-              <p>مدت زمان: {exam.Timer} دقیقه</p>
+            <div key={exam.ID} className="UserExam_div_text">
+              <h3 className="UserExam_div_h" >{exam.Title}</h3>
+              <p className="UserExam_div_des" >توضیحات: {exam.Description}</p>
+              <p className="UserExam_div_ti" >مدت زمان: {exam.Timer} دقیقه</p>
             </div>
           ))}
         </div>
       ) : (
-        <p>هیچ آزمونی برای نمایش وجود ندارد.</p>
+        <p className="UserExam_nama" >هیچ آزمونی برای نمایش وجود ندارد</p>
       )}
     </div>
   );

@@ -101,14 +101,15 @@ function Question() {
   
 
   return (
-    <div className="question_container">
-      <h2>ایجاد سوالات</h2>
-      <p>نوع آزمون: {examType === "test" ? "تستی" : "تشریحی"}</p>
-      <p>شناسه آزمون: {examId}</p>
+    <div className="Question_container">
+      <h2 className="Question_h">ایجاد سوالات</h2>
+      <p className="Question_examType" >نوع آزمون: {examType === "test" ? "تستی" : "تشریحی"}</p>
+      <p className="Question_examId" >شناسه آزمون: {examId}</p>
 
-      <div className="question_form">
-        <label>متن سوال:</label>
-        <textarea
+      <div className="Question_div">
+        <label className="Question_div_label" >متن سوال:</label>
+        <textarea 
+          className="Question_div_textarea"
           value={currentQuestion}
           onChange={(e) => setCurrentQuestion(e.target.value)}
           placeholder="متن سوال را وارد کنید"
@@ -116,12 +117,13 @@ function Question() {
       </div>
 
       {examType === "test" && (
-        <div className="test_question_form">
-          <label>گزینه‌ها:</label>
+        <div className="Question_test">
+          <label className="Question_test_label">گزینه‌ها:</label>
           {options.map((option, index) => (
             <input
               key={index}
               type="text"
+              className="Question_test_input"
               value={option}
               onChange={(e) => {
                 const newOptions = [...options];
@@ -131,11 +133,11 @@ function Question() {
               placeholder={`گزینه ${index + 1}`}
             />
           ))}
-          <label>گزینه صحیح:</label>
-          <select value={correctOption} onChange={(e) => setCorrectOption(e.target.value)}>
-            <option value="">انتخاب کنید</option>
+          <label className="Question_test_label">گزینه صحیح:</label>
+          <select className="Question_test_select" value={correctOption} onChange={(e) => setCorrectOption(e.target.value)}>
+            <option className="Question_test_option" value="">انتخاب کنید</option>
             {options.map((_, index) => (
-              <option key={index} value={index}>
+              <option className="Question_test_option" key={index} value={index}>
                 گزینه {index + 1}
               </option>
             ))}
@@ -144,41 +146,48 @@ function Question() {
       )}
 
       {examType === "descriptive" && (
-        <div className="descriptive_question_form">
-          <label>نمره سوال:</label>
+        <div className="Question_descriptive">
+          <label className="Question_descriptive_label">نمره سوال:</label>
           <input
             type="number"
             value={descriptiveScore}
             onChange={(e) => setDescriptiveScore(e.target.value)}
             placeholder="نمره سوال را وارد کنید"
+            className=""
           />
         </div>
       )}
+      
+      <div className="Question_button_div">
+                <button className="Question_button" onClick={handleAddQuestion}>اضافه کردن سوال</button>
+      </div>
+     
 
-      <button onClick={handleAddQuestion}>اضافه کردن سوال</button>
-
-      <h3>لیست سوالات:</h3>
-      <ul>
+      <h3 className="Question_h3" >لیست سوالات:</h3>
+      <ul className="Question_ul" >
         {questions.map((q, index) => (
-          <li key={index}>
-            <strong>سوال {q.question_number}: {q.question_text}</strong>
+          <li className="Question_li" key={index}>
+            <strong className="Question_strong" >سوال {q.question_number}: {q.question_text}</strong>
             {q.type === "test" && (
-              <ul>
+              <ul className="Question_strong_ul">
                 {q.options.map((opt, idx) => (
-                  <li key={idx} style={{ color: idx === parseInt(q.correct_option) ? "green" : "black" }}>
+                  <li className="Question_strong_li"  key={idx} style={{ color: idx === parseInt(q.correct_option) ? "green" : "black" }}>
                     {opt}
                   </li>
                 ))}
               </ul>
             )}
             {q.type === "descriptive" && (
-              <p>نمره: {q.score}</p>
+              <p className="Question_strong_ul_p" >نمره: {q.score}</p>
             )}
           </li>
         ))}
       </ul>
-
-      <button onClick={handleSendQuestions}>ارسال سوالات</button>
+       
+      <div className="Question_button_div_one">
+                 <button className="Question_button_one" onClick={handleSendQuestions}>ارسال سوالات</button>
+      </div>
+      
     </div>
   );
 }

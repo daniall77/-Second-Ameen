@@ -52,36 +52,42 @@ function AdminExam() {
 
   return (
     <div className="AdminExam_container">
-      <h2>ایجاد آزمون جدید</h2>
-      <div className="form_group">
-        <label>عنوان آزمون:</label>
+      <h2 className="AdminExam_h" >ایجاد آزمون جدید</h2>
+      <div className="AdminExam_form_group">
+        <label className="AdminExam_form_label" >عنوان آزمون:</label>
         <input
           type="text"
           value={examTitle}
           onChange={(e) => setExamTitle(e.target.value)}
           placeholder="عنوان آزمون را وارد کنید"
+          className="AdminExam_form_input"
         />
       </div>
-      <div className="form_group">
-        <label>مدت زمان آزمون (دقیقه):</label>
+      <div className="AdminExam_form_group">
+        <label className="AdminExam_form_label" >مدت زمان آزمون (دقیقه):</label>
         <input
           type="number"
           value={examDuration}
           onChange={(e) => setExamDuration(e.target.value)}
           placeholder="مدت زمان آزمون"
+          className="AdminExam_form_input"
         />
       </div>
-      <div className="form_group">
-        <label>نوع آزمون:</label>
+      <div className="AdminExam_form_group">
+        <label className="AdminExam_form_label" >نوع آزمون:</label>
         <select
           value={examType}
           onChange={(e) => setExamType(e.target.value)}
+          className="AdminExam_form_select"
         >
-          <option value="test">تستی</option>
-          <option value="descriptive">تشریحی</option>
+          <option  className="AdminExam_form_option" value="test">تستی</option>
+          <option  className="AdminExam_form_option" value="descriptive">تشریحی</option>
         </select>
       </div>
-      <button onClick={handleCreateExam}>ایجاد آزمون</button>
+      <div className="AdminExam_form_div">
+             <button className="AdminExam_form_div_button" onClick={handleCreateExam}>ایجاد آزمون</button>
+      </div>
+
     </div>
   );
 }

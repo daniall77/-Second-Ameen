@@ -45,70 +45,67 @@ function Dashboard() {
   };
 
   return (
-    <div className="Dashboard_container">
-      <div className="Dashboard_main">
-        {location.pathname === "/Dashboard" && renderProfileComponent()}
-        <Outlet />
-      </div>
-      <div className="Dashboard_sidebar">
-        <div className="Dashboard_sidebar_top">
-          <Link to="Image">
-            <img
-              src={profileImage}
-              alt="User Avatar"
-              style={{ width: "100px", height: "100px", borderRadius: "50%" }}
-            />
+  <div className="Dashboard_container">
+    <div className="Dashboard_main">
+      {location.pathname === "/Dashboard" && renderProfileComponent()}
+      <Outlet />
+    </div>
+    <div className="Dashboard_sidebar">
+      <div className="Dashboard_sidebar_top">
+       
+        <div className="Dashboard_curved_section">
+          <div className="Dashboard_curved_background"></div>
+          <Link className="Dashboard_sidebar_link_img"  to="Image">
+                  <img
+                  src={profileImage}
+                  alt="User Avatar"
+                  className="Dashboard_curved_img"
+                  />
           </Link>
         </div>
-        <div className="Dashboard_sidebar_bottom">
-          <ul className="Dashboard_sidebar_menu">
-            <li
-              className={`Dashboard_sidebar_item ${
-                location.pathname === "/Dashboard" ? "active" : ""
-              }`}
-            >
-              <Link to="/Dashboard" className="Dashboard_sidebar_link">
-                پنل کاربری
-              </Link>
-            </li>
-            <li
-              className={`Dashboard_sidebar_item ${
-                location.pathname === "/Dashboard/Hesab" ? "active" : ""
-              }`}
-            >
-              <Link to="Hesab" className="Dashboard_sidebar_link">
-                اطلاعات حساب
-              </Link>
-            </li>
-            <li
-              className={`Dashboard_sidebar_item ${
-                location.pathname === "/Dashboard/Exam" ? "active" : ""
-              }`}
-            >
-              <Link to="Exam" className="Dashboard_sidebar_link">
-                آزمون
-              </Link>
-            </li>
-            <li className="Dashboard_sidebar_item">
-              <Link to="/Login" className="Dashboard_sidebar_link">
-                خروج
-              </Link>
-            </li>
-          </ul>
-        </div>
+      </div>
+      <div className="Dashboard_sidebar_bottom">
+        <ul className="Dashboard_sidebar_menu">
+          <li
+            className={`Dashboard_sidebar_item ${
+              location.pathname === "/Dashboard" ? "active" : ""
+            }`}
+          >
+            <Link to="/Dashboard" className="Dashboard_sidebar_link">
+              پنل کاربری
+            </Link>
+          </li>
+          <li
+            className={`Dashboard_sidebar_item ${
+              location.pathname === "/Dashboard/Hesab" ? "active" : ""
+            }`}
+          >
+            <Link to="Hesab" className="Dashboard_sidebar_link">
+              اطلاعات حساب
+            </Link>
+          </li>
+          <li
+            className={`Dashboard_sidebar_item ${
+              location.pathname === "/Dashboard/Exam" ? "active" : ""
+            }`}
+          >
+            <Link to="Exam" className="Dashboard_sidebar_link">
+              آزمون
+            </Link>
+          </li>
+          <li className="Dashboard_sidebar_item Dashboard_sidebar_logout">
+            <Link to="/Login" className="Dashboard_sidebar_link">
+              خروج
+            </Link>
+          </li>
+        </ul>
       </div>
     </div>
+  </div>
   );
 }
 
 export default Dashboard;
-
-
-
-
-
-
-
 
 
 

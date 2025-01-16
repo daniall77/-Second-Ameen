@@ -51,38 +51,29 @@ function Image() {
   
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>آپلود تصویر پروفایل</h1>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: "15px" }}>
+    <div className="Image_container">
+      <h1 className="Image_h">آپلود تصویر پروفایل</h1>
+      <form className="Image_form" onSubmit={handleSubmit}>
+        <div className="Image_form_div" >
           <input
             type="file"
             accept=".jpg,.png"
             onChange={handleFileChange}
-            style={{ marginBottom: "15px" }}
+            className="Image_form_div_input"
           />
         </div>
-        <button
-          type="submit"
-          style={{
-            padding: "10px 20px",
-            backgroundColor: "#007bff",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-            marginBottom: "15px",
-          }}
-        >
-          ثبت
-        </button>
+        <div className="Image_form_div_button">
+              <button
+                type="submit"
+                className="Image_form_button"
+              >
+                ثبت
+              </button>
+        </div>
       </form>
       {message && (
         <p
-          style={{
-            marginTop: "20px",
-            color: message.includes("خطا") ? "red" : "green",
-          }}
+            className="Image_p"
         >
           {message}
         </p>
