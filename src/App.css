@@ -1075,9 +1075,9 @@ body {
 
 
 
-/* start page AdminExam  */
+/* start page EditorExam  */
 
-.AdminExam_container {
+.EditorExam_container {
   max-width: 600px;
   margin: 50px auto;
   padding: 20px 30px;
@@ -1088,7 +1088,7 @@ body {
 }
 
 
-.AdminExam_h {
+.EditorExam_h {
   font-size: 1.8rem;
   color: #343a40;
   margin-bottom: 20px;
@@ -1097,13 +1097,13 @@ body {
   padding-bottom: 5px;
 }
 
-.AdminExam_form_group {
+.EditorExam_form_group {
   margin-bottom: 20px;
   text-align: left;
 }
 
 
-.AdminExam_form_label {
+.EditorExam_form_label {
   font-size: 1rem;
   color: #495057;
   display: block;
@@ -1112,7 +1112,7 @@ body {
 }
 
 
-.AdminExam_form_input {
+.EditorExam_form_input {
   width: 100%;
   padding: 10px 15px;
   font-size: 1rem;
@@ -1122,14 +1122,14 @@ body {
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.AdminExam_form_input:focus {
+.EditorExam_form_input:focus {
   border-color: #00b4d8;
   box-shadow: 0 0 5px rgba(0, 180, 216, 0.5);
   outline: none;
 }
 
 
-.AdminExam_form_select {
+.EditorExam_form_select {
   width: 100%;
   padding: 10px 15px;
   font-size: 1rem;
@@ -1141,18 +1141,18 @@ body {
   cursor: pointer;
 }
 
-.AdminExam_form_select:focus {
+.EditorExam_form_select:focus {
   border-color: #00b4d8;
   box-shadow: 0 0 5px rgba(0, 180, 216, 0.5);
   outline: none;
 }
 
 
-.AdminExam_form_div {
+.EditorExam_form_div {
   margin-top: 20px;
 }
 
-.AdminExam_form_div_button {
+.EditorExam_form_div_button {
   padding: 10px 20px;
   font-size: 1rem;
   color: #ffffff;
@@ -1163,17 +1163,17 @@ body {
   transition: background-color 0.3s, transform 0.2s;
 }
 
-.AdminExam_form_div_button:hover {
+.EditorExam_form_div_button:hover {
   background: #005f99;
   transform: translateY(-3px);
 }
 
-.AdminExam_form_div_button:active {
+.EditorExam_form_div_button:active {
   transform: translateY(0);
 }
 
 
-/* end page AdminExam  */
+/* end page EditorExam  */
 
 
 
