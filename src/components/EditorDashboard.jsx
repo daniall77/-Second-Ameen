@@ -6,9 +6,6 @@ function EditorDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const [adminPage, setAdminPage] = useState(1);
-  const [adminRowsPerPage, setAdminRowsPerPage] = useState(2);
-
   const [editorPage, setEditorPage] = useState(1);
   const [editorRowsPerPage, setEditorRowsPerPage] = useState(2);
 
@@ -135,44 +132,8 @@ function EditorDashboard() {
 
   return (
     <div>
+        
       <h1>لیست کاربران</h1>
-
-      <section>
-        <h2>مدیران</h2>
-        {data.admins.length > 0 ? (
-          <>
-            <table border="1" style={{ width: "100%", borderCollapse: "collapse" }}>
-              <thead>
-                <tr>
-                  <th>شماره</th>
-                  <th>نام</th>
-                  <th>شماره موبایل</th>
-                  <th>نام خانوادگی</th>
-                </tr>
-              </thead>
-              <tbody>
-                    {paginate(data.admins , adminPage , adminRowsPerPage).map((admin, index) => (
-                      <tr key={index}>
-                        <td>{(adminPage - 1) * adminRowsPerPage + index + 1}</td> 
-                        <td>{admin.first_name}</td>
-                        <td>{admin.phone_number}</td>
-                        <td>{admin.last_name}</td>
-                      </tr>
-                    ))}
-              </tbody>
-            </table>
-            {renderPaginationControls(
-              data.admins.length,
-              adminPage,
-              adminRowsPerPage,
-              setAdminPage,
-              setAdminRowsPerPage
-            )}
-          </>
-        ) : (
-          <p>هیچ مدیری وجود ندارد</p>
-        )}
-      </section>
 
       <section>
         <h2>ویرایشگران</h2>
