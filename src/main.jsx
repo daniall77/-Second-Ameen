@@ -8,10 +8,12 @@ import Register from "./components/Register.jsx";
 import VerifyRegister from "./components/VerifyRegister.jsx";
 import VerifyLogin from "./components/VerifyLogin.jsx";
 import Dashboard from "./components/Dashboard.jsx";
-import Hesab from "./components/Hesab.jsx";
+import Account from "./components/Account.jsx";
 import Image from "./components/Image.jsx";
 import Exam from "./components/Exam.jsx";
 import Question from "./components/Question.jsx"; 
+import Content from "./components/Content.jsx"; 
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -23,9 +25,10 @@ createRoot(document.getElementById("root")).render(
         <Route path="/VerifyRegister" element={<VerifyRegister />} />
         <Route path="/VerifyLogin" element={<VerifyLogin />} />
         <Route path="/Dashboard" element={<Dashboard />}>
-          <Route path="Hesab" element={<Hesab />} />
+          <Route path="Account" element={<Account />} />
           <Route path="Image" element={<Image />} />
           <Route path="Exam" element={<Exam />} />
+          <Route path="Content" element={<Content />} />
           <Route path="Exam/Question" element={<Question />} />
         </Route>
       </Routes>

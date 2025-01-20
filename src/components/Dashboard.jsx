@@ -77,11 +77,20 @@ function Dashboard() {
           </li>
           <li
             className={`Dashboard_sidebar_item ${
-              location.pathname === "/Dashboard/Hesab" ? "active" : ""
+              location.pathname === "/Dashboard/Account" ? "active" : ""
             }`}
           >
-            <Link to="Hesab" className="Dashboard_sidebar_link">
+            <Link to="Account" className="Dashboard_sidebar_link">
               اطلاعات حساب
+            </Link>
+          </li>
+          <li
+            className={`Dashboard_sidebar_item ${
+              location.pathname === "/Dashboard/Content" ? "active" : ""
+            }`}
+          >
+            <Link to="Content" className="Dashboard_sidebar_link">
+                  ایجاد مطلب
             </Link>
           </li>
           <li

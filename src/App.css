@@ -572,11 +572,11 @@ body {
 /* end page  UserDashboard */
 
 
-/* start page Hesab  */
 
 
+/* start page Account  */
 
-.Hesab_container {
+.Account_container {
   max-width: 500px;
   margin: 50px auto;
   padding: 30px;
@@ -588,7 +588,7 @@ body {
 }
 
 
-.Hesab_header {
+.Account_header {
   font-size: 1.8rem;
   font-weight: bold;
   color: #4caf50;
@@ -596,16 +596,16 @@ body {
 }
 
 
-.Hesab_details {
+.Account_details {
   margin-top: 20px;
 }
 
-.Hesab_field {
+.Account_field {
   margin-bottom: 20px;
   text-align: right;
 }
 
-.Hesab_field label {
+.Account_field label {
   display: block;
   font-size: 1rem;
   font-weight: bold;
@@ -613,7 +613,7 @@ body {
   margin-bottom: 8px;
 }
 
-.Hesab_field input {
+.Account_field input {
   width: 100%;
   padding: 10px 15px;
   font-size: 1rem;
@@ -624,26 +624,26 @@ body {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.Hesab_field input:focus {
+.Account_field input:focus {
   border-color: #4caf50;
   box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
   outline: none;
 }
 
-.Hesab_field input[readonly] {
+.Account_field input[readonly] {
   background-color: #f3f3f3;
   color: #777;
   cursor: not-allowed;
 }
 
-.Hesab_button_group {
+.Account_button_group {
   margin-top: 30px;
   display: flex;
   justify-content: center;
   gap: 10px;
 }
 
-.Hesab_button {
+.Account_button {
   padding: 10px 20px;
   font-size: 1rem;
   font-weight: bold;
@@ -655,24 +655,24 @@ body {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.Hesab_button:hover {
+.Account_button:hover {
   background-color: #45a049;
   transform: translateY(-2px);
 }
 
-.Hesab_button:active {
+.Account_button:active {
   transform: translateY(0);
 }
 
-.Hesab_button.cancel {
+.Account_button.cancel {
   background-color: #f44336;
 }
 
-.Hesab_button.cancel:hover {
+.Account_button.cancel:hover {
   background-color: #e53935;
 }
 
-/* end page Hesab  */
+/* end page Account  */
 
 
 
@@ -1064,6 +1064,41 @@ body {
 
 
 
+
+/* start page AdminContent  */
+
+.AdminContent_container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  direction: rtl;
+}
+
+.checkbox-container,
+.input-container,
+.upload-container,
+.rich-text-container {
+  margin-bottom: 20px;
+}
+
+.text-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.uploaded-image img {
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+/* end page AdminContent  */
+
+
+
+
   
 /* start page AdminDashboard  */
 
@@ -1072,6 +1107,15 @@ body {
 /* end page AdminDashboard  */
 
 
+
+
+
+
+/* start page EditorDashboard  */
+
+
+
+/* end page EditorDashboard  */
 
 
 
@@ -1703,3 +1747,10 @@ body {
 }
 
 /* end page  VerifyRegister && VerifyLogin */
+
+
+
+
+
+
+
