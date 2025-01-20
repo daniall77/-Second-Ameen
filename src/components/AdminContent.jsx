@@ -51,14 +51,14 @@ function AdminContent() {
     formData.append("categories_list", categoriesList);
     formData.append("title", textInput);
     formData.append("text", richText);
-    formData.append("file", imageFile);
+    // formData.append("file", imageFile);
     
-    // if (imageFile) {
-    //   formData.append("file", imageFile);
-    // } else {
-    //   alert("لطفاً یک تصویر انتخاب کنید!");
-    //   return;
-    // }
+    if (imageFile) {
+      formData.append("file", imageFile);
+    } else {
+      alert("لطفاً یک تصویر انتخاب کنید!");
+      return;
+    }
   
     try {
       const response = await axios.post("http://localhost:8000/createArticles", formData, {
