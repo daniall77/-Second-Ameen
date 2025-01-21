@@ -1,31 +1,31 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { digitsEnToFa } from "@persian-tools/persian-tools";
 import { useCookies } from "react-cookie";
-
+import Select from "react-select";
+import DatePicker, { Calendar, DateObject } from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
 
 function UserDashboard() {
-  
   const [province, setProvince] = useState("");
   const [city, setCity] = useState("");
   const [school, setSchool] = useState("");
   const [grade, setGrade] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [error, setError] = useState("");
+  const [birthday, setBirthday] = useState(null);
   const [schoolError, setSchoolError] = useState("");
   const [gradeError, setGradeError] = useState("");
   const [isReadOnly, setIsReadOnly] = useState(false);
   const [isEditEnabled, setIsEditEnabled] = useState(false);
-  const [citySearch, setCitySearch] = useState("");
-  const [isCityDropdownOpen, setIsCityDropdownOpen] = useState(false);
-  const [provinceCityData, setProvinceCityData] = useState({ provinces: [], cities: {} });
+  const [provinceCityData, setProvinceCityData] = useState({
+    provinces: [],
+    cities: {},
+  });
   const [cookies] = useCookies(["access_token"]);
-            
+
   useEffect(() => {
     const fetchProvinceCityData = async () => {
       try {
         const response = await axios.get("http://localhost:8000/provincecity");
-        console.log(response.data);
         const { provinces, cities } = response.data;
 
         const formattedCities = provinces.reduce((acc, province) => {
@@ -44,8 +44,6 @@ function UserDashboard() {
       }
     };
 
-
-
     const fetchUserInfo = async () => {
       try {
         const response = await axios.get("http://localhost:8000/info", {
@@ -53,54 +51,47 @@ function UserDashboard() {
             Authorization: `Bearer ${cookies.access_token}`,
           },
         });
-      
+
         const userInfo = response.data;
-    
+        console.log(response.data);
         setProvince(userInfo.province_id || "");
         setCity(userInfo.city_id || "");
         setSchool(userInfo.school || "");
         setGrade(userInfo.grade || "");
-        setBirthDate(userInfo.birthday || "");
-    
+
        
+        if (userInfo.birthday) {
+          setBirthday(
+            new DateObject({
+              date: userInfo.birthday,
+              calendar: persian,
+              locale: persian_fa,
+              format: "YYYY/MM/DD",
+            })
+          );
+        }
+
         const isComplete =
           userInfo.province_id &&
           userInfo.city_id &&
           userInfo.school &&
           userInfo.grade &&
           userInfo.birthday;
-    
-        setIsReadOnly(isComplete); 
-        setIsEditEnabled(isComplete); 
+
+        setIsReadOnly(isComplete);
+        setIsEditEnabled(isComplete);
       } catch (error) {
         console.error("Error fetching user info:", error);
       }
     };
-    
-
-
 
     fetchProvinceCityData();
     fetchUserInfo();
   }, [cookies.access_token]);
 
-  const handleProvinceChange = (e) => {
-    setProvince(e.target.value);
-    setCity("");
-    setCitySearch("");
-    setIsCityDropdownOpen(false);
-  };
-
-  const handleCitySelect = (selectedCity) => {
-    setCity(selectedCity);
-    setIsCityDropdownOpen(false);
-  };
-
-  const validatePersianText = (text) => /^[\u0600-\u06FF\s]+$/.test(text);
-
   const handleSchoolChange = (e) => {
     const value = e.target.value;
-    if (validatePersianText(value) || value === "") {
+    if (/^[\u0600-\u06FF\s]+$/.test(value) || value === "") {
       setSchool(value);
       setSchoolError("");
     } else {
@@ -110,7 +101,7 @@ function UserDashboard() {
 
   const handleGradeChange = (e) => {
     const value = e.target.value;
-    if (validatePersianText(value) || value === "") {
+    if (/^[\u0600-\u06FF\s]+$/.test(value) || value === "") {
       setGrade(value);
       setGradeError("");
     } else {
@@ -118,97 +109,28 @@ function UserDashboard() {
     }
   };
 
-  const validateBirthDate = (value) => {
-    const regex = /^(\d{4})\/(\d{2})\/(\d{2})$/;
-    const match = value.match(regex);
-
-    if (match) {
-      const year = parseInt(match[1], 10);
-      const month = parseInt(match[2], 10);
-      const day = parseInt(match[3], 10);
-
-      if (
-        year >= 1300 &&
-        year <= 1403 &&
-        month >= 1 &&
-        month <= 12 &&
-        day >= 1 &&
-        day <= 31
-      ) {
-        setError("");
-        return true;
-      }
-    }
-    setError("تاریخ وارد شده معتبر نیست!");
-    return false;
-  };
-
-  const handleBirthDateChange = (e) => {
-    let value = e.target.value;
-
-    value = value.replace(/[^0-9]/g, "");
-
-    if (value.length > 4 && value.length <= 6) {
-      value = value.slice(0, 4) + "/" + value.slice(4);
-    } else if (value.length > 6) {
-      value =
-        value.slice(0, 4) +
-        "/" +
-        value.slice(4, 6) +
-        "/" +
-        value.slice(6, 8);
-    }
-
-    if (value.length > 10) {
-      return;
-    }
-
-    setBirthDate(value);
-
-    if (value.length === 10) {
-      validateBirthDate(value);
-    } else {
-      setError("");
-    }
-  };
-
   const handleSubmit = async () => {
-    if (!birthDate) {
-      alert("لطفاً تمام فیلدها را پر کنید");
-      return;
-    }
-
-    if (!validateBirthDate(birthDate)) {
-      return;
-    }
-
-    if (
-      province &&
-      city &&
-      school.trim() &&
-      grade.trim() &&
-      validatePersianText(school) &&
-      validatePersianText(grade)
-    ) {
+    if (province && city && school.trim() && grade.trim() && birthday) {
       try {
         const formData = new URLSearchParams();
-        formData.append("birthday", birthDate);
         formData.append("province", province);
         formData.append("city", city);
         formData.append("school", school);
         formData.append("grade", grade);
+        formData.append(
+          "birthday",
+          birthday.format("YYYY/MM/DD") 
+        );
 
         const response = await axios.post("http://localhost:8000/panel", formData, {
           headers: {
             Authorization: `Bearer ${cookies.access_token}`,
           },
         });
-        console.log("Response from server:", response.data);
         alert("اطلاعات با موفقیت ثبت شد");
         setIsReadOnly(true);
         setIsEditEnabled(true);
       } catch (error) {
-        console.error("Error submitting form data:", error);
         alert("خطا در ثبت اطلاعات. لطفاً مجدداً تلاش کنید");
       }
     } else {
@@ -221,85 +143,51 @@ function UserDashboard() {
     setIsEditEnabled(false);
   };
 
+  const provinceOptions = provinceCityData.provinces.map((prov) => ({
+    value: prov,
+    label: prov,
+  }));
+
+  const cityOptions = province
+    ? provinceCityData.cities[province]?.map((city) => ({
+        value: city,
+        label: city,
+      }))
+    : [];
+
   return (
     <div className="UserDashboard_container">
       <h2 className="UserDashboard_heading">ویرایش پروفایل</h2>
 
-     
       <div className="UserDashboard_input_group">
-        <label htmlFor="province" className="UserDashboard_label">
-          استان:
-        </label>
-        <select
-          id="province"
-          value={province}
-          onChange={handleProvinceChange}
-          className="UserDashboard_input"
-        >
-          <option  value="">انتخاب کنید</option>
-          {provinceCityData.provinces.map((prov) => (
-            <option key={prov} value={prov}>
-              {prov}
-            </option>
-          ))}
-        </select>
+        <label className="UserDashboard_label">استان:</label>
+        <Select
+          value={provinceOptions.find((opt) => opt.value === province)}
+          onChange={(selectedOption) => {
+            setProvince(selectedOption.value);
+            setCity("");
+          }}
+          options={provinceOptions}
+          placeholder="انتخاب کنید"
+          isDisabled={isReadOnly || provinceOptions.length === 0}
+        />
       </div>
 
-   
       <div className="UserDashboard_input_group">
-        <label htmlFor="city" className="UserDashboard_label">
-          شهرستان:
-        </label>
-        <div
-          className={`UserDashboard_custom_select ${!province ? "disabled" : ""}`}
-          onClick={() => province && setIsCityDropdownOpen(!isCityDropdownOpen)}
-        >
-          <div className="UserDashboard_selected_value">
-            {city || "انتخاب کنید"}
-          </div>
-          {isCityDropdownOpen && (
-            <div className="UserDashboard_dropdown_menu">
-              <input
-                type="text"
-                value={citySearch}
-                onChange={(e) => setCitySearch(e.target.value)}
-                placeholder="جستجوی شهرستان"
-                className="UserDashboard_search_input"
-                autoFocus
-              />
-              <div className="UserDashboard_options">
-                {provinceCityData.cities[province]
-                  ?.filter((ct) =>
-                    ct.toLowerCase().includes(citySearch.toLowerCase())
-                  )
-                  .map((filteredCity) => (
-                    <div
-                      key={filteredCity}
-                      className="UserDashboard_option"
-                      onClick={() => handleCitySelect(filteredCity)}
-                    >
-                      {filteredCity}
-                    </div>
-                  ))}
-                {provinceCityData.cities[province]?.filter((ct) =>
-                  ct.toLowerCase().includes(citySearch.toLowerCase())
-                ).length === 0 && (
-                  <div className="UserDashboard_no_option">شهرستانی یافت نشد</div>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
+        <label className="UserDashboard_label">شهرستان:</label>
+        <Select
+          value={cityOptions.find((opt) => opt.value === city)}
+          onChange={(selectedOption) => setCity(selectedOption.value)}
+          options={cityOptions}
+          placeholder="انتخاب کنید"
+          isDisabled={isReadOnly || !province}
+        />
       </div>
 
-
       <div className="UserDashboard_input_group">
-        <label htmlFor="school" className="UserDashboard_label">
-          نام مدرسه:
-        </label>
+        <label className="UserDashboard_label">نام مدرسه:</label>
         <input
           type="text"
-          id="school"
           value={school}
           onChange={handleSchoolChange}
           readOnly={isReadOnly}
@@ -308,14 +196,10 @@ function UserDashboard() {
         {schoolError && <p className="UserDashboard_error">{schoolError}</p>}
       </div>
 
-
       <div className="UserDashboard_input_group">
-        <label htmlFor="grade" className="UserDashboard_label">
-          پایه تحصیلی:
-        </label>
+        <label className="UserDashboard_label">پایه تحصیلی:</label>
         <input
           type="text"
-          id="grade"
           value={grade}
           onChange={handleGradeChange}
           readOnly={isReadOnly}
@@ -324,34 +208,24 @@ function UserDashboard() {
         {gradeError && <p className="UserDashboard_error">{gradeError}</p>}
       </div>
 
- 
       <div className="UserDashboard_input_group">
-        <label htmlFor="birthDate" className="UserDashboard_label">
-          تاریخ تولد:
-        </label>
-        <input
-          type="text"
-          id="birthDate"
-          value={digitsEnToFa(birthDate)}
-          onChange={(e) => {
-            const englishDigits = e.target.value.replace(/[۰-۹]/g, (d) =>
-              String.fromCharCode(d.charCodeAt(0) - 1728)
-            );
-            handleBirthDateChange({ target: { value: englishDigits } });
-          }}
-          readOnly={isReadOnly}
-          className="UserDashboard_input"
-          placeholder="YYYY/MM/DD"
+        <label className="UserDashboard_label">تاریخ تولد:</label>
+        <DatePicker
+          value={birthday}
+          onChange={setBirthday}
+          calendar={persian}
+          locale={persian_fa}
+          format="YYYY/MM/DD"
+          className="custom-datepicker"
+          placeholder="تاریخ را انتخاب کنید"
+          disabled={isReadOnly}
         />
-        {error && <p className="UserDashboard_error">{digitsEnToFa(error)}</p>}
       </div>
 
- 
       <div className="UserDashboard_button_group">
         <button onClick={handleSubmit} className="UserDashboard_button submit">
           ثبت
         </button>
-
         <button
           onClick={handleEdit}
           className={`UserDashboard_button edit ${isEditEnabled ? "enabled" : ""}`}
@@ -365,6 +239,4 @@ function UserDashboard() {
 }
 
 export default UserDashboard;
-
-
 
