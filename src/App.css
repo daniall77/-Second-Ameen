@@ -865,9 +865,9 @@ body {
 
 
 
-/* start page Question  */
+/* start page AdminQuestion &&  EditorQuestion  */
 
-.Question_container {
+.AdminQuestion_container {
   max-width: 800px;
   margin: 50px auto;
   padding: 30px 20px;
@@ -879,7 +879,7 @@ body {
 }
 
 
-.Question_h {
+.AdminQuestion_h {
   font-size: 1.8rem;
   color: #343a40;
   margin-bottom: 20px;
@@ -889,24 +889,24 @@ body {
 }
 
 
-.Question_examType,
-.Question_examId {
+.AdminQuestion_examType,
+.AdminQuestion_examId {
   font-size: 1.1rem;
   margin: 10px 0;
   color: #6c757d;
 }
 
 
-.Question_div,
-.Question_test,
-.Question_descriptive {
+.AdminQuestion_div,
+.AdminQuestion_test,
+.AdminQuestion_descriptive {
   margin: 20px 0;
   text-align: left;
 }
 
-.Question_div_label,
-.Question_test_label,
-.Question_descriptive_label {
+.AdminQuestion_div_label,
+.AdminQuestion_test_label,
+.AdminQuestion_descriptive_label {
   display: block;
   font-size: 1rem;
   color: #495057;
@@ -915,7 +915,7 @@ body {
 }
 
 
-.Question_div_textarea {
+.AdminQuestion_div_textarea {
   width: 100%;
   min-height: 80px;
   font-size: 1rem;
@@ -926,14 +926,14 @@ body {
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.Question_div_textarea:focus {
+.AdminQuestion_div_textarea:focus {
   border-color: #00b4d8;
   box-shadow: 0 0 5px rgba(0, 180, 216, 0.5);
   outline: none;
 }
 
 
-.Question_test_input {
+.AdminQuestion_test_input {
   display: block;
   width: 100%;
   margin-bottom: 10px;
@@ -944,14 +944,14 @@ body {
   background-color: #f8f9fa;
 }
 
-.Question_test_input:focus {
+.AdminQuestion_test_input:focus {
   border-color: #00b4d8;
   box-shadow: 0 0 5px rgba(0, 180, 216, 0.5);
   outline: none;
 }
 
 
-.Question_test_select {
+.AdminQuestion_test_select {
   width: 100%;
   padding: 10px 15px;
   font-size: 1rem;
@@ -963,14 +963,14 @@ body {
   cursor: pointer;
 }
 
-.Question_test_select:focus {
+.AdminQuestion_test_select:focus {
   border-color: #00b4d8;
   box-shadow: 0 0 5px rgba(0, 180, 216, 0.5);
   outline: none;
 }
 
 
-.Question_descriptive input {
+.AdminQuestion_descriptive input {
   width: 100%;
   padding: 10px 15px;
   font-size: 1rem;
@@ -979,21 +979,21 @@ body {
   background-color: #f8f9fa;
 }
 
-.Question_descriptive input:focus {
+.AdminQuestion_descriptive input:focus {
   border-color: #00b4d8;
   box-shadow: 0 0 5px rgba(0, 180, 216, 0.5);
   outline: none;
 }
 
 
-.Question_button_div,
-.Question_button_div_one {
+.AdminQuestion_button_div,
+.AdminQuestion_button_div_one {
   margin: 20px 0;
   text-align: center;
 }
 
-.Question_button,
-.Question_button_one {
+.AdminQuestion_button,
+.AdminQuestion_button_one {
   padding: 10px 25px;
   font-size: 1rem;
   color: #ffffff;
@@ -1004,31 +1004,31 @@ body {
   transition: background-color 0.3s, transform 0.2s;
 }
 
-.Question_button:hover,
-.Question_button_one:hover {
+.AdminQuestion_button:hover,
+.AdminQuestion_button_one:hover {
   background: #005f99;
   transform: translateY(-3px);
 }
 
-.Question_button:active,
-.Question_button_one:active {
+.AdminQuestion_button:active,
+.AdminQuestion_button_one:active {
   transform: translateY(0);
 }
 
 
-.Question_h3 {
+.AdminQuestion_h3 {
   font-size: 1.4rem;
   color: #495057;
   margin: 20px 0;
 }
 
-.Question_ul {
+.AdminQuestion_ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-.Question_li {
+.AdminQuestion_li {
   padding: 10px;
   margin-bottom: 10px;
   background: #f8f9fa;
@@ -1037,30 +1037,30 @@ body {
   text-align: left;
 }
 
-.Question_strong {
+.AdminQuestion_strong {
   font-size: 1rem;
   color: #495057;
   display: block;
   margin-bottom: 5px;
 }
 
-.Question_strong_ul {
+.AdminQuestion_strong_ul {
   padding-left: 20px;
   margin: 10px 0;
 }
 
-.Question_strong_li {
+.AdminQuestion_strong_li {
   font-size: 0.9rem;
   margin-bottom: 5px;
 }
 
-.Question_strong_ul_p {
+.AdminQuestion_strong_ul_p {
   font-size: 0.9rem;
   color: #6c757d;
 }
 
 
-/* end page Question  */
+/* end page AdminQuestion  &&  EditorQuestion  */
 
 
 
