@@ -23,9 +23,9 @@ function UserExam() {
       } catch (err) {
         console.error("Error fetching exams:", err);
         if (err.response?.status === 403) {
-          setError("شما مجاز به مشاهده این اطلاعات نیستید.");
+          setError("شما مجاز به مشاهده این اطلاعات نیستید");
         } else {
-          setError("خطایی در دریافت اطلاعات رخ داد.");
+          setError("خطایی در دریافت اطلاعات رخ داد");
         }
       }
     };
@@ -33,24 +33,34 @@ function UserExam() {
     fetchExams();
   }, [cookies.access_token]);
 
-  const handleStartExam = async (examId) => {
+  
+  const handleStartExam = async (exam) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `http://localhost:8000/exams/${examId}`,
-        {},
+        `http://localhost:8000/exams/${exam.ID}`,
+        { exam_id: exam.ID }, 
         {
           headers: {
             Authorization: `Bearer ${cookies.access_token}`,
+            // "Content-Type": "application/json",
           },
         }
       );
       console.log("Exam started, questions:", response.data);
-      navigate("/Dashboard/Exam/Question", { state: { questions: response.data } });
+  
+      navigate("/Dashboard/Exam/Question", { 
+        state: { 
+          examId: exam.ID, 
+          timer: exam.Timer, 
+          description: exam.Description,
+          questions: response.data 
+        } 
+      });
     } catch (err) {
       console.error("Error starting exam:", err);
       if (err.response?.status === 403) {
-        alert("شما مجاز به شروع این آزمون نیستید.");
+        alert("شما مجاز به شروع این آزمون نیستید");
       } else if (err.response?.status === 404) {
         alert("سوالاتی برای این آزمون یافت نشد.");
       } else {
@@ -75,7 +85,7 @@ function UserExam() {
               <p className="UserExam_div_ti">مدت زمان: {exam.Timer} دقیقه</p>
               <button
                 className="UserExam_start_button"
-                onClick={() => handleStartExam(exam.ID)}
+                onClick={() => handleStartExam(exam)}
                 disabled={loading}
               >
                 {loading ? "در حال شروع..." : "شروع آزمون"}
