@@ -10,7 +10,7 @@ function UserQuestion() {
   const [remainingTime, setRemainingTime] = useState(timer * 60);
   const [testAnswers, setTestAnswers] = useState({});
   const [descriptiveAnswers, setDescriptiveAnswers] = useState({});
-  const [cookies] = useCookies(["access_token"]);
+  const [cookies, setCookie] = useCookies(["access_token", "completedExams"]);
 
   useEffect(() => {
     if (!questions) return;
@@ -51,7 +51,6 @@ function UserQuestion() {
 
   const handleFinishExam = async () => {
     try {
-   
       const testAnswersArray = Object.entries(testAnswers).map(
         ([questionNumber, selectedOptionNumber]) => ({
           question_number: parseInt(questionNumber, 10),
@@ -60,11 +59,6 @@ function UserQuestion() {
       );
 
       if (testAnswersArray.length > 0) {
-        console.log("Test Answers to send:", {
-          exam_id: examId,
-          answers: testAnswersArray,
-        });
-
         await axios.post(
           "http://localhost:8000/answers/test",
           {
@@ -79,7 +73,6 @@ function UserQuestion() {
         );
       }
 
-     
       const descriptiveAnswersArray = Object.entries(descriptiveAnswers).map(
         ([questionNumber, answerText]) => ({
           question_number: parseInt(questionNumber, 10),
@@ -88,11 +81,6 @@ function UserQuestion() {
       );
 
       if (descriptiveAnswersArray.length > 0) {
-        console.log("Descriptive Answers to send:", {
-          exam_id: examId,
-          answers: descriptiveAnswersArray,
-        });
-
         await axios.post(
           "http://localhost:8000/answers/descriptive",
           {
@@ -107,11 +95,17 @@ function UserQuestion() {
         );
       }
 
+     
+      const completedExams = cookies.completedExams || [];
+      if (!completedExams.includes(examId)) {
+        setCookie("completedExams", [...completedExams, examId], { path: "/" , maxAge: 31536000 });
+      }
+
       alert("پاسخ‌های شما با موفقیت ارسال شد!");
-      navigate("/Dashboard");
+      navigate("/Dashboard/Exam");
     } catch (error) {
       console.error("Error submitting answers:", error);
-      alert("خطایی در ارسال پاسخ‌ها رخ داد. لطفاً دوباره تلاش کنید.");
+      alert("خطایی در ارسال پاسخ‌ها رخ داد.");
     }
   };
 
@@ -143,7 +137,7 @@ function UserQuestion() {
                         <input
                           type="radio"
                           name={`question_${question.question_number}`}
-                          value={idx + 1} 
+                          value={idx + 1}
                           onChange={() =>
                             handleTestAnswerChange(question.question_number, idx + 1)
                           }

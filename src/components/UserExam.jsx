@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function UserExam() {
-  const [cookies] = useCookies(["access_token"]);
+  const [cookies] = useCookies(["access_token", "completedExams"]);
   const [exams, setExams] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,34 +33,40 @@ function UserExam() {
     fetchExams();
   }, [cookies.access_token]);
 
-  
+  const isCompleted = (examId) => {
+    return cookies.completedExams?.includes(examId);
+  };
+
   const handleStartExam = async (exam) => {
+    if (isCompleted(exam.ID)) {
+      alert("این آزمون قبلاً تکمیل شده است");
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await axios.post(
         `http://localhost:8000/exams/${exam.ID}`,
-        { exam_id: exam.ID }, 
+        { exam_id: exam.ID },
         {
           headers: {
             Authorization: `Bearer ${cookies.access_token}`,
-            // "Content-Type": "application/json",
           },
         }
       );
-      console.log("Exam started, questions:", response.data);
-  
-      navigate("/Dashboard/Exam/Question", { 
-        state: { 
-          examId: exam.ID, 
-          timer: exam.Timer, 
+
+      navigate("/Dashboard/Exam/Question", {
+        state: {
+          examId: exam.ID,
+          timer: exam.Timer,
           description: exam.Description,
-          questions: response.data 
-        } 
+          questions: response.data,
+        },
       });
     } catch (err) {
       console.error("Error starting exam:", err);
       if (err.response?.status === 403) {
-        alert("شما مجاز به شروع این آزمون نیستید");
+        alert("شما مجاز به شروع این آزمون نیستید.");
       } else if (err.response?.status === 404) {
         alert("سوالاتی برای این آزمون یافت نشد.");
       } else {
@@ -83,13 +89,21 @@ function UserExam() {
               <h3 className="UserExam_div_h">{exam.Title}</h3>
               <p className="UserExam_div_des">توضیحات: {exam.Description}</p>
               <p className="UserExam_div_ti">مدت زمان: {exam.Timer} دقیقه</p>
-              <button
-                className="UserExam_start_button"
-                onClick={() => handleStartExam(exam)}
-                disabled={loading}
-              >
-                {loading ? "در حال شروع..." : "شروع آزمون"}
-              </button>
+              <div className="UserExam_buttons">
+                <button
+                  className="UserExam_start_button"
+                  onClick={() => handleStartExam(exam)}
+                  disabled={isCompleted(exam.ID) || loading}
+                >
+                  {loading ? "در حال شروع..." : "شروع آزمون"}
+                </button>
+                <button
+                  className="UserExam_result_button"
+                  disabled={!isCompleted(exam.ID)}
+                >
+                  مشاهده نتیجه
+                </button>
+              </div>
             </div>
           ))}
         </div>
