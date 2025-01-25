@@ -132,10 +132,10 @@ function Dashboard() {
             {canAccessCorrecting() && (
               <li
                 className={`Dashboard_sidebar_item ${
-                  location.pathname === "/Dashboard/Correcting" ? "active" : ""
+                  location.pathname === "/Dashboard/ListExam" ? "active" : ""
                 }`}
               >
-                <Link to="Correcting" className="Dashboard_sidebar_link">
+                <Link to="ListExam" className="Dashboard_sidebar_link">
                   تصحیح آزمون
                 </Link>
               </li>
@@ -153,6 +153,7 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
 
 
 

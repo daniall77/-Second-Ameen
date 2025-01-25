@@ -1,57 +1,71 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 
 function AdminCorrecting() {
+  const { examId } = useParams(); 
   const [cookies] = useCookies(["access_token"]);
-  const [exams, setExams] = useState([]);
+  const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
- 
+
+
+
   useEffect(() => {
-    const fetchExams = async () => {
+    const fetchAnswers = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:8000/answers/descriptive/exams", {
-          headers: {
-            Authorization: `Bearer ${cookies.access_token}`,
-          },
-        });
-        console.log(response.data);
-        setExams(response.data); 
+        const response = await axios.get(
+          `http://localhost:8000/answers/descriptive/${examId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${cookies.access_token}`,
+            },
+          }
+        );
+        setAnswers(response.data.data); 
         setError("");
       } catch (err) {
-        console.error("خطا در دریافت لیست آزمون‌ها:", err);
-        setError("مشکلی در دریافت لیست آزمون‌ها رخ داده است");
+        console.error("خطا در دریافت پاسخ‌ها:", err);
+        setError("مشکلی در دریافت پاسخ‌ها رخ داده است");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchExams();
-  }, [cookies.access_token]);
+    fetchAnswers();
+  }, [examId, cookies.access_token]);
 
   return (
-    <div className="AdminCorrecting_container">
-      <h2> آزمون</h2>
-      {loading && <p>در حال بارگذاری...</p>} 
-      {error && <p className="error">{error}</p>} 
+    <div className="Correcting_container">
+      <h2>پاسخ‌های آزمون {examId}</h2>
+      {loading && <p>در حال بارگذاری...</p>}
+      {error && <p className="error">{error}</p>}
 
-    
       {!loading && !error && (
-        <div className="AdminCorrecting_exams">
-          {exams.length > 0 ? (
+        <div className="Correcting_answers">
+          {answers.length > 0 ? (
             <ul>
-              {exams.map((exam) => (
-                <li key={exam.id}>
-                  <p>عنوان آزمون: {exam.title}</p>
-                  <p>توضیحات: {exam.description}</p>
+              {answers.map((answer) => (
+                <li key={answer.user_id}>
+                  <p>
+                    دانشجو: {answer.firstname} {answer.lastname} - شماره
+                    تلفن: {answer.phone_number}
+                  </p>
+                  <ul>
+                    {answer.answers.map((ans, index) => (
+                      <li key={index}>
+                        <p>سؤال {ans.question_number}: {ans.answer_text}</p>
+                      </li>
+                    ))}
+                  </ul>
                 </li>
               ))}
             </ul>
           ) : (
-            <p>هیچ آزمونی یافت نشد</p>
+            <p>پاسخی برای این آزمون یافت نشد</p>
           )}
         </div>
       )}
@@ -60,13 +74,3 @@ function AdminCorrecting() {
 }
 
 export default AdminCorrecting;
-
-
-
-
-
-
-
-
-
-
