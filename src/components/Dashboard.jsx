@@ -44,12 +44,11 @@ function Dashboard() {
         );
         console.log(response.data);
 
-      
+       
         removeCookie("access_token", { path: "/" });
 
         alert("شما از حساب کاربری خود خارج شدید");
 
-     
         navigate("/");
       } else {
         console.warn("No access token found for logout");
@@ -69,6 +68,9 @@ function Dashboard() {
       return <UserDashboard />;
     }
   };
+
+
+  const canAccessCorrecting = () => cookies.role === "admin" || cookies.role === "editor";
 
   return (
     <div className="Dashboard_container">
@@ -127,6 +129,17 @@ function Dashboard() {
                 آزمون
               </Link>
             </li>
+            {canAccessCorrecting() && (
+              <li
+                className={`Dashboard_sidebar_item ${
+                  location.pathname === "/Dashboard/Correcting" ? "active" : ""
+                }`}
+              >
+                <Link to="Correcting" className="Dashboard_sidebar_link">
+                  تصحیح آزمون
+                </Link>
+              </li>
+            )}
             <li className="Dashboard_sidebar_item Dashboard_sidebar_logout">
               <button className="Dashboard_sidebar_link" onClick={handleLogout}>
                 خروج

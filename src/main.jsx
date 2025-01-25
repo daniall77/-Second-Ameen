@@ -13,6 +13,8 @@ import Image from "./components/Image.jsx";
 import Exam from "./components/Exam.jsx";
 import Question from "./components/Question.jsx"; 
 import Content from "./components/Content.jsx"; 
+import Correcting from "./components/Correcting.jsx"; 
+
 
 
 createRoot(document.getElementById("root")).render(
@@ -29,6 +31,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="Image" element={<Image />} />
           <Route path="Exam" element={<Exam />} />
           <Route path="Content" element={<Content />} />
+          <Route path="Correcting" element={<Correcting />} />
           <Route path="Exam/Question" element={<Question />} />
         </Route>
       </Routes>

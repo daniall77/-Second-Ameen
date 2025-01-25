@@ -8,6 +8,8 @@ function UserExam() {
   const [exams, setExams] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [scoreData, setScoreData] = useState(null); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,7 +41,7 @@ function UserExam() {
 
   const handleStartExam = async (exam) => {
     if (isCompleted(exam.ID)) {
-      alert("این آزمون قبلاً تکمیل شده است");
+      alert("این آزمون قبلاً تکمیل شده است.");
       return;
     }
 
@@ -77,6 +79,21 @@ function UserExam() {
     }
   };
 
+  const handleViewResult = async (examId) => {
+    try {
+      const response = await axios.get(`http://localhost:8000/score/test/${examId}`, {
+        headers: {
+          Authorization: `Bearer ${cookies.access_token}`,
+        },
+      });
+      setScoreData(response.data.data); 
+      setShowModal(true); 
+    } catch (err) {
+      console.error("Error fetching score:", err);
+      alert("خطایی در دریافت نمره رخ داد.");
+    }
+  };
+
   return (
     <div className="UserExam_container">
       <h2 className="UserExam_h">نمایش آزمون‌ها</h2>
@@ -99,6 +116,7 @@ function UserExam() {
                 </button>
                 <button
                   className="UserExam_result_button"
+                  onClick={() => handleViewResult(exam.ID)}
                   disabled={!isCompleted(exam.ID)}
                 >
                   مشاهده نتیجه
@@ -109,6 +127,24 @@ function UserExam() {
         </div>
       ) : (
         <p className="UserExam_nama">هیچ آزمونی برای نمایش وجود ندارد</p>
+      )}
+
+      {showModal && (
+        <div className="modal_overlay">
+          <div className="modal_content">
+            <h3>نتیجه آزمون</h3>
+            {scoreData ? (
+              <>
+                <p>تعداد سوالات: {scoreData.total_questions}</p>
+                <p>تعداد پاسخ‌های صحیح: {scoreData.correct_answers}</p>
+                <p>درصد نمره: {scoreData.score_percentage.toFixed(2)}%</p>
+              </>
+            ) : (
+              <p>در حال بارگذاری نمره...</p>
+            )}
+            <button onClick={() => setShowModal(false)}>بستن</button>
+          </div>
+        </div>
       )}
     </div>
   );
