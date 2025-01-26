@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function UserExam() {
-  const [cookies] = useCookies(["access_token", "completedExams"]);
+  const [cookies] = useCookies(["access_token"]);
   const [exams, setExams] = useState([]);
+  const [userExamIds, setUserExamIds] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [scoreData, setScoreData] = useState(null); 
+  const [scoreData, setScoreData] = useState(null);
+  const [isDescriptive, setIsDescriptive] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,19 +34,25 @@ function UserExam() {
       }
     };
 
+    const fetchUserExamIds = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/user/exam/list", {
+          headers: {
+            Authorization: `Bearer ${cookies.access_token}`,
+          },
+        });
+        setUserExamIds(response.data.data); 
+      } catch (err) {
+        console.error("Error fetching user exams:", err);
+        setUserExamIds([]);
+      }
+    };
+
     fetchExams();
+    fetchUserExamIds();
   }, [cookies.access_token]);
 
-  const isCompleted = (examId) => {
-    return cookies.completedExams?.includes(examId);
-  };
-
   const handleStartExam = async (exam) => {
-    if (isCompleted(exam.ID)) {
-      alert("این آزمون قبلاً تکمیل شده است.");
-      return;
-    }
-
     setLoading(true);
     try {
       const response = await axios.post(
@@ -79,18 +87,41 @@ function UserExam() {
     }
   };
 
-  const handleViewResult = async (examId) => {
+  const handleViewResult = async (exam) => {
+    setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:8000/score/test/${examId}`, {
-        headers: {
-          Authorization: `Bearer ${cookies.access_token}`,
-        },
-      });
-      setScoreData(response.data.data); 
-      setShowModal(true); 
+      if (exam.Description === "descriptive") {
+        const response = await axios.get(
+          `http://localhost:8000/score/descriptive/${exam.ID}`,
+          {
+            headers: {
+              Authorization: `Bearer ${cookies.access_token}`,
+            },
+          }
+        );
+        setScoreData({ total_score: response.data.total_score });
+        setIsDescriptive(true);
+      } else {
+        const response = await axios.get(
+          `http://localhost:8000/score/test/${exam.ID}`,
+          {
+            headers: {
+              Authorization: `Bearer ${cookies.access_token}`,
+            },
+          }
+        );
+        setScoreData(response.data.data);
+        setIsDescriptive(false);
+      }
+      setShowModal(true);
     } catch (err) {
       console.error("Error fetching score:", err);
-      alert("خطایی در دریافت نمره رخ داد.");
+      alert(
+        err.response?.data?.detail ||
+          "خطایی در دریافت نمره آزمون رخ داده است."
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -110,14 +141,14 @@ function UserExam() {
                 <button
                   className="UserExam_start_button"
                   onClick={() => handleStartExam(exam)}
-                  disabled={isCompleted(exam.ID) || loading}
+                  disabled={userExamIds.includes(exam.ID) || loading} 
                 >
                   {loading ? "در حال شروع..." : "شروع آزمون"}
                 </button>
                 <button
                   className="UserExam_result_button"
-                  onClick={() => handleViewResult(exam.ID)}
-                  disabled={!isCompleted(exam.ID)}
+                  onClick={() => handleViewResult(exam)}
+                  disabled={!userExamIds.includes(exam.ID)} 
                 >
                   مشاهده نتیجه
                 </button>
@@ -134,11 +165,15 @@ function UserExam() {
           <div className="modal_content">
             <h3>نتیجه آزمون</h3>
             {scoreData ? (
-              <>
-                <p>تعداد سوالات: {scoreData.total_questions}</p>
-                <p>تعداد پاسخ‌های صحیح: {scoreData.correct_answers}</p>
-                <p>درصد نمره: {scoreData.score_percentage.toFixed(2)}%</p>
-              </>
+              isDescriptive ? (
+                <p>نمره کل: {scoreData.total_score}</p>
+              ) : (
+                <>
+                  <p>تعداد سوالات: {scoreData.total_questions}</p>
+                  <p>تعداد پاسخ‌های صحیح: {scoreData.correct_answers}</p>
+                  <p>درصد نمره: {scoreData.score_percentage.toFixed(2)}%</p>
+                </>
+              )
             ) : (
               <p>در حال بارگذاری نمره...</p>
             )}
@@ -151,3 +186,9 @@ function UserExam() {
 }
 
 export default UserExam;
+
+
+
+
+
+
