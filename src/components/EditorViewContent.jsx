@@ -66,7 +66,7 @@ function EditorViewContent() {
                 <div className="AdminViewContent_article_photo">
                   <p>تصویر مقاله:</p>
                   <img
-                    src={`http://localhost:8000/profiles/${article.photo}`}
+                    src={`http://localhost:8000/articles/${article.photo}`}
                     alt="Article"
                     className="article-image"
                     style={{ maxWidth: "100%", height: "auto", marginTop: "10px" }}

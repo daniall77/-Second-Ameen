@@ -48,7 +48,6 @@ function UserViewContent() {
       }
     };
 
-  
     fetchPendingArticles();
     fetchApprovedArticles();
     fetchRejectedArticles();
@@ -58,6 +57,7 @@ function UserViewContent() {
     <div className="UserViewContent_container">
       <h2>لیست مقالات ارسال‌شده</h2>
 
+    
       <div className="UserViewContent_section">
         <h3>مقالات در حال بررسی</h3>
         {pendingArticles.length === 0 ? (
@@ -67,6 +67,12 @@ function UserViewContent() {
             {pendingArticles.map((article) => (
               <div key={article.id} className="UserViewContent_article_card">
                 <h4 className="UserViewContent_article_title">{article.title}</h4>
+                <img
+                  src={`http://localhost:8000/articles/${article.photo}`}
+                  alt="Article"
+                  className="article-image"
+                  style={{ maxWidth: "100%", height: "auto", marginTop: "10px" }}
+                />
                 <p className="UserViewContent_article_text">{article.text}</p>
                 <p className="UserViewContent_article_date">تاریخ ارسال: {article.created_at}</p>
                 <div className="UserViewContent_article_categories">
@@ -81,7 +87,7 @@ function UserViewContent() {
         )}
       </div>
 
-    
+      
       <div className="UserViewContent_section">
         <h3>مقالات تایید شده</h3>
         {approvedArticles.length === 0 ? (
@@ -91,6 +97,12 @@ function UserViewContent() {
             {approvedArticles.map((article) => (
               <div key={article.id} className="UserViewContent_article_card">
                 <h4 className="UserViewContent_article_title">{article.title}</h4>
+                <img
+                  src={`http://localhost:8000/articles/${article.photo}`}
+                  alt="Article"
+                  className="article-image"
+                  style={{ maxWidth: "100%", height: "auto", marginTop: "10px" }}
+                />
                 <p className="UserViewContent_article_text">{article.text}</p>
                 <p className="UserViewContent_article_date">تاریخ تایید: {article.created_at}</p>
                 <div className="UserViewContent_article_categories">
@@ -102,6 +114,7 @@ function UserViewContent() {
         )}
       </div>
 
+      
       <div className="UserViewContent_section">
         <h3>مقالات رد شده</h3>
         {rejectedArticles.length === 0 ? (
@@ -111,6 +124,12 @@ function UserViewContent() {
             {rejectedArticles.map((article) => (
               <div key={article.id} className="UserViewContent_article_card">
                 <h4 className="UserViewContent_article_title">{article.title}</h4>
+                <img
+                  src={`http://localhost:8000/articles/${article.photo}`}
+                  alt="Article"
+                  className="article-image"
+                  style={{ maxWidth: "100%", height: "auto", marginTop: "10px" }}
+                />
                 <p className="UserViewContent_article_text">{article.text}</p>
                 <p className="UserViewContent_article_date">تاریخ رد: {article.created_at}</p>
                 <div className="UserViewContent_article_categories">

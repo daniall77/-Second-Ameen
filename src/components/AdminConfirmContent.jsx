@@ -29,22 +29,19 @@ function AdminConfirmContent() {
     try {
       console.log(`Performing action on article ${articleId}, isApproved: ${isApproved}`);
 
-   
-      
       const formData = new FormData();
       formData.append("article_id", articleId);
-      formData.append("permit", isApproved ? 1 : 0); 
+      formData.append("permit", isApproved ? 1 : 0);
 
       const response = await axios.post("http://localhost:8000/checkArticle", formData, {
         headers: {
           Authorization: `Bearer ${cookies.access_token}`,
-          "Content-Type": "multipart/form-data", 
+          "Content-Type": "multipart/form-data",
         },
       });
 
       console.log("Action response:", response.data);
 
-      
       setArticles(articles.filter((article) => article.id !== articleId));
       alert(isApproved ? "مقاله تایید شد" : "مقاله رد شد");
     } catch (error) {
@@ -64,6 +61,12 @@ function AdminConfirmContent() {
           {articles.map((article) => (
             <div key={article.id} className="AdminConfirmContent_article_card">
               <h3 className="AdminConfirmContent_article_title">{article.title}</h3>
+              <img
+                src={`http://localhost:8000/articles/${article.photo}`}
+                alt="Article"
+                className="article-image"
+                style={{ maxWidth: "100%", height: "auto", marginTop: "10px" }}
+              />
               <p className="AdminConfirmContent_article_text">{article.text}</p>
               <p className="AdminConfirmContent_article_author">نویسنده: {article.author_id}</p>
               <p className="AdminConfirmContent_article_date">تاریخ ایجاد: {article.created_at}</p>
@@ -93,6 +96,4 @@ function AdminConfirmContent() {
 }
 
 export default AdminConfirmContent;
-
-
 
