@@ -5,6 +5,7 @@ import Select from "react-select";
 import DatePicker, { Calendar, DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
+import toast, { Toaster } from "react-hot-toast";
 
 function UserDashboard() {
   const [province, setProvince] = useState("");
@@ -127,14 +128,14 @@ function UserDashboard() {
             Authorization: `Bearer ${cookies.access_token}`,
           },
         });
-        alert("اطلاعات با موفقیت ثبت شد");
+        toast.success("اطلاعات با موفقیت ثبت شد");
         setIsReadOnly(true);
         setIsEditEnabled(true);
       } catch (error) {
-        alert("خطا در ثبت اطلاعات. لطفاً مجدداً تلاش کنید");
+        toast.error("خطا در ثبت اطلاعات. لطفاً مجدداً تلاش کنید");
       }
     } else {
-      alert("لطفاً تمام فیلدها را پر کنید");
+      toast.error("لطفاً تمام فیلدها را پر کنید");
     }
   };
 
@@ -155,8 +156,11 @@ function UserDashboard() {
       }))
     : [];
 
+    
   return (
     <div className="UserDashboard_container">
+
+      <Toaster position="top-center" reverseOrder={false} />
       <h2 className="UserDashboard_heading">ویرایش پروفایل</h2>
 
       <div className="UserDashboard_input_group">

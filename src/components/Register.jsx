@@ -2,6 +2,7 @@ import React , { useState }  from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import toast, { Toaster } from "react-hot-toast";
 
 function Register() {
   const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm();
@@ -42,7 +43,7 @@ function Register() {
             message: 'این کاربر با این شماره موبایل قبلاً ثبت‌نام کرده است',
           });
         } else {
-          alert('خطایی رخ داده است. لطفاً دوباره تلاش کنید');
+          toast.error('خطایی رخ داده است. لطفاً دوباره تلاش کنید');
         }
       })
       .finally(() => {
@@ -65,8 +66,10 @@ function Register() {
     }
   };
 
+  
   return (
     <div className="Register_container">
+       <Toaster position="top-center" reverseOrder={false} />
       <div className="Register_box">
         <h2 className="Register_h">ثبت‌نام</h2>
         <form className="Register_form" onSubmit={handleSubmit(handleRegister)}>

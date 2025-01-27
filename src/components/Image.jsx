@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import toast, { Toaster } from "react-hot-toast";
 
 function Image() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -18,7 +19,7 @@ function Image() {
     event.preventDefault();
   
     if (!selectedFile) {
-      alert("لطفاً یک فایل انتخاب کنید!");
+      toast.error("لطفاً یک فایل انتخاب کنید!");
       return;
     }
   
@@ -49,9 +50,13 @@ function Image() {
     }
   };
   
+  
 
   return (
     <div className="Image_container">
+       
+       <Toaster position="top-center" reverseOrder={false} />
+
       <h1 className="Image_h">آپلود تصویر پروفایل</h1>
       <form className="Image_form" onSubmit={handleSubmit}>
         <div className="Image_form_div" >

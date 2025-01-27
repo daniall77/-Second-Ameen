@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import toast, { Toaster } from "react-hot-toast";
+
+
 
 function EditorCorrecting() {
   const { examId } = useParams(); 
@@ -67,15 +70,17 @@ function EditorCorrecting() {
           },
         }
       );
-      alert("نمرات با موفقیت ثبت شد.");
+      toast.success("نمرات با موفقیت ثبت شد.");
     } catch (err) {
       console.error("خطا در ثبت نمرات:", err);
-      alert("مشکلی در ثبت نمرات رخ داده است.");
+      toast.error("مشکلی در ثبت نمرات رخ داده است.");
     }
   };
 
+  
   return (
     <div className="AdminCorrecting_container">
+       <Toaster position="top-center" reverseOrder={false} />
       <h2>تصحیح پاسخ‌های آزمون {examId}</h2>
 
       {loading && <p>در حال بارگذاری...</p>}

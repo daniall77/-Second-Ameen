@@ -6,6 +6,10 @@ import EditorDashboard from "./EditorDashboard.jsx";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import avator from "/image/1.png";
+import toast, { Toaster } from "react-hot-toast";
+
+
+
 
 function Dashboard() {
   const location = useLocation();
@@ -47,7 +51,7 @@ function Dashboard() {
        
         removeCookie("access_token", { path: "/" });
 
-        alert("شما از حساب کاربری خود خارج شدید");
+        toast.success("شما از حساب کاربری خود خارج شدید");
 
         navigate("/");
       } else {
@@ -55,7 +59,7 @@ function Dashboard() {
       }
     } catch (error) {
       console.error("Error during logout:", error);
-      alert("مشکلی در خروج از حساب کاربری رخ داده است");
+      toast.error("مشکلی در خروج از حساب کاربری رخ داده است");
     }
   };
 
@@ -72,8 +76,10 @@ function Dashboard() {
 
   const canAccessCorrecting = () => cookies.role === "admin" || cookies.role === "editor";
 
+  
   return (
     <div className="Dashboard_container">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="Dashboard_main">
         {location.pathname === "/Dashboard" && renderProfileComponent()}
         <Outlet />

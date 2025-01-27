@@ -25,7 +25,7 @@ function AdminContent() {
         setTopics(response.data.categories); 
       } catch (error) {
         console.error("Error fetching topics:", error);
-        toast.error("خطا در دریافت موضوعات!");
+        toast.error("خطا در دریافت موضوعات");
       }
     };
 
@@ -39,7 +39,7 @@ function AdminContent() {
     }
 
     if (topics.some((topic) => topic.name === newTopic.trim())) {
-      toast.error("این موضوع قبلاً اضافه شده است!");
+      toast.error("این موضوع قبلاً اضافه شده است");
       return;
     }
 
@@ -56,10 +56,10 @@ function AdminContent() {
       console.log(response.data);
       setTopics([...topics, response.data]);
       setNewTopic("");
-      toast.success("موضوع با موفقیت اضافه شد!");
+      toast.success("موضوع با موفقیت اضافه شد");
     } catch (error) {
       console.error("Error adding topic:", error.response || error.message);
-      toast.error("خطا در اضافه کردن موضوع!");
+      toast.error("خطا در اضافه کردن موضوع");
     }
   };
 
@@ -91,7 +91,6 @@ function AdminContent() {
   const handleSubmit = async () => {
     const formData = new FormData();
 
-   
     const plainText = richText.replace(/<\/?[^>]+(>|$)/g, "");
 
     const categoriesList = selectedCategories.map((cat) => cat.value).join(",");
@@ -109,16 +108,16 @@ function AdminContent() {
         },
       });
       console.log("Article created successfully:", response.data);
-      alert("مقاله با موفقیت ارسال شد!");
+      toast.success("مقاله با موفقیت ارسال شد!");
     } catch (error) {
       console.error("Error creating article:", error.response?.data || error.message);
-      alert("ارسال مقاله با مشکل مواجه شد: " + (error.response?.data?.detail || "مشکلی پیش آمد."));
+      toast.error("ارسال مقاله با مشکل مواجه شد: " + (error.response?.data?.detail || "مشکلی پیش آمد."));
     }
   };
 
   return (
     <div className="AdminContent_container">
-      <Toaster className="Verify_Toaster" position="top-right" reverseOrder={false} />
+      <Toaster className="Verify_Toaster" position="top-center" reverseOrder={false} />
 
       <h2 className="dashboard-title">مدیریت موضوعات</h2>
 
@@ -204,17 +203,17 @@ export default AdminContent;
 
 
 
+
+
 // import React, { useState, useEffect } from "react";
 // import Select from "react-select";
 // import axios from "axios";
 // import "react-quill/dist/quill.snow.css";
 // import ReactQuill from "react-quill";
 // import { useCookies } from "react-cookie";
-// import toast, { Toaster } from 'react-hot-toast';
-
+// import toast, { Toaster } from "react-hot-toast";
 
 // function AdminContent() {
-
 //   const [topics, setTopics] = useState([]); 
 //   const [newTopic, setNewTopic] = useState(""); 
 //   const [categories, setCategories] = useState([]);
@@ -224,10 +223,6 @@ export default AdminContent;
 //   const [imageFile, setImageFile] = useState(null); 
 //   const [richText, setRichText] = useState("");
 //   const [cookies] = useCookies(["access_token"]); 
-
-
-
-
 
 //   useEffect(() => {
 //     const fetchTopics = async () => {
@@ -243,7 +238,6 @@ export default AdminContent;
 
 //     fetchTopics();
 //   }, [cookies.access_token]);
-
 
 //   const handleAddTopic = async () => {
 //     if (newTopic.trim() === "") {
@@ -276,20 +270,6 @@ export default AdminContent;
 //     }
 //   };
 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //   useEffect(() => {
 //     const fetchCategories = async () => {
 //       try {
@@ -307,7 +287,6 @@ export default AdminContent;
 //     fetchCategories();
 //   }, []);
 
-
 //   const handleImageUpload = (e) => {
 //     const file = e.target.files[0];
 //     if (file) {
@@ -316,18 +295,19 @@ export default AdminContent;
 //     }
 //   };
 
-
 //   const handleSubmit = async () => {
 //     const formData = new FormData();
+
+   
+//     const plainText = richText.replace(/<\/?[^>]+(>|$)/g, "");
 
 //     const categoriesList = selectedCategories.map((cat) => cat.value).join(",");
 
 //     formData.append("categories_list", categoriesList);
 //     formData.append("title", textInput);
-//     formData.append("text", richText);
+//     formData.append("text", plainText); 
 //     formData.append("file", imageFile);
     
-  
 //     try {
 //       const response = await axios.post("http://localhost:8000/createArticles", formData, {
 //         headers: {
@@ -342,7 +322,6 @@ export default AdminContent;
 //       alert("ارسال مقاله با مشکل مواجه شد: " + (error.response?.data?.detail || "مشکلی پیش آمد."));
 //     }
 //   };
-  
 
 //   return (
 //     <div className="AdminContent_container">
@@ -371,10 +350,6 @@ export default AdminContent;
 //           <p>هیچ موضوعی یافت نشد</p>
 //         )}
 //       </ul>
-
-
-
-
 
 //       <h2>مدیریت دسته‌بندی‌ها</h2>
 
@@ -431,4 +406,6 @@ export default AdminContent;
 //   );
 // }
 
-// export default AdminContent
+// export default AdminContent;
+
+

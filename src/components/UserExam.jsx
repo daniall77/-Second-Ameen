@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 function UserExam() {
   const [cookies] = useCookies(["access_token"]);
@@ -76,11 +77,11 @@ function UserExam() {
     } catch (err) {
       console.error("Error starting exam:", err);
       if (err.response?.status === 403) {
-        alert("شما مجاز به شروع این آزمون نیستید.");
+        toast.error("شما مجاز به شروع این آزمون نیستید.");
       } else if (err.response?.status === 404) {
-        alert("سوالاتی برای این آزمون یافت نشد.");
+        toast.error("سوالاتی برای این آزمون یافت نشد.");
       } else {
-        alert("خطایی در شروع آزمون رخ داد.");
+        toast.error("خطایی در شروع آزمون رخ داد.");
       }
     } finally {
       setLoading(false);
@@ -116,7 +117,7 @@ function UserExam() {
       setShowModal(true);
     } catch (err) {
       console.error("Error fetching score:", err);
-      alert(
+      toast.error(
         err.response?.data?.detail ||
           "خطایی در دریافت نمره آزمون رخ داده است."
       );
@@ -125,8 +126,12 @@ function UserExam() {
     }
   };
 
+
+  
   return (
     <div className="UserExam_container">
+
+      <Toaster position="top-center" reverseOrder={false} />
       <h2 className="UserExam_h">نمایش آزمون‌ها</h2>
       {error ? (
         <p className="UserExam_p">{error}</p>

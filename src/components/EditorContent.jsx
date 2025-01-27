@@ -4,6 +4,8 @@ import axios from "axios";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import { useCookies } from "react-cookie";
+import toast, { Toaster } from "react-hot-toast";
+
 
 function EditorContent() {
   const [categories, setCategories] = useState([]);
@@ -60,15 +62,17 @@ function EditorContent() {
         },
       });
       console.log("Article created successfully:", response.data);
-      alert("مقاله با موفقیت ارسال شد!");
+      toast.success("مقاله با موفقیت ارسال شد!");
     } catch (error) {
       console.error("Error creating article:", error.response?.data || error.message);
-      alert("ارسال مقاله با مشکل مواجه شد: " + (error.response?.data?.detail || "مشکلی پیش آمد."));
+      toast.error("ارسال مقاله با مشکل مواجه شد: " + (error.response?.data?.detail || "مشکلی پیش آمد."));
     }
   };
 
+  
   return (
     <div className="AdminContent_container">
+       <Toaster position="top-center" reverseOrder={false} />
       <h2>مدیریت دسته‌بندی‌ها</h2>
 
       <div className="multiselect-container">

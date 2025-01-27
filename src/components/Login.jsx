@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 function Login() {
   const { register, handleSubmit, setError, formState: { errors } } = useForm();
@@ -46,7 +47,7 @@ function Login() {
           message: "این شماره موبایل یافت نشد. لطفاً ثبت‌نام کنید",
         });
       } else {
-        alert("خطای ناشناخته! لطفاً دوباره تلاش کنید");
+        toast.error("خطای ناشناخته! لطفاً دوباره تلاش کنید");
       }
     })
     .finally(() => {
@@ -65,9 +66,11 @@ function Login() {
     }
   };
 
+  
   return (
     <div className="Login_container">
-      
+      <Toaster position="top-center" reverseOrder={false} />
+
       <div className="Login_background_circle one"></div>
       <div className="Login_background_circle two"></div>
   

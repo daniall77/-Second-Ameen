@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import toast, { Toaster } from "react-hot-toast";
+
 
 function EditorConfirmContent() {
   const [articles, setArticles] = useState([]);
@@ -43,15 +45,17 @@ function EditorConfirmContent() {
       console.log("Action response:", response.data);
 
       setArticles(articles.filter((article) => article.id !== articleId));
-      alert(isApproved ? "مقاله تایید شد" : "مقاله رد شد");
+      toast.success(isApproved ? "مقاله تایید شد" : "مقاله رد شد");
     } catch (error) {
       console.error("Error performing action:", error);
-      alert("عملیات با خطا مواجه شد.");
+      toast.error("عملیات با خطا مواجه شد.");
     }
   };
 
+  
   return (
     <div className="AdminConfirmContent_container">
+       <Toaster position="top-center" reverseOrder={false} />
       <h2>مقالات در انتظار تایید</h2>
 
       {articles.length === 0 ? (
