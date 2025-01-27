@@ -15,6 +15,9 @@ import Question from "./components/Question.jsx";
 import Content from "./components/Content.jsx"; 
 import ListExam from "./components/ListExam.jsx"; 
 import Correcting from "./components/Correcting.jsx"; 
+import ViewContent from "./components/ViewContent.jsx"; 
+import ConfirmContent from "./components/ConfirmContent.jsx"; 
+
 
 
 createRoot(document.getElementById("root")).render(
@@ -34,6 +37,8 @@ createRoot(document.getElementById("root")).render(
           <Route path="ListExam" element={<ListExam />} />
           <Route path="ListExam/Correcting/:examId" element={<Correcting />} />
           <Route path="Exam/Question" element={<Question />} />
+          <Route path="ViewContent" element={<ViewContent />} />
+          <Route path="ConfirmContent" element={<ConfirmContent />} />
         </Route>
       </Routes>
     </Router>

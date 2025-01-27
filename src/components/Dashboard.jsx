@@ -122,6 +122,26 @@ function Dashboard() {
             </li>
             <li
               className={`Dashboard_sidebar_item ${
+                location.pathname === "/Dashboard/ViewContent" ? "active" : ""
+              }`}
+            >
+              <Link to="ViewContent" className="Dashboard_sidebar_link">
+                   مشاهده مطلب
+              </Link>
+            </li>
+            {canAccessCorrecting() && (
+              <li
+                className={`Dashboard_sidebar_item ${
+                  location.pathname === "/Dashboard/ConfirmContent" ? "active" : ""
+                }`}
+              >
+                <Link to="ConfirmContent" className="Dashboard_sidebar_link">
+                  تایید مطلب
+                </Link>
+              </li>
+            )}
+            <li
+              className={`Dashboard_sidebar_item ${
                 location.pathname === "/Dashboard/Exam" ? "active" : ""
               }`}
             >
