@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie"; 
+import toast, { Toaster } from "react-hot-toast";
 
 function AdminDashboard() {
 
-  
+  const [cookies] = useCookies(["access_token"]);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -33,6 +35,50 @@ function AdminDashboard() {
 
     fetchUsers();
   }, []);
+
+
+
+  const changeUserRole = async (userId, newRole) => {
+    try {
+      const endpoint =
+        newRole === "admin"
+          ? "http://localhost:8000/convert/admins"
+          : "http://localhost:8000/convert/editors";
+  
+      await axios.put(
+        endpoint,
+        null,
+        {
+          params: { user_id: userId },
+          headers: {
+            Authorization: `Bearer ${cookies.access_token}`,
+          },
+        }
+      );
+  
+      setData((prevData) => {
+        return {
+          ...prevData,
+          users: prevData.users.map((user) =>
+            user.id === userId ? { ...user, role: newRole } : user
+          ),
+          editors:
+            newRole === "admin"
+              ? prevData.editors.filter((editor) => editor.id !== userId)
+              : [...prevData.editors, prevData.users.find((user) => user.id === userId)],
+          admins:
+            newRole === "admin"
+              ? [...prevData.admins, prevData.users.find((user) => user.id === userId)]
+              : prevData.admins,
+        };
+      });
+  
+      toast.success(`کاربر به ${newRole === "admin" ? "ادمین" : "ویرایشگر"} تبدیل شد.`);
+    } catch (err) {
+      toast.error("تغییر نقش انجام نشد.");
+    }
+  };
+
 
   if (loading) {
     return <div>در حال بارگذاری...</div>;
@@ -137,6 +183,7 @@ function AdminDashboard() {
 
   return (
     <div>
+      <Toaster position="top-center" reverseOrder={false} />
       <h1>لیست کاربران</h1>
 
       <section>
@@ -197,7 +244,11 @@ function AdminDashboard() {
                     <td>{editor.first_name}</td>
                     <td>{editor.phone_number}</td>
                     <td>{editor.last_name}</td>
-                    <td></td>
+                    <td>
+                          <button onClick={() => changeUserRole(editor.id, "admin")}>
+                            تبدیل به ادمین
+                          </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -246,7 +297,14 @@ function AdminDashboard() {
                     <td>{user.birthday}</td>
                     <td>{user.school}</td>
                     <td>{user.grade}</td>
-                    <td></td>
+                    <td>
+                        <button onClick={() => changeUserRole(user.id, "admin")}>
+                          تبدیل به ادمین
+                        </button>
+                        <button onClick={() => changeUserRole(user.id, "editor")}>
+                          تبدیل به ویرایشگر
+                        </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -268,6 +326,9 @@ function AdminDashboard() {
 }
 
 export default AdminDashboard;
+
+
+
 
 
 

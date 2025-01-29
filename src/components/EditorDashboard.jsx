@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
+import toast, { Toaster } from "react-hot-toast";
 
 function EditorDashboard() {
+
+  const [cookies] = useCookies(["access_token"]);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,6 +32,40 @@ function EditorDashboard() {
 
     fetchUsers();
   }, []);
+
+
+  const convertToEditor = async (userId) => {
+    try {
+      await axios.put(
+        "http://localhost:8000/convert/editors",
+        null,
+        {
+          params: { user_id: userId },
+          headers: {
+            Authorization: `Bearer ${cookies.access_token}`,
+          },
+        }
+      );
+  
+      setData((prevData) => {
+        const updatedUser = prevData.users.find((user) => user.id === userId);
+        if (!updatedUser) return prevData;
+  
+        return {
+          ...prevData,
+          users: prevData.users.filter((user) => user.id !== userId),
+          editors: [...prevData.editors, { ...updatedUser, role: "editor" }],
+        };
+      });
+  
+      toast.success("کاربر با موفقیت به ویرایشگر تبدیل شد!");
+    } catch (err) {
+      toast.error("عملیات ناموفق بود.");
+    }
+  };
+
+
+
 
   if (loading) {
     return <div>در حال بارگذاری...</div>;
@@ -132,6 +170,7 @@ function EditorDashboard() {
 
   return (
     <div>
+      <Toaster position="top-center" reverseOrder={false} />
         
       <h1>لیست کاربران</h1>
 
@@ -146,7 +185,6 @@ function EditorDashboard() {
                   <th>نام</th>
                   <th>شماره موبایل</th>
                   <th>نام خانوادگی</th>
-                  <th>تغییر نقش</th>
                 </tr>
               </thead>
               <tbody>
@@ -156,7 +194,6 @@ function EditorDashboard() {
                     <td>{editor.first_name}</td>
                     <td>{editor.phone_number}</td>
                     <td>{editor.last_name}</td>
-                    <td></td>
                   </tr>
                 ))}
               </tbody>
@@ -205,7 +242,9 @@ function EditorDashboard() {
                     <td>{user.birthday}</td>
                     <td>{user.school}</td>
                     <td>{user.grade}</td>
-                    <td></td>
+                    <td>
+                          <button onClick={() => convertToEditor(user.id)}>تبدیل به ویرایشگر</button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
