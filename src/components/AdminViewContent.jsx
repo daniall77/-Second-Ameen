@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import toast, { Toaster } from "react-hot-toast";
+import { ScaleLoader } from "react-spinners"; 
 
 function AdminViewContent() {
   const [articles, setArticles] = useState([]); 
@@ -18,10 +19,10 @@ function AdminViewContent() {
         });
         console.log(response.data);
         setArticles(response.data);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching articles:", error);
         toast.error("خطایی در دریافت اطلاعات مقالات رخ داد.");
+      } finally {
         setLoading(false);
       }
     };
@@ -29,17 +30,17 @@ function AdminViewContent() {
     fetchArticles();
   }, [cookies.access_token]);
 
-  if (loading) {
-    return <p>در حال بارگذاری...</p>;
-  }
-
   return (
     <div className="AdminViewContent_container">
       <Toaster position="top-center" reverseOrder={false} />
       <h2 className="AdminViewContent_heading">لیست مقالات</h2>
 
-      {articles.length === 0 ? (
-        <p>هیچ مقاله‌ای یافت نشد.</p>
+      {loading ? (
+        <div className="loader-container">
+          <ScaleLoader />
+        </div>
+      ) : articles.length === 0 ? (
+        <p>هیچ مقاله‌ای یافت نشد</p>
       ) : (
         <div className="AdminViewContent_articles">
           {articles.map((article) => (
@@ -69,7 +70,6 @@ function AdminViewContent() {
                     src={`http://localhost:8000/articles/${article.photo}`}
                     alt="Article"
                     className="article-image"
-                    style={{ maxWidth: "100%", height: "auto", marginTop: "10px" }}
                   />
                 </div>
               )}

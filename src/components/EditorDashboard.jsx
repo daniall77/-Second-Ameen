@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import toast, { Toaster } from "react-hot-toast";
+import { ScaleLoader, BeatLoader } from "react-spinners";
 
 function EditorDashboard() {
 
@@ -9,6 +10,7 @@ function EditorDashboard() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [convertingUserId, setConvertingUserId] = useState(null); 
 
   const [editorPage, setEditorPage] = useState(1);
   const [editorRowsPerPage, setEditorRowsPerPage] = useState(2);
@@ -35,6 +37,7 @@ function EditorDashboard() {
 
 
   const convertToEditor = async (userId) => {
+    setConvertingUserId(userId);
     try {
       await axios.put(
         "http://localhost:8000/convert/editors",
@@ -58,9 +61,12 @@ function EditorDashboard() {
         };
       });
   
-      toast.success("کاربر با موفقیت به ویرایشگر تبدیل شد!");
+      toast.success("کاربر با موفقیت به ادیتور تبدیل شد");
+      window.location.reload(); 
     } catch (err) {
-      toast.error("عملیات ناموفق بود.");
+      toast.error("عملیات ناموفق بود");
+    } finally {
+      setConvertingUserId(null);
     }
   };
 
@@ -68,7 +74,11 @@ function EditorDashboard() {
 
 
   if (loading) {
-    return <div>در حال بارگذاری...</div>;
+    return (
+      <div className="loader-container">
+        <ScaleLoader />
+      </div>
+    );
   }
 
   if (error) {
@@ -172,10 +182,10 @@ function EditorDashboard() {
     <div>
       <Toaster position="top-center" reverseOrder={false} />
         
-      <h1>لیست کاربران</h1>
+      <h1>لیست اعضا</h1>
 
       <section>
-        <h2>ویرایشگران</h2>
+        <h2>ادیتور</h2>
         {data.editors.length > 0 ? (
           <>
             <table border="1" style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -207,12 +217,12 @@ function EditorDashboard() {
             )}
           </>
         ) : (
-          <p>هیچ ویرایشگری وجود ندارد</p>
+          <p>هیچ ادیتوری وجود ندارد</p>
         )}
       </section>
 
       <section>
-        <h2>کاربران</h2>
+        <h2>کاربر</h2>
         {data.users.length > 0 ? (
           <>
             <table border="1" style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -243,7 +253,11 @@ function EditorDashboard() {
                     <td>{user.school}</td>
                     <td>{user.grade}</td>
                     <td>
-                          <button onClick={() => convertToEditor(user.id)}>تبدیل به ویرایشگر</button>
+                         {convertingUserId === user.id ? (
+                            <BeatLoader  />
+                          ) : (
+                            <button onClick={() => convertToEditor(user.id)}>ادیتور</button>
+                          )}
                     </td>
                   </tr>
                 ))}

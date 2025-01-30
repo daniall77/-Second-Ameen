@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie"; 
 import toast, { Toaster } from "react-hot-toast";
+import { ScaleLoader, BeatLoader } from "react-spinners";
 
 function AdminDashboard() {
 
@@ -9,6 +10,7 @@ function AdminDashboard() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [changingUserId, setChangingUserId] = useState(null);
 
   const [adminPage, setAdminPage] = useState(1);
   const [adminRowsPerPage, setAdminRowsPerPage] = useState(2);
@@ -39,6 +41,7 @@ function AdminDashboard() {
 
 
   const changeUserRole = async (userId, newRole) => {
+    setChangingUserId(userId);
     try {
       const endpoint =
         newRole === "admin"
@@ -73,15 +76,21 @@ function AdminDashboard() {
         };
       });
   
-      toast.success(`کاربر به ${newRole === "admin" ? "ادمین" : "ویرایشگر"} تبدیل شد.`);
+      toast.success(`کاربر به ${newRole === "admin" ? "ادمین" : "ادیتور"} تبدیل شد`);
+      window.location.reload(); 
     } catch (err) {
-      toast.error("تغییر نقش انجام نشد.");
+      toast.error("تغییر نقش انجام نشد");
     }
+      setChangingUserId(null);
   };
 
 
   if (loading) {
-    return <div>در حال بارگذاری...</div>;
+    return (
+      <div className="loader-container">
+        <ScaleLoader />
+      </div>
+    );
   }
 
   if (error) {
@@ -184,10 +193,10 @@ function AdminDashboard() {
   return (
     <div>
       <Toaster position="top-center" reverseOrder={false} />
-      <h1>لیست کاربران</h1>
+      <h1>لیست اعضا</h1>
 
       <section>
-        <h2>مدیران</h2>
+        <h2>ادمین</h2>
         {data.admins.length > 0 ? (
           <>
             <table border="1" style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -219,12 +228,12 @@ function AdminDashboard() {
             )}
           </>
         ) : (
-          <p>هیچ مدیری وجود ندارد</p>
+          <p>هیچ ادمینی وجود ندارد</p>
         )}
       </section>
 
       <section>
-        <h2>ویرایشگران</h2>
+        <h2>ادیتور</h2>
         {data.editors.length > 0 ? (
           <>
             <table border="1" style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -245,9 +254,9 @@ function AdminDashboard() {
                     <td>{editor.phone_number}</td>
                     <td>{editor.last_name}</td>
                     <td>
-                          <button onClick={() => changeUserRole(editor.id, "admin")}>
-                            تبدیل به ادمین
-                          </button>
+                        <button onClick={() => changeUserRole(editor.id, "admin")} disabled={changingUserId === editor.id}>
+                               {changingUserId === editor.id ? <BeatLoader  /> : "ادمین"}
+                        </button>
                     </td>
                   </tr>
                 ))}
@@ -262,12 +271,12 @@ function AdminDashboard() {
             )}
           </>
         ) : (
-          <p>هیچ ویرایشگری وجود ندارد</p>
+          <p>هیچ ادیتوری وجود ندارد</p>
         )}
       </section>
 
       <section>
-        <h2>کاربران</h2>
+        <h2>کاربر</h2>
         {data.users.length > 0 ? (
           <>
             <table border="1" style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -298,12 +307,12 @@ function AdminDashboard() {
                     <td>{user.school}</td>
                     <td>{user.grade}</td>
                     <td>
-                        <button onClick={() => changeUserRole(user.id, "admin")}>
-                          تبدیل به ادمین
-                        </button>
-                        <button onClick={() => changeUserRole(user.id, "editor")}>
-                          تبدیل به ویرایشگر
-                        </button>
+                           <button onClick={() => changeUserRole(user.id, "admin")} disabled={changingUserId === user.id}>
+                                {changingUserId === user.id ? <BeatLoader /> : "ادمین"}
+                           </button>
+                           <button onClick={() => changeUserRole(user.id, "editor")} disabled={changingUserId === user.id}>
+                               {changingUserId === user.id ? <BeatLoader /> : "ادیتور"}
+                           </button>
                     </td>
                   </tr>
                 ))}
@@ -327,113 +336,4 @@ function AdminDashboard() {
 
 export default AdminDashboard;
 
-
-
-
-
-
-// import React, { useState, useEffect } from "react";
-// import { useCookies } from "react-cookie";
-// import axios from "axios";
-// import toast, { Toaster } from 'react-hot-toast';
-
-// function AdminDashboard() {
-  
-
-//   const [topics, setTopics] = useState([]); 
-//   const [newTopic, setNewTopic] = useState(""); 
-//   const [cookies] = useCookies(["access_token"]);
-
- 
-
- 
-//   useEffect(() => {
-//     const fetchTopics = async () => {
-//       try {
-//         const response = await axios.get("http://localhost:8000/categories");
-//         console.log(response.data);
-//         setTopics(response.data.categories); 
-//       } catch (error) {
-//         console.error("Error fetching topics:", error);
-//         toast.error("خطا در دریافت موضوعات!");
-//       }
-//     };
-
-//     fetchTopics();
-//   }, [cookies.access_token]);
-
-
-//   const handleAddTopic = async () => {
-//     if (newTopic.trim() === "") {
-//       toast.error("لطفاً یک موضوع وارد کنید!");
-//       return;
-//     }
-
-//     if (topics.some((topic) => topic.name === newTopic.trim())) {
-//       toast.error("این موضوع قبلاً اضافه شده است!");
-//       return;
-//     }
-
-//     try {
-//       const response = await axios.post(
-//         "http://localhost:8000/categories/create",
-//         { name: newTopic.trim() },
-//         {
-//           headers: {
-//             Authorization: `Bearer ${cookies.access_token}`,
-//           },
-//         }
-//       );
-//       console.log(response.data);
-//       setTopics([...topics, response.data]);
-//       setNewTopic("");
-//       toast.success("موضوع با موفقیت اضافه شد!");
-//     } catch (error) {
-//       console.error("Error adding topic:", error.response || error.message);
-//       toast.error("خطا در اضافه کردن موضوع!");
-//     }
-//   };
-
- 
-//   const handleKeyPress = (e) => {
-//     if (e.key === "Enter") {
-//       handleAddTopic();
-//     }
-//   };
-
-//   return (
-//     <div className="AdminDashboard_container">
-
-//       <Toaster className="Verify_Toaster" position="top-right" reverseOrder={false} />
-
-//       <h2 className="dashboard-title">مدیریت موضوعات</h2>
-
-//       <div className="topic-input">
-//         <input
-//           type="text"
-//           placeholder="یک موضوع جدید اضافه کنید..."
-//           value={newTopic}
-//           onChange={(e) => setNewTopic(e.target.value)}
-//           onKeyPress={handleKeyPress}
-//           className="input-box"
-//         />
-//         <button onClick={handleAddTopic} className="add-button">
-//           + افزودن
-//         </button>
-//       </div>
-
-//       <h3>لیست موضوعات:</h3>
-//       <ul>
-//         {topics.length > 0 ? (
-//           topics.map((topic) => <li key={topic.id}>{topic.name}</li>)
-//         ) : (
-//           <p>هیچ موضوعی یافت نشد</p>
-//         )}
-//       </ul>
-
-//     </div>
-//   );
-// }
-
-// export default AdminDashboard;
 

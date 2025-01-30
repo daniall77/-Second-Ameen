@@ -412,7 +412,130 @@ body {
 
 /* start page  UserDashboard */
 
+
 .UserDashboard_container {
+  width: 90%;
+  max-width: 500px;
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+
+.UserDashboard_heading {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+
+.UserDashboard_input_group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+
+.UserDashboard_label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+
+.UserDashboard_input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.UserDashboard_input:focus {
+  border-color: #007bff;
+  box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.3);
+}
+
+
+.custom-datepicker {
+  width: 100%;
+  text-align: center;
+}
+
+
+.UserDashboard_error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+
+.UserDashboard_button_group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.UserDashboard_button {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 5px;
+}
+
+.UserDashboard_button.submit {
+  background-color: #007bff;
+  color: white;
+}
+
+.UserDashboard_button.submit:hover {
+  background-color: #0056b3;
+}
+
+
+.UserDashboard_button.edit {
+  background-color: #28a745;
+  color: white;
+}
+
+.UserDashboard_button.edit:hover {
+  background-color: #218838;
+}
+
+
+.UserDashboard_button:disabled {
+  background-color: #ccc !important;
+  color: #666 !important;
+  cursor: not-allowed !important;
+  opacity: 0.7;
+}
+
+
+@media (max-width: 600px) {
+  .UserDashboard_container {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .UserDashboard_button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+
+/* .UserDashboard_container {
   max-width: 600px;
   margin: 50px auto;
   padding: 30px;
@@ -564,7 +687,7 @@ body {
 .UserDashboard_button.edit:disabled {
   background-color: #ddd;
   cursor: not-allowed;
-}
+} */
 
 
 
