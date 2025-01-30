@@ -71,7 +71,7 @@ function EditorContent() {
         setUploadedImage(URL.createObjectURL(file));
         setImageFile(file);
         setImageLoading(false);
-      }, 1000);
+      }, 500);
     }
   };
 

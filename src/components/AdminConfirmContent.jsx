@@ -2,25 +2,28 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import toast, { Toaster } from "react-hot-toast";
+import { ScaleLoader, BeatLoader } from "react-spinners";
 
 function AdminConfirmContent() {
   const [articles, setArticles] = useState([]);
   const [cookies] = useCookies(["access_token"]);
+  const [loading, setLoading] = useState(true);
+  const [processingArticle, setProcessingArticle] = useState(null);
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        console.log("Fetching articles from server...");
         const response = await axios.get("http://localhost:8000/checklistArticles", {
           headers: {
             Authorization: `Bearer ${cookies.access_token}`,
           },
         });
-        console.log("Fetched articles:", response.data);
         setArticles(response.data);
       } catch (error) {
         console.error("Error fetching articles:", error);
-        toast.error("خطا در دریافت مقالات");
+        toast.error("خطا در دریافت لیست مقالات");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -28,36 +31,41 @@ function AdminConfirmContent() {
   }, [cookies.access_token]);
 
   const handleAction = async (articleId, isApproved) => {
-    try {
-      console.log(`Performing action on article ${articleId}, isApproved: ${isApproved}`);
+    setProcessingArticle(articleId);
 
+    try {
       const formData = new FormData();
       formData.append("article_id", articleId);
       formData.append("permit", isApproved ? 1 : 0);
 
-      const response = await axios.post("http://localhost:8000/checkArticle", formData, {
+      await axios.post("http://localhost:8000/checkArticle", formData, {
         headers: {
           Authorization: `Bearer ${cookies.access_token}`,
           "Content-Type": "multipart/form-data",
         },
       });
 
-      console.log("Action response:", response.data);
-
-      setArticles(articles.filter((article) => article.id !== articleId));
-      toast.success(isApproved ? "مقاله تایید شد." : "مقاله رد شد.");
+      setArticles((prevArticles) => prevArticles.filter((article) => article.id !== articleId));
+      toast.success(isApproved ? "مقاله مورد نظر تایید شد" : "مقاله مورد نظر رد شد");
     } catch (error) {
       console.error("Error performing action:", error);
-      toast.error("عملیات با خطا مواجه شد");
+      toast.error("عملیات با خطا مواجه شد.");
+    } finally {
+      setProcessingArticle(null);
     }
   };
 
   return (
     <div className="AdminConfirmContent_container">
-      <h2>مقالات در انتظار تایید</h2>
       <Toaster position="top-center" reverseOrder={false} />
 
-      {articles.length === 0 ? (
+      <h2>مقالات در انتظار تایید</h2>
+
+      {loading ? (
+        <div className="loader-container">
+          <ScaleLoader  />
+        </div>
+      ) : articles.length === 0 ? (
         <p>هیچ مقاله‌ای در انتظار تایید نیست</p>
       ) : (
         <div className="AdminConfirmContent_articles">
@@ -68,7 +76,6 @@ function AdminConfirmContent() {
                 src={`http://localhost:8000/articles/${article.photo}`}
                 alt="Article"
                 className="article-image"
-                style={{ maxWidth: "100%", height: "auto", marginTop: "10px" }}
               />
               <p className="AdminConfirmContent_article_text">{article.text}</p>
               <p className="AdminConfirmContent_article_author">نویسنده: {article.author_id}</p>
@@ -80,14 +87,16 @@ function AdminConfirmContent() {
                 <button
                   className="approve-button"
                   onClick={() => handleAction(article.id, true)}
+                  disabled={processingArticle === article.id}
                 >
-                  تایید
+                  {processingArticle === article.id ? <BeatLoader /> : "تایید"}
                 </button>
                 <button
                   className="reject-button"
                   onClick={() => handleAction(article.id, false)}
+                  disabled={processingArticle === article.id}
                 >
-                  رد
+                  {processingArticle === article.id ? <BeatLoader  /> : "رد"}
                 </button>
               </div>
             </div>
@@ -100,9 +109,11 @@ function AdminConfirmContent() {
 
 export default AdminConfirmContent;
 
+
 // import React, { useEffect, useState } from "react";
 // import axios from "axios";
 // import { useCookies } from "react-cookie";
+// import toast, { Toaster } from "react-hot-toast";
 
 // function AdminConfirmContent() {
 //   const [articles, setArticles] = useState([]);
@@ -121,6 +132,7 @@ export default AdminConfirmContent;
 //         setArticles(response.data);
 //       } catch (error) {
 //         console.error("Error fetching articles:", error);
+//         toast.error("خطا در دریافت مقالات");
 //       }
 //     };
 
@@ -142,20 +154,20 @@ export default AdminConfirmContent;
 //         },
 //       });
 
-      
 //       console.log("Action response:", response.data);
 
 //       setArticles(articles.filter((article) => article.id !== articleId));
-//       alert(isApproved ? "مقاله تایید شد" : "مقاله رد شد");
+//       toast.success(isApproved ? "مقاله تایید شد." : "مقاله رد شد.");
 //     } catch (error) {
 //       console.error("Error performing action:", error);
-//       alert("عملیات با خطا مواجه شد.");
+//       toast.error("عملیات با خطا مواجه شد");
 //     }
 //   };
 
 //   return (
 //     <div className="AdminConfirmContent_container">
 //       <h2>مقالات در انتظار تایید</h2>
+//       <Toaster position="top-center" reverseOrder={false} />
 
 //       {articles.length === 0 ? (
 //         <p>هیچ مقاله‌ای در انتظار تایید نیست</p>
@@ -199,4 +211,7 @@ export default AdminConfirmContent;
 // }
 
 // export default AdminConfirmContent;
+
+
+
 
