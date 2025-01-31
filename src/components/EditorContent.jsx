@@ -81,17 +81,20 @@ function EditorContent() {
       toast.error("پر کردن همه فیلدها الزامی است.");
       return;
     }
-
+  
     setLoading(true);
-
+  
+ 
+    const plainText = richText.replace(/<\/?p>/g, "");
+  
     const formData = new FormData();
     const categoriesList = selectedCategories.map((cat) => cat.value).join(",");
-
+  
     formData.append("categories_list", categoriesList);
     formData.append("title", textInput);
-    formData.append("text", richText);
+    formData.append("text", plainText);  
     formData.append("file", imageFile);
-
+  
     try {
       const response = await axios.post("http://localhost:8000/createArticles", formData, {
         headers: {
@@ -99,11 +102,10 @@ function EditorContent() {
           Authorization: `Bearer ${cookies.access_token}`,
         },
       });
-
+  
       console.log("Article created successfully:", response.data);
       toast.success("مقاله با موفقیت ارسال شد");
-
-      
+  
       setTextInput("");
       setSelectedCategories([]);
       setRichText("");
