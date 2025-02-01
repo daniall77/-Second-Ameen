@@ -60,11 +60,8 @@ function Login() {
   };
 
   return (
-    <div className="Login_container">
-      <Toaster position="top-center" reverseOrder={false} />
-
-      <div className="Login_background_circle one"></div>
-      <div className="Login_background_circle two"></div>
+    <div className="Login_container" dir="rtl">
+      <Toaster className="Login_container_Toaster" position="top-center" reverseOrder={false} />
 
       <div className="Login_box">
         <h2 className="Login_h">ورود</h2>
@@ -95,7 +92,7 @@ function Login() {
               disabled={isLoading}
             >
               {isLoading ? (
-                <BeatLoader  />
+                <BeatLoader  className="Login_button_div_BeatLoader"  />
               ) : (
                 "ورود"
               )}

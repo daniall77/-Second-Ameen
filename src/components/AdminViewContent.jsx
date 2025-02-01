@@ -31,16 +31,17 @@ function AdminViewContent() {
   }, [cookies.access_token]);
 
   return (
+
     <div className="AdminViewContent_container">
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster className="AdminViewContent_Toaster" position="top-center" reverseOrder={false} />
       <h2 className="AdminViewContent_heading">لیست مقالات</h2>
 
       {loading ? (
-        <div className="loader-container">
+        <div className="AdminViewContent_ScaleLoader">
           <ScaleLoader />
         </div>
       ) : articles.length === 0 ? (
-        <p>هیچ مقاله‌ای یافت نشد</p>
+        <p className="AdminViewContent_container_p" >هیچ مقاله‌ای یافت نشد</p>
       ) : (
         <div className="AdminViewContent_articles">
           {articles.map((article) => (
@@ -65,11 +66,11 @@ function AdminViewContent() {
               
               {article.photo && (
                 <div className="AdminViewContent_article_photo">
-                  <p>تصویر مقاله:</p>
+                  <p className="AdminViewContent_article_photo_p">تصویر مقاله</p>
                   <img
                     src={`http://localhost:8000/articles/${article.photo}`}
                     alt="Article"
-                    className="article-image"
+                    className="AdminViewContent_article_img"
                   />
                 </div>
               )}
@@ -77,8 +78,8 @@ function AdminViewContent() {
               
               {article.text && (
                 <div className="AdminViewContent_article_text">
-                  <p>متن مقاله:</p>
-                  <p>{article.text}</p>
+                  <p className="AdminViewContent_article_text_one">متن مقاله</p>
+                  <p className="AdminViewContent_article_text_two">{article.text}</p>
                 </div>
               )}
             </div>

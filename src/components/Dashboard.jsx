@@ -78,12 +78,8 @@ function Dashboard() {
 
   
   return (
-    <div className="Dashboard_container">
-      <Toaster position="top-center" reverseOrder={false} />
-      <div className="Dashboard_main">
-        {location.pathname === "/Dashboard" && renderProfileComponent()}
-        <Outlet />
-      </div>
+    <div className="Dashboard_container" dir="rtl">
+      <Toaster className="Dashboard_container_Toaster" position="top-center" reverseOrder={false} />
       <div className="Dashboard_sidebar">
         <div className="Dashboard_sidebar_top">
           <div className="Dashboard_curved_section">
@@ -166,13 +162,17 @@ function Dashboard() {
                 </Link>
               </li>
             )}
-            <li className="Dashboard_sidebar_item Dashboard_sidebar_logout">
-              <button className="Dashboard_sidebar_link" onClick={handleLogout}>
-                خروج
-              </button>
-            </li>
-          </ul>
+             </ul>
+              <div className=" Dashboard_sidebar_logout">
+                    <button className="Dashboard_sidebar_link" onClick={handleLogout}>
+                      خروج
+                    </button>
+              </div>
         </div>
+      </div>
+      <div className="Dashboard_main">
+        {location.pathname === "/Dashboard" && renderProfileComponent()}
+        <Outlet />
       </div>
     </div>
   );

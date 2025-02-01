@@ -10,7 +10,7 @@ function Account() {
   const phoneNumber = cookies.phoneNumber;
 
   return (
-    <div className="Account_container">
+    <div className="Account_container" dir="rtl" >
       <h1 className="Account_header">صفحه اطلاعات حساب</h1>
       <div className="Account_details">
         <div className="Account_field">

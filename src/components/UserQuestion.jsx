@@ -179,11 +179,13 @@ function UserQuestion() {
       <Toaster position="top-center" reverseOrder={false} />
 
       {loading ? (
-        <div className="loading_container">
+        <div className="UserQuestion_loading">
           <BounceLoader />
         </div>
       ) : (
         <>
+
+        <div className="UserQuestion_div">
           <h2 className="UserQuestion_heading">آزمون شماره {examId}</h2>
           <p className="UserQuestion_description">توضیحات: {description}</p>
           <p className="UserQuestion_timer">زمان باقی‌مانده: {formatTime(remainingTime)}</p>
@@ -196,16 +198,17 @@ function UserQuestion() {
                   isTestQuestion(question) ? "UserQuestion_test" : "UserQuestion_descriptive"
                 }`}
               >
-                <h3>
+                <h3 className="UserQuestion_questions_h">
                   سوال {index + 1}: {question.question_text}
                 </h3>
                 {isTestQuestion(question) ? (
-                  <ul>
+                  <ul className="UserQuestion_questions_ul">
                     {[question.option_1, question.option_2, question.option_3, question.option_4].map(
                       (option, idx) => (
-                        <li key={idx}>
-                          <label>
+                        <li key={idx} className="UserQuestion_questions_li" >
+                          <label className="UserQuestion_questions_label" >
                             <input
+                              className="UserQuestion_questions_input"
                               type="radio"
                               name={`question_${question.question_number}`}
                               value={idx + 1}
@@ -221,8 +224,7 @@ function UserQuestion() {
                   </ul>
                 ) : (
                   <textarea
-                    rows="4"
-                    cols="50"
+                    className="UserQuestion_questions_textarea"
                     placeholder="پاسخ خود را اینجا بنویسید..."
                     onChange={(e) =>
                       handleDescriptiveAnswerChange(question.question_number, e.target.value)
@@ -233,9 +235,14 @@ function UserQuestion() {
             ))}
           </div>
 
-          <button className="UserQuestion_finish_button" onClick={handleFinishExam} disabled={isSubmitting}>
-            {isSubmitting ? <BeatLoader /> : "پایان آزمون"}
-          </button>
+          <div className="UserQuestion_finish_div">
+                   <button className="UserQuestion_finish_button" onClick={handleFinishExam} disabled={isSubmitting}>
+                        {isSubmitting ? <BeatLoader /> : "پایان آزمون"}
+                   </button>
+          </div>
+
+
+       </div>
         </>
       )}
     </div>

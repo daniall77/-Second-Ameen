@@ -62,33 +62,35 @@ function EditorListExam() {
 
   return (
     <div className="AdminListExam_container">
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster className="AdminListExam_container_Toaster" position="top-center" reverseOrder={false} />
 
-      <h2>آزمون</h2>
+      <h2 className="AdminListExam_container_h" >آزمون</h2>
 
      
       {loading ? (
-        <div className="loader-container">
+        <div className="AdminListExam_container_loader">
           <ScaleLoader  />
         </div>
       ) : error ? (
-        <p className="error">{error}</p>
+        <p className="AdminListExam_container_error">{error}</p>
       ) : (
         <div className="AdminListExam_exams">
           {exams.length > 0 ? (
-            <ul>
+            <ul className="AdminListExam_exams_ul">
               {exams.map((exam) => (
-                <li key={exam.id}>
-                  <p>عنوان آزمون: {exam.title}</p>
-                  <p>توضیحات: {exam.description}</p>
-                  <button onClick={() => handleViewResults(exam.id)} disabled={loadingExam === exam.id}>
-                    {loadingExam === exam.id ? <BeatLoader /> : "مشاهده نتایج"}
-                  </button>
+                <li key={exam.id} className="AdminListExam_exams_li">
+                  <p className="AdminListExam_exams_p">عنوان آزمون: {exam.title}</p>
+                  <p className="AdminListExam_exams_p">توضیحات: {exam.description}</p>
+                  <div className="AdminListExam_exams_div">
+                      <button className="AdminListExam_exams_button" onClick={() => handleViewResults(exam.id)} disabled={loadingExam === exam.id}>
+                        {loadingExam === exam.id ? <BeatLoader /> : "مشاهده نتایج"}
+                      </button>
+                  </div>
                 </li>
               ))}
             </ul>
           ) : (
-            <p>هیچ آزمونی یافت نشد</p>
+            <p className="AdminListExam_exams_div_p">هیچ آزمونی یافت نشد</p>
           )}
         </div>
       )}

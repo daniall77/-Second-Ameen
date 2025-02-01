@@ -20,10 +20,12 @@ function App() {
  
   useEffect(() => {
     if (location.state?.successMessage && !toastShown.current) {
-      toast.success(location.state.successMessage, { duration: 5000 });
+      toast.success(location.state.successMessage, { duration: 2000 });
       toastShown.current = true;
     }
   }, [location.state]);
+
+
 
   
   useEffect(() => {
@@ -146,7 +148,6 @@ function App() {
                     src={`http://localhost:8000/articles/${article.photo}`}
                     alt="Article"
                     className="article-image"
-                    style={{ maxWidth: "100%", height: "100px", marginTop: "10px" }}
                   />
                   <p className="author">نویسنده: {article.author_id}</p>
                   <p className="date">تاریخ ایجاد: {article.created_at}</p>
@@ -183,9 +184,6 @@ export default App;
 // import axios from "axios";
 // import { CiUser } from "react-icons/ci";
 // import toast, { Toaster } from "react-hot-toast";
-
-
-
 
 // function App() {
 //   const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
@@ -300,6 +298,13 @@ export default App;
 // }
 
 // export default App;
+
+
+
+
+
+
+
 
 
 // 2222222222222222222222222222222222222222222222222222222222222222222222222222
@@ -434,6 +439,18 @@ export default App;
 
 // export default App;
 
+
+
+
+
+
+
+
+
+
+
+
+
 // 11111111111111111111111111111111111111111111111111111111111111111111111111
 
 // import React, { useEffect, useState } from "react";
@@ -558,6 +575,13 @@ export default App;
 // }
 
 // export default App;
+
+
+
+
+
+
+
 
 
 

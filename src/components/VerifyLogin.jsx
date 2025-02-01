@@ -22,7 +22,7 @@ function VerifyLogin() {
 
   useEffect(() => {
     if (!toastShown.current) {
-      toast.success(`کد تأیید به شماره ${phoneNumber} ارسال شد`, { duration: 4000 });
+      toast.success(`کد تأیید به شماره ${phoneNumber}ارسال شد`, { duration: 4000 });
       toastShown.current = true;
     }
 
@@ -88,7 +88,7 @@ function VerifyLogin() {
       console.error('Verification error:', error);
 
       if (error.response && error.response.status === 400) {
-        toast.error('کد تأیید نادرست است یا کاربر پیدا نشد', { duration: 4000 });
+        toast.error('کد تأیید نادرست است', { duration: 4000 });
         // setErrorMessage('کد تأیید نادرست است یا کاربر پیدا نشد');
       } else {
         toast.error('خطایی رخ داده است. لطفاً دوباره تلاش کنید', { duration: 4000 });
@@ -117,7 +117,7 @@ function VerifyLogin() {
       console.error('Verification error:', error);
 
       if (error.response && error.response.status === 400) {
-        toast.error('کد تأیید نادرست است یا کاربر پیدا نشد', { duration: 4000 });
+        toast.error('کد تأیید نادرست است ', { duration: 4000 });
         // setErrorMessage('کد تأیید نادرست است یا کاربر پیدا نشد');
       } else {
         toast.error('خطایی رخ داده است. لطفاً دوباره تلاش کنید', { duration: 4000 });
@@ -128,12 +128,12 @@ function VerifyLogin() {
     }
 
     startTimer();
-    toast.success(`کد تأیید جدید به شماره ${phoneNumber} ارسال شد`, { duration: 4000 });
+    toast.success(`کد تأیید جدید به شماره ${phoneNumber}ارسال شد`, { duration: 4000 });
   };
 
   return (
-    <div className="Verify_container">
-      <Toaster className="Verify_Toaster" position="top-center" reverseOrder={false} />
+    <div className="Verify_container" >
+      <Toaster  className="Verify_container_Toaster" position="top-center" reverseOrder={false}  />
       <div className="Verify_box">
         <h2 className="Verify_h">کد تأیید برای شماره موبایل {phoneNumber} ارسال شد</h2>
         <div className="Verify_input_container">
@@ -155,7 +155,7 @@ function VerifyLogin() {
         ) : (
           <div className="Verify_div_button_one">
             <button type="button" className="Verify_button_one" onClick={handleResendCode} disabled={isResending}>
-              {isResending ? <BeatLoader /> : 'ارسال مجدد کد'}
+              {isResending ? <BeatLoader className="Verify_container_BeatLoader" /> : 'ارسال مجدد کد'}
             </button>
           </div>
         )}
@@ -167,7 +167,7 @@ function VerifyLogin() {
             onClick={() => handleVerify(verificationCode.join(''))}
             disabled={isVerifyDisabled || isLoading}
           >
-            {isLoading ? <BeatLoader /> : 'تأیید'}
+            {isLoading ? <BeatLoader className="Verify_container_BeatLoader" /> : 'تأیید'}
           </button>
         </div>
       </div>

@@ -164,6 +164,7 @@ function UserDashboard() {
     : [];
 
   return (
+  <div className="UserDashboard">
     <div className="UserDashboard_container">
       <Toaster position="top-center" reverseOrder={false} />
       <h2 className="UserDashboard_heading">ویرایش پروفایل</h2>
@@ -172,6 +173,7 @@ function UserDashboard() {
         <label className="UserDashboard_label">استان:</label>
         <Select
           value={provinceOptions.find((opt) => opt.value === province)}
+          className="UserDashboard_label_Select"
           onChange={(selectedOption) => {
             setProvince(selectedOption.value);
             setCity("");
@@ -188,6 +190,7 @@ function UserDashboard() {
           value={cityOptions.find((opt) => opt.value === city)}
           onChange={(selectedOption) => setCity(selectedOption.value)}
           options={cityOptions}
+          className="UserDashboard_label_Select"
           placeholder="انتخاب کنید"
           isDisabled={isReadOnly || !province}
         />
@@ -227,6 +230,7 @@ function UserDashboard() {
           format="YYYY/MM/DD"
           placeholder="تاریخ را انتخاب کنید"
           disabled={isReadOnly}
+          className="UserDashboard_date"
         />
       </div>
 
@@ -239,6 +243,8 @@ function UserDashboard() {
           </button>
       </div>
     </div>
+  </div>
+
   );
 }
 

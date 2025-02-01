@@ -32,59 +32,59 @@ function EditorViewContent() {
 
   return (
     <div className="AdminViewContent_container">
-      <Toaster position="top-center" reverseOrder={false} />
-      <h2 className="AdminViewContent_heading">لیست مقالات</h2>
+        <Toaster className="AdminViewContent_Toaster" position="top-center" reverseOrder={false} />
+        <h2 className="AdminViewContent_heading">لیست مقالات</h2>
 
-      {loading ? (
-        <div className="loader-container">
-          <ScaleLoader />
-        </div>
-      ) : articles.length === 0 ? (
-        <p>هیچ مقاله‌ای یافت نشد</p>
-      ) : (
-        <div className="AdminViewContent_articles">
-          {articles.map((article) => (
-            <div key={article.id} className="AdminViewContent_article_card">
-              <h3 className="AdminViewContent_article_title">{article.title}</h3>
-              <p className="AdminViewContent_article_description">{article.description}</p>
-              <p className="AdminViewContent_article_date">
-                تاریخ ایجاد: {article.created_at}
-              </p>
-              {article.updated_at && (
+        {loading ? (
+          <div className="AdminViewContent_ScaleLoader">
+            <ScaleLoader />
+          </div>
+        ) : articles.length === 0 ? (
+          <p className="AdminViewContent_container_p" >هیچ مقاله‌ای یافت نشد</p>
+        ) : (
+          <div className="AdminViewContent_articles">
+            {articles.map((article) => (
+              <div key={article.id} className="AdminViewContent_article_card">
+                <h3 className="AdminViewContent_article_title">{article.title}</h3>
+                <p className="AdminViewContent_article_description">{article.description}</p>
                 <p className="AdminViewContent_article_date">
-                  آخرین بروزرسانی: {article.updated_at}
+                  تاریخ ایجاد: {article.created_at}
                 </p>
-              )}
-              <div className="AdminViewContent_article_categories">
-                دسته‌بندی‌ها:{" "}
-                {article.category.length > 0
-                  ? article.category.join(", ")
-                  : "بدون دسته‌بندی"}
+                {article.updated_at && (
+                  <p className="AdminViewContent_article_date">
+                    آخرین بروزرسانی: {article.updated_at}
+                  </p>
+                )}
+                <div className="AdminViewContent_article_categories">
+                  دسته‌بندی‌ها:{" "}
+                  {article.category.length > 0
+                    ? article.category.join(", ")
+                    : "بدون دسته‌بندی"}
+                </div>
+
+                
+                {article.photo && (
+                  <div className="AdminViewContent_article_photo">
+                    <p className="AdminViewContent_article_photo_p">تصویر مقاله</p>
+                    <img
+                      src={`http://localhost:8000/articles/${article.photo}`}
+                      alt="Article"
+                      className="AdminViewContent_article_img"
+                    />
+                  </div>
+                )}
+
+                
+                {article.text && (
+                  <div className="AdminViewContent_article_text">
+                    <p className="AdminViewContent_article_text_one">متن مقاله</p>
+                    <p className="AdminViewContent_article_text_two">{article.text}</p>
+                  </div>
+                )}
               </div>
-
-              
-              {article.photo && (
-                <div className="AdminViewContent_article_photo">
-                  <p>تصویر مقاله:</p>
-                  <img
-                    src={`http://localhost:8000/articles/${article.photo}`}
-                    alt="Article"
-                    className="article-image"
-                  />
-                </div>
-              )}
-
-              
-              {article.text && (
-                <div className="AdminViewContent_article_text">
-                  <p>متن مقاله:</p>
-                  <p>{article.text}</p>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
     </div>
   );
 }

@@ -64,8 +64,8 @@ function Register() {
   };
 
   return (
-    <div className="Register_container">
-       <Toaster position="top-center" reverseOrder={false} />
+    <div className="Register_container" dir="rtl">
+       <Toaster className="Register_container_Toaster" position="top-center" reverseOrder={false} />
       <div className="Register_box">
         <h2 className="Register_h">ثبت‌نام</h2>
         <form className="Register_form" onSubmit={handleSubmit(handleRegister)}>
@@ -126,7 +126,7 @@ function Register() {
                 disabled={isLoading}
               >
                 {isLoading ? (
-                  <BeatLoader />
+                  <BeatLoader className='Register_button_div_BeatLoader' />
                 ) : (
                   'ثبت‌نام'
                 )}

@@ -49,91 +49,90 @@ function UserViewContent() {
 
   return (
     <div className="UserViewContent_container">
-      <h2>لیست مقالات ارسال‌شده</h2>
-
-
-      <div className="UserViewContent_section">
-        <h3>مقالات در حال بررسی</h3>
-        {pendingArticles.length === 0 ? (
-          <p>هیچ مقاله‌ای در حال بررسی نیست.</p>
-        ) : (
-          <div className="UserViewContent_articles">
-            {pendingArticles.map((article) => (
-              <div key={article.id} className="UserViewContent_article_card">
-                <h4 className="UserViewContent_article_title">{article.title}</h4>
-                <img
-                  src={`http://localhost:8000/articles/${article.photo}`}
-                  alt="Article"
-                  className="article-image"
-                  style={{ maxWidth: "100%", height: "auto", marginTop: "10px" }}
-                />
-                <p className="UserViewContent_article_text">{article.text}</p>
-                <p className="UserViewContent_article_date">تاریخ ارسال: {article.created_at}</p>
-                <div className="UserViewContent_article_categories">
-                  دسته‌بندی‌ها: {article.category.join(", ")}
-                </div>
-                <p className="UserViewContent_article_status">
-                  وضعیت مقاله: <span>در حال بررسی</span>
-                </p>
+      <h2 className="UserViewContent_container_h">لیست مقالات ارسال‌شده</h2>
+      <div className="UserViewContent_div">
+  
+          <div className="UserViewContent_section">
+            <h3 className="UserViewContent_section_h">مقالات در حال بررسی</h3>
+            {pendingArticles.length === 0 ? (
+              <p className="UserViewContent_section_p">هیچ مقاله‌ای در حال بررسی نیست.</p>
+            ) : (
+              <div className="UserViewContent_articles">
+                {pendingArticles.map((article) => (
+                  <div key={article.id} className="UserViewContent_article_card">
+                    <h4 className="UserViewContent_article_title">{article.title}</h4>
+                    <img
+                      src={`http://localhost:8000/articles/${article.photo}`}
+                      alt="Article"
+                       className="UserViewContent_article_image"
+                    />
+                    <p className="UserViewContent_article_text">{article.text}</p>
+                    <p className="UserViewContent_article_date">تاریخ ارسال: {article.created_at}</p>
+                    <div className="UserViewContent_article_categories">
+                      دسته‌بندی‌ها: {article.category.join(", ")}
+                    </div>
+                    <p className="UserViewContent_article_status">
+                      وضعیت مقاله: <span className="UserViewContent_article_categories_span">در حال بررسی</span>
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
-        )}
-      </div>
 
 
-      <div className="UserViewContent_section">
-        <h3>مقالات تایید شده</h3>
-        {approvedArticles.length === 0 ? (
-          <p>هیچ مقاله تایید شده‌ای وجود ندارد.</p>
-        ) : (
-          <div className="UserViewContent_articles">
-            {approvedArticles.map((article) => (
-              <div key={article.id} className="UserViewContent_article_card">
-                <h4 className="UserViewContent_article_title">{article.title}</h4>
-                <img
-                  src={`http://localhost:8000/articles/${article.photo}`}
-                  alt="Article"
-                  className="article-image"
-                  style={{ maxWidth: "100%", height: "auto", marginTop: "10px" }}
-                />
-                <p className="UserViewContent_article_text">{article.text}</p>
-                <p className="UserViewContent_article_date">تاریخ تایید: {article.created_at}</p>
-                <div className="UserViewContent_article_categories">
-                  دسته‌بندی‌ها: {article.category.join(", ")}
-                </div>
+          <div className="UserViewContent_section">
+            <h3 className="UserViewContent_section_h">مقالات تایید شده</h3>
+            {approvedArticles.length === 0 ? (
+              <p className="UserViewContent_section_p">هیچ مقاله تایید شده‌ای وجود ندارد.</p>
+            ) : (
+              <div className="UserViewContent_articles">
+                {approvedArticles.map((article) => (
+                  <div key={article.id} className="UserViewContent_article_card">
+                    <h4 className="UserViewContent_article_title">{article.title}</h4>
+                    <img
+                      src={`http://localhost:8000/articles/${article.photo}`}
+                      alt="Article"
+                       className="UserViewContent_article_image"
+                    />
+                    <p className="UserViewContent_article_text">{article.text}</p>
+                    <p className="UserViewContent_article_date">تاریخ تایید: {article.created_at}</p>
+                    <div className="UserViewContent_article_categories">
+                      دسته‌بندی‌ها: {article.category.join(", ")}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
-        )}
-      </div>
 
   
-      <div className="UserViewContent_section">
-        <h3>مقالات رد شده</h3>
-        {rejectedArticles.length === 0 ? (
-          <p>هیچ مقاله رد شده‌ای وجود ندارد.</p>
-        ) : (
-          <div className="UserViewContent_articles">
-            {rejectedArticles.map((article) => (
-              <div key={article.id} className="UserViewContent_article_card">
-                <h4 className="UserViewContent_article_title">{article.title}</h4>
-                <img
-                  src={`http://localhost:8000/articles/${article.photo}`}
-                  alt="Article"
-                  className="article-image"
-                />
-                <p className="UserViewContent_article_text">{article.text}</p>
-                <p className="UserViewContent_article_date">تاریخ رد: {article.created_at}</p>
-                <div className="UserViewContent_article_categories">
-                  دسته‌بندی‌ها: {article.category.join(", ")}
-                </div>
+          <div className="UserViewContent_section">
+            <h3 className="UserViewContent_section_h">مقالات رد شده</h3>
+            {rejectedArticles.length === 0 ? (
+              <p className="UserViewContent_section_p">هیچ مقاله رد شده‌ای وجود ندارد.</p>
+            ) : (
+              <div className="UserViewContent_articles">
+                {rejectedArticles.map((article) => (
+                  <div key={article.id} className="UserViewContent_article_card">
+                    <h4 className="UserViewContent_article_title">{article.title}</h4>
+                    <img
+                      src={`http://localhost:8000/articles/${article.photo}`}
+                      alt="Article"
+                      className="UserViewContent_article_image"
+                    />
+                    <p className="UserViewContent_article_text">{article.text}</p>
+                    <p className="UserViewContent_article_date">تاریخ رد: {article.created_at}</p>
+                    <div className="UserViewContent_article_categories">
+                      دسته‌بندی‌ها: {article.category.join(", ")}
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
-        )}
-      </div>
-    </div>
+     </div>
+  </div>
   );
 }
 

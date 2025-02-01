@@ -12,6 +12,7 @@ function AdminExam() {
   const [examDuration, setExamDuration] = useState("");
   const [examType, setExamType] = useState("test");
   const [loading, setLoading] = useState(false);
+  
   const navigate = useNavigate();
 
   const examTypeOptions = [
@@ -70,6 +71,7 @@ function AdminExam() {
   };
 
   return (
+    
     <div className="EditorExam_container">
       <Toaster position="top-center" reverseOrder={false} />
       <h2 className="EditorExam_h">ایجاد آزمون جدید</h2>

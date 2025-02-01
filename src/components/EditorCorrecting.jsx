@@ -115,41 +115,41 @@ function EditorCorrecting() {
 
   return (
     <div className="AdminCorrecting_container">
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster className="AdminCorrecting_container_Toaster" position="top-center" reverseOrder={false} />
 
-      <h2>تصحیح پاسخ‌های آزمون {examId}</h2>
+      <h2 className="AdminCorrecting_container_h">تصحیح پاسخ‌های آزمون {examId}</h2>
 
       {loading ? (
-        <div className="loader-container">
+        <div className="AdminCorrecting_container_loader">
           <ScaleLoader />
         </div>
       ) : error ? (
-        <p className="error">{error}</p>
+        <p className="AdminCorrecting_container_error">{error}</p>
       ) : (
         <div className="AdminCorrecting_content">
           {data.length > 0 ? (
-            <ul>
+            <ul className="AdminCorrecting_content_ul">
               {data.map((item) => (
-                <li key={item.user_id} className="AdminCorrecting_user">
-                  <h3>
+                <li key={item.user_id} className="AdminCorrecting_content_li">
+                  <h3 className="AdminCorrecting_content_li_h">
                     دانشجو: {item.firstname} {item.lastname} - شماره تماس: {item.phone_number}
                   </h3>
                   <div className="AdminCorrecting_questions_answers">
                     {item.questions.map((q) => (
                       <div key={q.question_number} className="AdminCorrecting_question">
-                        <p>
-                          <strong>سؤال {q.question_number}: </strong>
+                        <p className="AdminCorrecting_question_p">
+                          <strong className="AdminCorrecting_question_strong" >سؤال {q.question_number}: </strong>
                           {q.question_text}
                         </p>
-                        <p>
-                          <strong>نمره کل سؤال: </strong> {q.question_score}
+                        <p className="AdminCorrecting_question_p">
+                          <strong className="AdminCorrecting_question_strong">نمره کل سؤال: </strong> {q.question_score}
                         </p>
                         {item.answers
                           .filter((a) => a.question_number === q.question_number)
                           .map((ans) => (
                             <div key={ans.question_number} className="AdminCorrecting_answer">
-                              <p>
-                                <strong>پاسخ: </strong> {ans.answer_text}
+                              <p  className="AdminCorrecting_answer_p">
+                                <strong className="AdminCorrecting_answer_strong">پاسخ: </strong> {ans.answer_text}
                               </p>
                               <input
                                 className="AdminCorrecting_score_input"
@@ -165,30 +165,32 @@ function EditorCorrecting() {
                       </div>
                     ))}
                   </div>
-                  <button
-                    className="AdminCorrecting_submit_button"
-                    onClick={() =>
-                      handleSubmitGrades(item.user_id, item.firstname, item.lastname, item.phone_number)
-                    }
-                    disabled={submittingUser === item.user_id}
-                  >
-                    {submittingUser === item.user_id ? <BeatLoader /> : "ثبت نمرات"}
-                  </button>
+                  <div className="AdminCorrecting_submit">
+                        <button
+                          className="AdminCorrecting_submit_button"
+                              onClick={() =>
+                                handleSubmitGrades(item.user_id, item.firstname, item.lastname, item.phone_number)
+                              }
+                              disabled={submittingUser === item.user_id}
+                            >
+                              {submittingUser === item.user_id ? <BeatLoader /> : "ثبت نمرات"}
+                        </button>
+                  </div>
                 </li>
               ))}
             </ul>
           ) : (
-            <p>هیچ پاسخی برای این آزمون یافت نشد</p>
+            <p className="AdminCorrecting_submit_p">هیچ پاسخی برای این آزمون یافت نشد</p>
           )}
         </div>
       )}
 
       {gradedStudents.length > 0 && (
-        <div className="graded-table">
-          <h3>نمرات ثبت‌شده</h3>
-           <table>
-              <thead>
-                <tr>
+        <div className="AdminCorrecting_graded_table">
+          <h3 className="AdminCorrecting_graded_h" >نمرات ثبت‌شده</h3>
+           <table className="AdminCorrecting_graded_table">
+              <thead  className="AdminCorrecting_graded_thead">
+                <tr className="AdminCorrecting_graded_thead_tr">
                   <th>شماره</th>
                   <th>نام</th>
                   <th>نام خانوادگی</th>
@@ -196,16 +198,16 @@ function EditorCorrecting() {
                   <th>نمره</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="AdminCorrecting_graded_tbody">
                 {addingToTable ? (
-                  <tr>
+                  <tr className="AdminCorrecting_graded_tbody_tr">
                     <td>
                       <ClipLoader />
                     </td>
                   </tr>
                 ) : (
                   gradedStudents.map((student, index) => (
-                    <tr key={student.id}>
+                    <tr key={student.id} className="AdminCorrecting_graded_tbody_tr">
                       <td>{index + 1}</td>
                       <td>{student.firstname}</td>
                       <td>{student.lastname}</td>
@@ -216,6 +218,7 @@ function EditorCorrecting() {
                 )}
               </tbody>
             </table>
+
         </div>
       )}
     </div>

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { ScaleLoader, BeatLoader } from "react-spinners";
+import { RxCross2 } from "react-icons/rx";
 
 
 function UserExam() {
@@ -134,14 +135,14 @@ function UserExam() {
       <Toaster position="top-center" reverseOrder={false} />
       
       {loadingPage ? (
-        <div className="loader-container">
+        <div className="UserExam_container_loader">
           <ScaleLoader  />
         </div>
       ) : (
         <>
-          <h2 className="UserExam_h">نمایش آزمون‌ها</h2>
+          <h2 className="UserExam_container_h">نمایش آزمون‌ها</h2>
           {error ? (
-            <p className="UserExam_p">{error}</p>
+            <p className="UserExam_container_p">{error}</p>
           ) : exams.length > 0 ? (
             <div className="UserExam_div">
               {exams.map((exam) => (
@@ -183,23 +184,28 @@ function UserExam() {
       )}
 
       {showModal && (
-        <div className="modal_overlay">
-          <div className="modal_content">
-            <h3>نتیجه آزمون</h3>
+        <div className="UserExam_modal_overlay">
+          <div className="UserExam_modal_content">
+            <h3 className="UserExam_modal_h">نتیجه آزمون</h3>
             {scoreData ? (
               isDescriptive ? (
-                <p>نمره کل: {scoreData.total_score}</p>
+                <p className="UserExam_modal_p">نمره کل: {scoreData.total_score}</p>
               ) : (
                 <>
-                  <p>تعداد سوالات: {scoreData.total_questions}</p>
-                  <p>تعداد پاسخ‌های صحیح: {scoreData.correct_answers}</p>
-                  <p>درصد نمره: {scoreData.score_percentage.toFixed(2)}%</p>
+                  <p className="UserExam_modal_p">تعداد سوالات: {scoreData.total_questions}</p>
+                  <p className="UserExam_modal_p">تعداد پاسخ‌های صحیح: {scoreData.correct_answers}</p>
+                  <p className="UserExam_modal_p">درصد نمره: {scoreData.score_percentage.toFixed(2)}%</p>
                 </>
               )
             ) : (
-              <p>در حال بارگذاری نمره...</p>
+              <p className="UserExam_modal_p">در حال بارگذاری نمره...</p>
             )}
-            <button onClick={() => setShowModal(false)}>بستن</button>
+            <div className="UserExam_modal_div">
+                   <button  className="UserExam_modal_div_button"  onClick={() => setShowModal(false)}>
+                         <RxCross2  className="UserExam_RxCross2" />
+                    </button>
+            </div>
+            
           </div>
         </div>
       )}

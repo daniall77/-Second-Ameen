@@ -133,7 +133,7 @@ function AdminQuestion() {
 
   return (
     <div className="AdminQuestion_container">
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
       <h2 className="AdminQuestion_h">ایجاد سوالات</h2>
       <p className="AdminQuestion_examType">نوع آزمون: {examType === "test" ? "تستی" : "تشریحی"}</p>
       <p className="AdminQuestion_examId">شناسه آزمون: {examId}</p>
@@ -233,6 +233,7 @@ function AdminQuestion() {
 }
 
 export default AdminQuestion;
+
 
 
 

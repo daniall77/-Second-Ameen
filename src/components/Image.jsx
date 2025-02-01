@@ -76,6 +76,7 @@ function Image() {
   };
 
   return (
+  <div className="Image_container_container">
     <div className="Image_container">
       <Toaster position="top-center" reverseOrder={false} />
 
@@ -88,7 +89,7 @@ function Image() {
             onChange={handleFileChange}
             className="Image_form_div_input"
           />
-          {imageError && <p className="error-message">{imageError}</p>}
+          {imageError && <p className="Image_error_message">{imageError}</p>}
         </div>
 
         <div className="Image_form_div_button">
@@ -103,15 +104,19 @@ function Image() {
           {loadingPreview ? (
             <ClipLoader  />
           ) : (
-            previewUrl && <img src={previewUrl} alt="Preview" className="preview-image" />
+            previewUrl && <img src={previewUrl} alt="Preview" className="Image_preview" />
           )}
         </div>
       </form>
     </div>
+  </div>
   );
 }
 
 export default Image;
+
+
+
 
 
 // import React, { useState } from "react";

@@ -6,14 +6,14 @@ import ReactQuill from "react-quill";
 import { useCookies } from "react-cookie";
 import toast, { Toaster } from "react-hot-toast";
 import { BeatLoader, ClipLoader } from "react-spinners";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 function AdminContent() {
 
 
   const [topics, setTopics] = useState([]); 
   const [newTopic, setNewTopic] = useState("");
-  const location = useLocation(); 
+  // const location = useLocation(); 
 
 // start   main
   const [categories, setCategories] = useState([]);
@@ -30,7 +30,6 @@ function AdminContent() {
 
 //   end   main
 
-
   useEffect(() => {
     const fetchTopics = async () => {
       try {
@@ -45,6 +44,10 @@ function AdminContent() {
 
     fetchTopics();
   }, [cookies.access_token]);
+
+
+
+
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -94,9 +97,6 @@ function AdminContent() {
     }
   };
   
-
-
-
 // start   main
 
 useEffect(() => {
@@ -154,7 +154,6 @@ useEffect(() => {
     }
   };
 
- 
   const handleSubmit = async () => {
     if (!textInput || !richText || !imageFile || selectedCategories.length === 0) {
       toast.error("پر کردن همه فیلدها الزامی است");
@@ -162,7 +161,6 @@ useEffect(() => {
     }
   
     setLoading(true);
-  
  
     const plainText = richText.replace(/<\/?p>/g, "");
   
@@ -192,7 +190,7 @@ useEffect(() => {
       setImageFile(null);
     } catch (error) {
       console.error("Error creating article:", error.response?.data || error.message);
-      toast.error("ارسال مقاله با مشکل مواجه شد.");
+      toast.error("ارسال مقاله با مشکل مواجه شد");
     } finally {
       setLoading(false);
     }
@@ -200,111 +198,110 @@ useEffect(() => {
 
   //   end   main
 
-
-
-
-
   return (
     <div className="AdminContent_container">
-      <Toaster className="Verify_Toaster" position="top-center" reverseOrder={false} />
+    <div className="AdminContent_container_container">
+      <Toaster className="AdminContent_Toaster" position="top-center" reverseOrder={false} />
+    <div className="AdminContent_container_main">
 
 
+      <h2 className="AdminContent_title">مدیریت موضوعات</h2>
 
-      <h2 className="dashboard-title">مدیریت موضوعات</h2>
-
-      <div className="topic-input">
+      <div className="AdminContent_topic_input">
         <input
           type="text"
           placeholder="یک موضوع جدید اضافه کنید..."
           value={newTopic}
           onChange={(e) => setNewTopic(e.target.value)}
-          className="input-box"
+          className="AdminContent_input_box"
         />
-        <button onClick={handleAddTopic} className="add-button" disabled={loading}>
-          {loading ? <BeatLoader /> : "+ افزودن"}
+        <button onClick={handleAddTopic} className="AdminContent_add_button" disabled={loading}>
+          {loading ? <BeatLoader className="AdminContent_BeatLoader" /> : "+ افزودن"}
         </button>
 
       </div>
-
-      <h3>لیست موضوعات:</h3>
-      <ul>
+   
+      <h3 className="AdminContent_title_h">لیست موضوعات:</h3>
+      <ul className="AdminContent_title_ul">
         {topics.length > 0 ? (
-          topics.map((topic) => <li key={topic.id}>{topic.name}</li>)
+          topics.map((topic) => <li key={topic.id} className="AdminContent_title_li" >{topic.name}</li>)
         ) : (
-          <p>هیچ موضوعی یافت نشد</p>
+          <p className="AdminContent_title_p">هیچ موضوعی یافت نشد</p>
         )}
       </ul>
-
-
-
+    </div>
 {/* main */}
-
-      <h2>مدیریت دسته‌بندی‌ها</h2>
-
-      <div className="multiselect-container">
-        <p>گزینه‌های موردنظر خود را انتخاب کنید:</p>
-        <Select
-          isMulti
-          options={categories}
-          value={selectedCategories}
-          onChange={(selected) => setSelectedCategories(selected)}
-          placeholder="دسته‌بندی‌ها را انتخاب کنید"
-        />
-      </div>
-
- 
-      <div className="input-container">
-        <label>
-          <p>عنوان مقاله:</p>
-          <input
-            type="text"
-            value={textInput}
-            onChange={handleTextInputChange}
-            placeholder="عنوان مقاله را وارد کنید"
-            className="text-input"
-          />
-        </label>
-        {textInputError && <p className="error">{textInputError}</p>}
-      </div>
+    <div className="AdminContent_multiselect">
+      <h2 className="AdminContent_title_h" >مدیریت دسته‌بندی‌ها</h2>
+       
+          <div className="AdminContent_multiselect_container">
+            <p className="AdminContent_multiselect_p" >گزینه‌های موردنظر خود را انتخاب کنید</p>
+            <Select
+              isMulti
+              options={categories}
+              value={selectedCategories}
+              onChange={(selected) => setSelectedCategories(selected)}
+              placeholder="دسته‌بندی‌ها را انتخاب کنید"
+              className="AdminContent_multiselect_Select"
+            />
+          </div>
 
     
-      <div className="upload-container">
-        <label>
-          <p>عکس خود را آپلود کنید:</p>
-          <input type="file" accept="image/*" onChange={handleImageUpload} />
-        </label>
-        {imageError && <p className="error">{imageError}</p>}
-        {imageLoading ? (
-          <ClipLoader color="#4A90E2" size={15} />
-        ) : (
-          uploadedImage && (
-            <div className="uploaded-image">
-              <p>پیش‌نمایش عکس:</p>
-              <img src={uploadedImage} alt="Uploaded preview" width="200" />
-            </div>
-          )
-        )}
-      </div>
+          <div className="AdminContent_multiselect_container">
+            <label className="AdminContent_multiselect_label">
+              <p className="AdminContent_multiselect_p">عنوان مقاله</p>
+              <input
+                type="text"
+                value={textInput}
+                onChange={handleTextInputChange}
+                placeholder="عنوان مقاله را وارد کنید"
+                className="AdminContent_multiselect_input"
+              />
+            </label>
+            {textInputError && <p className="error">{textInputError}</p>}
+          </div>
+
+        
+          <div className="AdminContent_multiselect_container">
+            <label className="AdminContent_multiselect_label" >
+              <p className="AdminContent_multiselect_p" >عکس خود را آپلود کنید</p>
+              <input className="AdminContent_multiselect_input" type="file" accept="image/*" onChange={handleImageUpload} />
+            </label>
+            {imageError && <p className="error">{imageError}</p>}
+            {imageLoading ? (
+              <ClipLoader className="AdminContent_multiselect_ClipLoader" />
+            ) : (
+              uploadedImage && (
+                <div className="AdminContent_multiselect_uploaded_image">
+                  <p className="AdminContent_multiselect_uploaded_image_p">پیش‌نمایش عکس</p>
+                  <img className="AdminContent_multiselect_uploaded_image_img" src={uploadedImage} alt="Uploaded preview" width="200" />
+                </div>
+              )
+            )}
+          </div>
+
+        
+          <div className="AdminContent_multiselect_container">
+            <p className="AdminContent_multiselect_p">متن خود را بنویسید</p>
+            <ReactQuill
+              value={richText}
+              onChange={handleRichTextChange}
+              placeholder="متن خود را در اینجا بنویسید"
+              className="AdminContent_multiselect_ReactQuill"
+            />
+          </div>
 
     
-      <div className="rich-text-container">
-        <p>متن خود را بنویسید:</p>
-        <ReactQuill
-          value={richText}
-          onChange={handleRichTextChange}
-          placeholder="متن خود را در اینجا بنویسید"
-        />
-      </div>
-
- 
-      <div className="submit-container">
-        {loading ? (
-          <BeatLoader />
-        ) : (
-          <button onClick={handleSubmit} className="submit-button">
-            ارسال مقاله
-          </button>
-        )}
+          <div className="AdminContent_submit_container">
+            {loading ? (
+              <BeatLoader className="AdminContent_BeatLoader" />
+            ) : (
+              <button onClick={handleSubmit} className="AdminContent_submit_button">
+                ارسال مقاله
+              </button>
+            )}
+          </div>
+       </div>
       </div>
     </div>
   );

@@ -120,76 +120,81 @@ function EditorContent() {
   };
 
   return (
-    <div className="AdminContent_container">
-      <Toaster position="top-center" reverseOrder={false} />
-      <h2>مدیریت دسته‌بندی‌ها</h2>
+    <div className="UserContent_container">
+      <Toaster  position="top-center" reverseOrder={false} />
+      <h2 className="UserContent_container_h">مدیریت دسته‌بندی‌ها</h2>
 
-     
-      <div className="multiselect-container">
-        <p>گزینه‌های موردنظر خود را انتخاب کنید:</p>
-        <Select
-          isMulti
-          options={categories}
-          value={selectedCategories}
-          onChange={(selected) => setSelectedCategories(selected)}
-          placeholder="دسته‌بندی‌ها را انتخاب کنید"
-        />
-      </div>
-
- 
-      <div className="input-container">
-        <label>
-          <p>عنوان مقاله:</p>
-          <input
-            type="text"
-            value={textInput}
-            onChange={handleTextInputChange}
-            placeholder="عنوان مقاله را وارد کنید"
-            className="text-input"
+      <div className="UserContent_container_div">
+        <div className="UserContent_container_multiselect">
+          <p className="UserContent_container_multiselect_p">گزینه‌های موردنظر خود را انتخاب کنید:</p>
+          <Select
+            isMulti
+            options={categories}
+            value={selectedCategories}
+            onChange={(selected) => setSelectedCategories(selected)}
+            placeholder="دسته‌بندی‌ها را انتخاب کنید"
+            className="UserContent_container_multiselect_Select"
           />
-        </label>
-        {textInputError && <p className="error">{textInputError}</p>}
-      </div>
+        </div>
 
-    
-      <div className="upload-container">
-        <label>
-          <p>عکس خود را آپلود کنید:</p>
-          <input type="file" accept="image/*" onChange={handleImageUpload} />
-        </label>
-        {imageError && <p className="error">{imageError}</p>}
-        {imageLoading ? (
-          <ClipLoader color="#4A90E2" size={15} />
-        ) : (
-          uploadedImage && (
-            <div className="uploaded-image">
-              <p>پیش‌نمایش عکس:</p>
-              <img src={uploadedImage} alt="Uploaded preview" width="200" />
+  
+        <div className="UserContent_input_container">
+          <label className="UserContent_input_label">
+            <p className="UserContent_input_p">عنوان مقاله:</p>
+            <input
+              type="text"
+              value={textInput}
+              onChange={handleTextInputChange}
+              placeholder="عنوان مقاله را وارد کنید"
+              className="UserContent_text_input"
+            />
+          </label>
+          {textInputError && <p className="UserContent_error">{textInputError}</p>}
+        </div>
+
+      
+        <div className="UserContent_upload_container">
+          <label className="UserContent_upload_label">
+            <p className="UserContent_upload_p">عکس خود را آپلود کنید:</p>
+            <input type="file" accept="image/*" onChange={handleImageUpload} className="UserContent_upload_input" />
+          </label>
+          {imageError && <p className="UserContent_upload_error">{imageError}</p>}
+          {imageLoading ? (
+            <ClipLoader />
+          ) : (
+            uploadedImage && (
+              <div className="UserContent_uploaded_image">
+                <p  className="UserContent_uploaded_image_p">پیش‌نمایش عکس:</p>
+                <img src={uploadedImage} alt="Uploaded preview" className="UserContent_uploaded_image_img" />
+              </div>
+            )
+          )}
+        </div>
+
+      
+        <div className="UserContent_rich_text">
+          <p className="UserContent_rich_text_p">متن خود را بنویسید:</p>
+          <ReactQuill
+            value={richText}
+            onChange={handleRichTextChange}
+            placeholder="متن خود را در اینجا بنویسید"
+             className="UserContent_ReactQuill"
+          />
+        </div>
+
+  
+        <div className="UserContent_submit_container">
+          {loading ? (
+            <BeatLoader />
+          ) : (
+            <div className="UserContent_button">
+                <button onClick={handleSubmit} className="UserContent_submit_button">
+                  ارسال مقاله
+                </button>
             </div>
-          )
-        )}
-      </div>
-
-    
-      <div className="rich-text-container">
-        <p>متن خود را بنویسید:</p>
-        <ReactQuill
-          value={richText}
-          onChange={handleRichTextChange}
-          placeholder="متن خود را در اینجا بنویسید"
-        />
-      </div>
-
- 
-      <div className="submit-container">
-        {loading ? (
-          <BeatLoader />
-        ) : (
-          <button onClick={handleSubmit} className="submit-button">
-            ارسال مقاله
-          </button>
-        )}
-      </div>
+          )}
+        </div>
+     </div>
     </div>
   );
 }
