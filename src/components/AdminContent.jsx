@@ -242,7 +242,6 @@ useEffect(() => {
               value={selectedCategories}
               onChange={(selected) => setSelectedCategories(selected)}
               placeholder="دسته‌بندی‌ها را انتخاب کنید"
-              className="AdminContent_multiselect_Select"
             />
           </div>
 

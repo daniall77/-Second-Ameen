@@ -65,9 +65,9 @@ function Login() {
 
       <div className="Login_box">
         <h2 className="Login_h">ورود</h2>
-        <h2 className="Login_h">
+        <h2 className="Login_h_title">
           حساب کاربری ندارید؟{" "}
-          <Link to="/Register" className="Login_h_link">
+          <Link to="/Register" className="Login_h_link Login_h_title">
             ثبت نام کنید
           </Link>
         </h2>

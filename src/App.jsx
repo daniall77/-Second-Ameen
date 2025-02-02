@@ -6,6 +6,9 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { CiUser } from "react-icons/ci";
 import toast, { Toaster } from "react-hot-toast";
+import { ScaleLoader } from "react-spinners";
+import { IoExitOutline } from "react-icons/io5";
+import { AiOutlineHome } from "react-icons/ai";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
@@ -24,7 +27,22 @@ function App() {
       toastShown.current = true;
     }
   }, [location.state]);
+ 
+    useEffect(() => {
+    const handleScroll = () => {
+      const nav = document.querySelector(".header_nav");
+      if (window.pageYOffset > 36) {
+        nav.classList.add("sticky");
+      } else {
+        nav.classList.remove("sticky");
+      }
+    };
 
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
 
   
@@ -61,7 +79,7 @@ function App() {
         setArticles(response.data);
         console.log(response.data);
       } catch (err) {
-        setError("مشکلی در دریافت مقالات پیش آمد");
+        setError("مقاله ای برای نمایش وجود ندارد");
         console.error("Error fetching articles:", err);
       } finally {
         setLoading(false);
@@ -97,7 +115,11 @@ function App() {
           <nav className="header_nav">
             <div className="header_navbar_right">
               <ul className="header_navbar_right_ul">
-                <li className="header_navbar_right_li">مطالب</li>
+                <li className="header_navbar_right_li"> خانه</li>
+                <li className="header_navbar_right_li"> خدمات</li>
+                <li className="header_navbar_right_li">درباره ما</li>
+                <li className="header_navbar_right_li">فرم ها</li>
+                <li className="header_navbar_right_li"> تماس با ما</li>
               </ul>
             </div>
             <div className="header_navbar_left">
@@ -110,20 +132,23 @@ function App() {
               ) : (
                 <>
                   <div className="user_icon" onClick={() => setShowDetails(!showDetails)}>
-                    <CiUser />
+                    <CiUser className="user_icon_CiUser" />
                   </div>
                   {showDetails && (
                     <div className="user_details">
-                      <div className="div">شماره موبایل: {userData.phoneNumber}</div>
-                      <div className="div">نام: {userData.firstName}</div>
-                      <div className="div">نام خانوادگی: {userData.lastName}</div>
-                      <div className="div">رول: {userData.role}</div>
-                      <Link to="/Dashboard">
-                        <div className="red">پنل کاربری</div>
-                      </Link>
-                      <button className="logout_button" onClick={handleLogout}>
-                        خروج
-                      </button>
+                      <div className="user_details_div">    {userData.firstName}  {userData.lastName}  خوش آمدی </div>
+                      <div className="user_details_div"> 
+                           <AiOutlineHome className="user_details_AiOutlineHome" />
+                          <Link to="/Dashboard" className="user_details_div_panel">
+                            <div className="user_details_div_panel">پنل کاربری</div>
+                          </Link>
+                      </div>
+                      <div className="user_details_div"> 
+                            <IoExitOutline className="user_details_IoExitOutline" />
+                            <button className="logout_button" onClick={handleLogout}>
+                              خروج 
+                            </button>
+                      </div>
                     </div>
                   )}
                 </>
@@ -135,27 +160,27 @@ function App() {
        
         <div className="content">
           {loading ? (
-            <p>در حال بارگذاری...</p>
+              <ScaleLoader className="content_ScaleLoader" />
           ) : error ? (
-            <p className="error">{error}</p>
+            <p className="content_error">{error}</p>
           ) : (
-            <div className="articles">
+            <div className="content_articles">
               {articles.map((article) => (
-                <div key={article.id} className="article">
-                  <h2>{article.title}</h2>
-                  <p className="author">متن: {article.text}</p>
+                <div key={article.id} className="content_articles_div">
+                  <h2 className="content_articles_h">{article.title}</h2>
+                  <p className="content_articles_author">متن: {article.text}</p>
                   <img
                     src={`http://localhost:8000/articles/${article.photo}`}
                     alt="Article"
-                    className="article-image"
+                    className="content_articles_image"
                   />
-                  <p className="author">نویسنده: {article.author_id}</p>
-                  <p className="date">تاریخ ایجاد: {article.created_at}</p>
-                  {article.updated_at && <p className="date">آخرین بروزرسانی: {article.updated_at}</p>}
-                  <p className="categories">
+                  <p className="content_articles_author">نویسنده: {article.author_id}</p>
+                  <p className="content_articles_author">تاریخ ایجاد: {article.created_at}</p>
+                  {article.updated_at && <p className="content_articles_date">آخرین بروزرسانی: {article.updated_at}</p>}
+                  <p className="content_articles_categories">
                     دسته‌بندی‌ها: {article.category.length > 0 ? article.category.join(", ") : "بدون دسته"}
                   </p>
-                  <p className="content">{article.content}</p>
+                  <p className="content_articles_author">{article.content}</p>
                 </div>
               ))}
             </div>

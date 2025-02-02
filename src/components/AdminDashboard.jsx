@@ -122,7 +122,7 @@ function AdminDashboard() {
         <button
           key={i}
           onClick={() => onPageChange(i)}
-          className={`${currentPage === i ? "active" : ""} page-button`}
+          className={`${currentPage === i ? "active" : ""} page_button`}
         >
           {i}
         </button>
