@@ -10,12 +10,13 @@ import toast, { Toaster } from "react-hot-toast";
 
 
 
-
 function Dashboard() {
   const location = useLocation();
   const navigate = useNavigate(); 
   const [cookies, , removeCookie] = useCookies(["role", "access_token"]);
   const [profileImage, setProfileImage] = useState(avator);
+  
+  
 
   useEffect(() => {
     const fetchProfileImage = async () => {
@@ -34,7 +35,7 @@ function Dashboard() {
         console.error("خطا در دریافت تصویر پروفایل:", error);
       }
     };
-
+  
     fetchProfileImage();
   }, [cookies.access_token]);
 
@@ -148,7 +149,7 @@ function Dashboard() {
               }`}
             >
               <Link to="Exam" className="Dashboard_sidebar_link">
-                آزمون
+                مسابقه
               </Link>
             </li>
             {canAccessCorrecting() && (
@@ -158,7 +159,7 @@ function Dashboard() {
                 }`}
               >
                 <Link to="ListExam" className="Dashboard_sidebar_link">
-                  تصحیح آزمون
+                     تصحیح مسابقه
                 </Link>
               </li>
             )}
@@ -171,8 +172,8 @@ function Dashboard() {
         </div>
       </div>
       <div className="Dashboard_main">
-        {location.pathname === "/Dashboard" && renderProfileComponent()}
-        <Outlet />
+          {location.pathname === "/Dashboard" && renderProfileComponent()}
+          <Outlet />
       </div>
     </div>
   );

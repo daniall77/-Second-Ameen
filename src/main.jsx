@@ -16,33 +16,35 @@ import Content from "./components/Content.jsx";
 import ListExam from "./components/ListExam.jsx"; 
 import Correcting from "./components/Correcting.jsx"; 
 import ViewContent from "./components/ViewContent.jsx"; 
+import ListMatches from "./components/ListMatches.jsx" ;
 import ConfirmContent from "./components/ConfirmContent.jsx"; 
 
 
 
 createRoot(document.getElementById("root")).render(
-  // <StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/VerifyRegister" element={<VerifyRegister />} />
-        <Route path="/VerifyLogin" element={<VerifyLogin />} />
-        <Route path="/Dashboard" element={<Dashboard />}>
-          <Route path="Account" element={<Account />} />
-          <Route path="Image" element={<Image />} />
-          <Route path="Exam" element={<Exam />} />
-          <Route path="Content" element={<Content />} />
-          <Route path="ListExam" element={<ListExam />} />
-          <Route path="ListExam/Correcting/:examId" element={<Correcting />} />
-          <Route path="Exam/Question" element={<Question />} />
-          <Route path="ViewContent" element={<ViewContent />} />
-          <Route path="ConfirmContent" element={<ConfirmContent />} />
-        </Route>
-      </Routes>
-    </Router>
-  // </StrictMode>
+  <StrictMode>
+      <Router>
+          <Routes>
+              <Route path="/" element={<App />} />
+              <Route path="/ListMatches" element={<ListMatches />} />
+              <Route path="/Login" element={<Login />} />
+              <Route path="/Register" element={<Register />} />
+              <Route path="/VerifyRegister" element={<VerifyRegister />} />
+              <Route path="/VerifyLogin" element={<VerifyLogin />} />
+              <Route path="/Dashboard" element={<Dashboard />}>
+                  <Route path="Account" element={<Account />} />
+                  <Route path="Image" element={<Image />} />
+                  <Route path="Exam" element={<Exam />} />
+                  <Route path="Content" element={<Content />} />
+                  <Route path="ListExam" element={<ListExam />} />
+                  <Route path="ListExam/Correcting/:examId" element={<Correcting />} />
+                  <Route path="Exam/Question" element={<Question />} />
+                  <Route path="ViewContent" element={<ViewContent />} />
+                  <Route path="ConfirmContent" element={<ConfirmContent />} />
+              </Route>
+          </Routes>
+      </Router>
+  </StrictMode>
 );
 
 
