@@ -6,14 +6,13 @@ import ReactQuill from "react-quill";
 import { useCookies } from "react-cookie";
 import toast, { Toaster } from "react-hot-toast";
 import { BeatLoader, ClipLoader } from "react-spinners";
-// import { useLocation } from "react-router-dom";
+
 
 function AdminContent() {
 
-
   const [topics, setTopics] = useState([]); 
   const [newTopic, setNewTopic] = useState("");
-  // const location = useLocation(); 
+
 
 // start   main
   const [categories, setCategories] = useState([]);
@@ -46,21 +45,6 @@ function AdminContent() {
   }, [cookies.access_token]);
 
 
-
-
-
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    if (params.get("success") === "true") {
-      toast.success("موضوع با موفقیت اضافه شد");
-  
-      
-      const newUrl = window.location.pathname;
-      window.history.replaceState({}, "", newUrl);
-    }
-  }, [location]);
-  
-
   const handleAddTopic = async () => {
     if (newTopic.trim() === "") {
       toast.error("لطفاً یک موضوع وارد کنید!");
@@ -88,7 +72,6 @@ function AdminContent() {
       console.log(response.data);
   
       setNewTopic("");
-      window.location.href = `${window.location.pathname}?success=true`; 
     } catch (error) {
       console.error("Error adding topic:", error.response || error.message);
       toast.error("خطا در اضافه کردن موضوع");
@@ -129,12 +112,10 @@ useEffect(() => {
     }
   };
 
-
   const handleRichTextChange = (value) => {
     setRichText(value); 
   };
 
- 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -182,7 +163,7 @@ useEffect(() => {
   
       console.log("Article created successfully:", response.data);
       toast.success("مقاله با موفقیت ارسال شد");
-  
+    
       setTextInput("");
       setSelectedCategories([]);
       setRichText("");
@@ -245,7 +226,6 @@ useEffect(() => {
             />
           </div>
 
-    
           <div className="AdminContent_multiselect_container">
             <label className="AdminContent_multiselect_label">
               <p className="AdminContent_multiselect_p">عنوان مقاله</p>
@@ -278,7 +258,6 @@ useEffect(() => {
               )
             )}
           </div>
-
         
           <div className="AdminContent_multiselect_container">
             <p className="AdminContent_multiselect_p">متن خود را بنویسید</p>
@@ -290,7 +269,6 @@ useEffect(() => {
             />
           </div>
 
-    
           <div className="AdminContent_submit_container">
             {loading ? (
               <BeatLoader className="AdminContent_BeatLoader" />

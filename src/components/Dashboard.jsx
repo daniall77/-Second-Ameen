@@ -16,7 +16,6 @@ function Dashboard() {
   const [cookies, , removeCookie] = useCookies(["role", "access_token"]);
   const [profileImage, setProfileImage] = useState(avator);
   
-  
 
   useEffect(() => {
     const fetchProfileImage = async () => {
@@ -180,12 +179,4 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
-
-
-
-
-
-
-
 

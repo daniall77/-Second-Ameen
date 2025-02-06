@@ -37,6 +37,39 @@ function EditorDashboard() {
   }, []);
 
 
+  // const convertToEditor = async (userId) => {
+  //   setConvertingUserId(userId);
+  //   try {
+  //     await axios.put(
+  //       "http://localhost:8000/convert/editors",
+  //       null,
+  //       {
+  //         params: { user_id: userId },
+  //         headers: {
+  //           Authorization: `Bearer ${cookies.access_token}`,
+  //         },
+  //       }
+  //     );
+  
+  //     setData((prevData) => {
+  //       const updatedUser = prevData.users.find((user) => user.id === userId);
+  //       if (!updatedUser) return prevData;
+  
+  //       return {
+  //         ...prevData,
+  //         users: prevData.users.filter((user) => user.id !== userId),
+  //         editors: [...prevData.editors, { ...updatedUser, role: "editor" }],
+  //       };
+  //     });
+  
+  //     toast.success("کاربر با موفقیت به ادیتور تبدیل شد");
+  //     window.location.reload(); 
+  //   } catch (err) {
+  //     toast.error("عملیات ناموفق بود");
+  //   } finally {
+  //     setConvertingUserId(null);
+  //   }
+  // };
   const convertToEditor = async (userId) => {
     setConvertingUserId(userId);
     try {
@@ -63,13 +96,13 @@ function EditorDashboard() {
       });
   
       toast.success("کاربر با موفقیت به ادیتور تبدیل شد");
-      window.location.reload(); 
     } catch (err) {
       toast.error("عملیات ناموفق بود");
     } finally {
       setConvertingUserId(null);
     }
   };
+  
 
 
 

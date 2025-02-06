@@ -40,51 +40,72 @@ function AdminDashboard() {
   }, []);
 
 
-
   const changeUserRole = async (userId, newRole) => {
     setChangingUserId(userId);
     try {
-      const endpoint =
-        newRole === "admin"
-          ? "http://localhost:8000/convert/admins"
-          : "http://localhost:8000/convert/editors";
+      let endpoint = "";
+      if (newRole === "admin") {
+        endpoint = "http://localhost:8000/convert/admins";
+      } else if (newRole === "editor") {
+        endpoint = "http://localhost:8000/convert/editors";
+      } else if (newRole === "user") {
+        endpoint = "http://localhost:8000/convert/users";
+      }
   
-      await axios.put(
-        endpoint,
-        null,
-        {
-          params: { user_id: userId },
-          headers: {
-            Authorization: `Bearer ${cookies.access_token}`,
-          },
-        }
-      );
-  
-      setData((prevData) => {
-        return {
-          ...prevData,
-          users: prevData.users.map((user) =>
-            user.id === userId ? { ...user, role: newRole } : user
-          ),
-          editors:
-            newRole === "admin"
-              ? prevData.editors.filter((editor) => editor.id !== userId)
-              : [...prevData.editors, prevData.users.find((user) => user.id === userId)],
-          admins:
-            newRole === "admin"
-              ? [...prevData.admins, prevData.users.find((user) => user.id === userId)]
-              : prevData.admins,
-        };
+      await axios.put(endpoint, null, {
+        params: { user_id: userId },
+        headers: {
+          Authorization: `Bearer ${cookies.access_token}`,
+        },
       });
   
-      toast.success(`کاربر به ${newRole === "admin" ? "ادمین" : "ادیتور"} تبدیل شد`);
-      window.location.reload(); 
+      setData((prevData) => {
+       
+        const user =
+          prevData.admins.find((u) => u.id === userId) ||
+          prevData.editors.find((u) => u.id === userId) ||
+          prevData.users.find((u) => u.id === userId);
+  
+        if (!user) return prevData;
+  
+     
+        const updatedAdmins = prevData.admins.filter((u) => u.id !== userId);
+        const updatedEditors = prevData.editors.filter((u) => u.id !== userId);
+        const updatedUsers = prevData.users.filter((u) => u.id !== userId);
+  
+        
+        if (newRole === "admin") {
+          return {
+            ...prevData,
+            admins: [...updatedAdmins, user],
+            editors: updatedEditors,
+            users: updatedUsers,
+          };
+        } else if (newRole === "editor") {
+          return {
+            ...prevData,
+            admins: updatedAdmins,
+            editors: [...updatedEditors, user],
+            users: updatedUsers,
+          };
+        } else {
+          return {
+            ...prevData,
+            admins: updatedAdmins,
+            editors: updatedEditors,
+            users: [...updatedUsers, user],
+          };
+        }
+      });
+  
+      toast.success(`کاربر به ${newRole === "admin" ? "ادمین" : newRole === "editor" ? "ادیتور" : "کاربر"} تبدیل شد`);
+  
     } catch (err) {
       toast.error("تغییر نقش انجام نشد");
     }
-      setChangingUserId(null);
+    setChangingUserId(null);
   };
-
+  
 
   if (loading) {
     return (
@@ -264,11 +285,24 @@ function AdminDashboard() {
                           <td>{editor.phone_number}</td>
                           <td>{editor.last_name}</td>
                           <td>
-                            <div className="AdminDashboard_container_button">
-                              <button className="AdminDashboard_button" onClick={() => changeUserRole(editor.id, "admin")} disabled={changingUserId === editor.id}>
-                                    {changingUserId === editor.id ? <BeatLoader  /> : "ادمین"}
-                              </button>
-                            </div>
+                               <div className="AdminDashboard_container_button">
+                                    <button 
+                                      className="AdminDashboard_button" 
+                                      onClick={() => changeUserRole(editor.id, "admin")} 
+                                      disabled={changingUserId === editor.id}
+                                    >
+                                      {changingUserId === editor.id ? <BeatLoader /> : "ادمین"}
+                                    </button>
+                               </div>
+                               <div className="AdminDashboard_container_button">
+                                      <button 
+                                        className="AdminDashboard_button" 
+                                        onClick={() => changeUserRole(editor.id, "user")} 
+                                        disabled={changingUserId === editor.id}
+                                      >
+                                        {changingUserId === editor.id ? <BeatLoader /> : "کاربر"}
+                                      </button>
+                               </div>
                           </td>
                         </tr>
                       ))}
