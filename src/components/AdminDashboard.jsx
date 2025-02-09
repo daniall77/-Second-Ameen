@@ -98,8 +98,8 @@ function AdminDashboard() {
         }
       });
   
-      toast.success(`کاربر به ${newRole === "admin" ? "ادمین" : newRole === "editor" ? "ادیتور" : "کاربر"} تبدیل شد`);
-  
+      toast.success("تغییر نقش با موفقیت انجام شد");
+      
     } catch (err) {
       toast.error("تغییر نقش انجام نشد");
     }

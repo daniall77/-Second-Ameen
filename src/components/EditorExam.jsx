@@ -14,7 +14,6 @@ function EditorExam() {
   const [articles, setArticles] = useState([]); 
   const [loading, setLoading] = useState(false);
   const [cookies] = useCookies(["access_token"]);
-  
   const navigate = useNavigate();
 
   const examTypeOptions = [
@@ -22,7 +21,6 @@ function EditorExam() {
     { value: "descriptive", label: "تشریحی" },
   ];
 
-  
   useEffect(() => {
     const fetchArticles = async () => {
       try {
@@ -50,10 +48,12 @@ function EditorExam() {
 
     setLoading(true);
 
+
+
     const examData = {
       title: examTitle,
       type: examType,
-      source: selectedArticles.map((article) => article.value) , 
+      article_ids: selectedArticles.map((article) => article.value) , 
     };
 
     console.log(examData);
@@ -144,5 +144,6 @@ function EditorExam() {
 }
 
 export default EditorExam;
+
 
 

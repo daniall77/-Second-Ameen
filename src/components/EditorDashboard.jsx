@@ -95,7 +95,8 @@ function EditorDashboard() {
         };
       });
   
-      toast.success("کاربر با موفقیت به ادیتور تبدیل شد");
+      // toast.success("کاربر با موفقیت به ادیتور تبدیل شد");
+       toast.success("تغییر نقش با موفقیت انجام شد");
     } catch (err) {
       toast.error("عملیات ناموفق بود");
     } finally {

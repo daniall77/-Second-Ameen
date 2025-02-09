@@ -18,6 +18,8 @@ import Correcting from "./components/Correcting.jsx";
 import ViewContent from "./components/ViewContent.jsx"; 
 import ListMatches from "./components/ListMatches.jsx" ;
 import ConfirmContent from "./components/ConfirmContent.jsx"; 
+import Matche from "./components/Matche.jsx"; 
+import ListPhone from "./components/ListPhone.jsx";
 
 
 
@@ -27,6 +29,7 @@ createRoot(document.getElementById("root")).render(
           <Routes>
               <Route path="/" element={<App />} />
               <Route path="/ListMatches" element={<ListMatches />} />
+              <Route path="/ListMatches/Matche/:examId" element={<Matche />} />
               <Route path="/Login" element={<Login />} />
               <Route path="/Register" element={<Register />} />
               <Route path="/VerifyRegister" element={<VerifyRegister />} />
@@ -37,7 +40,8 @@ createRoot(document.getElementById("root")).render(
                   <Route path="Exam" element={<Exam />} />
                   <Route path="Content" element={<Content />} />
                   <Route path="ListExam" element={<ListExam />} />
-                  <Route path="ListExam/Correcting/:examId" element={<Correcting />} />
+                  <Route path="ListExam/ListPhone" element={<ListPhone />} />
+                  <Route path="ListExam/ListPhone/Correcting" element={<Correcting />} />
                   <Route path="Exam/Question" element={<Question />} />
                   <Route path="ViewContent" element={<ViewContent />} />
                   <Route path="ConfirmContent" element={<ConfirmContent />} />
