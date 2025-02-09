@@ -14,7 +14,6 @@ function AdminListPhone() {
 
   useEffect(() => {
 
-
     const fetchParticipants = async () => {
       setIsLoading(true);
       try {
@@ -22,15 +21,14 @@ function AdminListPhone() {
           headers: { Authorization: `Bearer ${cookies.access_token}` },
         });
 
-        console.log(` شرکت‌کنندگان آزمون ${examId}:`, response.data.data);
         setPhoneNumbers(response.data.data);
       } catch (error) {
         if (error.response?.status === 404) {
-          toast.error(" هیچ پاسخ تصحیح‌نشده‌ای برای این آزمون یافت نشد!");
+          toast.error("هیچ پاسخ تصحیح‌نشده‌ای برای این آزمون یافت نشد");
         } else {
-          toast.error(" خطا در دریافت لیست شرکت‌کنندگان");
+          toast.error("خطا در دریافت لیست شرکت‌کنندگان");
         }
-        console.error(" خطا:", error);
+        console.error("خطا:", error);
       } finally {
         setIsLoading(false);
       }
@@ -58,7 +56,7 @@ function AdminListPhone() {
           </div>
         ))
       ) : (
-        <p> هیچ پاسخ تصحیح‌نشده‌ای برای این آزمون یافت نشد.</p>
+        <p>هیچ پاسخ تصحیح‌نشده‌ای برای این آزمون یافت نشد</p>
       )}
     </div>
   );

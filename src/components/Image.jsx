@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { BeatLoader, ClipLoader } from "react-spinners";
 
 function Image() {
+  
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [imageError, setImageError] = useState("");
@@ -13,8 +14,8 @@ function Image() {
   const [cookies] = useCookies(["access_token"]);
 
   const handleFileChange = (event) => {
-    const file = event.target.files[0];
-
+    const file = event.target.files[0]; 
+    
     if (file) {
       const validFormats = ["image/jpeg", "image/png"];
       if (!validFormats.includes(file.type)) {
@@ -62,7 +63,7 @@ function Image() {
       );
 
       if (response.status === 200) {
-        toast.success("تصویر با موفقیت ارسال شد!");
+        toast.success("تصویر با موفقیت ارسال شد");
         window.location.reload();
       } else {
         toast.error("مشکلی در آپلود تصویر وجود دارد.");

@@ -1,231 +1,116 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useCookies } from "react-cookie";
 import toast, { Toaster } from "react-hot-toast";
-import { ScaleLoader, BeatLoader, ClipLoader } from "react-spinners";
+import { useCookies } from "react-cookie";
 
 function EditorCorrecting() {
-  const { examId } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { examId, phoneNumber } = location.state || {}; 
   const [cookies] = useCookies(["access_token"]);
-  const [data, setData] = useState([]);
-  const [grades, setGrades] = useState({});
-  const [gradedStudents, setGradedStudents] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [submittingUser, setSubmittingUser] = useState(null);
-  const [addingToTable, setAddingToTable] = useState(false);
-  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [studentData, setStudentData] = useState(null);
+  const [grades, setGrades] = useState({}); 
 
   useEffect(() => {
-    const fetchAnswersAndQuestions = async () => {
+
+
+    const fetchAnswers = async () => {
+      setIsLoading(true);
       try {
-        setLoading(true);
-        const response = await axios.get(
-          `http://localhost:8000/answers/descriptive/${examId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${cookies.access_token}`,
-            },
-          }
-        );
-        setData(response.data.data);
-        setError("");
-      } catch (err) {
-        console.error("خطا در دریافت اطلاعات:", err);
-        setError("هیچ پاسخی برای این آزمون یافت نشد");
-        toast.error("هیچ پاسخی برای این آزمون یافت نشد");
+        const response = await axios.get(`http://localhost:8000/answers/descriptive/${examId}/${phoneNumber}`, {
+          headers: { Authorization: `Bearer ${cookies.access_token}` },
+        });
+
+        console.log(` پاسخ‌های دانش‌آموز ${phoneNumber} برای آزمون ${examId}:`, response.data.data);
+        setStudentData(response.data.data[0]); 
+
+        
+        const initialGrades = {};
+        response.data.data[0]?.questions.forEach(q => {
+          initialGrades[q.question_number] = "";
+        });
+        setGrades(initialGrades);
+      } catch (error) {
+        if (error.response?.status === 404) {
+          toast.error("هیچ پاسخی برای این آزمون یافت نشد");
+        } else {
+          toast.error("خطا در دریافت پاسخ‌های دانش‌آموز");
+        }
+        console.error("خطا:", error);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
-    fetchAnswersAndQuestions();
-  }, [examId, cookies.access_token]);
+    fetchAnswers();
+  }, [examId, phoneNumber]);
 
-  const handleGradeChange = (userId, questionNumber, value) => {
-    setGrades((prevGrades) => ({
+  const handleGradeChange = (questionNumber, value) => {
+    setGrades(prevGrades => ({
       ...prevGrades,
-      [userId]: {
-        ...prevGrades[userId],
-        [questionNumber]: value,
-      },
+      [questionNumber]: value,
     }));
   };
 
-  const handleSubmitGrades = async (userId, firstname, lastname, phone) => {
-    const userGrades = Object.entries(grades[userId] || {}).map(
-      ([questionNumber, score]) => ({
-        question_number: Number(questionNumber),
-        score: Number(score),
-      })
-    );
-
-   
-    const userQuestions = data.find((item) => item.user_id === userId)?.questions || [];
-    const isAllGraded = userQuestions.every(
-      (q) => grades[userId]?.[q.question_number] !== undefined && grades[userId]?.[q.question_number] !== ""
-    );
-
-    if (!isAllGraded) {
-      toast.error("قرار دادن نمره برای هر فیلد الزامی است.");
-      return;
-    }
-
-    setSubmittingUser(userId); 
+  const handleFinishCorrection = async () => {
+    const formattedGrades = Object.entries(grades).map(([question_number, score]) => ({
+      question_number: parseInt(question_number),
+      score: parseFloat(score),
+    }));
 
     try {
-      const response = await axios.post(
-        `http://localhost:8000/grade/descriptive/${examId}/${userId}`,
-        userGrades,
-        {
-          headers: {
-            Authorization: `Bearer ${cookies.access_token}`,
-          },
-        }
-      );
+      const response = await axios.post(`http://localhost:8000/grade/descriptive/${examId}/${phoneNumber}`, formattedGrades, {
+        headers: { Authorization: `Bearer ${cookies.access_token}` },
+      });
 
-      const totalScore = response.data.data.total_score;
-
-      setData((prevData) => prevData.filter((item) => item.user_id !== userId));
-
-      setAddingToTable(true); 
-
-      setTimeout(() => {
-        setGradedStudents((prev) => [
-          ...prev,
-          {
-            id: prev.length + 1,
-            firstname,
-            lastname,
-            phone,
-            score: totalScore,
-          },
-        ]);
-        setAddingToTable(false);
-      }, 1000);
-
-      toast.success("نمرات با موفقیت ثبت شد.");
-    } catch (err) {
-      console.error("خطا در ثبت نمرات:", err);
-      toast.error("مشکلی در ثبت نمرات رخ داده است.");
-    } finally {
-      setSubmittingUser(null);
+      toast.success(` تصحیح آزمون با موفقیت انجام شد! نمره کل: ${response.data.data.total_score}`);
+      navigate("/Dashboard/ListExam/ListPhone");
+    } catch (error) {
+      toast.error(" خطا در ارسال نمرات!");
+      console.error(" خطا:", error);
     }
   };
 
   return (
     <div className="AdminCorrecting_container">
-      <Toaster className="AdminCorrecting_container_Toaster" position="top-center" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
+      <h2>پاسخ‌های دانش‌آموز</h2>
 
-      <h2 className="AdminCorrecting_container_h">تصحیح پاسخ‌های آزمون {examId}</h2>
-
-      {loading ? (
-        <div className="AdminCorrecting_container_loader">
-          <ScaleLoader />
+      {isLoading ? (
+        <p> در حال بارگیری...</p>
+      ) : studentData ? (
+        <div className="student-info">
+          <h3> {studentData.firstname} {studentData.lastname}</h3>
+          <p> شماره تلفن: {studentData.phone_number}</p>
+          <h3> سوالات و پاسخ‌ها:</h3>
+          {studentData.questions.map((q, index) => (
+            <div key={index} className="question-answer">
+              <p><strong> سوال {q.question_number}:</strong> {q.question_text} (نمره کل: {q.question_score})</p>
+              <p><strong> پاسخ:</strong> {studentData.answers.find(a => a.question_number === q.question_number)?.answer_text || " بدون پاسخ"}</p>
+              
+              
+              <label> نمره:</label>
+              <input 
+                type="number"
+                min="0"
+                max={q.question_score}
+                value={grades[q.question_number]}
+                onChange={(e) => handleGradeChange(q.question_number, e.target.value)}
+                placeholder={`حداکثر ${q.question_score}`}
+              />
+            </div>
+          ))}
+          <button className="finish-btn" onClick={handleFinishCorrection}> پایان تصحیح</button>
         </div>
-      ) : error ? (
-        <p className="AdminCorrecting_container_error">{error}</p>
       ) : (
-        <div className="AdminCorrecting_content">
-          {data.length > 0 ? (
-            <ul className="AdminCorrecting_content_ul">
-              {data.map((item) => (
-                <li key={item.user_id} className="AdminCorrecting_content_li">
-                  <h3 className="AdminCorrecting_content_li_h">
-                    دانشجو: {item.firstname} {item.lastname} - شماره تماس: {item.phone_number}
-                  </h3>
-                  <div className="AdminCorrecting_questions_answers">
-                    {item.questions.map((q) => (
-                      <div key={q.question_number} className="AdminCorrecting_question">
-                        <p className="AdminCorrecting_question_p">
-                          <strong className="AdminCorrecting_question_strong" >سؤال {q.question_number}: </strong>
-                          {q.question_text}
-                        </p>
-                        <p className="AdminCorrecting_question_p">
-                          <strong className="AdminCorrecting_question_strong">نمره کل سؤال: </strong> {q.question_score}
-                        </p>
-                        {item.answers
-                          .filter((a) => a.question_number === q.question_number)
-                          .map((ans) => (
-                            <div key={ans.question_number} className="AdminCorrecting_answer">
-                              <p  className="AdminCorrecting_answer_p">
-                                <strong className="AdminCorrecting_answer_strong">پاسخ: </strong> {ans.answer_text}
-                              </p>
-                              <input
-                                className="AdminCorrecting_score_input"
-                                type="number"
-                                placeholder="نمره دانشجو"
-                                value={grades[item.user_id]?.[q.question_number] || ""}
-                                onChange={(e) =>
-                                  handleGradeChange(item.user_id, q.question_number, e.target.value)
-                                }
-                              />
-                            </div>
-                          ))}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="AdminCorrecting_submit">
-                        <button
-                          className="AdminCorrecting_submit_button"
-                              onClick={() =>
-                                handleSubmitGrades(item.user_id, item.firstname, item.lastname, item.phone_number)
-                              }
-                              disabled={submittingUser === item.user_id}
-                            >
-                              {submittingUser === item.user_id ? <BeatLoader /> : "ثبت نمرات"}
-                        </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="AdminCorrecting_submit_p">هیچ پاسخی برای این آزمون یافت نشد</p>
-          )}
-        </div>
-      )}
-
-      {gradedStudents.length > 0 && (
-        <div className="AdminCorrecting_graded_table">
-          <h3 className="AdminCorrecting_graded_h" >نمرات ثبت‌شده</h3>
-           <table className="AdminCorrecting_graded_table">
-              <thead  className="AdminCorrecting_graded_thead">
-                <tr className="AdminCorrecting_graded_thead_tr">
-                  <th>شماره</th>
-                  <th>نام</th>
-                  <th>نام خانوادگی</th>
-                  <th>شماره موبایل</th>
-                  <th>نمره</th>
-                </tr>
-              </thead>
-              <tbody className="AdminCorrecting_graded_tbody">
-                {addingToTable ? (
-                  <tr className="AdminCorrecting_graded_tbody_tr">
-                    <td>
-                      <ClipLoader />
-                    </td>
-                  </tr>
-                ) : (
-                  gradedStudents.map((student, index) => (
-                    <tr key={student.id} className="AdminCorrecting_graded_tbody_tr">
-                      <td>{index + 1}</td>
-                      <td>{student.firstname}</td>
-                      <td>{student.lastname}</td>
-                      <td>{student.phone}</td>
-                      <td>{student.score}</td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-
-        </div>
+        <p> هیچ پاسخی برای این آزمون یافت نشد.</p>
       )}
     </div>
   );
 }
 
 export default EditorCorrecting;
-
 
 

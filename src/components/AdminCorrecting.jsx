@@ -34,11 +34,11 @@ function AdminCorrecting() {
         setGrades(initialGrades);
       } catch (error) {
         if (error.response?.status === 404) {
-          toast.error(" هیچ پاسخی برای این آزمون یافت نشد!");
+          toast.error("هیچ پاسخی برای این آزمون یافت نشد");
         } else {
-          toast.error(" خطا در دریافت پاسخ‌های دانش‌آموز");
+          toast.error("خطا در دریافت پاسخ‌های دانش‌آموز");
         }
-        console.error(" خطا:", error);
+        console.error("خطا:", error);
       } finally {
         setIsLoading(false);
       }

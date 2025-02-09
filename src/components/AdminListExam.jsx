@@ -24,7 +24,7 @@ function AdminListExam() {
         setExams(response.data);
       } catch (error) {
         if (error.response?.status === 404) {
-          toast.error(" هیچ آزمون تشریحی یافت نشد!");
+          toast.error(" هیچ آزمون تشریحی یافت نشد");
         } else {
           toast.error(" خطا در دریافت لیست آزمون‌ها");
         }
