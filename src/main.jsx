@@ -29,7 +29,7 @@ createRoot(document.getElementById("root")).render(
           <Routes>
               <Route path="/" element={<App />} />
               <Route path="/ListMatches" element={<ListMatches />} />
-              <Route path="/ListMatches/Matche/:examId" element={<Matche />} />
+              <Route path="/ListMatches/Matche" element={<Matche />} />
               <Route path="/Login" element={<Login />} />
               <Route path="/Register" element={<Register />} />
               <Route path="/VerifyRegister" element={<VerifyRegister />} />
