@@ -77,43 +77,66 @@ function EditorCorrecting() {
   };
 
   return (
-    <div className="AdminCorrecting_container">
-      <Toaster position="top-center" reverseOrder={false} />
-      <h2>پاسخ‌های دانش‌آموز</h2>
+          <div className="AdminCorrecting_container">
+                <Toaster className="AdminCorrecting_Toaster"  position="top-center" reverseOrder={false} />
 
-      {isLoading ? (
-        <div className="loader-container">
-          <BounceLoader  />
-        </div>
-      ) : studentData ? (
-        <div className="student-info">
-          <h3>{studentData.firstname} {studentData.lastname}</h3>
-          <p>شماره تلفن: {studentData.phone_number}</p>
-          <h3>سوالات و پاسخ‌ها:</h3>
-          {studentData.questions.map((q, index) => (
-            <div key={index} className="question-answer">
-              <p><strong>سوال {q.question_number}:</strong> {q.question_text} (نمره کل: {q.question_score})</p>
-              <p><strong>پاسخ:</strong> {studentData.answers.find(a => a.question_number === q.question_number)?.answer_text || "بدون پاسخ"}</p>
-              
-              <label>نمره:</label>
-              <input
-                type="number"
-                min="0"
-                max={q.question_score}
-                value={grades[q.question_number]}
-                onChange={(e) => handleGradeChange(q.question_number, e.target.value)}
-                placeholder={`حداکثر ${q.question_score}`}
-              />
-            </div>
-          ))}
-          <button className="finish-btn" onClick={handleFinishCorrection} disabled={isSubmitting}>
-            {isSubmitting ? <BeatLoader  /> : "پایان تصحیح"}
-          </button>
-        </div>
-      ) : (
-        <p>هیچ پاسخی برای این آزمون یافت نشد.</p>
-      )}
-    </div>
+                <header className="AdminCorrecting_header">
+                    <h2 className="AdminCorrecting_header_h" >پاسخ‌های دانش‌آموز</h2>
+                </header>
+
+                {isLoading ? (
+                  <div className="AdminCorrecting_loader_container">
+                      <BounceLoader className="AdminCorrecting_BounceLoader" />
+                  </div>
+                ) : studentData ? (
+                <section className="AdminCorrecting_student_info_section">
+                    <header className="AdminCorrecting_student_header">
+                          <h3 className="AdminCorrecting_student_header_h">{studentData.firstname} {studentData.lastname}</h3>
+                          <p className="AdminCorrecting_student_header_p"><strong className="AdminCorrecting_student_header_strong">شماره تلفن:</strong> {studentData.phone_number}</p>
+                    </header>
+
+                    <h3 className="AdminCorrecting_student_h">سوالات و پاسخ‌ها:</h3>
+
+                    <div className="AdminCorrecting_questions_section">
+                          {studentData.questions.map((q, index) => (
+                          <article key={index} className="AdminCorrecting_question_card">
+                              <header className="AdminCorrecting_question_header">
+                                <p className="AdminCorrecting_question_p">
+                                    <strong className="AdminCorrecting_question_strong">سوال {q.question_number}:</strong> {q.question_text} 
+                                    <span className="AdminCorrecting_question_score"> (نمره کل: {q.question_score})</span>
+                                </p>
+                              </header>
+
+                              <p className="AdminCorrecting_p" >
+                                <strong className="AdminCorrecting_strong">پاسخ:</strong> {studentData.answers.find(a => a.question_number === q.question_number)?.answer_text || "بدون پاسخ"}
+                              </p>
+
+                              <div className="AdminCorrecting_grade_input">
+                                    <label className="AdminCorrecting_grade_label"><strong className="AdminCorrecting_grade_strong" >نمره:</strong></label>
+                                        <input
+                                          className="AdminCorrecting_grade_input"
+                                          type="number"
+                                          min="0"
+                                          max={q.question_score}
+                                          value={grades[q.question_number]}
+                                          onChange={(e) => handleGradeChange(q.question_number, e.target.value)}
+                                          placeholder={`حداکثر ${q.question_score}`}
+                                        />
+                              </div>
+                          </article>
+                        ))}
+                    </div>
+
+                      <footer className="AdminCorrecting_footer">
+                        <button className="AdminCorrecting_finish_button" onClick={handleFinishCorrection} disabled={isSubmitting}>
+                          {isSubmitting ? <BeatLoader className="AdminCorrecting_BeatLoader" /> : "پایان تصحیح"}
+                        </button>
+                      </footer>
+                </section>
+              ) : (
+                  <p className="AdminCorrecting_no_answers_message">هیچ پاسخی برای این آزمون یافت نشد</p>
+              )}
+          </div>
   );
 }
 

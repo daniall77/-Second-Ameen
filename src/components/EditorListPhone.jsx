@@ -46,27 +46,43 @@ function EditorListPhone() {
   };
 
   return (
-    <div className="AdminListPhone_container">
-      <Toaster position="top-center" reverseOrder={false} />
-      <h2>شرکت‌کنندگان آزمون {examId}</h2>
+        <div className="AdminListPhone_container">
+            <Toaster className="AdminListPhone_Toaster" position="top-center" reverseOrder={false} />
 
-      {isLoading ? (
-        <div className="loader-container">
-          <ScaleLoader  />
+            <header className="AdminListPhone_header">
+                <h2 className="AdminListPhone_header_h" >شرکت‌کنندگان آزمون {examId}</h2>
+            </header>
+
+            {isLoading ? (
+                <div className="AdminListPhone_loader_container">
+                  <ScaleLoader className="AdminListPhone_ScaleLoader" />
+                </div>
+                ) : phoneNumbers.length > 0 ? (
+                <section className="AdminListPhone_participants_section">
+                    {phoneNumbers.map((phone) => (
+                    <article key={phone} className="AdminListPhone_participant_card">
+                        <header className="AdminListPhone_participant_info">
+                            <p className="AdminListPhone_participant_info_p"><strong className="AdminListPhone_participant_info_strong">شماره تلفن:</strong> {phone}</p>
+                        </header>
+
+                        <footer className="AdminListPhone_participant_footer">
+                            <button
+                              className="AdminListPhone_view_answers_button"
+                              onClick={() => handleViewAnswers(phone)}
+                              disabled={loadingPhone === phone}
+                              >
+                                  {loadingPhone === phone ? <BeatLoader className="AdminListPhone_BeatLoader" /> : "مشاهده پاسخ‌ها"}
+                              </button>
+                        </footer>
+                  </article>
+                ))}
+                </section>
+              ) : (
+              <p className="AdminListPhone_no_participants_message">
+                    هیچ پاسخ تصحیح‌نشده‌ای برای این آزمون یافت نشد
+              </p>
+            )}
         </div>
-      ) : phoneNumbers.length > 0 ? (
-        phoneNumbers.map((phone) => (
-          <div key={phone} className="participant-card">
-            <p> شماره تلفن: {phone}</p>
-            <button onClick={() => handleViewAnswers(phone)} disabled={loadingPhone === phone}>
-              {loadingPhone === phone ? <BeatLoader  /> : "مشاهده پاسخ‌ها"}
-            </button>
-          </div>
-        ))
-      ) : (
-        <p>هیچ پاسخ تصحیح‌نشده‌ای برای این آزمون یافت نشد</p>
-      )}
-    </div>
   );
 }
 

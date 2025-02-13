@@ -27,7 +27,7 @@ function ListMatches() {
   }, []);
 
   const handleStartExam = async (examId, examType) => {
-    setLoadingExamId(examId);
+       setLoadingExamId(examId);
 
     try {
       const response = await axios.post(`http://localhost:8000/exams/${examId}`);
@@ -115,7 +115,6 @@ function ListMatches() {
               <p className="ListMatches_no_exams_message">هیچ آزمونی یافت نشد</p>
             )}
           </div>
-
   );
 }
 
