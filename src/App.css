@@ -1316,6 +1316,7 @@
 }
 
 
+
 .AdminContent_container {
   display: flex;
   flex-direction: column ;
@@ -1329,254 +1330,102 @@
 
 }
 
-.AdminContent_container_container{
-   padding : 20px ;
-   background-color: #28a745;
-   width: 800px;
-   font-family: "vazir";
-  }
-
-.AdminContent_container_main{
-  background: var(--white);
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  padding: 25px;
-  max-width: 600px;
-  width: 80%;
-  margin-bottom: 20px;
-  animation: fadeIn 0.8s ease-in-out;
-  font-family: "vazir";
-}
-
-.AdminContent_multiselect {
-  background: var(--white);
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  padding: 25px;
-  max-width: 600px;
-  width: 80%;
-  margin-bottom: 20px;
-  animation: fadeIn 0.8s ease-in-out;
-  font-family: "vazir";
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.AdminContent_title {
-  font-size: 22px;
-  color: var(--primary-dark);
-  margin-bottom: 15px;
-  text-align: center;
-  font-family: "vazir";
-}
-
-.AdminContent_topic_input {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
-  font-family: "vazir";
-}
-
-.AdminContent_input_box {
-  flex: 1;
-  padding: 10px;
-  font-size: 16px;
-  border: 2px solid var(--primary-light);
-  border-radius: 8px;
-  transition: 0.3s;
-  font-family: "vazir";
-}
-
-.AdminContent_input_box:focus {
-  border-color: var(--accent-yellow);
-  outline: none;
-  box-shadow: 0 0 8px rgba(255, 193, 7, 0.5);
-  font-family: "vazir";
-}
-
-.AdminContent_add_button {
-  background: var(--accent-yellow);
-  color: var(--primary-dark);
-  border: none;
-  padding: 10px 15px;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-  font-family: "vazir";
-}
-
-.AdminContent_add_button:hover {
-  background: var(--primary-light);
-  color: var(--white);
-  font-family: "vazir";
-}
-.AdminContent_title_h {
-  font-family: "vazir";
-  color: var(--primary-dark) ;
-}
-
-.AdminContent_title_ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  font-family: "vazir";
-}
-
-.AdminContent_title_li {
-  background: var(--primary-light);
-  padding: 8px;
-  border-radius: 8px;
-  margin: 5px 0;
-  color: var(--white);
-  font-family: "vazir";
-}
-
-.AdminContent_title_p {
-  color: var(--error-red);
-  text-align: center;
-  font-family: "vazir";
-}
-
-.AdminContent_multiselect_p {
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: var(--primary-dark);
-  font-family: "vazir";
-}
-
-.AdminContent_multiselect_container .css-b62m3t-container {
+/* 
+ */
+ /*  */
+ /*  */
+ 
+.dropdown-container {
   width: 300px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
 }
 
-.AdminContent_multiselect_input {
+
+.dropdown-title {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+.dropdown-button {
   width: 100%;
   padding: 10px;
-  font-size: 16px;
-  border: 2px solid var(--primary-light);
-  border-radius: 8px;
-  font-family: "vazir";
-}
-
-.AdminContent_multiselect_uploaded_image {
-  text-align: center;
-  margin-top: 10px;
-  font-family: "vazir";
-}
-
-.AdminContent_multiselect_uploaded_image_p {
-  font-size: 14px;
-  margin-bottom: 5px;
-  font-family: "vazir";
-}
-
-.AdminContent_multiselect_uploaded_image_img {
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  font-family: "vazir";
-}
-
-.AdminContent_multiselect_ReactQuill {
-  border-radius: 8px;
-  font-family: "vazir";
-}
-
-.AdminContent_submit_container {
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
-  font-family: "vazir";
-}
-
-.AdminContent_submit_button {
-  background: var(--primary-dark);
-  color: var(--white);
+  background-color: #007bff;
+  color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 16px;
   cursor: pointer;
-  transition: 0.3s;
-  font-family: "vazir";
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.AdminContent_submit_button:hover {
-  background: var(--primary-light);
+
+.chevron {
+  transition: transform 0.3s ease;
+}
+
+.chevron.rotate {
+  transform: rotate(180deg);
 }
 
 
-@media (min-width: 1440px) {
-  .AdminContent_container_main,
-  .AdminContent_multiselect {
-    max-width: 700px;
-    padding: 30px;
-  }
-  .AdminContent_title {
-    font-size: 24px;
-  }
+.dropdown-menu {
+  position: absolute;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  margin-top: 5px;
 }
 
-@media (max-width: 1024px) {
-  .AdminContent_container_main,
-  .AdminContent_multiselect {
-    max-width: 80%;
-  }
+
+.category-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
 }
 
-@media (max-width: 768px) {
-  .AdminContent_container_main,
-  .AdminContent_multiselect {
-    max-width: 90%;
-    padding: 20px;
-  }
 
-  .AdminContent_input_box,
-  .AdminContent_multiselect_input {
-    font-size: 14px;
-  }
-
-  .AdminContent_add_button,
-  .AdminContent_submit_button {
-    font-size: 14px;
-    padding: 8px;
-  }
+.category-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
 }
 
-@media (max-width: 480px) {
-  .AdminContent_container_main,
-  .AdminContent_multiselect {
-    max-width: 95%;
-    padding: 15px;
-  }
 
-  .AdminContent_title {
-    font-size: 18px;
-  }
-
-  .AdminContent_input_box,
-  .AdminContent_multiselect_input {
-    font-size: 12px;
-    padding: 8px;
-  }
-
-  .AdminContent_add_button,
-  .AdminContent_submit_button {
-    font-size: 12px;
-    padding: 6px;
-  }
+.category-checkbox {
+  margin-right: 5px;
+  transform: scale(1.2);
 }
+
+
+.subcategory-list {
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+
+.subcategory-label {
+  display: block;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+
+.subcategory-checkbox {
+  margin-right: 5px;
+  transform: scale(1.1);
+}
+
+
+
 
 
 
