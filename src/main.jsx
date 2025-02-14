@@ -24,7 +24,7 @@ import ListPhone from "./components/ListPhone.jsx";
 
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+//   <StrictMode>
       <Router>
           <Routes>
               <Route path="/" element={<App />} />
@@ -48,7 +48,7 @@ createRoot(document.getElementById("root")).render(
               </Route>
           </Routes>
       </Router>
-  </StrictMode>
+//   </StrictMode>
 );
 
 
