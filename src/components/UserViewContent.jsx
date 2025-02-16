@@ -66,10 +66,15 @@ function UserViewContent() {
                       alt="Article"
                        className="UserViewContent_article_image"
                     />
-                    <p className="UserViewContent_article_text">{article.text}</p>
+                    <p className="Article_Text">متن:</p>
+                    <div className="Article_Content" dangerouslySetInnerHTML={{ __html: article.text }}></div>
                     <p className="UserViewContent_article_date">تاریخ ارسال: {article.created_at}</p>
                     <div className="UserViewContent_article_categories">
-                      دسته‌بندی‌ها: {article.category.join(", ")}
+                         دسته‌بندی‌ها: <strong className="" >
+                                    {article.category.length > 0 ?
+                                     Object.entries(article.subcategory).map(([key, values]) => `${key}-${values.join("-")}`).join(" | ") :
+                                      "دسته بندی نشده"}
+                                      </strong>
                     </div>
                     <p className="UserViewContent_article_status">
                       وضعیت مقاله: <span className="UserViewContent_article_categories_span">در حال بررسی</span>
@@ -95,10 +100,15 @@ function UserViewContent() {
                       alt="Article"
                        className="UserViewContent_article_image"
                     />
-                    <p className="UserViewContent_article_text">{article.text}</p>
+                    <p className="Article_Text">متن:</p>
+                     <div className="Article_Content" dangerouslySetInnerHTML={{ __html: article.text }}></div>
                     <p className="UserViewContent_article_date">تاریخ تایید: {article.created_at}</p>
                     <div className="UserViewContent_article_categories">
-                      دسته‌بندی‌ها: {article.category.join(", ")}
+                         دسته‌بندی‌ها: <strong className="" >
+                                    {article.subcategory.length > 0 ?
+                                     Object.entries(article.subcategory).map(([key, values]) => `${key}-${values.join("-")}`).join(" | ") :
+                                      "دسته بندی نشده"}
+                                      </strong>
                     </div>
                   </div>
                 ))}
@@ -121,10 +131,15 @@ function UserViewContent() {
                       alt="Article"
                       className="UserViewContent_article_image"
                     />
-                    <p className="UserViewContent_article_text">{article.text}</p>
+                    <p className="Article_Text">متن:</p>
+                    <div className="Article_Content" dangerouslySetInnerHTML={{ __html: article.text }}></div>
                     <p className="UserViewContent_article_date">تاریخ رد: {article.created_at}</p>
                     <div className="UserViewContent_article_categories">
-                      دسته‌بندی‌ها: {article.category.join(", ")}
+                          دسته‌بندی‌ها: <strong className="" >
+                                    {article.subcategory.length > 0 ?
+                                     Object.entries(article.subcategory).map(([key, values]) => `${key}-${values.join("-")}`).join(" | ") :
+                                      "دسته بندی نشده"}
+                                      </strong>
                     </div>
                   </div>
                 ))}

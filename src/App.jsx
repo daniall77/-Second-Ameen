@@ -28,7 +28,7 @@
 
             useEffect(() => {
               if (location.state?.successMessage && !toastShown.current) {
-                toast.success(location.state.successMessage, { duration: 2000 });
+                toast.success(location.state.successMessage, { duration: 1000 });
                 toastShown.current = true;
               }
             }, [location.state]);
@@ -184,7 +184,8 @@
                                 <h2 className="Article_Title"><strong className="Article_strong">{article.title}</strong></h2>
                               </header>
                               <section className="Article_Details">
-                                <p className="Article_Text">متن: <strong className="Article_strong">{article.text}</strong></p>
+                                 <p className="Article_Text">متن:</p>
+                                 <div className="Article_Content" dangerouslySetInnerHTML={{ __html: article.text }}></div>
                                 <img
                                   src={`http://localhost:8000/articles/${article.photo}`}
                                   alt="Article"
@@ -196,7 +197,11 @@
                                   <p className="Article_Update_Date">آخرین بروزرسانی: <strong className="Article_strong">{article.updated_at}</strong></p>
                                 )}
                                 <p className="Article_Categories">
-                                  دسته‌بندی‌ها: <strong className="Article_strong" >{article.category.length > 0 ? article.category.join(", ") : "بدون دسته"}</strong>
+                                  دسته‌بندی‌ها: <strong className="Article_strong" >
+                                    {article.category.length > 0 ?
+                                     Object.entries(article.subcategory).map(([key, values]) => `${key}-${values.join("-")}`).join(" | ") :
+                                      "دسته بندی نشده"}
+                                      </strong>
                                 </p>
                                 <p className="Article_Content"><strong className="Article_strong">{article.content}</strong></p>
                               </section>

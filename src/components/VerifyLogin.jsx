@@ -82,7 +82,7 @@ function VerifyLogin() {
       if (response.data && response.data.access_token) {
         setCookie('access_token', response.data.access_token, { path: '/', maxAge: 31536000 });
 
-        navigate('/', { state: { successMessage: 'ورود موفق' } });
+        navigate('/');
       }
     } catch (error) {
       console.error('Verification error:', error);

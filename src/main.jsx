@@ -20,6 +20,7 @@ import ListMatches from "./components/ListMatches.jsx" ;
 import ConfirmContent from "./components/ConfirmContent.jsx"; 
 import Matche from "./components/Matche.jsx"; 
 import ListPhone from "./components/ListPhone.jsx";
+import EditContent from "./components/EditContent.jsx";
 
 
 
@@ -45,6 +46,7 @@ createRoot(document.getElementById("root")).render(
                   <Route path="Exam/Question" element={<Question />} />
                   <Route path="ViewContent" element={<ViewContent />} />
                   <Route path="ConfirmContent" element={<ConfirmContent />} />
+                  <Route path="EditContent" element={<EditContent />} />
               </Route>
           </Routes>
       </Router>

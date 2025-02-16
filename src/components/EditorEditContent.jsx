@@ -6,7 +6,8 @@ import Select from "react-select";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 
-function EditorViewContent() {
+function EditorEditContent() {
+
   const [cookies] = useCookies(["access_token"]);
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -35,9 +36,7 @@ const [initialContent, setInitialContent] = useState("");
 
 const fetchArticles = async () => {
   try {
-    const response = await axios.get("http://localhost:8000/userArticles", {
-      headers: { Authorization: `Bearer ${cookies.access_token}` },
-    });
+    const response = await axios.get("http://localhost:8000/articles");
     setArticles(response.data);
     console.log(response.data);
   } catch (err) {
@@ -50,8 +49,9 @@ const fetchArticles = async () => {
 
 
   useEffect(() => {
+
     fetchArticles();
-  }, [cookies.access_token]);
+  }, []);
 
 
   const fetchArticleDetails = async (articleId) => {
@@ -63,7 +63,7 @@ const fetchArticles = async () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      console.log(" API  :", response.data);
+      console.log(" API :", response.data);
   
       const articleData = response.data;
       setSelectedArticle(articleId);
@@ -137,32 +137,23 @@ try {
 
   toast.success("مقاله با موفقیت به‌روزرسانی شد");
 
-  setArticles((prevArticles) =>
-    prevArticles.map((article) =>
-      article.id === selectedArticle
-        ? { ...article, title, text: content, photo: image?.fileName }
-        : article
-    )
-  );
-
-
   setIsModalOpen(false);
-
 
 
   fetchArticles();
 
-
-
-
   } catch (error) {
-      if (error.response && error.response.status === 403) {
+
+     if (error.response && error.response.status === 403) {
            toast.error("مجاز به ویرایش این مقاله نیستید");
       } else {
            toast.error("خطا در ویرایش مقاله");
       }
   }
+
+
 };
+
 
 
 
@@ -269,9 +260,9 @@ try {
       <Toaster position="top-center" reverseOrder={false} />
       <div className="AdminDashboard_container">
         <div className="AdminDashboard_container_main">
-          <h1 className="AdminDashboard_container_main_h">لیست مقالات من</h1>
+          <h1 className="AdminDashboard_container_main_h">لیست مقالات </h1>
           <section className="AdminDashboard_container_main_section">
-            <h2 className="AdminDashboard_container_main_section_h">مقالات من</h2>
+            <h2 className="AdminDashboard_container_main_section_h"> مقالات</h2>
             {articles.length > 0 ? (
               <>
                 <table className="AdminDashboard_container_table">
@@ -347,6 +338,8 @@ try {
 
                 <button onClick={() => setIsModalOpen(false)}>بستن</button>
                 
+               
+
                 <button onClick={handleSaveChanges} disabled={isSaveButtonDisabled}>
                      ثبت تغییرات
                </button>
@@ -359,7 +352,5 @@ try {
   );
 }
 
-export default EditorViewContent;
 
-
-
+export default EditorEditContent;

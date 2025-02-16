@@ -103,9 +103,14 @@ function Dashboard() {
               <Link to="ViewContent" className="Dashboard_sidebar_link">مشاهده مطلب</Link>
             </li>
             {canAccessCorrecting() && (
+              <>
               <li className={`Dashboard_sidebar_item ${location.pathname === "/Dashboard/ConfirmContent" ? "active" : ""}`}>
                 <Link to="ConfirmContent" className="Dashboard_sidebar_link">تایید مطلب</Link>
               </li>
+              <li className={`Dashboard_sidebar_item ${location.pathname === "/Dashboard/EditContent" ? "active" : ""}`}>
+                  <Link to="EditContent" className="Dashboard_sidebar_link">ویرایش مطلب</Link>
+              </li>
+              </>
             )}
             <li className={`Dashboard_sidebar_item ${location.pathname === "/Dashboard/Exam" ? "active" : ""}`}>
               <Link to="Exam" className="Dashboard_sidebar_link">مسابقه</Link>
@@ -153,9 +158,14 @@ function Dashboard() {
                               <Link to="ViewContent" className="Dashboard_sidebar_link">مشاهده مطلب</Link>
                             </li>
                             {canAccessCorrecting() && (
-                              <li className={`Dashboard_sidebar_item ${location.pathname === "/Dashboard/ConfirmContent" ? "active" : ""}`}>
-                                <Link to="ConfirmContent" className="Dashboard_sidebar_link">تایید مطلب</Link>
-                              </li>
+                              <>
+                                <li className={`Dashboard_sidebar_item ${location.pathname === "/Dashboard/ConfirmContent" ? "active" : ""}`}>
+                                  <Link to="ConfirmContent" className="Dashboard_sidebar_link">تایید مطلب</Link>
+                                </li>
+                                <li className={`Dashboard_sidebar_item ${location.pathname === "/Dashboard/EditContent" ? "active" : ""}`}>
+                                    <Link to="EditContent" className="Dashboard_sidebar_link">ویرایش مطلب</Link>
+                                </li>
+                              </>
                             )}
                             <li className={`Dashboard_sidebar_item ${location.pathname === "/Dashboard/Exam" ? "active" : ""}`}>
                               <Link to="Exam" className="Dashboard_sidebar_link">مسابقه</Link>
