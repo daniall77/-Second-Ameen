@@ -22,6 +22,7 @@ function AdminDashboard() {
   const [userPage, setUserPage] = useState(1);
   const [userRowsPerPage, setUserRowsPerPage] = useState(2);
 
+  
   useEffect(() => {
     const fetchUsers = async () => {
       try {
