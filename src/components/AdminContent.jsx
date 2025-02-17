@@ -7,6 +7,9 @@ import { FiTrash } from "react-icons/fi";
 import { useCookies } from "react-cookie";
 import { ScaleLoader, BeatLoader, ClipLoader } from "react-spinners";
 import toast, { Toaster } from "react-hot-toast";
+import { IoClose } from "react-icons/io5";
+import { IoChevronDownOutline } from "react-icons/io5";
+import { IoChevronUpOutline } from "react-icons/io5";
 
 
 
@@ -34,8 +37,6 @@ function AdminContent() {
   const [imagePreview, setImagePreview] = useState(null);
   const [imageLoading, setImageLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
-
-
 
 
 
@@ -234,148 +235,162 @@ function AdminContent() {
   
 
   return (
-    <div className="form-container">
+    <div className="AdminContent_container" dir="rtl">
 
-
-<Toaster position="top-center" reverseOrder={false} />
+         <Toaster position="top-center" reverseOrder={false} />
       {pageLoading ? (
-        <ScaleLoader />
+        <ScaleLoader className="AdminContent_ScaleLoader" />
       ) : (
+
         <>
                     {/* section1 */}
-         
-     
-                    <button onClick={() => setIsOpen(true)} >
-                             افزودن دسته بندی
-                    </button>
+                        <div className="AdminContent_box">
+                            <div className="AdminContent_container_one">
+                                  <button  className="AdminContent_button_one"   onClick={() => setIsOpen(true)} >
+                                          افزودن دسته بندی
+                                  </button>
+                            </div>
+                       </div>
 
                         {isOpen && (
-                          <div className="modal">
-                            <div className="modal-content">
-                              <h2>افزودن کتگوری</h2>
+                          <div className="AdminContent_modal">
+                            <div className="AdminContent_modal_overlay" onClick={() => setIsOpen(false)}></div>
+                            <div className="AdminContent_modal_content">
+                                <div className="AdminContent_header">
+                                    <h2 className="AdminContent_header_h" >افزودن کتگوری</h2>
+                                    <button className="AdminContent_header_button"  onClick={() => setIsOpen(false)}>
+                                            <IoClose className="AdminContent_IoClose"  />
+                                    </button>
+                                </div>
 
                             
-                              {error && <p style={{ color: "red" }}>{error}</p>}
+                              {error && <p className="AdminContent_modal_error" >{error}</p>}
 
-                              <div>
+                              <div className="AdminContent_modal_main">
                                 <input
                                   type="text"
                                   placeholder="نام کتگوری"
                                   value={category}
                                   onChange={(e) => setCategory(e.target.value)}
+                                  className="AdminContent_modal_input"
                                 />
-                                <button onClick={handleAddSubcategory}>
-                                  <LuCirclePlus />
+                                <button className="AdminContent_modal_button" onClick={handleAddSubcategory}>
+                                  <LuCirclePlus className="AdminContent_LuCirclePlus" />
                                 </button>
                               </div>
 
                             
                               {subcategories.length > 0 &&
                                 subcategories.map((sub, index) => (
-                                  <div key={index}>
+                                  <div className="AdminContent_modal_section" key={index}>
                                     <input
                                       type="text"
                                       placeholder="نام ساب‌کتگوری"
                                       value={sub}
+                                      className="AdminContent_modal_section_input"
                                       onChange={(e) =>
                                         handleChangeSubcategory(index, e.target.value)
                                       }
                                     />
-                                    <button onClick={() => handleRemoveSubcategory(index)}>
-                                      <FiTrash />
+                                    <button className="AdminContent_modal_section_button" onClick={() => handleRemoveSubcategory(index)}>
+                                      <FiTrash className="AdminContent_FiTrash" />
                                     </button>
                                   </div>
                                 ))}
 
-                              <div>
-                                <button onClick={handleSubmitTest}  disabled={loading} >
-                                      {loading ? <BeatLoader /> : " ثبت"}
-                                </button>
-                                <button onClick={() => setIsOpen(false)}>بستن</button>
+                              <div className="AdminContent_modal_div">
+                                  <button className="AdminContent_modal_div_button" onClick={handleSubmitTest}  disabled={loading} >
+                                        {loading ? <BeatLoader className="AdminContent_BeatLoader" /> : " ثبت"}
+                                  </button>
                               </div>
                             </div>
                           </div>
                         )}
 
-
-
                         {/* section1 */}
-
-
 
                         {/* section2 */}
 
+                        <div className="AdminContent_box">
+                            <div className="AdminContent_container_two">
+
+                                <h2 className="AdminContent_container_header" >افزودن مقاله جدید</h2>
 
 
+                                <label className="AdminContent_label">عنوان مقاله:</label>
+                                <input type="text" value={title} onChange={handleTitleChange} className="AdminContent_text_input" placeholder="عنوان مقاله را وارد کنید..." />
+                                {error && <p className="AdminContent_message">{error}</p>}
 
+                                <label className="AdminContent_label">انتخاب تصویر مقاله:</label>
+                                <div className="AdminContent_file_one">
+                                        <div className="AdminContent_file_wrapper">
+                                              <input type="file" id="fileInput" onChange={handleImageChange} className="AdminContent_file_input" />
+                                              <label for="fileInput" className="AdminContent_file_label">انتخاب فایل</label>
+                                        </div>
+                                        {imageLoading ? <ClipLoader className="AdminContent_ClipLoader" /> : imagePreview && <img src={imagePreview} alt="Preview" className="AdminContent_image_preview" />}
+                                </div>
+                                <label className="AdminContent_label"> دسته بندی:</label>
+                                <div className="AdminContent_dropdown">
+                                <button className="AdminContent_dropdown_button" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                                        <p> انتخاب  دسته بندی </p>  
+                                     {/* <span className={`AdminContent_chevron ${isDropdownOpen ? "rotate" : ""}`}> <IoChevronDownOutline className="AdminContent_IoChevronDownOutline" /> </span> */}
+                                        <span className="AdminContent_chevron" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                                               {isDropdownOpen ? (
+                                                    <IoChevronUpOutline className="AdminContent_IoChevronUpOutline" />
+                                                  ) : (
+                                                    <IoChevronDownOutline className="AdminContent_IoChevronDownOutline" />
+                                                  )}
+                                          </span>
+                                </button>
 
-                        <h2 className="form-title">افزودن مقاله جدید</h2>
+                                {isDropdownOpen && (
+                                  <div className="AdminContent_dropdown_menu">
+                                    {categories.map((category) => (
+                                      <div key={category.id} className="AdminContent_category_item">
+                                        <label className="AdminContent_category_label">
+                                          <input
+                                            type="checkbox"
+                                            onChange={() => handleCategoryChange(category.id)}
+                                            checked={!!selectedCategories[category.id]}
+                                            className="AdminContent_category_checkbox"
+                                          />
+                                          {category.name}
+                                        </label>
 
-                        {error && <p className="error-message">{error}</p>}
-
-                        <label className="form-label">عنوان مقاله:</label>
-                        <input type="text" value={title} onChange={handleTitleChange} className="text-input" placeholder="عنوان مقاله را وارد کنید..." />
-
-                        <label className="form-label">انتخاب تصویر مقاله:</label>
-                        <input type="file" onChange={handleImageChange} className="file-input" />
-                        {imageLoading ? <ClipLoader /> : imagePreview && <img src={imagePreview} alt="Preview" className="image-preview" />}
-
-                        <label className="form-label">انتخاب کتگوری و ساب‌کتگوری:</label>
-                        <div className="dropdown">
-                        <button className="dropdown-button" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-                          انتخاب کتگوری
-                          <span className={`chevron ${isDropdownOpen ? "rotate" : ""}`}>▼</span>
-                        </button>
-
-                        {isDropdownOpen && (
-                          <div className="dropdown-menu">
-                            {categories.map((category) => (
-                              <div key={category.id} className="category-item">
-                                <label className="category-label">
-                                  <input
-                                    type="checkbox"
-                                    onChange={() => handleCategoryChange(category.id)}
-                                    checked={!!selectedCategories[category.id]}
-                                    className="category-checkbox"
-                                  />
-                                  {category.name}
-                                </label>
-
-                                {selectedCategories[category.id] && (
-                                  <div className="subcategory-list">
-                                    {category.subcategories.map((sub) => (
-                                      <label key={sub.id} className="subcategory-label">
-                                        <input
-                                          type="checkbox"
-                                          onChange={() => handleSubcategoryChange(sub.id)}
-                                          checked={!!selectedSubcategories[sub.id]}
-                                          className="subcategory-checkbox"
-                                        />
-                                        {sub.name}
-                                      </label>
+                                        {selectedCategories[category.id] && (
+                                          <div className="AdminContent_subcategory_list">
+                                            {category.subcategories.map((sub) => (
+                                              <label key={sub.id} className="AdminContent_subcategory_label">
+                                                <input
+                                                  type="checkbox"
+                                                  onChange={() => handleSubcategoryChange(sub.id)}
+                                                  checked={!!selectedSubcategories[sub.id]}
+                                                  className="AdminContent_subcategory_checkbox"
+                                                />
+                                                {sub.name}
+                                              </label>
+                                            ))}
+                                          </div>
+                                        )}
+                                      </div>
                                     ))}
                                   </div>
                                 )}
-                              </div>
-                            ))}
-                          </div>
-                        )}
+                                </div>
+
+                                <label className="AdminContent_label">متن مقاله:</label>
+                                <ReactQuill value={content} onChange={setContent} className="AdminContent_text_editor" />
+                                
+                                <div className="AdminContent_submit">
+                                      <button className="AdminContent_submit_button" onClick={handleSubmit} disabled={loading}>
+                                            {loading ? <BeatLoader className="AdminContent_BeatLoader" /> : "ارسال مقاله"}
+                                      </button>
+                                </div>
                         </div>
-
-                        <label className="form-label">متن مقاله:</label>
-                        <ReactQuill value={content} onChange={setContent} className="text-editor" />
-
-                        <button className="submit-button" onClick={handleSubmit} disabled={loading}>
-                               {loading ? <BeatLoader /> : "ارسال مقاله"}
-                        </button>
-
-
+                      </div>
                         {/* section2 */}
         </>
       )}
-
-
-
 
     </div>
   );

@@ -8,7 +8,7 @@ function Content() {
   const [cookies] = useCookies(["role"]);
 
   return (
-    <div className="Content_container">
+    <div className="Content_container" dir="rtl">
       {cookies.role === "admin" && <AdminContent />}
       {cookies.role === "user" && <UserContent />}
       {cookies.role === "editor" && <EditorContent />}

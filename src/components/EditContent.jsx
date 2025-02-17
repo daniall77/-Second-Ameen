@@ -7,7 +7,7 @@ function EditContent () {
   const [cookies] = useCookies(["role"]);
 
   return (
-    <div className="EditContent_container">
+    <div className="ViewContent_container">
       {cookies.role === "admin" && <AdminEditContent />}
       {cookies.role === "editor" && <EditorEditContent />}
     </div>
