@@ -12,6 +12,7 @@ import { IoClose } from "react-icons/io5";
 
 
 function AdminViewContent() {
+
   const [cookies] = useCookies(["access_token"]);
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,8 +38,6 @@ function AdminViewContent() {
 const [initialTitle, setInitialTitle] = useState("");
 const [initialImage, setInitialImage] = useState(null);
 const [initialContent, setInitialContent] = useState("");
-
-
 
 
 
@@ -83,7 +82,7 @@ useEffect(() => {
       setTitle(articleData.title);
       
       setImage({
-        fileName: articleData.photo, 
+        // fileName: articleData.photo, 
         fileUrl: `http://localhost:8000/articles/${articleData.photo}`,
       });
 
@@ -94,7 +93,7 @@ useEffect(() => {
       setInitialTitle(articleData.title);
       setInitialContent(articleData.text);
       setInitialImage({
-        fileName: articleData.photo,
+        // fileName: articleData.photo,
         fileUrl: `http://localhost:8000/articles/${articleData.photo}`,
       });
 
@@ -112,7 +111,7 @@ useEffect(() => {
     const file = event.target.files[0];
     if (file) {
       setImage({
-        fileName: file.name,
+        // fileName: file.name,
         fileUrl: URL.createObjectURL(file),
         fileData: file, 
       });
@@ -128,10 +127,15 @@ useEffect(() => {
 //  put
 
 
+// const isSaveButtonDisabled = 
+// title === initialTitle &&
+// content === initialContent &&
+// image?.fileName === initialImage?.fileName;
+
 const isSaveButtonDisabled = 
 title === initialTitle &&
-content === initialContent &&
-image?.fileName === initialImage?.fileName;
+content === initialContent 
+// image?.fileName === initialImage?.fileName;
 
 
 const handleSaveChanges = async () => {
@@ -274,9 +278,9 @@ try {
   };
 
   return (
-    <div className="AdminViewContent">
-      <Toaster position="top-center" reverseOrder={false} />
+  
       <div className="AdminViewContent_container">
+      <Toaster position="top-center" reverseOrder={false} />
         <div className="AdminViewContent_container_main">
           <h1 className="AdminViewContent_container_main_h">لیست مقالات من</h1>
           <section className="AdminViewContent_container_main_section">
@@ -286,10 +290,10 @@ try {
                   <thead className="AdminViewContent_container_thead" >
                     <tr className="AdminViewContent_container_thead_tr" >
                       <th>شماره</th>
-                      <th>کد مقاله</th>
-                      <th>تاریخ ایجاد</th>
-                      <th>تاریخ ویرایش</th>
-                      <th>دسته‌بندی</th>
+                      <th className="AdminViewContent_none" >کد مقاله</th>
+                      <th className="AdminViewContent_none" >تاریخ ایجاد</th>
+                      <th >تاریخ ویرایش</th>
+                      <th className="AdminViewContent_none" >دسته‌بندی</th>
                       <th>عنوان مقاله</th>
                       <th>متن مقاله</th>
                       <th>عکس</th>
@@ -300,18 +304,18 @@ try {
                     {paginate(articles, articlePage, articleRowsPerPage).map((article, index) => (
                       <tr key={article.id} className="AdminViewContent_container_tbody_tr">
                         <td>{(articlePage - 1) * articleRowsPerPage + index + 1}</td>
-                        <td>{article.id}</td>
-                        <td>{article.created_at}</td>
+                        <td className="AdminViewContent_none" >{article.id}</td>
+                        <td className="AdminViewContent_none" >{article.created_at}</td>
                         <td>{article.updated_at ? article.updated_at : "-"}</td>
-                        <td>{article.category.join(" , ")}</td>
+                        <td className="AdminViewContent_none">{article.category.join("|")}</td>
                         <td>{article.title}</td>
-                        <td>{article.text.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 50)}...</td>
-                        <td>
-                          {article.photo ? <img src={`http://localhost:8000/articles/${article.photo}`} alt="مقاله" className="AdminViewContent_container_tbody_img" /> : "-"}
+                        <td>{article.text.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 10)}...</td>
+                        <td className="AdminViewContent_img">
+                          {article.photo ? <img src={`http://localhost:8000/articles/${article.photo}`} alt="مقاله" className="AdminViewContent_container_tbody_img" /> : ""}
                         </td>
                         <td>
-                            <button className="AdminDashboard_tbody_button" onClick={() => fetchArticleDetails(article.id)}>
-                              ویرایش
+                            <button className="AdminViewContent_tbody_button" onClick={() => fetchArticleDetails(article.id)}>
+                                 ویرایش
                             </button>
                         </td>
                       </tr>
@@ -331,7 +335,7 @@ try {
             )}
           </section>
         </div>
-      </div>
+      
 
       {isModalOpen && (
         <div className="AdminViewContent_modal">
@@ -340,36 +344,37 @@ try {
                <div className="AdminViewContent_modal_header">
                       <h3 className="AdminViewContent_modal_header_h"> کد مقاله : {selectedArticle} </h3>
                       <button className="AdminViewContent_modal_header_button"  onClick={() => setIsModalOpen(false)}>
-                           <IoClose className="AdminContent_IoClose"  />
+                           <IoClose className="AdminContent_IoClose" />
                      </button>
                </div>
                <div className="AdminViewContent_modal_main">
                    <label className="AdminViewContent_label">عنوان مقاله</label>
-                   <input type="text" className="AdminViewContent_input" value={title}  onChange={(e) => setTitle(e.target.value)}  />
-                    
-                   <div className="AdminViewContent_file_wrapper">
-                         <label className="AdminViewContent_label">تصویر مقاله</label>
-                         <input type="file" className="AdminViewContent_file_input" onChange={handleImageChange} />
+                   <input type="text" className="AdminViewContent_modal_input" value={title}  onChange={(e) => setTitle(e.target.value)}  />
+                    <div className="AdminViewContent_div">
+                          <div className="AdminViewContent_file_wrapper">
+                               <label for="fileInput" className="AdminViewContent_file_label">تصویر مقاله</label>
+                               <input type="file" className="AdminViewContent_file_input" id="fileInput" onChange={handleImageChange} />
+                          </div>
+                          {/* {image?.fileName && <p className="AdminViewContent_file_p">فایل انتخاب شده: {image.fileName}</p>} */}
+                          {image?.fileUrl && <img className="AdminViewContent_image_preview" src={image.fileUrl} alt=""  />}
                     </div>
-                          {image?.fileName && <p className="AdminViewContent_file_p">فایل انتخاب شده: {image.fileName}</p>}
-                          {image?.fileUrl && <img className="AdminViewContent_file_img" src={image.fileUrl} alt="مقاله"  />}
-
-                      <label className="AdminViewContent_label">متن مقاله</label>
-                      <ReactQuill value={content} onChange={handleContentChange} theme="snow" />
+                    <label className="AdminViewContent_label">متن مقاله</label>
+                    <ReactQuill value={content} onChange={handleContentChange} theme="snow" />
 
                </div>
                 
-               <div className="AdminViewContent_button_div">
-                      <button className="AdminViewContent_button" onClick={handleSaveChanges} disabled={isSaveButtonDisabled}>
+               <div className="AdminContent_modal_div">
+                      <button className="AdminContent_modal_div_button" onClick={handleSaveChanges} disabled={isSaveButtonDisabled}>
                            ثبت تغییرات
-                       </button>
+                      </button>
                </div>
 
           </div>
         </div>
-      )}
-
-    </div>
+        )}
+        
+      </div>
+   
   );
 }
 

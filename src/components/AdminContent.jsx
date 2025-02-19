@@ -250,7 +250,7 @@ function AdminContent() {
                                           افزودن دسته بندی
                                   </button>
                             </div>
-                       </div>
+                        </div>
 
                         {isOpen && (
                           <div className="AdminContent_modal">
@@ -259,7 +259,7 @@ function AdminContent() {
                                 <div className="AdminContent_header">
                                     <h2 className="AdminContent_header_h" >افزودن کتگوری</h2>
                                     <button className="AdminContent_header_button"  onClick={() => setIsOpen(false)}>
-                                            <IoClose className="AdminContent_IoClose"  />
+                                            <IoClose className="AdminContent_IoClose" />
                                     </button>
                                 </div>
 

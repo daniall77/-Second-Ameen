@@ -265,7 +265,7 @@ try {
       <Toaster position="top-center" reverseOrder={false} />
       <div className="AdminDashboard_container">
         <div className="AdminDashboard_container_main">
-          <h1 className="AdminDashboard_container_main_h">لیست مقالات </h1>
+          <h1 className="AdminDashboard_container_main_h">لیست همه مقالات </h1>
           <section className="AdminDashboard_container_main_section">
             <h2 className="AdminDashboard_container_main_section_h"> مقالات</h2>
             {articles.length > 0 ? (

@@ -339,7 +339,6 @@
   padding: 1rem;
   background-color: var(--white);
   border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   font-family: "vazir";
 }
 
@@ -400,6 +399,8 @@
    background-color: #6394f0;
    cursor: pointer;
 } 
+
+
 
 /* end page pagination  */
 
@@ -1771,25 +1772,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
   background-color:  #e3eaf5;;
   min-height: 100vh;
   font-family: "vazir";
 }
 
-.AdminViewContent {
+.AdminViewContent_container {
   width: 100%;
   max-width: 1200px;
   background-color:  #e3eaf5;;
   padding: 20px;
   font-family: "vazir";
-
+  margin-bottom: 200px;
 } 
-
-
-.AdminViewContent_container {
-  padding: 20px;
-}
 
 .AdminViewContent_container_main {
   text-align: center;
@@ -1802,17 +1797,17 @@
 }
 
 .AdminViewContent_container_main_section {
-  overflow-x: auto;
   background: var(--white);
   padding: 15px;
   border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .AdminViewContent_container_table {
   width: 100%;
   border-collapse: collapse;
   background: var(--white);
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
 }
 
@@ -1829,21 +1824,29 @@
 .AdminViewContent_container_tbody {
   text-align: center;
 }
+.AdminViewContent_img{
+   display: flex; 
+   margin-right: 10px;
+}
 
 .AdminViewContent_container_tbody_tr {
-  border-bottom: 1px solid var(--primary-light);
+  border-bottom: 2px solid var(--primary-light);
   transition: background 0.3s;
 }
 
+.AdminViewContent_container_tbody_tr td {
+  padding: 5px;
+}
+
 .AdminViewContent_container_tbody_tr:hover {
-  background: var(--accent-yellow);
+  background: #d6d6d6;
   color: #000;
 }
 
 .AdminViewContent_container_tbody_img {
   width: 50px;
   height: 50px;
-  border-radius: 5px;
+  border-radius: 50%;
   object-fit: cover;
 }
 
@@ -1858,7 +1861,7 @@
 }
 
 .AdminViewContent_tbody_button:hover {
-  background: var(--error-red);
+  background: #005bb5;
 }
 
 .AdminViewContent_container_p {
@@ -1872,7 +1875,254 @@
 /* section 2 */
 
 
+.AdminViewContent_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: fadeIn 0.3s forwards;
+  font-family: "vazir";
+  z-index: 1000;
+}
 
+.AdminViewContent_modal_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  font-family: "vazir";
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.AdminViewContent_modal_content {
+  background: var(--white);
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 10;
+  font-family: "vazir";
+}
+
+.AdminViewContent_modal_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  font-family: "vazir";
+}
+
+.AdminViewContent_modal_header_h {
+  margin: 0;
+  font-size: 20px;
+  color: var(--primary-light);
+  font-family: "vazir";
+}
+
+.AdminViewContent_modal_header_button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  font-family: "vazir";
+}
+
+
+
+.AdminViewContent_modal_main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+  font-family: "vazir";
+}
+.AdminViewContent_label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 7px;
+  color: #333;
+  font-family: "vazir";
+  margin-top: 12px;
+}
+
+.AdminViewContent_modal_input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid var(--primary-light);
+  border-radius: 5px;
+  font-family: "vazir";
+}
+.AdminViewContent_modal_input:focus {
+  border-color: var(--accent-yellow);
+  outline: none;
+  box-shadow: 0 0 8px var(--accent-yellow);
+  transition: 0.3s ease-in-out;
+}
+
+.AdminViewContent_file_wrapper {
+  position: relative;
+  display: inline-block;
+  font-family: "vazir";
+}
+
+.AdminViewContent_file_input {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+  font-family: "vazir";
+}
+
+.AdminViewContent_file_label {
+  display: inline-block;
+  padding: 10px 15px;
+  background: var(--primary-light);
+  color: var(--white);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-family: "vazir";
+}
+
+.AdminViewContent_file_label:hover {
+  background: #005bb5;
+}
+
+.AdminViewContent_image_preview{
+  width: 100px ;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.AdminViewContent_modal_div {
+  text-align: center;
+  margin-top: 15px;
+  font-family: "vazir";
+}
+
+.AdminViewContent_modal_div_button {
+  background: var(--primary-light);
+  color: var(--white);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: "vazir";
+}
+
+.AdminViewContent_modal_div_button:hover {
+  background: #005bb5;
+}
+
+.AdminViewContent_div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+
+@media (max-width: 1100px) {
+  .AdminViewContent_none{
+    display: none;
+  }
+}
+
+@media (max-width: 892px) {
+  .AdminViewContent_container_tbody_tr,
+  .AdminViewContent_container_thead_tr{
+    font-size: 12px;
+  }
+}
+
+
+
+
+@media (max-width: 768px) {
+  .AdminViewContent_container {
+    padding: 15px;
+  }
+  .AdminViewContent_none{
+    display: none;
+  }
+  
+  .AdminViewContent_tbody_button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  
+  .AdminViewContent_modal_content {
+    width: 90%;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .AdminViewContent_container_main_h {
+    font-size: 20px;
+  }
+  .AdminViewContent_none{
+    display: none;
+  }
+  
+  .AdminViewContent_container_table th,
+  .AdminViewContent_container_table td {
+    font-size: 12px;
+    padding: 5px;
+  }
+  
+  .AdminViewContent_tbody_button {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+  
+  .AdminViewContent_modal_content {
+    width: 95%;
+  }
+}
+
+
+@media (max-width: 360px) {
+  .AdminViewContent_container_main_h {
+    font-size: 18px;
+  }
+  .AdminViewContent_none{
+    display: none;
+  }
+  
+  .AdminViewContent_modal_content {
+    padding: 15px;
+    width: 100%;
+  }
+  
+  .AdminViewContent_modal_input {
+    width: 100%;
+    font-size: 8px;
+  }
+  
+  .AdminViewContent_tbody_button {
+    padding: 4px 6px;
+    font-size: 8px;
+  }
+}
 
 
 
