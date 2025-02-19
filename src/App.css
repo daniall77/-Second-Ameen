@@ -345,6 +345,7 @@
 .pagination_one {
   display: flex;
   gap: 0.5rem;
+  font-family: "vazir";
 }
 
 .pagination_button_one,
@@ -361,11 +362,13 @@
 .pagination_button_one {
   background-color: var(--primary-dark);
   color: var(--white);
+  font-family: "vazir";
 }
 
 .pagination_button_two {
   background-color: var(--primary-light);
   color: var(--white);
+  font-family: "vazir";
 }
 
 .pagination_button_one:hover,
@@ -377,14 +380,17 @@
 .pagination_button_two:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+  font-family: "vazir";
 }
 
 .pagination_two {
    display: flex;
+   font-family: "vazir";
 }
 .pagination_two .css-13cymwt-control{
    width: 70px;
    height: 5px;
+   font-family: "vazir";
 }
 
 .page-button{
@@ -394,10 +400,12 @@
    border: none;
    border-radius: 50%;
    cursor: pointer;
+   font-family: "vazir";
 }
 .page-button.active {
    background-color: #6394f0;
    cursor: pointer;
+   font-family: "vazir";
 } 
 
 
@@ -1124,7 +1132,6 @@
 .Dashboard_main::-webkit-scrollbar {
   width: 5px; 
   font-family: "vazir";
- 
 }
 
 .Dashboard_main::-webkit-scrollbar-track {
@@ -1262,7 +1269,6 @@
   cursor: pointer;
   width: 100%;
   height: 50px;
-  margin-bottom: 20px;
 }
 
 .Dashboard_FiMenu {
@@ -1788,12 +1794,14 @@
 
 .AdminViewContent_container_main {
   text-align: center;
+  font-family: "vazir";
 }
 
 .AdminViewContent_container_main_h {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
+  font-family: "vazir";
 }
 
 .AdminViewContent_container_main_section {
@@ -1801,6 +1809,7 @@
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: "vazir";
 }
 
 .AdminViewContent_container_table {
@@ -1809,38 +1818,46 @@
   background: var(--white);
   border-radius: 10px;
   overflow: hidden;
+  font-family: "vazir";
 }
 
 .AdminViewContent_container_thead {
   background: var(--primary-light);
   color: var(--white);
+  font-family: "vazir";
 }
 
 .AdminViewContent_container_thead_tr th {
   padding: 10px;
   text-align: center;
+  font-family: "vazir";
 }
 
 .AdminViewContent_container_tbody {
   text-align: center;
+  font-family: "vazir";
 }
 .AdminViewContent_img{
    display: flex; 
    margin-right: 10px;
+   font-family: "vazir";
 }
 
 .AdminViewContent_container_tbody_tr {
   border-bottom: 2px solid var(--primary-light);
   transition: background 0.3s;
+  font-family: "vazir";
 }
 
 .AdminViewContent_container_tbody_tr td {
   padding: 5px;
+  font-family: "vazir";
 }
 
 .AdminViewContent_container_tbody_tr:hover {
-  background: #d6d6d6;
+  background-color: #f1f8ff;
   color: #000;
+  font-family: "vazir";
 }
 
 .AdminViewContent_container_tbody_img {
@@ -1848,6 +1865,7 @@
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
+  font-family: "vazir";
 }
 
 .AdminViewContent_tbody_button {
@@ -1858,6 +1876,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
+  font-family: "vazir";
 }
 
 .AdminViewContent_tbody_button:hover {
@@ -1869,19 +1888,28 @@
   color: var(--primary-light);
   text-align: center;
   padding: 20px;
+  font-family: "vazir";
 }
 
 
 /* section 2 */
 
 
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .AdminViewContent_modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1891,31 +1919,35 @@
   font-family: "vazir";
   z-index: 1000;
 }
-
-.AdminViewContent_modal_overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+.AdminViewContent_modal::-webkit-scrollbar {
+  width: 5px; 
   font-family: "vazir";
 }
 
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.AdminViewContent_modal::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  font-family: "vazir";
+}
+
+.AdminViewContent_modal::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 5px; 
+  font-family: "vazir";
+}
+
+.AdminViewContent_modal::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+  font-family: "vazir";
 }
 
 .AdminViewContent_modal_content {
   background: var(--white);
   padding: 20px;
   border-radius: 8px;
-  max-width: 400px;
+  width: 400px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  position: relative;
+  position: fixed;
+  top: 100px;
   z-index: 10;
   font-family: "vazir";
 }
@@ -2037,6 +2069,7 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
+  font-family: "vazir";
 }
 
 
@@ -2071,6 +2104,9 @@
   
   .AdminViewContent_modal_content {
     width: 90%;
+  }
+  .AdminViewContent_container_main_h{
+    margin-top: 50px;
   }
 }
 
@@ -2124,13 +2160,6 @@
   }
 }
 
-
-
-
-
-
-
-/* end page AdminViewContent  && EditorViewContent  &&  AdminEditContent   && EditorEditContent  */
 
 
 
@@ -2207,131 +2236,37 @@
 
 
 
+
+/* end page AdminViewContent  && EditorViewContent  &&  AdminEditContent   && EditorEditContent  */
+
+
+
+
 /* start page AdminDashboard  &&  EditorDashboard */
 
-.AdminDashboard{
-  direction: rtl;
-  height: 100vh;
-  font-family: "vazir";
- }
-
-.AdminDashboard_container {
- 
-  font-family: "vazir";
-  background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
-  min-height: 100vh;
-  padding: 2rem;
+.AdminDashboard {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color:  #e3eaf5;;
+  min-height: 100vh;
+  font-family: "vazir";
 }
+
+.AdminDashboard_container {
+  width: 100%;
+  max-width: 1200px;
+  background-color:  #e3eaf5;;
+  padding: 20px;
+  font-family: "vazir";
+  margin-bottom: 200px;
+} 
 
 .AdminDashboard_container_main {
-  background-color: var(--white);
-  width: 90%;
-  max-width: 1200px;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
   animation: fadeIn 0.6s ease-in-out;
+  font-family: "vazir";
 }
-
-.AdminDashboard_container_main_h {
-  text-align: center;
-  font-size: 1.8rem;
-  color: var(--primary-dark);
-  margin-bottom: 1rem;
-}
-
-.AdminDashboard_container_main_section {
-  margin-bottom: 2rem;
-}
-
-.AdminDashboard_container_main_section_h {
-  font-size: 1.5rem;
-  color: var(--primary-dark);
-  margin-bottom: 0.8rem;
-  position: relative;
-}
-
-.AdminDashboard_container_main_section_h::after {
-  content: "";
-  width: 50px;
-  height: 3px;
-  background-color: var(--primary-light);
-  position: absolute;
-  bottom: -5px;
-  right: 0;
-  border-radius: 5px;
-}
-
-.AdminDashboard_container_table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-  border-radius: 10px;
-}
-
-.AdminDashboard_container_thead {
-  background-color: var(--primary-light);
-  color: var(--white);
-}
-
-.AdminDashboard_container_thead_tr th {
-  padding: 10px;
-  text-align: center;
-}
-
-.AdminDashboard_container_tbody_tr {
-  background-color: var(--white);
-  transition: background 0.3s;
-}
-
-.AdminDashboard_container_tbody_tr:hover {
-  background-color: #f1f8ff;
-}
-
-.AdminDashboard_container_tbody_tr td {
-  padding: 10px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-}
-
-.AdminDashboard_container_button {
-  display: inline-block;
-  margin: 5px;
-}
-
-.AdminDashboard_button {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: all 0.3s ease-in-out;
-  color: var(--white);
-  font-weight: bold;
-}
-
-.AdminDashboard_button:hover {
-  opacity: 0.8;
-}
-
-.AdminDashboard_button:nth-child(1) {
-  background-color: var(--success-green);
-}
-
-.AdminDashboard_button:nth-child(2) {
-  background-color: var(--accent-yellow);
-}
-
-.AdminDashboard_container_p {
-  text-align: center;
-  color: var(--error-red);
-  font-size: 1rem;
-  font-weight: bold;
-}
-
 
 @keyframes fadeIn {
   from {
@@ -2345,51 +2280,120 @@
 }
 
 
-@media (max-width: 1024px) {
-  .AdminDashboard_container_main {
-    width: 95%;
-  }
-
-  .AdminDashboard_container_thead_tr th,
-  .AdminDashboard_container_tbody_tr td {
-    font-size: 0.9rem;
-    padding: 8px;
-  }
+.AdminDashboard_container_main_h {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 50px;
+  font-family: "vazir";
 }
+
+.AdminDashboard_container_main_section {
+  background: var(--white);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 80px;
+  font-family: "vazir";
+}
+.AdminDashboard_container_main_section_h {
+  font-size: 1.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.8rem;
+  position: relative;
+  font-family: "vazir";
+}
+
+.AdminDashboard_container_table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: "vazir";
+}
+
+.AdminDashboard_container_thead {
+  background: var(--primary-light);
+  color: var(--white);
+  font-family: "vazir";
+}
+
+.AdminDashboard_container_thead_tr th {
+  padding: 10px;
+  text-align: center;
+  font-family: "vazir";
+}
+
+.AdminDashboard_container_tbody {
+  text-align: center;
+  font-family: "vazir";
+}
+
+.AdminDashboard_container_tbody_tr {
+  border-bottom: 2px solid var(--primary-light);
+  transition: background 0.3s;
+  font-family: "vazir";
+}
+
+.AdminDashboard_container_tbody_tr td {
+  padding: 5px;
+  font-family: "vazir";
+}
+
+.AdminDashboard_container_tbody_tr:hover {
+  background-color: #f1f8ff;
+  color: #000;
+}
+
+.AdminDashboard_container_p {
+  font-size: 16px;
+  color: var(--primary-light);
+  text-align: center;
+  padding: 20px;
+  font-family: "vazir";
+}
+
+.AdminDashboard_container_button {
+  display: inline-block;
+  margin: 5px;
+  font-family: "vazir";
+}
+
+.AdminDashboard_button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease-in-out;
+  color: var(--white);
+  background-color: var(--success-green) ;
+  font-family: "vazir";
+}
+
+.AdminDashboard_button1 {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease-in-out;
+  color: var(--white);
+  background-color: var(--error-red) ;
+  font-family: "vazir";
+}
+
 
 @media (max-width: 768px) {
-  .AdminDashboard_container_main {
-    padding: 1.5rem;
+  .AdminDashboard_none{
+    display: none;
   }
-
-  .AdminDashboard_container_main_h {
-    font-size: 1.5rem;
-  }
-
-  .AdminDashboard_container_main_section_h {
-    font-size: 1.3rem;
-  }
-
-  .AdminDashboard_button {
-    font-size: 0.8rem;
-    padding: 6px 10px;
+  .AdminDashboard_container_main_h{
+    margin-top: 50px;
   }
 }
 
-@media (max-width: 480px) {
-  .AdminDashboard_container_main {
-    padding: 1rem;
-  }
 
-  .AdminDashboard_container_table {
-    font-size: 0.8rem;
-  }
-
-  .AdminDashboard_button {
-    font-size: 0.7rem;
-    padding: 5px 8px;
-  }
-}
 
 
 /* end page AdminDashboard  && EditorDashboard  */

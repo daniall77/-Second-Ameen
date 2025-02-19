@@ -5,9 +5,11 @@ import toast, { Toaster } from "react-hot-toast";
 import Select from "react-select";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
+import { IoClose } from "react-icons/io5";
+
+
 
 function EditorEditContent() {
-
   const [cookies] = useCookies(["access_token"]);
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,6 +36,7 @@ const [initialContent, setInitialContent] = useState("");
 
 
 
+
 const fetchArticles = async () => {
   try {
     const response = await axios.get("http://localhost:8000/articles");
@@ -46,6 +49,7 @@ const fetchArticles = async () => {
     setLoading(false);
   }
 };
+
 
 
   useEffect(() => {
@@ -112,11 +116,11 @@ const fetchArticles = async () => {
   
 //  put
 
-
 const isSaveButtonDisabled = 
 title === initialTitle &&
 content === initialContent &&
 image?.fileName === initialImage?.fileName;
+
 
 
 const handleSaveChanges = async () => {
@@ -135,24 +139,28 @@ try {
     },
   });
 
-  toast.success("مقاله با موفقیت به‌روزرسانی شد");
+  toast.success("مقاله با موفقیت به‌روزرسانی شد!");
+
 
   setIsModalOpen(false);
 
 
   fetchArticles();
 
-  } catch (error) {
 
-     if (error.response && error.response.status === 403) {
-           toast.error("مجاز به ویرایش این مقاله نیستید");
-      } else {
-           toast.error("خطا در ویرایش مقاله");
-      }
-  }
+} catch (error) {
+
+  if (error.response && error.response.status === 403) {
+        toast.error("مجاز به ویرایش این مقاله نیستید");
+   } else {
+        toast.error("خطا در ویرایش مقاله");
+   }
+}
 
 
 };
+
+
 
 
 
@@ -256,101 +264,101 @@ try {
   };
 
   return (
-    <div className="AdminDashboard">
-      <Toaster position="top-center" reverseOrder={false} />
-      <div className="AdminDashboard_container">
-        <div className="AdminDashboard_container_main">
-          <h1 className="AdminDashboard_container_main_h">لیست مقالات </h1>
-          <section className="AdminDashboard_container_main_section">
-            <h2 className="AdminDashboard_container_main_section_h"> مقالات</h2>
-            {articles.length > 0 ? (
-              <>
-                <table className="AdminDashboard_container_table">
-                  <thead>
-                    <tr>
-                      <th>شماره</th>
-                      <th>کد مقاله</th>
-                      <th>تاریخ ایجاد</th>
-                      <th>تاریخ ویرایش</th>
-                      <th>دسته‌بندی</th>
-                      <th>عنوان مقاله</th>
-                      <th>متن مقاله</th>
-                      <th>عکس</th>
-                      <th>ویرایش</th>
+  <div className="AdminViewContent_container">
+    <Toaster position="top-center" reverseOrder={false} />
+      <div className="AdminViewContent_container_main">
+        <h1 className="AdminViewContent_container_main_h">لیست همه مقالات</h1>
+        <section className="AdminViewContent_container_main_section">
+          {articles.length > 0 ? (
+            <>
+              <table className="AdminViewContent_container_table">
+                <thead className="AdminViewContent_container_thead" >
+                  <tr className="AdminViewContent_container_thead_tr" >
+                    <th>شماره</th>
+                    <th className="AdminViewContent_none" >کد مقاله</th>
+                    <th className="AdminViewContent_none" >تاریخ ایجاد</th>
+                    <th >تاریخ ویرایش</th>
+                    <th className="AdminViewContent_none" >دسته‌بندی</th>
+                    <th>عنوان مقاله</th>
+                    <th>متن مقاله</th>
+                    <th>عکس</th>
+                    <th>ویرایش</th>
+                  </tr>
+                </thead>
+                <tbody className="AdminViewContent_container_tbody" >
+                  {paginate(articles, articlePage, articleRowsPerPage).map((article, index) => (
+                    <tr key={article.id} className="AdminViewContent_container_tbody_tr">
+                      <td>{(articlePage - 1) * articleRowsPerPage + index + 1}</td>
+                      <td className="AdminViewContent_none" >{article.id}</td>
+                      <td className="AdminViewContent_none" >{article.created_at}</td>
+                      <td>{article.updated_at ? article.updated_at : "-"}</td>
+                      <td className="AdminViewContent_none">{article.category.join("|")}</td>
+                      <td>{article.title}</td>
+                      <td>{article.text.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 10)}...</td>
+                      <td className="AdminViewContent_img">
+                        {article.photo ? <img src={`http://localhost:8000/articles/${article.photo}`} alt="مقاله" className="AdminViewContent_container_tbody_img" /> : ""}
+                      </td>
+                      <td>
+                          <button className="AdminViewContent_tbody_button" onClick={() => fetchArticleDetails(article.id)}>
+                               ویرایش
+                          </button>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {paginate(articles, articlePage, articleRowsPerPage).map((article, index) => (
-                      <tr key={article.id}>
-                        <td>{(articlePage - 1) * articleRowsPerPage + index + 1}</td>
-                        <td>{article.id}</td>
-                        <td>{article.created_at}</td>
-                        <td>{article.updated_at ? article.updated_at : "-"}</td>
-                        <td>{article.category.join(" , ")}</td>
-                        <td>{article.title}</td>
-                        <td>{article.text.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 50)}...</td>
-                        <td>
-                          {article.photo ? <img src={`http://localhost:8000/articles/${article.photo}`} alt="مقاله" width="50" height="50" /> : "-"}
-                        </td>
-                        <td>
-                            <button className="AdminDashboard_button" onClick={() => fetchArticleDetails(article.id)}>
-                              ویرایش
-                            </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                {renderPaginationControls(
-                  articles.length,
-                  articlePage,
-                  articleRowsPerPage,
-                  setArticlePage,
-                  setArticleRowsPerPage
-                )}
-              </>
-            ) : (
-              <p className="AdminDashboard_container_p">هیچ مقاله‌ای وجود ندارد</p>
-            )}
-          </section>
-        </div>
+                  ))}
+                </tbody>
+              </table>
+              {renderPaginationControls(
+                articles.length,
+                articlePage,
+                articleRowsPerPage,
+                setArticlePage,
+                setArticleRowsPerPage
+              )}
+            </>
+          ) : (
+            <p className="AdminViewContent_container_p">هیچ مقاله‌ای وجود ندارد</p>
+          )}
+        </section>
       </div>
+    
 
-      {isModalOpen && (
-        <div className="modal">
-          <div className="modal_content">
-            <h2>اطلاعات مقاله</h2>
-            <h3> کد مقاله  {selectedArticle} </h3>
-            <label>عنوان مقاله</label>
-            <input type="text" value={title}  onChange={(e) => setTitle(e.target.value)}  />
+    {isModalOpen && (
+      <div className="AdminViewContent_modal">
+        <div className="AdminViewContent_modal_content">
+             <div className="AdminViewContent_modal_header">
+                    <h3 className="AdminViewContent_modal_header_h"> کد مقاله : {selectedArticle} </h3>
+                    <button className="AdminViewContent_modal_header_button"  onClick={() => setIsModalOpen(false)}>
+                         <IoClose className="AdminContent_IoClose" />
+                   </button>
+             </div>
+             <div className="AdminViewContent_modal_main">
+                 <label className="AdminViewContent_label">عنوان مقاله</label>
+                 <input type="text" className="AdminViewContent_modal_input" value={title}  onChange={(e) => setTitle(e.target.value)}  />
+                  <div className="AdminViewContent_div">
+                        <div className="AdminViewContent_file_wrapper">
+                             <label for="fileInput" className="AdminViewContent_file_label">تصویر مقاله</label>
+                             <input type="file" className="AdminViewContent_file_input" id="fileInput" onChange={handleImageChange} />
+                        </div>
 
-            <label>تصویر مقاله</label>
-                    <label className="form-label">انتخاب تصویر مقاله:</label>
-                    <input type="file" className="file-input" onChange={handleImageChange} />
-
-                   {image?.fileName && <p>فایل انتخاب شده: {image.fileName}</p>}
-
-                  {image?.fileUrl && <img src={image.fileUrl} alt="مقاله" width="100" height="100" />}
-
-
-                  <label>متن مقاله</label>
+                        {image?.fileUrl && <img className="AdminViewContent_image_preview" src={image.fileUrl} alt=""  />}
+                  </div>
+                  <label className="AdminViewContent_label">متن مقاله</label>
                   <ReactQuill value={content} onChange={handleContentChange} theme="snow" />
 
-                <button onClick={() => setIsModalOpen(false)}>بستن</button>
-                
-               
+             </div>
+              
+             <div className="AdminContent_modal_div">
+                    <button className="AdminContent_modal_div_button" onClick={handleSaveChanges} disabled={isSaveButtonDisabled}>
+                         ثبت تغییرات
+                    </button>
+             </div>
 
-                <button onClick={handleSaveChanges} disabled={isSaveButtonDisabled}>
-                     ثبت تغییرات
-               </button>
-
-          </div>
         </div>
+      </div>
       )}
-
-    </div>
+      
+  </div>
   );
 }
-
 
 export default EditorEditContent;

@@ -5,8 +5,14 @@ import toast, { Toaster } from "react-hot-toast";
 import Select from "react-select";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
+import { IoClose } from "react-icons/io5";
+
+
+
+
 
 function EditorViewContent() {
+
   const [cookies] = useCookies(["access_token"]);
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,6 +29,9 @@ function EditorViewContent() {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
   const [content, setContent] = useState("");
+
+
+
 
 // put
 
@@ -49,9 +58,9 @@ const fetchArticles = async () => {
 };
 
 
-  useEffect(() => {
-    fetchArticles();
-  }, [cookies.access_token]);
+useEffect(() => {
+  fetchArticles();
+}, [cookies.access_token]);
 
 
   const fetchArticleDetails = async (articleId) => {
@@ -63,14 +72,17 @@ const fetchArticles = async () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      console.log(" API  :", response.data);
+      console.log(" API :", response.data);
   
       const articleData = response.data;
+
+
+
       setSelectedArticle(articleId);
       setTitle(articleData.title);
       
       setImage({
-        fileName: articleData.photo, 
+        fileName: articleData.photo,
         fileUrl: `http://localhost:8000/articles/${articleData.photo}`,
       });
 
@@ -94,6 +106,7 @@ const fetchArticles = async () => {
     }
   };
 
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -104,6 +117,7 @@ const fetchArticles = async () => {
       });
     }
   };
+
 
   const handleContentChange = (value) => {
     setContent(value);
@@ -119,6 +133,7 @@ content === initialContent &&
 image?.fileName === initialImage?.fileName;
 
 
+
 const handleSaveChanges = async () => {
 try {
   const formData = new FormData();
@@ -127,6 +142,9 @@ try {
   if (image?.fileData) {
     formData.append("file", image.fileData);
   }
+
+
+
 
   await axios.put(`http://localhost:8000/editArticle/${selectedArticle}`, formData, {
     headers: {
@@ -137,33 +155,24 @@ try {
 
   toast.success("مقاله با موفقیت به‌روزرسانی شد");
 
-  setArticles((prevArticles) =>
-    prevArticles.map((article) =>
-      article.id === selectedArticle
-        ? { ...article, title, text: content, photo: image?.fileName }
-        : article
-    )
-  );
-
-
   setIsModalOpen(false);
-
 
 
   fetchArticles();
 
+  
+
+} catch (error) {
+
+  if (error.response && error.response.status === 403) {
+        toast.error("مجاز به ویرایش این مقاله نیستید");
+   } else {
+        toast.error("خطا در ویرایش مقاله");
+   }
+}
 
 
-
-  } catch (error) {
-      if (error.response && error.response.status === 403) {
-           toast.error("مجاز به ویرایش این مقاله نیستید");
-      } else {
-           toast.error("خطا در ویرایش مقاله");
-      }
-  }
 };
-
 
 
   const paginate = (data, page, rowsPerPage) => {
@@ -265,45 +274,44 @@ try {
   };
 
   return (
-    <div className="AdminDashboard">
+  
+      <div className="AdminViewContent_container">
       <Toaster position="top-center" reverseOrder={false} />
-      <div className="AdminDashboard_container">
-        <div className="AdminDashboard_container_main">
-          <h1 className="AdminDashboard_container_main_h">لیست مقالات من</h1>
-          <section className="AdminDashboard_container_main_section">
-            <h2 className="AdminDashboard_container_main_section_h">مقالات من</h2>
+        <div className="AdminViewContent_container_main">
+          <h1 className="AdminViewContent_container_main_h">لیست مقالات من</h1>
+          <section className="AdminViewContent_container_main_section">
             {articles.length > 0 ? (
               <>
-                <table className="AdminDashboard_container_table">
-                  <thead>
-                    <tr>
+                <table className="AdminViewContent_container_table">
+                  <thead className="AdminViewContent_container_thead" >
+                    <tr className="AdminViewContent_container_thead_tr" >
                       <th>شماره</th>
-                      <th>کد مقاله</th>
-                      <th>تاریخ ایجاد</th>
-                      <th>تاریخ ویرایش</th>
-                      <th>دسته‌بندی</th>
+                      <th className="AdminViewContent_none" >کد مقاله</th>
+                      <th className="AdminViewContent_none" >تاریخ ایجاد</th>
+                      <th >تاریخ ویرایش</th>
+                      <th className="AdminViewContent_none" >دسته‌بندی</th>
                       <th>عنوان مقاله</th>
                       <th>متن مقاله</th>
                       <th>عکس</th>
                       <th>ویرایش</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="AdminViewContent_container_tbody" >
                     {paginate(articles, articlePage, articleRowsPerPage).map((article, index) => (
-                      <tr key={article.id}>
+                      <tr key={article.id} className="AdminViewContent_container_tbody_tr">
                         <td>{(articlePage - 1) * articleRowsPerPage + index + 1}</td>
-                        <td>{article.id}</td>
-                        <td>{article.created_at}</td>
+                        <td className="AdminViewContent_none" >{article.id}</td>
+                        <td className="AdminViewContent_none" >{article.created_at}</td>
                         <td>{article.updated_at ? article.updated_at : "-"}</td>
-                        <td>{article.category.join(" , ")}</td>
+                        <td className="AdminViewContent_none">{article.category.join("|")}</td>
                         <td>{article.title}</td>
-                        <td>{article.text.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 50)}...</td>
-                        <td>
-                          {article.photo ? <img src={`http://localhost:8000/articles/${article.photo}`} alt="مقاله" width="50" height="50" /> : "-"}
+                        <td>{article.text.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 10)}...</td>
+                        <td className="AdminViewContent_img">
+                          {article.photo ? <img src={`http://localhost:8000/articles/${article.photo}`} alt="مقاله" className="AdminViewContent_container_tbody_img" /> : ""}
                         </td>
                         <td>
-                            <button className="AdminDashboard_button" onClick={() => fetchArticleDetails(article.id)}>
-                              ویرایش
+                            <button className="AdminViewContent_tbody_button" onClick={() => fetchArticleDetails(article.id)}>
+                                 ویرایش
                             </button>
                         </td>
                       </tr>
@@ -319,48 +327,51 @@ try {
                 )}
               </>
             ) : (
-              <p className="AdminDashboard_container_p">هیچ مقاله‌ای وجود ندارد</p>
+              <p className="AdminViewContent_container_p">هیچ مقاله‌ای وجود ندارد</p>
             )}
           </section>
         </div>
-      </div>
+      
 
       {isModalOpen && (
-        <div className="modal">
-          <div className="modal_content">
-            <h2>اطلاعات مقاله</h2>
-            <h3> کد مقاله  {selectedArticle} </h3>
-            <label>عنوان مقاله</label>
-            <input type="text" value={title}  onChange={(e) => setTitle(e.target.value)}  />
+        <div className="AdminViewContent_modal">
+          <div className="AdminViewContent_modal_content">
+               <div className="AdminViewContent_modal_header">
+                      <h3 className="AdminViewContent_modal_header_h"> کد مقاله : {selectedArticle} </h3>
+                      <button className="AdminViewContent_modal_header_button"  onClick={() => setIsModalOpen(false)}>
+                           <IoClose className="AdminContent_IoClose" />
+                     </button>
+               </div>
+               <div className="AdminViewContent_modal_main">
+                   <label className="AdminViewContent_label">عنوان مقاله</label>
+                   <input type="text" className="AdminViewContent_modal_input" value={title}  onChange={(e) => setTitle(e.target.value)}  />
+                    <div className="AdminViewContent_div">
+                          <div className="AdminViewContent_file_wrapper">
+                               <label for="fileInput" className="AdminViewContent_file_label">تصویر مقاله</label>
+                               <input type="file" className="AdminViewContent_file_input" id="fileInput" onChange={handleImageChange} />
+                          </div>
+                     
+                          {image?.fileUrl && <img className="AdminViewContent_image_preview" src={image.fileUrl} alt=""  />}
+                    </div>
+                    <label className="AdminViewContent_label">متن مقاله</label>
+                    <ReactQuill value={content} onChange={handleContentChange} theme="snow" />
 
-            <label>تصویر مقاله</label>
-                    <label className="form-label">انتخاب تصویر مقاله:</label>
-                    <input type="file" className="file-input" onChange={handleImageChange} />
-
-                   {image?.fileName && <p>فایل انتخاب شده: {image.fileName}</p>}
-
-                  {image?.fileUrl && <img src={image.fileUrl} alt="مقاله" width="100" height="100" />}
-
-
-                  <label>متن مقاله</label>
-                  <ReactQuill value={content} onChange={handleContentChange} theme="snow" />
-
-                <button onClick={() => setIsModalOpen(false)}>بستن</button>
+               </div>
                 
-                <button onClick={handleSaveChanges} disabled={isSaveButtonDisabled}>
-                     ثبت تغییرات
-               </button>
+               <div className="AdminContent_modal_div">
+                      <button className="AdminContent_modal_div_button" onClick={handleSaveChanges} disabled={isSaveButtonDisabled}>
+                           ثبت تغییرات
+                      </button>
+               </div>
 
           </div>
         </div>
-      )}
-
-    </div>
+        )}
+        
+      </div>
+   
   );
 }
 
 export default EditorViewContent;
-
-
-
 

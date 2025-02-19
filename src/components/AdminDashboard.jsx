@@ -117,7 +117,7 @@ function AdminDashboard() {
   }
 
   if (error) {
-    return <div style={{ color: "red" }}>{error}</div>;
+    return <div>{error}</div>;
   }
 
   const paginate = (data, page, rowsPerPage) => {
@@ -144,7 +144,7 @@ function AdminDashboard() {
         <button
           key={i}
           onClick={() => onPageChange(i)}
-          className={`${currentPage === i ? "active" : ""} page_button`}
+          className={`${currentPage === i ? "active" : ""} page-button`}
         >
           {i}
         </button>
@@ -220,170 +220,170 @@ function AdminDashboard() {
   };
 
   return (
-    <div className="AdminDashboard">
-    <div className="AdminDashboard_container">
-      <Toaster position="top-center" reverseOrder={false} />
+    <div className="AdminDashboard" dir="rtl">
+      <div className="AdminDashboard_container">
+        <Toaster position="top-center" reverseOrder={false} />
 
-      <div className="AdminDashboard_container_main">
-            <h1 className="AdminDashboard_container_main_h" >لیست اعضا</h1>
-          
-            <section className="AdminDashboard_container_main_section"> 
-               <h2 className="AdminDashboard_container_main_section_h">ادمین</h2>
-              {data.admins.length > 0 ? (
-                <>
-                  <table className="AdminDashboard_container_table" >
-                    <thead className="AdminDashboard_container_thead">
-                      <tr  className="AdminDashboard_container_thead_tr">
-                        <th>شماره</th>
-                        <th>نام</th>
-                        <th>شماره موبایل</th>
-                        <th>نام خانوادگی</th>
-                      </tr>
-                    </thead>
-                    <tbody className="AdminDashboard_container_tbody">
-                          {paginate(data.admins , adminPage , adminRowsPerPage).map((admin, index) => (
-                            <tr  key={index} className="AdminDashboard_container_tbody_tr">
-                              <td>{(adminPage - 1) * adminRowsPerPage + index + 1}</td> 
-                              <td>{admin.first_name}</td>
-                              <td>{admin.phone_number}</td>
-                              <td>{admin.last_name}</td>
-                            </tr>
-                          ))}
-                    </tbody>
-                  </table>
-                  {renderPaginationControls(
-                    data.admins.length,
-                    adminPage,
-                    adminRowsPerPage,
-                    setAdminPage,
-                    setAdminRowsPerPage
-                  )}
-                </>
-              ) : (
-                <p className="AdminDashboard_container_p">هیچ ادمینی وجود ندارد</p>
-              )}
-            </section>
+        <div className="AdminDashboard_container_main">
+              <h1 className="AdminDashboard_container_main_h" >پنل کاربری</h1>
+            
+              <section className="AdminDashboard_container_main_section"> 
+                <h2 className="AdminDashboard_container_main_section_h"> لیست ادمین ها</h2>
+                {data.admins.length > 0 ? (
+                  <>
+                    <table className="AdminDashboard_container_table" >
+                      <thead className="AdminDashboard_container_thead">
+                        <tr  className="AdminDashboard_container_thead_tr">
+                          <th>شماره</th>
+                          <th>نام</th>
+                          <th>شماره موبایل</th>
+                          <th>نام خانوادگی</th>
+                        </tr>
+                      </thead>
+                      <tbody className="AdminDashboard_container_tbody">
+                            {paginate(data.admins , adminPage , adminRowsPerPage).map((admin, index) => (
+                              <tr  key={index} className="AdminDashboard_container_tbody_tr">
+                                <td>{(adminPage - 1) * adminRowsPerPage + index + 1}</td> 
+                                <td>{admin.first_name}</td>
+                                <td>{admin.phone_number}</td>
+                                <td>{admin.last_name}</td>
+                              </tr>
+                            ))}
+                      </tbody>
+                    </table>
+                    {renderPaginationControls(
+                      data.admins.length,
+                      adminPage,
+                      adminRowsPerPage,
+                      setAdminPage,
+                      setAdminRowsPerPage
+                    )}
+                  </>
+                ) : (
+                  <p className="AdminDashboard_container_p">هیچ ادمینی وجود ندارد</p>
+                )}
+              </section>
 
-            <section className="AdminDashboard_container_main_section">
-              <h2 className="AdminDashboard_container_main_section_h">ادیتور</h2>
-              {data.editors.length > 0 ? (
-                <>
-                  <table  className="AdminDashboard_container_table" >
-                    <thead className="AdminDashboard_container_thead">
-                      <tr className="AdminDashboard_container_thead_tr">
-                        <th>شماره</th>
-                        <th>نام</th>
-                        <th>شماره موبایل</th>
-                        <th>نام خانوادگی</th>
-                        <th>تغییر نقش</th>
-                      </tr>
-                    </thead>
-                    <tbody className="AdminDashboard_container_tbody">
-                      {paginate(data.editors, editorPage, editorRowsPerPage).map((editor, index) => (
-                        <tr key={index} className="AdminDashboard_container_tbody_tr">
-                          <td>{(editorPage - 1) * editorRowsPerPage + index + 1}</td> 
-                          <td>{editor.first_name}</td>
-                          <td>{editor.phone_number}</td>
-                          <td>{editor.last_name}</td>
-                          <td>
-                               <div className="AdminDashboard_container_button">
-                                    <button 
-                                      className="AdminDashboard_button" 
-                                      onClick={() => changeUserRole(editor.id, "admin")} 
-                                      disabled={changingUserId === editor.id}
-                                    >
-                                      {changingUserId === editor.id ? <BeatLoader /> : "ادمین"}
-                                    </button>
-                               </div>
-                               <div className="AdminDashboard_container_button">
+              <section className="AdminDashboard_container_main_section">
+                <h2 className="AdminDashboard_container_main_section_h">لیست ادیتور ها</h2>
+                {data.editors.length > 0 ? (
+                  <>
+                    <table  className="AdminDashboard_container_table" >
+                      <thead className="AdminDashboard_container_thead">
+                        <tr className="AdminDashboard_container_thead_tr">
+                          <th>شماره</th>
+                          <th>نام</th>
+                          <th>شماره موبایل</th>
+                          <th>نام خانوادگی</th>
+                          <th>تغییر نقش</th>
+                        </tr>
+                      </thead>
+                      <tbody className="AdminDashboard_container_tbody">
+                        {paginate(data.editors, editorPage, editorRowsPerPage).map((editor, index) => (
+                          <tr key={index} className="AdminDashboard_container_tbody_tr">
+                            <td>{(editorPage - 1) * editorRowsPerPage + index + 1}</td> 
+                            <td>{editor.first_name}</td>
+                            <td>{editor.phone_number}</td>
+                            <td>{editor.last_name}</td>
+                            <td>
+                                <div className="AdminDashboard_container_button">
                                       <button 
                                         className="AdminDashboard_button" 
-                                        onClick={() => changeUserRole(editor.id, "user")} 
+                                        onClick={() => changeUserRole(editor.id, "admin")} 
                                         disabled={changingUserId === editor.id}
                                       >
-                                        {changingUserId === editor.id ? <BeatLoader /> : "کاربر"}
+                                        {changingUserId === editor.id ? <BeatLoader /> : "ادمین"}
                                       </button>
-                               </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  {renderPaginationControls(
-                    data.editors.length,
-                    editorPage,
-                    editorRowsPerPage,
-                    setEditorPage,
-                    setEditorRowsPerPage
-                  )}
-                </>
-              ) : (
-                <p className="AdminDashboard_container_p">هیچ ادیتوری وجود ندارد</p>
-              )}
-            </section>
+                                </div>
+                                <div className="AdminDashboard_container_button">
+                                        <button 
+                                          className="AdminDashboard_button1" 
+                                          onClick={() => changeUserRole(editor.id, "user")} 
+                                          disabled={changingUserId === editor.id}
+                                        >
+                                          {changingUserId === editor.id ? <BeatLoader /> : "کاربر"}
+                                        </button>
+                                </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    {renderPaginationControls(
+                      data.editors.length,
+                      editorPage,
+                      editorRowsPerPage,
+                      setEditorPage,
+                      setEditorRowsPerPage
+                    )}
+                  </>
+                ) : (
+                  <p className="AdminDashboard_container_p">هیچ ادیتوری وجود ندارد</p>
+                )}
+              </section>
 
-            <section className="AdminDashboard_container_main_section">
-              <h2 className="AdminDashboard_container_main_section_h">کاربر</h2>
-              {data.users.length > 0 ? (
-                <>
-                  <table  className="AdminDashboard_container_table">
-                    <thead className="AdminDashboard_container_thead">
-                      <tr className="AdminDashboard_container_thead_tr">
-                        <th>شماره</th>
-                        <th>نام</th>
-                        <th>شماره موبایل</th>
-                        <th>نام خانوادگی</th>
-                        <th>استان</th>
-                        <th>شهر</th>
-                        <th>تاریخ تولد</th>
-                        <th>نام مدرسه</th>
-                        <th>پایه تحصیلی</th>
-                        <th>تغییر نقش</th>
-                      </tr>
-                    </thead>
-                    <tbody className="AdminDashboard_container_tbody">
-                      {paginate(data.users, userPage, userRowsPerPage).map((user, index) => (
-                        <tr key={index} className="AdminDashboard_container_tbody_tr">
-                          <td>{(userPage - 1) * userRowsPerPage + index + 1}</td> 
-                          <td>{user.first_name}</td>
-                          <td>{user.phone_number}</td>
-                          <td>{user.last_name}</td>
-                          <td>{user.province_id}</td>
-                          <td>{user.city_id}</td>
-                          <td>{user.birthday}</td>
-                          <td>{user.school}</td>
-                          <td>{user.grade}</td>
-                          <td>
-                                <div className="AdminDashboard_container_button">
-                                      <button className="AdminDashboard_button" onClick={() => changeUserRole(user.id, "admin")} disabled={changingUserId === user.id}>
-                                            {changingUserId === user.id ? <BeatLoader /> : "ادمین"}
-                                      </button>
-                                </div>
-                                <div className="AdminDashboard_container_button">
-                                      <button className="AdminDashboard_button" onClick={() => changeUserRole(user.id, "editor")} disabled={changingUserId === user.id}>
-                                          {changingUserId === user.id ? <BeatLoader /> : "ادیتور"}
-                                      </button>
-                                </div>
-                          </td>
+              <section className="AdminDashboard_container_main_section">
+                <h2 className="AdminDashboard_container_main_section_h">لیست کاربر ها</h2>
+                {data.users.length > 0 ? (
+                  <>
+                    <table  className="AdminDashboard_container_table">
+                      <thead className="AdminDashboard_container_thead">
+                        <tr className="AdminDashboard_container_thead_tr">
+                          <th>شماره</th>
+                          <th>نام</th>
+                          <th>شماره موبایل</th>
+                          <th>نام خانوادگی</th>
+                          <th className="AdminDashboard_none">استان</th>
+                          <th className="AdminDashboard_none">شهر</th>
+                          <th className="AdminDashboard_none">تاریخ تولد</th>
+                          <th className="AdminDashboard_none">نام مدرسه</th>
+                          <th className="AdminDashboard_none">پایه تحصیلی</th>
+                          <th>تغییر نقش</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  {renderPaginationControls(
-                    data.users.length,
-                    userPage,
-                    userRowsPerPage,
-                    setUserPage,
-                    setUserRowsPerPage
-                  )}
-                </>
-              ) : (
-                <p className="AdminDashboard_container_p">هیچ کاربری وجود ندارد</p>
-              )}
-            </section>
+                      </thead>
+                      <tbody className="AdminDashboard_container_tbody">
+                        {paginate(data.users, userPage, userRowsPerPage).map((user, index) => (
+                          <tr key={index} className="AdminDashboard_container_tbody_tr">
+                            <td>{(userPage - 1) * userRowsPerPage + index + 1}</td> 
+                            <td>{user.first_name}</td>
+                            <td>{user.phone_number}</td>
+                            <td>{user.last_name}</td>
+                            <td className="AdminDashboard_none">{user.province_id}</td>
+                            <td className="AdminDashboard_none">{user.city_id}</td>
+                            <td className="AdminDashboard_none">{user.birthday}</td>
+                            <td className="AdminDashboard_none">{user.school}</td>
+                            <td className="AdminDashboard_none">{user.grade}</td>
+                            <td>
+                                  <div className="AdminDashboard_container_button">
+                                        <button className="AdminDashboard_button" onClick={() => changeUserRole(user.id, "admin")} disabled={changingUserId === user.id}>
+                                              {changingUserId === user.id ? <BeatLoader /> : "ادمین"}
+                                        </button>
+                                  </div>
+                                  <div className="AdminDashboard_container_button">
+                                        <button className="AdminDashboard_button" onClick={() => changeUserRole(user.id, "editor")} disabled={changingUserId === user.id}>
+                                            {changingUserId === user.id ? <BeatLoader /> : "ادیتور"}
+                                        </button>
+                                  </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    {renderPaginationControls(
+                      data.users.length,
+                      userPage,
+                      userRowsPerPage,
+                      setUserPage,
+                      setUserRowsPerPage
+                    )}
+                  </>
+                ) : (
+                  <p className="AdminDashboard_container_p">هیچ کاربری وجود ندارد</p>
+                )}
+              </section>
+        </div>
       </div>
     </div>
-  </div>
   );
 }
 

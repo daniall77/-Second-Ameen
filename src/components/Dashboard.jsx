@@ -132,7 +132,6 @@ function Dashboard() {
         <div className={`Dashboard_overlay ${isSidebarOpen ? "open" : ""}`} onClick={() => setIsSidebarOpen(false)}>
           <div className="Dashboard_slide_menu" onClick={(e) => e.stopPropagation()}>
             <FiX className="Dashboard_close_icon" onClick={() => setIsSidebarOpen(false)}  />
-            {/* <div className="Dashboard_sidebar_content"> */}
         
                     <div className="Dashboard_sidebar_one">
                         <div className="Dashboard_sidebar_top">
@@ -182,7 +181,6 @@ function Dashboard() {
                         </div>
                     </div>
 
-            {/* </div> */}
           </div>
         </div>
       )}
