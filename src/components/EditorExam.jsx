@@ -27,7 +27,7 @@ function EditorExam() {
         const response = await axios.get("http://localhost:8000/articles");  
         const formattedArticles = response.data.map((article) => ({
           value: article.id, 
-          label: `مقاله ${article.id} - ${article.title} - ${article.text.slice(0, 20)}...`, 
+          label: `مقاله ${article.id} - ${article.title} - ${article.text.replace(/<\/?[^>]+(>|$)/g, "").slice(0, 20)}...`, 
         }));
 
         setArticles(formattedArticles);
@@ -93,52 +93,55 @@ function EditorExam() {
 
   return (
     <div className="EditorExam_container">
-      <Toaster position="top-center" reverseOrder={false} />
-      <h2 className="EditorExam_h">ایجاد آزمون جدید</h2>
+        <Toaster position="top-center" reverseOrder={false} />
+        <div className="EditorExam_container_main">
+            <h1 className="EditorExam_container_main_h">ایجاد آزمون جدید</h1>
+              <section className="EditorExam_container_main_section">
+                  <div className="EditorExam_form_group">
+                    <label className="EditorExam_form_label">عنوان آزمون:</label>
+                    <input
+                      type="text"
+                      value={examTitle}
+                      onChange={(e) => setExamTitle(e.target.value)}
+                      placeholder="عنوان آزمون را وارد کنید"
+                      className="EditorExam_form_input"
+                    />
+                  </div>
 
-      <div className="EditorExam_form_group">
-        <label className="EditorExam_form_label">عنوان آزمون:</label>
-        <input
-          type="text"
-          value={examTitle}
-          onChange={(e) => setExamTitle(e.target.value)}
-          placeholder="عنوان آزمون را وارد کنید"
-          className="EditorExam_form_input"
-        />
-      </div>
+                  <div className="EditorExam_form_group">
+                    <label className="EditorExam_form_label">مقالات مرتبط:</label>
+                    <Select
+                      isMulti
+                      options={articles} 
+                      value={selectedArticles} 
+                      onChange={setSelectedArticles}
+                      placeholder="عنوان مقاله را انتخاب کنید"
+                      className="EditorExam_form_select"
+                    />
+                  </div>
 
-      <div className="EditorExam_form_group">
-        <label className="EditorExam_form_label">مقالات مرتبط:</label>
-        <Select
-          isMulti
-          options={articles} 
-          value={selectedArticles} 
-          onChange={setSelectedArticles}
-          placeholder="عنوان مقاله را انتخاب کنید"
-          className="EditorExam_form_select"
-        />
-      </div>
+                  <div className="EditorExam_form_group">
+                    <label className="EditorExam_form_label">نوع آزمون:</label>
+                    <Select
+                      options={examTypeOptions}
+                      value={examTypeOptions.find((option) => option.value === examType)}
+                      onChange={(selectedOption) => setExamType(selectedOption.value)}
+                      className="EditorExam_form_select"
+                      placeholder="نوع آزمون را انتخاب کنید"
+                    />
+                  </div>
 
-      <div className="EditorExam_form_group">
-        <label className="EditorExam_form_label">نوع آزمون:</label>
-        <Select
-          options={examTypeOptions}
-          value={examTypeOptions.find((option) => option.value === examType)}
-          onChange={(selectedOption) => setExamType(selectedOption.value)}
-          className="EditorExam_form_select"
-          placeholder="نوع آزمون را انتخاب کنید"
-        />
-      </div>
-
-      <div className="EditorExam_form_div">
-        <button
-          className="EditorExam_form_div_button"
-          onClick={handleCreateExam}
-          disabled={loading}
-        >
-          {loading ? <BeatLoader /> : "ایجاد آزمون"}
-        </button>
-      </div>
+                  <div className="EditorExam_form_div">
+                    <button
+                      className="EditorExam_form_div_button"
+                      onClick={handleCreateExam}
+                      disabled={loading}
+                    >
+                      {loading ? <BeatLoader /> : "ایجاد آزمون"}
+                    </button>
+                  </div>
+              </section>            
+        </div> 
     </div>
   );
 }
