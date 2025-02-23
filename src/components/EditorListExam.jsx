@@ -49,36 +49,33 @@ function EditorListExam() {
   return (
         <div className="AdminListExam_container">
              <Toaster className="AdminListExam_Toaster"  position="top-center" reverseOrder={false} />
-
-             <header className="AdminListExam_header">
-                 <h2 className="AdminListExam_header_h" >لیست آزمون‌های تشریحی</h2>
-             </header>
-
               {isLoading ? (
                     <div className="AdminListExam_loader_container">
                         <ScaleLoader  className="AdminListExam_ScaleLoader" />
                     </div>
               ) : exams.length > 0 ? (
-                   <section className="AdminListExam_exams_section">
+                <div className="AdminListExam_container_main">
+                   <h2 className="AdminListExam_container_main_header" >لیست مسابقات تشریحی</h2>
+                   <section className="AdminListExam_container_main_section">
                         {exams.map((exam) => (
-                          <article key={exam.id} className="AdminListExam_exam_card">
-                                <header className="AdminListExam_exam_header">
-                                      <p className="AdminListExam_exam_header_p" ><strong className="AdminListExam_exam_header_strong">آزمون شماره:</strong> {exam.id}</p>
-                                      <p className="AdminListExam_exam_header_p"><strong className="AdminListExam_exam_header_strong">عنوان:</strong> {exam.title}</p>
-                                </header>
-
-                                <footer className="AdminListExam_exam_footer">
+                          <div key={exam.id} className="AdminListExam_exam_card">
+                                <div className="AdminListExam_exam_header">
+                                      <p className="AdminListExam_exam_header_p" > کد مسابقه : {exam.id}</p>
+                                      <p className="AdminListExam_exam_header_p">    مسابقه : {exam.title}</p>
+                                </div>
+                                <div className="AdminListExam_exam_footer">
                                       <button
                                         className="AdminListExam_exam_button"
                                         onClick={() => handleViewParticipants(exam.id)}
                                         disabled={loadingExamId === exam.id}
                                       >
-                                        {loadingExamId === exam.id ? <BeatLoader className="AdminListExam_BeatLoader" /> : "مشاهده شرکت‌کنندگان"}
+                                        {loadingExamId === exam.id ? <BeatLoader className="AdminListExam_BeatLoader" /> : "مشاهده"}
                                       </button>
-                                </footer>
-                         </article>
+                                </div>
+                         </div>
                         ))}
                    </section>
+                </div>
               ) : (
                 <p className="AdminListExam_no_exams_message">هیچ آزمون تشریحی یافت نشد</p>
                )}

@@ -20,6 +20,7 @@
 }
 .Main_Header {
   width: 100%;
+  z-index: 100;
 }
 
 .Main_Navigation {
@@ -1269,10 +1270,12 @@
   cursor: pointer;
   width: 100%;
   height: 50px;
+  font-family: "vazir";
 }
 
 .Dashboard_FiMenu {
   font-size: 24px;
+  font-family: "vazir";
 }
 
 
@@ -1286,6 +1289,7 @@
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
   justify-content: flex-end;
+  font-family: "vazir";
 }
 
 
@@ -1301,6 +1305,7 @@
   position: fixed;
   top: 0;
   right: 0;
+  font-family: "vazir";
 }
 
 
@@ -1311,6 +1316,7 @@
   font-size: 24px;
   cursor: pointer;
   color: var(--primary-dark);
+  font-family: "vazir";
 }
 
 
@@ -1370,16 +1376,12 @@
 }
 
 
-
-
 /* end page  Dashboard */
 
 
 
 
 /* start page AdminContent    */
-
-
 
 
  .Content_container {
@@ -2236,7 +2238,6 @@
 
 
 
-
 /* end page AdminViewContent  && EditorViewContent  &&  AdminEditContent   && EditorEditContent  */
 
 
@@ -2452,7 +2453,7 @@
 .EditorExam_form_input {
   width: 100%;
   padding: 7px;
-  border: 1px solid var(--primary-light);
+  border: 2px solid var(--primary-light);
   border-radius: 5px;
   font-size: 1rem;
   font-family: "vazir";
@@ -2510,335 +2511,837 @@
 
 /* start page AdminQuestion &&  EditorQuestion  */
 
-.Question_container{
-  direction: rtl;
+.Question_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:  #e3eaf5;;
+  min-height: 100vh;
   font-family: "vazir";
-  height: 100vh; 
 }
-
 
 .AdminQuestion_container {
-  direction: rtl;
-  font-family: "Vazir", sans-serif;
-  background: var(--primary-dark);
-  color: var(--white);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  background-color:  #e3eaf5;;
+  padding: 20px;
+  font-family: "vazir";
+  margin-bottom: 200px;
 }
 
-.AdminQuestion_h {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+.AdminQuestion_container_main {
   text-align: center;
+  font-family: "vazir";
+}
+
+.AdminQuestion_container_main_h {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-family: "vazir";
+}
+
+.AdminQuestion_container_main_h1{
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-family: "vazir";
+  margin-top: 50px;
+}
+
+.AdminQuestion_container_main_section {
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: "vazir";
+  padding: 20px;
+}
+.AdminQuestion_flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 150px;
+  margin-bottom: 40px;
+  font-family: "vazir";
 }
 
 .AdminQuestion_examType,
 .AdminQuestion_examId {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
+  font-size: 18px;
+  font-family: "vazir";
 }
-
 
 .AdminQuestion_div {
   width: 100%;
   max-width: 500px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 10px;
+  font-family: "vazir";
 }
 
 .AdminQuestion_div_label {
   font-size: 1rem;
   margin-bottom: 0.5rem;
   display: block;
+  font-family: "vazir";
 }
 
 .AdminQuestion_div_textarea {
-  width: 100%;
-  min-height: 80px;
-  padding: 0.8rem;
-  border: 2px solid var(--white);
-  border-radius: 8px;
-  font-size: 1rem;
-  text-align: right;
-  background: var(--white);
-  color: var(--primary-dark);
-  transition: border 0.3s ease-in-out;
-}
+    width: 100%;
+    padding: 9px;
+    min-height: 80px;
+    border: 2px solid var(--primary-light);
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: "vazir";
+    margin-bottom: 10px;
+    transition: border 0.3s ease-in-out, height 0.2s ease-in-out;
+    resize: none;
+    overflow: hidden; 
+  }
+
 
 .AdminQuestion_div_textarea:focus {
   border-color: var(--accent-yellow);
   outline: none;
+  box-shadow: 0 0 8px var(--accent-yellow);
+  transition: 0.3s ease-in-out;
 }
-
 
 .AdminQuestion_test {
   width: 100%;
   max-width: 500px;
   margin-bottom: 1.5rem;
+  font-family: "vazir";
 }
 
 .AdminQuestion_test_label {
   font-size: 1rem;
   margin-bottom: 0.5rem;
   display: block;
+  font-family: "vazir";
 }
 
 .AdminQuestion_test_input {
   width: 100%;
-  padding: 0.6rem;
-  margin-bottom: 0.5rem;
-  border: 2px solid var(--white);
-  border-radius: 8px;
-  font-size: 1rem;
-  background: var(--white);
-  color: var(--primary-dark);
-  transition: border 0.3s ease-in-out;
+  padding: 7px;
+  border: 2px solid var(--primary-light);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: "vazir";
+  margin-bottom: 10px;
 }
 
 .AdminQuestion_test_input:focus {
   border-color: var(--accent-yellow);
   outline: none;
+  box-shadow: 0 0 8px var(--accent-yellow);
+  transition: 0.3s ease-in-out;
 }
-
 
 .AdminQuestion_descriptive {
   width: 100%;
   max-width: 500px;
   margin-bottom: 1.5rem;
+  font-family: "vazir";
 }
 
 .AdminQuestion_descriptive_label {
   font-size: 1rem;
   margin-bottom: 0.5rem;
   display: block;
+  font-family: "vazir";
 }
 
 .AdminQuestion_descriptive_input {
   width: 100%;
-  padding: 0.6rem;
-  border: 2px solid var(--white);
-  border-radius: 8px;
-  font-size: 1rem;
-  background: var(--white);
-  color: var(--primary-dark);
-  transition: border 0.3s ease-in-out;
+  padding: 7px;
+  border: 2px solid var(--primary-light);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: "vazir";
+  margin-bottom: 10px;
 }
 
 .AdminQuestion_descriptive_input:focus {
   border-color: var(--accent-yellow);
   outline: none;
+  box-shadow: 0 0 8px var(--accent-yellow);
+  transition: 0.3s ease-in-out;
 }
-
 
 .AdminQuestion_button_div {
   display: flex;
   justify-content: center;
   margin-top: 1rem;
+  font-family: "vazir";
 }
 
 .AdminQuestion_button {
   background-color: var(--success-green);
   color: var(--white);
   border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1.2rem;
-  border-radius: 8px;
+  font-family: "vazir";
+  font-size: 16px;
+  border-radius: 10px;
+  padding: 7px;
   cursor: pointer;
   transition: background 0.3s ease-in-out;
 }
 
 .AdminQuestion_button:hover {
-  background-color: #218838;
-}
-
-.AdminQuestion_button:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
-}
-
-
-.AdminQuestion_h3 {
-  font-size: 1.5rem;
-  margin-top: 2rem;
-  text-align: center;
+  background-color: #00851d;
 }
 
 .AdminQuestion_ul {
   list-style: none;
-  padding: 0;
   width: 100%;
-  max-width: 600px;
+  max-width: 500px;
+  font-family: "vazir";
+  text-align: right;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .AdminQuestion_li {
   background: var(--white);
-  color: var(--primary-dark);
-  padding: 1rem;
+  color: var(--primary-light);
+  padding: 12px;
   border-radius: 8px;
   margin-bottom: 1rem;
   font-size: 1rem;
+  font-family: "vazir";
 }
 
 .AdminQuestion_strong {
   font-weight: bold;
   display: block;
+  font-family: "vazir";
 }
 
 .AdminQuestion_strong_ul {
   list-style: none;
   padding: 0;
   margin-top: 0.5rem;
+  font-family: "vazir";
 }
 
 .AdminQuestion_strong_li {
   font-size: 0.9rem;
   margin-bottom: 0.3rem;
+  font-family: "vazir";
 }
 
 .AdminQuestion_strong_ul_p {
-  font-size: 1rem;
-  font-weight: bold;
+  font-size: 16px;
   margin-top: 0.5rem;
+  font-family: "vazir";
+  color: #000;
 }
-
 
 .AdminQuestion_button_div_one {
   display: flex;
   justify-content: center;
   margin-top: 1.5rem;
+  font-family: "vazir";
 }
 
 .AdminQuestion_button_one {
-  background-color: var(--accent-yellow);
-  color: var(--primary-dark);
+  background-color: var(--success-green);
+  color: var(--white);
   border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1.2rem;
-  border-radius: 8px;
+  font-family: "vazir";
+  font-size: 16px;
+  border-radius: 10px;
+  padding: 7px;
   cursor: pointer;
   transition: background 0.3s ease-in-out;
 }
 
 .AdminQuestion_button_one:hover {
-  background-color: #e0a800;
-}
-
-.AdminQuestion_button_one:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
-}
-
-
-@media (min-width: 1440px) {
-  .AdminQuestion_container {
-    max-width: 1200px;
-    margin: auto;
-  }
-
-  .AdminQuestion_h {
-    font-size: 2.2rem;
-  }
-
-  .AdminQuestion_div_textarea,
-  .AdminQuestion_test_input,
-  .AdminQuestion_descriptive_input {
-    font-size: 1.1rem;
-    padding: 1rem;
-  }
-
-  .AdminQuestion_button,
-  .AdminQuestion_button_one {
-    font-size: 1.3rem;
-    padding: 1rem 1.8rem;
-  }
-}
-
-
-@media (max-width: 1024px) {
-  .AdminQuestion_h {
-    font-size: 1.8rem;
-  }
-
-  .AdminQuestion_div,
-  .AdminQuestion_test,
-  .AdminQuestion_descriptive {
-    max-width: 450px;
-  }
-
-  .AdminQuestion_div_textarea,
-  .AdminQuestion_test_input,
-  .AdminQuestion_descriptive_input {
-    font-size: 1rem;
-    padding: 0.8rem;
-  }
-
-  .AdminQuestion_button,
-  .AdminQuestion_button_one {
-    font-size: 1.1rem;
-    padding: 0.8rem 1.5rem;
-  }
-}
-
-
-@media (max-width: 768px) {
-  .AdminQuestion_container {
-    padding: 1.5rem;
-  }
-
-  .AdminQuestion_h {
-    font-size: 1.5rem;
-  }
-
-  .AdminQuestion_div,
-  .AdminQuestion_test,
-  .AdminQuestion_descriptive {
-    max-width: 100%;
-  }
-
-  .AdminQuestion_div_textarea,
-  .AdminQuestion_test_input,
-  .AdminQuestion_descriptive_input {
-    font-size: 0.95rem;
-    padding: 0.7rem;
-  }
-
-  .AdminQuestion_button,
-  .AdminQuestion_button_one {
-    font-size: 1rem;
-    padding: 0.7rem 1.2rem;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .AdminQuestion_container {
-    padding: 1rem;
-  }
-
-  .AdminQuestion_h {
-    font-size: 1.3rem;
-  }
-
-  .AdminQuestion_div_textarea,
-  .AdminQuestion_test_input,
-  .AdminQuestion_descriptive_input {
-    font-size: 0.9rem;
-    padding: 0.6rem;
-  }
-
-  .AdminQuestion_button,
-  .AdminQuestion_button_one {
-    font-size: 0.9rem;
-    padding: 0.6rem 1rem;
-  }
+  background-color: #00851d;
 }
 
 
 /* end page AdminQuestion &&  EditorQuestion  */
 
+
+ /* start page Image  */
+
+ .Image_container_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:  #e3eaf5;;
+  min-height: 100vh;
+  font-family: "vazir";
+}
+
+.Image_container {
+  width: 100%;
+  max-width: 500px;
+  background-color:  #e3eaf5;;
+  padding: 20px;
+  font-family: "vazir";
+  margin-bottom: 200px;
+}
+.Image_container_main{
+  text-align: center;
+  font-family: "vazir";
+}
+
+.Image_h {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-family: "vazir";
+}
+
+.Image_form {
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: "vazir";
+  padding: 20px;
+}
+
+.Image_form_div {
+  position: relative;
+  display: inline-block;
+  font-family: "vazir";
+}
+.Image_form_flex{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Image_form_div_input {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+  font-family: "vazir";
+}
+
+.Image_form_div_label {
+  display: inline-block;
+  padding: 8px 11px;
+  background: var(--primary-light);
+  color: var(--white);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.3s ease;
+  font-family: "vazir";
+}
+
+.Image_error_message {
+  color: var(--error-red);
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-family: "vazir";
+}
+
+.Image_preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-top: 1rem;
+  border: 3px solid var(--primary-light);
+  box-shadow: 0 0 10px var(--primary-light);
+  font-family: "vazir";
+}
+
+.Image_form_div_button {
+  margin-top: 1.5rem;
+  font-family: "vazir";
+}
+
+.Image_form_button {
+  background: var(--success-green);
+  color: var(--white);
+  padding: 5px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+  font-family: "vazir";
+}
+
+.Image_form_button:hover {
+  background-color: #00851d;
+}
+
+ /* end page Image  */
+
+
+ /* start page AdminListExam &&  EditorListExam  */
+
+ .ListExam_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:  #e3eaf5;;
+  min-height: 100vh;
+  font-family: "vazir";
+}
+
+.AdminListExam_container {
+  width: 100%;
+  max-width: 1000px;
+  background-color:  #e3eaf5;;
+  font-family: "vazir";
+  margin-bottom: 200px;
+}
+
+.AdminListExam_container_main {
+  text-align: center;
+  margin-top: 40px;
+  font-family: "vazir";
+}
+
+.AdminListExam_container_main_header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: var(--primary-light);
+  font-family: "vazir";
+}
+
+.AdminListExam_container_main_section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 10px;
+  font-family: "vazir";
+}
+
+.AdminListExam_exam_card {
+  background: var(--white);
+  padding: 20px;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+  text-align: right;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--primary-light);
+  font-family: "vazir";
+}
+
+.AdminListExam_exam_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.AdminListExam_exam_header {
+  text-align: right;
+  border-bottom: 2px solid var(--primary-light);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  font-family: "vazir";
+}
+
+.AdminListExam_exam_header_p {
+  margin: 5px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  font-family: "vazir";
+}
+
+.AdminListExam_exam_footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  font-family: "vazir";
+}
+
+.AdminListExam_exam_button {
+  background: var(--primary-light);
+  color: var(--white);
+  padding: 7px 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: "vazir";
+  font-size: 1rem;
+}
+
+.AdminListExam_exam_button:hover {
+  background: #005bb5;
+}
+
+.AdminListExam_no_exams_message {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  font-weight: bold;
+  text-align: center;
+  font-family: "vazir";
+}
+
+
+
+
+@media (max-width: 1250px) {
+  .AdminListExam_container_main_section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+@media (max-width: 900px) {
+  .AdminListExam_container_main_section {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
+
+
+/* end page AdminListExam &&  EditorListExam  */
+
+
+
+
+/* start page ListMatches  */
+
+
+.ListMatches_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 170px;
+  background-color: #e3eaf5;
+  min-height: 100vh;
+  font-family: "vazir";
+  padding: 20px;
+}
+
+
+.ListMatches_exams_list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 10px;
+  width: 100%;
+  max-width: 1000px;
+  font-family: "vazir";
+}
+
+
+.ListMatches_exam_card {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 12px;
+  transition: 0.3s ease-in-out;
+  text-align: right;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 250px;
+  border-top: 5px solid var(--primary-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  font-family: "vazir";
+}
+
+.ListMatches_exam_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+}
+
+
+
+
+.ListMatches_exam_header {
+  border-bottom: 2px solid var(--primary-light);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  font-family: "vazir";
+}
+
+.ListMatches_exam_info {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  font-family: "vazir";
+}
+
+.ListMatches_exam_type_span {
+  color: var(--primary-light);
+  font-family: "vazir";
+}
+
+
+.ListMatches_articles_section {
+  margin-top: 15px;
+  flex-grow: 1;
+  font-family: "vazir";
+}
+
+.ListMatches_exam_title_h {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--accent-yellow);
+  font-family: "vazir";
+}
+
+.ListMatches_articles_list {
+  background: var(--white); ;
+  list-style: none;
+  padding: 0;
+  max-height: 60px; 
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-family: "vazir";
+}
+
+.ListMatches_articles_list::-webkit-scrollbar {
+  width: 3px; 
+  font-family: "vazir";
+}
+
+.ListMatches_articles_list::-webkit-scrollbar-track {
+  background: var(--white);
+  font-family: "vazir";
+  
+}
+.ListMatches_articles_list::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 20px; 
+  font-family: "vazir";
+}
+
+.ListMatches_articles_list::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+  font-family: "vazir";
+} 
+
+
+.ListMatches_article_card {
+  background: #f1f1f1;
+  padding: 7px;
+  border-radius: 10px;
+  transition: 0.3s;
+  font-family: "vazir";
+}
+
+.ListMatches_article_card:hover {
+  background: #f1f1f1;
+}
+
+.ListMatches_article_id{
+  font-size: 14px;
+   font-family: "vazir";
+}
+
+
+.ListMatches_exam_footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  font-family: "vazir";
+}
+
+.ListMatches_start_exam_button {
+  background: var(--primary-light);
+  color: var(--white);
+  padding: 9px 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: "vazir";
+}
+
+.ListMatches_start_exam_button:hover {
+  background: #005bb5;
+}
+
+.ListMatches_no_exams_message {
+  font-size: 1rem;
+  margin-top: 1rem;
+  font-weight: bold;
+  text-align: center;
+  font-family: "vazir";
+}
+
+
+
+@media (max-width: 1024px) {
+  .ListMatches_exams_list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+@media (max-width: 768px) {
+  .ListMatches_exams_list {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
+
+/* end page ListMatches  */
+
+
+
+/* start page UserDashboard   */
+
+
+
+.UserDashboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:  #e3eaf5;;
+  min-height: 100vh;
+  font-family: "vazir";
+}
+
+.UserDashboard_container {
+  width: 100%;
+  max-width: 500px;
+  background-color:  #e3eaf5;;
+  padding: 20px;
+  font-family: "vazir";
+  margin-bottom: 200px;
+}
+
+.UserDashboard_container_main {
+  text-align: center;
+  font-family: "vazir";
+}
+
+.UserDashboard_container_main_h {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 50px;
+  font-family: "vazir";
+}
+
+.UserDashboard_container_main_section{
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: "vazir";
+  padding: 20px;
+}
+
+.UserDashboard_input_group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+
+.UserDashboard_label {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.UserDashboard_input {
+  width: 100%;
+  padding: 6px;
+  border: 2px solid var(--primary-light);
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: "vazir";
+}
+
+.UserDashboard_input:focus,
+.UserDashboard_label_Select:focus ,
+.rmdp-input:focus
+{
+  border-color: var(--accent-yellow)!important;
+  outline: none !important;
+  box-shadow: 0 0 8px var(--accent-yellow) !important;
+  transition: 0.3s ease-in-out !important;
+}
+
+
+
+.rmdp-input{
+  width: 100% !important;
+  padding: 10px !important;
+  height: 40px !important;
+  border: 2px solid var(--primary-light) !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  font-family: "vazir" !important;
+}
+
+
+
+
+
+.UserDashboard_button_group {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  margin-top: 40px;
+}
+.UserDashboard_button_submit{
+  color: var(--white);
+  border: none;
+  padding: 6px 14px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  font-family: "vazir";
+  background-color: var(--success-green);
+}
+
+.UserDashboard_button_edit{
+  color: var(--white);
+  border: none;
+  padding: 6px 14px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  font-family: "vazir";
+  background-color: var(--primary-light);
+}
+
+.UserDashboard_error {
+  color: var(--error-red);
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.UserDashboard_button_submit:disabled,
+.UserDashboard_button_edit:disabled {
+  background-color: #ccc;  
+  color: #666; 
+  cursor: not-allowed;
+  opacity:1; 
+}
+
+
+
+
+
+ /* end page UserDashboard   */
+
+
+ /* start page EditorContent  &&  UserContent   */
+
+
+
+/* end page EditorContent  &&  UserContent   */
 
 
 /* start page AdminConfirmContent  && EditorConfirmContent  */
@@ -3057,202 +3560,6 @@
 
 /* end page AdminConfirmContent  && EditorConfirmContent  */
 
-
-
-
-
-
-
-
-
-
-
-/* start page AdminListExam &&  EditorListExam  */
-
-.ListExam_container{
-  direction: rtl;
-  font-family: "vazir";
-  height: 100vh; 
-}
-
-
-.AdminListExam_container {
-  direction: rtl;
-  font-family: "Vazir", sans-serif;
-  background: var(--primary-dark);
-  color: var(--white);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.AdminListExam_container_h {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-
-.AdminListExam_container_loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 200px;
-}
-
-.AdminListExam_container_error {
-  color: var(--error-red);
-  font-size: 1.2rem;
-  text-align: center;
-}
-
-
-.AdminListExam_exams {
-  width: 100%;
-  max-width: 600px;
-  background: var(--white);
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.AdminListExam_exams_ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.AdminListExam_exams_li {
-  background: var(--primary-light);
-  color: var(--white);
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-.AdminListExam_exams_p {
-  font-size: 1.1rem;
-  margin: 0.5rem 0;
-}
-
-.AdminListExam_exams_div {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-}
-
-.AdminListExam_exams_button {
-  background-color: var(--success-green);
-  color: var(--white);
-  border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
-}
-
-.AdminListExam_exams_button:hover {
-  background-color: #218838;
-}
-
-.AdminListExam_exams_button:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
-}
-
-.AdminListExam_exams_div_p {
-  text-align: center;
-  font-size: 1.2rem;
-  color: var(--white);
-}
-
-
-
-@media (min-width: 1440px) {
-  .AdminListExam_container {
-    max-width: 1200px;
-    margin: auto;
-  }
-
-  .AdminListExam_container_h {
-    font-size: 2.2rem;
-  }
-
-  .AdminListExam_exams {
-    max-width: 800px;
-  }
-}
-
-
-@media (max-width: 1024px) {
-  .AdminListExam_container_h {
-    font-size: 1.8rem;
-  }
-
-  .AdminListExam_exams {
-    max-width: 500px;
-  }
-
-  .AdminListExam_exams_p {
-    font-size: 1rem;
-  }
-
-  .AdminListExam_exams_button {
-    font-size: 1rem;
-    padding: 0.7rem 1.3rem;
-  }
-}
-
-
-@media (max-width: 768px) {
-  .AdminListExam_container {
-    padding: 1.5rem;
-  }
-
-  .AdminListExam_container_h {
-    font-size: 1.5rem;
-  }
-
-  .AdminListExam_exams {
-    width: 100%;
-  }
-
-  .AdminListExam_exams_p {
-    font-size: 0.95rem;
-  }
-
-  .AdminListExam_exams_button {
-    font-size: 0.95rem;
-    padding: 0.6rem 1rem;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .AdminListExam_container {
-    padding: 1rem;
-  }
-
-  .AdminListExam_container_h {
-    font-size: 1.3rem;
-  }
-
-  .AdminListExam_exams_p {
-    font-size: 0.9rem;
-  }
-
-  .AdminListExam_exams_button {
-    font-size: 0.9rem;
-    padding: 0.6rem 0.9rem;
-  }
-}
-
-
-/* end page AdminListExam &&  EditorListExam  */
 
 
 /* start page AdminCorrecting &&  EditorCorrecting  */
@@ -3531,583 +3838,14 @@
 
 
 
-/* start page EditorContent  &&  UserContent   */
 
 
-.UserContent_container {
-  direction: rtl;
-  font-family: "Vazir", sans-serif;
-  background: var(--primary-dark);
-  color: var(--white);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
 
-.UserContent_container_h {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
 
 
-.UserContent_container_div {
-  width: 100%;
-  max-width: 800px;
-  background: var(--white);
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  color: var(--primary-dark);
-}
 
 
-.UserContent_container_multiselect {
-  margin-bottom: 1rem;
-}
 
-.UserContent_container_multiselect_p {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-}
-
-.UserContent_container_multiselect_Select {
-  width: 100%;
-  border-radius: 8px;
-}
-
-
-.UserContent_input_container {
-  margin-bottom: 1rem;
-}
-
-.UserContent_input_label {
-  display: block;
-}
-
-.UserContent_input_p {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-}
-
-.UserContent_text_input {
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid var(--primary-light);
-}
-
-.UserContent_error {
-  color: var(--error-red);
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-}
-
-
-.UserContent_upload_container {
-  margin-bottom: 1rem;
-}
-
-.UserContent_upload_label {
-  display: block;
-}
-
-.UserContent_upload_p {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-}
-
-.UserContent_upload_input {
-  width: 100%;
-  padding: 0.5rem;
-  border-radius: 6px;
-  border: 1px solid var(--primary-light);
-}
-
-.UserContent_upload_error {
-  color: var(--error-red);
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-}
-
-.UserContent_uploaded_image {
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.UserContent_uploaded_image_p {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-}
-
-.UserContent_uploaded_image_img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-
-.UserContent_rich_text {
-  margin-bottom: 1rem;
-}
-
-.UserContent_rich_text_p {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-}
-
-.UserContent_ReactQuill {
-  height: 200px;
-}
-
-
-.UserContent_submit_container {
-  display: flex;
-  justify-content: center;
-}
-
-.UserContent_submit_button {
-  background-color: var(--success-green);
-  color: var(--white);
-  border: none;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
-}
-
-.UserContent_submit_button:hover {
-  background-color: #218838;
-}
-
-.UserContent_submit_button:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
-}
-
-
-@media (min-width: 1440px) {
-  .UserContent_container {
-    max-width: 1200px;
-    margin: auto;
-  }
-}
-
-
-@media (max-width: 1024px) {
-  .UserContent_container_h {
-    font-size: 1.8rem;
-  }
-
-  .UserContent_container_div {
-    max-width: 600px;
-  }
-}
-
-
-@media (max-width: 768px) {
-  .UserContent_container {
-    padding: 1.5rem;
-  }
-
-  .UserContent_container_h {
-    font-size: 1.5rem;
-  }
-
-  .UserContent_text_input,
-  .UserContent_upload_input {
-    font-size: 0.95rem;
-  }
-
-  .UserContent_submit_button {
-    font-size: 0.95rem;
-    padding: 0.7rem 1.3rem;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .UserContent_container {
-    padding: 1rem;
-  }
-
-  .UserContent_container_h {
-    font-size: 1.3rem;
-  }
-
-  .UserContent_text_input,
-  .UserContent_upload_input {
-    font-size: 0.9rem;
-  }
-
-  .UserContent_submit_button {
-    font-size: 0.9rem;
-    padding: 0.6rem 0.9rem;
-  }
-}
-
-
-/* end page EditorContent  &&  UserContent   */
-
-
-/* start page UserDashboard   */
-
-
-.UserDashboard{
-  direction: rtl;
-  height: 100vh;
-  font-family: "vazir";
- }
-
- 
-.UserDashboard_container {
-  direction: rtl;
-  font-family: "Vazir", sans-serif;
-  background: var(--primary-dark);
-  color: var(--white);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.UserDashboard_heading {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-
-.UserDashboard_input_group {
-  width: 100%;
-  max-width: 500px;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.UserDashboard_label {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-  color: var(--white);
-}
-
-.UserDashboard_label_Select {
-  width: 100%;
-}
-
-.UserDashboard_input {
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid var(--primary-light);
-}
-
-.UserDashboard_error {
-  color: var(--error-red);
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-}
-
-
-.UserDashboard_date {
-  width: 100%;
-  padding: 0.5rem;
-  border-radius: 6px;
-  border: 1px solid var(--primary-light);
-}
-
-
-.UserDashboard_button_group {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.UserDashboard_button {
-  font-size: 1rem;
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
-}
-
-.UserDashboard_button.submit {
-  background-color: var(--success-green);
-  color: var(--white);
-}
-
-.UserDashboard_button.submit:hover {
-  background-color: #218838;
-}
-
-.UserDashboard_button.edit {
-  background-color: var(--accent-yellow);
-  color: var(--primary-dark);
-}
-
-.UserDashboard_button.edit:hover {
-  background-color: #e6ac00;
-}
-
-.UserDashboard_button:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
-}
-
-
-@media (min-width: 1440px) {
-  .UserDashboard_container {
-    max-width: 1200px;
-    margin: auto;
-  }
-}
-
-
-@media (max-width: 1024px) {
-  .UserDashboard_heading {
-    font-size: 1.8rem;
-  }
-
-  .UserDashboard_input_group {
-    max-width: 450px;
-  }
-}
-
-
-@media (max-width: 768px) {
-  .UserDashboard_container {
-    padding: 1.5rem;
-  }
-
-  .UserDashboard_heading {
-    font-size: 1.5rem;
-  }
-
-  .UserDashboard_input {
-    font-size: 0.95rem;
-  }
-
-  .UserDashboard_button {
-    font-size: 0.95rem;
-    padding: 0.7rem 1.3rem;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .UserDashboard_container {
-    padding: 1rem;
-  }
-
-  .UserDashboard_heading {
-    font-size: 1.3rem;
-  }
-
-  .UserDashboard_input {
-    font-size: 0.9rem;
-  }
-
-  .UserDashboard_button {
-    font-size: 0.9rem;
-    padding: 0.6rem 0.9rem;
-  }
-}
-
-
-
- /* end page UserDashboard   */
-
-
-
- /* start page Image  */
-
- .Image_container_container{
-  direction: rtl;
-  height: 100vh;
-  font-family: "vazir";
- }
-
- 
-.Image_container {
-  direction: rtl;
-  font-family: "Vazir", sans-serif;
-  background: var(--primary-dark);
-  color: var(--white);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.Image_h {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-
-.Image_form {
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: var(--white);
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.Image_form_div {
-  width: 100%;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.Image_form_div_input {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid var(--primary-light);
-  border-radius: 6px;
-  font-size: 1rem;
-  text-align: center;
-  background-color: var(--white);
-}
-
-.Image_error_message {
-  color: var(--error-red);
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-}
-
-
-.Image_form_div_button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-}
-
-.Image_form_button {
-  font-size: 1rem;
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease-in-out;
-  background-color: var(--success-green);
-  color: var(--white);
-  width: 100%;
-}
-
-.Image_form_button:hover {
-  background-color: #218838;
-}
-
-.Image_form_button:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
-}
-
-
-.Image_preview {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid var(--primary-light);
-  margin-top: 1rem;
-}
-
-
-@media (min-width: 1440px) {
-  .Image_form {
-    max-width: 500px;
-  }
-}
-
-
-@media (max-width: 1024px) {
-  .Image_h {
-    font-size: 1.8rem;
-  }
-
-  .Image_form {
-    max-width: 380px;
-  }
-}
-
-
-@media (max-width: 768px) {
-  .Image_container {
-    padding: 1.5rem;
-  }
-
-  .Image_h {
-    font-size: 1.5rem;
-  }
-
-  .Image_form {
-    padding: 1.2rem;
-    max-width: 350px;
-  }
-
-  .Image_form_button {
-    font-size: 0.95rem;
-    padding: 0.7rem 1.3rem;
-  }
-
-  .Image_preview {
-    width: 130px;
-    height: 130px;
-  }
-}
-
-
-@media (max-width: 480px) {
-  .Image_container {
-    padding: 1rem;
-  }
-
-  .Image_h {
-    font-size: 1.3rem;
-  }
-
-  .Image_form {
-    padding: 1rem;
-    max-width: 300px;
-  }
-
-  .Image_form_button {
-    font-size: 0.9rem;
-    padding: 0.6rem 0.9rem;
-  }
-
-  .Image_preview {
-    width: 100px;
-    height: 100px;
-  }
-}
-
-
- /* end page Image  */
 
 
 
@@ -4762,163 +4500,7 @@
 
 
 
-/* start page ListMatches  */
 
-
-.ListMatches_container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 20px auto;
-  padding: 20px;
-  background: var(--white);
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.ListMatches_loader_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-}
-
-.ListMatches_exams_list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.ListMatches_exam_card {
-  background: var(--primary-dark);
-  color: var(--white);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease-in-out;
-}
-
-.ListMatches_exam_card:hover {
-  transform: scale(1.05);
-}
-
-.ListMatches_exam_header {
-  text-align: center;
-  border-bottom: 2px solid var(--accent-yellow);
-  padding-bottom: 10px;
-}
-
-.ListMatches_exam_title {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.ListMatches_exam_type {
-  font-size: 16px;
-  margin: 10px 0;
-}
-
-.ListMatches_exam_type_span {
-  color: var(--accent-yellow);
-  font-weight: bold;
-}
-
-.ListMatches_articles_section {
-  margin-top: 15px;
-}
-
-.ListMatches_articles_list {
-  list-style: none;
-  padding: 0;
-}
-
-.ListMatches_article_item {
-  background: var(--primary-light);
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 6px;
-  transition: all 0.3s;
-}
-
-.ListMatches_article_item:hover {
-  background: var(--accent-yellow);
-  color: var(--primary-dark);
-}
-
-.ListMatches_article_title {
-  font-size: 16px;
-}
-
-.ListMatches_start_exam_button {
-  width: 100%;
-  background: var(--accent-yellow);
-  color: var(--primary-dark);
-  border: none;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.ListMatches_start_exam_button:hover {
-  background: var(--white);
-  color: var(--primary-dark);
-}
-
-.ListMatches_no_exams_message {
-  text-align: center;
-  color: var(--error-red);
-  font-size: 18px;
-  font-weight: bold;
-}
-
-
-@media (max-width: 1024px) {
-  .ListMatches_container {
-    width: 95%;
-  }
-}
-
-@media (max-width: 768px) {
-  .ListMatches_exam_card {
-    padding: 15px;
-  }
-
-  .ListMatches_exam_title {
-    font-size: 18px;
-  }
-
-  .ListMatches_exam_type {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .ListMatches_exams_list {
-    grid-template-columns: 1fr;
-  }
-
-  .ListMatches_exam_card {
-    padding: 12px;
-  }
-}
-
-@media (max-width: 360px) {
-  .ListMatches_start_exam_button {
-    font-size: 14px;
-    padding: 8px;
-  }
-}
-
-
-/* end page ListMatches  */
 
 
 

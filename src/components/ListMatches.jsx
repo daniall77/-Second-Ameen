@@ -4,11 +4,38 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { ScaleLoader, BeatLoader } from "react-spinners";
 
+
+import { Link } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import jwt_decode from "jwt-decode";
+import { CiUser } from "react-icons/ci";
+import { IoExitOutline } from "react-icons/io5";
+import { AiOutlineHome } from "react-icons/ai";
+import { FiMenu, FiX } from "react-icons/fi";
+
+
+
+
+
 function ListMatches() {
+
+
+
   const [exams, setExams] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingExamId, setLoadingExamId] = useState(null);
   const navigate = useNavigate();
+
+  // start section 1
+
+  const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
+  const [userData, setUserData] = useState({ firstName: null, lastName: null, phoneNumber: null, role: null });
+  const [showDetails, setShowDetails] = useState(false);
+          // responsive
+           const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // end section 1
+
 
   useEffect(() => {
     const fetchExams = async () => {
@@ -46,11 +73,154 @@ function ListMatches() {
     } finally {
       setLoadingExamId(null);
     }
+
   };
 
+
+
+  //  start section 1
+
+
+          useEffect(() => {
+          const handleScroll = () => {
+            const nav = document.querySelector(".Main_Navigation");
+            if (window.pageYOffset > 36) {
+              nav.classList.add("sticky");
+            } else {
+              nav.classList.remove("sticky");
+            }
+          };
+          window.addEventListener("scroll", handleScroll);
+          return () => {
+            window.removeEventListener("scroll", handleScroll);
+          };
+        }, []);
+
+
+        useEffect(() => {
+          if (cookies.access_token) {
+            try {
+              const decodedToken = jwt_decode(cookies.access_token);
+              if (decodedToken && decodedToken.sub1 && decodedToken.sub2 && decodedToken.sub3 && decodedToken.sub4) {
+                setUserData({
+                  firstName: decodedToken.sub2,
+                  lastName: decodedToken.sub3,
+                  phoneNumber: decodedToken.sub1,
+                  role: decodedToken.sub4,
+                });
+                setCookie("firstName", decodedToken.sub2, { path: "/", maxAge: 31536000 });
+                setCookie("lastName", decodedToken.sub3, { path: "/", maxAge: 31536000 });
+                setCookie("phoneNumber", decodedToken.sub1, { path: "/", maxAge: 31536000 });
+                setCookie("role", decodedToken.sub4, { path: "/", maxAge: 31536000 });
+              } else {
+                console.error("Invalid token structure:", decodedToken);
+              }
+            } catch (error) {
+              console.error("Error decoding token:", error);
+            }
+          }
+        }, [cookies.access_token]);
+       
+
+        
+        const handleLogout  = async () => {
+          try {
+              console.log("Phone number value:", cookies.access_token);
+            if (cookies.access_token) {
+              await axios.post(`http://localhost:8000/logout?access_token=${encodeURIComponent(cookies.access_token)}`);
+              toast.success("شما از حساب کاربری خود خارج شدید");
+              removeCookie("access_token", { path: "/" });
+              setUserData({ firstName: null, lastName: null, phoneNumber: null, role: null });
+            }
+          } catch (error) {
+            console.error("Error during logout:", error);
+            toast.error("مشکلی در خروج از حساب کاربری رخ داده است");
+          }
+        };
+
+        // end section 1
+ 
+
   return (
-          <div className="ListMatches_container">
-            <Toaster className="ListMatches_Toaster" position="top-center" reverseOrder={false} />
+          <div className="ListMatches_container" dir="rtl">
+              <Toaster className="Notification_Toaster" position="top-center" reverseOrder={false} />
+
+                {/* start section 1 */}
+
+                   <header className="Main_Header">
+                         <nav className="Main_Navigation">
+                 
+                           <div className="Navigation_Right">
+                             <ul className="Nav_List">
+                               <li className="Nav_Item">
+                                      <Link to="/" className="Nav_Item">خانه</Link>
+                               </li>
+                               <li className="Nav_Item">درباره ما</li>
+                               <li className="Nav_Item">
+                                 <Link to="/ListMatches" className="Nav_Item">مسابقات</Link>
+                               </li>
+                             </ul>
+                           </div>
+                   
+                           <div className="Menu_Icon" onClick={() => setIsMenuOpen(true)}>
+                             <FiMenu className="FiMenu" />
+                           </div>
+                           <div className="Navigation_Left">
+                             {!cookies.access_token ? (
+                               <Link to="/Login">
+                                 <button className="Button_Login"><strong className="Button_Login_strong" >ورود | عضویت</strong></button>
+                               </Link>
+                             ) : (
+                               <>
+                                 <div className="User_Icon" onClick={() => setShowDetails(!showDetails)}>
+                                   <CiUser className="CiUser" />
+                                 </div>
+                                 {showDetails && (
+                                   <div className="User_Details_Dropdown">
+                                     <div className="User_Welcome_Message">
+                                       خوش آمدی <strong className="User_Welcome_strong" >{userData.firstName} {userData.lastName}</strong>
+                                     </div>
+                                     <div className="User_Panel_Link">
+                                       <AiOutlineHome className="User_Panel_Icon" />
+                                       <Link to="/Dashboard">
+                                         <div className="User_Welcome_Message" ><strong className="User_Welcome_strong" >پنل کاربری</strong></div>
+                                       </Link>
+                                     </div>
+                                     <div className="User_Logout">
+                                       <IoExitOutline className="Logout_Icon" />
+                                       <button className="Logout_Button" onClick={handleLogout}>
+                                            <strong className="Logout_Button_strong">خروج</strong>
+                                       </button>
+                                     </div>
+                                   </div>
+                                 )}
+                               </>
+                             )}
+                           </div>
+                         </nav>
+       
+                       {isMenuOpen && (
+                         <div className="Sidebar_Overlay"  onClick={() => setIsMenuOpen(false)}>
+                           <div className="Sidebar_Menu"   onClick={(e) => e.stopPropagation()}>
+                             <FiX className="Close_Icon" onClick={() => setIsMenuOpen(false)} />
+                              <ul className="Sidebar_List">
+                                <li className="Sidebar_Item">
+                                     <Link to="/" className="Sidebar_Item">خانه</Link>
+                                </li>
+                                <li className="Sidebar_Item">درباره ما</li>
+                                <li className="Sidebar_Item">
+                                    <Link to="/ListMatches" className="Sidebar_Item">مسابقات</Link>
+                                </li>
+                              </ul>
+                           </div>
+                         </div>
+                       )}
+                  </header>
+
+
+                  {/*  end section 1 */}
+
+
 
             {loading ? (
               <div className="ListMatches_loader_container">
@@ -61,12 +231,16 @@ function ListMatches() {
                 {exams.map((exam) => (
                   <div key={exam.ID} className="ListMatches_exam_card">
                     <header className="ListMatches_exam_header">
-                      <h3 className="ListMatches_exam_title">{exam.Title}</h3>
+                      <p className="ListMatches_exam_title">
+                         مسابقه : <span className="ListMatches_exam_type_span">{exam.Title}</span>
+                      </p>
                     </header>
 
                     <section className="ListMatches_exam_info">
                       <p className="ListMatches_exam_type">
-                        نوع آزمون: <span className="ListMatches_exam_type_span">{exam.Type}</span>
+                               نوع مسابقه : <span className="ListMatches_exam_type_span">
+                                 {exam.Type === "test" ? "تستی" : "تشریحی"}
+                                     </span>
                       </p>
                     </section>
 
@@ -79,11 +253,13 @@ function ListMatches() {
                             <li key={article.ID} className="ListMatches_article_item">
                               <article className="ListMatches_article_card">
                                 <header className="ListMatches_article_header">
-                                  <h5 className="ListMatches_article_title">{article.Title}</h5>
+                                  <p className="ListMatches_article_id">
+                                      کد مقاله: <span className="ListMatches_article_id_span">{article.ID}</span>
+                                  </p>
                                 </header>
                                 <footer className="ListMatches_article_footer">
                                   <p className="ListMatches_article_id">
-                                    آیدی مقاله: <span className="ListMatches_article_id_span">{article.ID}</span>
+                                      عنوان مقاله: <span className="ListMatches_article_id_span">{article.Title}</span>
                                   </p>
                                 </footer>
                               </article>
@@ -122,8 +298,6 @@ export default ListMatches;
 
 
 
-
-
 // import React, { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
@@ -153,7 +327,7 @@ export default ListMatches;
 //   }, []);
 
 //   const handleStartExam = async (examId, examType) => {
-//     setLoadingExamId(examId); 
+//        setLoadingExamId(examId);
 
 //     try {
 //       const response = await axios.post(`http://localhost:8000/exams/${examId}`);
@@ -170,46 +344,77 @@ export default ListMatches;
 //       toast.error("خطا در شروع آزمون");
 //       console.error("Error starting exam:", error);
 //     } finally {
-//       setLoadingExamId(null); 
+//       setLoadingExamId(null);
 //     }
 //   };
 
 //   return (
-//     <div className="ListMatches_container">
-//       <Toaster position="top-center" reverseOrder={false} />
+//           <div className="ListMatches_container">
+//             <Toaster className="ListMatches_Toaster" position="top-center" reverseOrder={false} />
 
-//       {loading ? (
-//         <div className="loader-container">
-//           <ScaleLoader  />
-//         </div>
-//       ) : exams.length > 0 ? (
-//         exams.map((exam) => (
-//           <div key={exam.ID} className="exam-card">
-//             <h3>{exam.Title}</h3>
-//             <p>نوع آزمون: {exam.Type}</p>
-//             <h4>مقالات مرتبط:</h4>
-//             <ul>
-//               {exam.Articles.length > 0 ? (
-//                 exam.Articles.map((article) => (
-//                   <li key={article.ID}>{article.Title} (آیدی: {article.ID})</li>
-//                 ))
-//               ) : (
-//                 <p>بدون مقاله</p>
-//               )}
-//             </ul>
-//             <button
-//               className="start-exam-button"
-//               onClick={() => handleStartExam(exam.ID, exam.Type)}
-//               disabled={loadingExamId === exam.ID}
-//             >
-//               {loadingExamId === exam.ID ? <BeatLoader  /> : "شروع آزمون"}
-//             </button>
+//             {loading ? (
+//               <div className="ListMatches_loader_container">
+//                 <ScaleLoader className="ListMatches_ScaleLoader" />
+//               </div>
+//             ) : exams.length > 0 ? (
+//               <div className="ListMatches_exams_list">
+//                 {exams.map((exam) => (
+//                   <div key={exam.ID} className="ListMatches_exam_card">
+//                     <header className="ListMatches_exam_header">
+//                       <h3 className="ListMatches_exam_title">{exam.Title}</h3>
+//                     </header>
+
+//                     <section className="ListMatches_exam_info">
+//                       <p className="ListMatches_exam_type">
+//                         نوع آزمون: <span className="ListMatches_exam_type_span">{exam.Type}</span>
+//                       </p>
+//                     </section>
+
+//                     <section className="ListMatches_articles_section">
+//                       <h4 className="ListMatches_exam_title_h">مقالات مرتبط</h4>
+
+//                       <ul className="ListMatches_articles_list">
+//                         {exam.Articles.length > 0 ? (
+//                           exam.Articles.map((article) => (
+//                             <li key={article.ID} className="ListMatches_article_item">
+//                               <article className="ListMatches_article_card">
+//                                 <header className="ListMatches_article_header">
+//                                   <h5 className="ListMatches_article_title">{article.Title}</h5>
+//                                 </header>
+//                                 <footer className="ListMatches_article_footer">
+//                                   <p className="ListMatches_article_id">
+//                                     آیدی مقاله: <span className="ListMatches_article_id_span">{article.ID}</span>
+//                                   </p>
+//                                 </footer>
+//                               </article>
+//                             </li>
+//                           ))
+//                         ) : (
+//                           <p className="ListMatches_no_articles">بدون مقاله</p>
+//                         )}
+//                       </ul>
+//                     </section>
+
+//                     <footer className="ListMatches_exam_footer">
+//                       <button
+//                         className="ListMatches_start_exam_button"
+//                         onClick={() => handleStartExam(exam.ID, exam.Type)}
+//                         disabled={loadingExamId === exam.ID}
+//                       >
+//                         {loadingExamId === exam.ID ? (
+//                           <BeatLoader className="ListMatches_BeatLoader" />
+//                         ) : (
+//                           "شروع آزمون"
+//                         )}
+//                       </button>
+//                     </footer>
+//                   </div>
+//                 ))}
+//               </div>
+//             ) : (
+//               <p className="ListMatches_no_exams_message">هیچ آزمونی یافت نشد</p>
+//             )}
 //           </div>
-//         ))
-//       ) : (
-//         <p>هیچ آزمونی یافت نشد</p>
-//       )}
-//     </div>
 //   );
 // }
 

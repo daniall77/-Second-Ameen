@@ -26,6 +26,12 @@ function AdminQuestion() {
     label: `گزینه ${index + 1}`,
   }));
 
+  const handleTextareaChange = (e) => {
+    setCurrentQuestion(e.target.value);
+    e.target.style.height = "auto";
+    e.target.style.height = `${e.target.scrollHeight}px`;
+  };
+
   const handleAddQuestion = () => {
     if (loadingAdd) return;
     
@@ -132,112 +138,112 @@ function AdminQuestion() {
   };
 
   return (
-    <div className="AdminQuestion_container">
-      <Toaster position="top-center" reverseOrder={false} />
-      <h2 className="AdminQuestion_h">ایجاد سوالات</h2>
-      <p className="AdminQuestion_examType">نوع آزمون: {examType === "test" ? "تستی" : "تشریحی"}</p>
-      <p className="AdminQuestion_examId">شناسه آزمون: {examId}</p>
+    <div className="AdminQuestion_container" dir="rtl">
+       <div className="AdminQuestion_container_main">
+            <Toaster position="top-center" reverseOrder={false} />
+            <h2 className="AdminQuestion_container_main_h">ایجاد سوالات</h2>
+            <section className="AdminQuestion_container_main_section">
+              <div className="AdminQuestion_flex">
+                <p className="AdminQuestion_examId">کد آزمون: {examId}</p>
+                <p className="AdminQuestion_examType">نوع آزمون: {examType === "test" ? "تستی" : "تشریحی"}</p>
+              </div>
+                <div className="AdminQuestion_div">
+                  <label className="AdminQuestion_div_label">متن سوال:</label>
+                  <textarea
+                    className="AdminQuestion_div_textarea"
+                    value={currentQuestion}
+                    onChange={handleTextareaChange}
+                    placeholder="متن سوال را وارد کنید"
+                  ></textarea>
+                </div>
 
-      <div className="AdminQuestion_div">
-        <label className="AdminQuestion_div_label">متن سوال:</label>
-        <textarea
-          className="AdminQuestion_div_textarea"
-          value={currentQuestion}
-          onChange={(e) => setCurrentQuestion(e.target.value)}
-          placeholder="متن سوال را وارد کنید"
-        ></textarea>
-      </div>
+                {examType === "test" && (
+                  <div className="AdminQuestion_test">
+                    <label className="AdminQuestion_test_label">گزینه‌ها:</label>
+                    {options.map((option, index) => (
+                      <input
+                        key={index}
+                        type="text"
+                        className="AdminQuestion_test_input"
+                        value={option}
+                        onChange={(e) => {
+                          const newOptions = [...options];
+                          newOptions[index] = e.target.value;
+                          setOptions(newOptions);
+                        }}
+                        placeholder={`گزینه ${index + 1}`}
+                      />
+                    ))}
+                    <label className="AdminQuestion_test_label">گزینه صحیح:</label>
+                    <Select
+                      options={correctOptionOptions}
+                      value={correctOption}
+                      onChange={(selectedOption) => setCorrectOption(selectedOption)}
+                      placeholder="انتخاب گزینه صحیح"
+                    />
+                  </div>
+                )}
 
-      {examType === "test" && (
-        <div className="AdminQuestion_test">
-          <label className="AdminQuestion_test_label">گزینه‌ها:</label>
-          {options.map((option, index) => (
-            <input
-              key={index}
-              type="text"
-              className="AdminQuestion_test_input"
-              value={option}
-              onChange={(e) => {
-                const newOptions = [...options];
-                newOptions[index] = e.target.value;
-                setOptions(newOptions);
-              }}
-              placeholder={`گزینه ${index + 1}`}
-            />
-          ))}
-          <label className="AdminQuestion_test_label">گزینه صحیح:</label>
-          <Select
-            options={correctOptionOptions}
-            value={correctOption}
-            onChange={(selectedOption) => setCorrectOption(selectedOption)}
-            placeholder="انتخاب گزینه صحیح"
-          />
-        </div>
-      )}
+                {examType === "descriptive" && (
+                  <div className="AdminQuestion_descriptive">
+                    <label className="AdminQuestion_descriptive_label">نمره سوال:</label>
+                    <input
+                      type="number"
+                      value={descriptiveScore}
+                      onChange={(e) => setDescriptiveScore(e.target.value)}
+                      placeholder="نمره سوال را وارد کنید"
+                      className="AdminQuestion_descriptive_input"
+                    />
+                  </div>
+                )}
 
-      {examType === "descriptive" && (
-        <div className="AdminQuestion_descriptive">
-          <label className="AdminQuestion_descriptive_label">نمره سوال:</label>
-          <input
-            type="number"
-            value={descriptiveScore}
-            onChange={(e) => setDescriptiveScore(e.target.value)}
-            placeholder="نمره سوال را وارد کنید"
-            className="AdminQuestion_descriptive_input"
-          />
-        </div>
-      )}
+                <div className="AdminQuestion_button_div">
+                  <button className="AdminQuestion_button" onClick={handleAddQuestion} disabled={loadingAdd}>
+                    {loadingAdd ? <BeatLoader /> : "افزودن سوال"}
+                  </button>
+                </div>
 
-      <div className="AdminQuestion_button_div">
-        <button className="AdminQuestion_button" onClick={handleAddQuestion} disabled={loadingAdd}>
-          {loadingAdd ? <BeatLoader /> : "اضافه کردن سوال"}
-        </button>
-      </div>
+            </section>
 
-      <h3 className="AdminQuestion_h3">لیست سوالات:</h3>
-      {loadingList ? (
-        <ScaleLoader />
-      ) : (
-        <ul className="AdminQuestion_ul">
-          {questions.map((q, index) => (
-            <li className="AdminQuestion_li" key={index}>
-              <strong className="AdminQuestion_strong">
-                سوال {q.question_number}: {q.question_text}
-              </strong>
-              {q.type === "test" && (
-                <ul className="AdminQuestion_strong_ul">
-                  {q.options.map((opt, idx) => (
-                    <li
-                      className="AdminQuestion_strong_li"
-                      key={idx}
-                      style={{ color: idx === q.correct_option ? "green" : "black" }}
-                    >
-                      {opt}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {q.type === "descriptive" && <p className="AdminQuestion_strong_ul_p">نمره: {q.score}</p>}
-            </li>
-          ))}
-        </ul>
-      )}
+            <h3 className="AdminQuestion_container_main_h1">لیست سوالات</h3>
+            {loadingList ? (
+              <ScaleLoader />
+            ) : (
+                  <ul className="AdminQuestion_ul">
+                    {questions.map((q, index) => (
+                      <li className="AdminQuestion_li" key={index}>
+                        <strong className="AdminQuestion_strong">
+                          سوال {q.question_number}: {q.question_text}
+                        </strong>
+                        {q.type === "test" && (
+                          <ul className="AdminQuestion_strong_ul">
+                            {q.options.map((opt, idx) => (
+                              <li
+                                className="AdminQuestion_strong_li"
+                                key={idx}
+                                style={{ color: idx === q.correct_option ? "#28a745" : "#000" }}
+                              >
+                                گزینه {idx + 1}: {opt}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {q.type === "descriptive" && <p className="AdminQuestion_strong_ul_p">نمره: {q.score}</p>}
+                      </li>
+                    ))}
+                  </ul>
+            )}
 
-      <div className="AdminQuestion_button_div_one">
-        <button className="AdminQuestion_button_one" onClick={handleSendQuestions} disabled={loadingSend}>
-          {loadingSend ? <BeatLoader  /> : "ارسال سوالات"}
-        </button>
-      </div>
+            <div className="AdminQuestion_button_div_one">
+                <button className="AdminQuestion_button_one" onClick={handleSendQuestions} disabled={loadingSend}>
+                    {loadingSend ? <BeatLoader  /> : "ارسال سوالات"}
+                </button>
+            </div>
+       </div>
     </div>
   );
 }
 
 export default AdminQuestion;
-
-
-
-
-
-
 
 

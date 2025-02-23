@@ -167,81 +167,84 @@ function UserDashboard() {
   <div className="UserDashboard">
     <div className="UserDashboard_container">
       <Toaster position="top-center" reverseOrder={false} />
-      <h2 className="UserDashboard_heading">ویرایش پروفایل</h2>
 
-      <div className="UserDashboard_input_group">
-        <label className="UserDashboard_label">استان:</label>
-        <Select
-          value={provinceOptions.find((opt) => opt.value === province)}
-          className="UserDashboard_label_Select"
-          onChange={(selectedOption) => {
-            setProvince(selectedOption.value);
-            setCity("");
-          }}
-          options={provinceOptions}
-          placeholder="انتخاب کنید"
-          isDisabled={isReadOnly || provinceOptions.length === 0}
-        />
-      </div>
+      <div className="UserDashboard_container_main">
+           <h2 className="UserDashboard_container_main_h">پنل کاربری</h2>
+           <section className="UserDashboard_container_main_section">
+                  <div className="UserDashboard_input_group">
+                    <label className="UserDashboard_label">استان:</label>
+                    <Select
+                      value={provinceOptions.find((opt) => opt.value === province)}
+                      className="UserDashboard_label_Select"
+                      onChange={(selectedOption) => {
+                        setProvince(selectedOption.value);
+                        setCity("");
+                      }}
+                      options={provinceOptions}
+                      placeholder="انتخاب کنید"
+                      isDisabled={isReadOnly || provinceOptions.length === 0}
+                    />
+                  </div>
 
-      <div className="UserDashboard_input_group">
-        <label className="UserDashboard_label">شهرستان:</label>
-        <Select
-          value={cityOptions.find((opt) => opt.value === city)}
-          onChange={(selectedOption) => setCity(selectedOption.value)}
-          options={cityOptions}
-          className="UserDashboard_label_Select"
-          placeholder="انتخاب کنید"
-          isDisabled={isReadOnly || !province}
-        />
-      </div>
+                  <div className="UserDashboard_input_group">
+                    <label className="UserDashboard_label">شهرستان:</label>
+                    <Select
+                      value={cityOptions.find((opt) => opt.value === city)}
+                      onChange={(selectedOption) => setCity(selectedOption.value)}
+                      options={cityOptions}
+                      className="UserDashboard_label_Select"
+                      placeholder="انتخاب کنید"
+                      isDisabled={isReadOnly || !province}
+                    />
+                  </div>
 
-      <div className="UserDashboard_input_group">
-        <label className="UserDashboard_label">نام مدرسه:</label>
-        <input
-          type="text"
-          value={school}
-          onChange={handleSchoolChange}
-          readOnly={isReadOnly}
-          className="UserDashboard_input"
-        />
-        {schoolError && <p className="UserDashboard_error">{schoolError}</p>}
-      </div>
+                  <div className="UserDashboard_input_group">
+                    <label className="UserDashboard_label">نام مدرسه:</label>
+                    <input
+                      type="text"
+                      value={school}
+                      onChange={handleSchoolChange}
+                      readOnly={isReadOnly}
+                      className="UserDashboard_input"
+                    />
+                    {schoolError && <p className="UserDashboard_error">{schoolError}</p>}
+                  </div>
 
-      <div className="UserDashboard_input_group">
-        <label className="UserDashboard_label">پایه تحصیلی:</label>
-        <input
-          type="text"
-          value={grade}
-          onChange={handleGradeChange}
-          readOnly={isReadOnly}
-          className="UserDashboard_input"
-        />
-        {gradeError && <p className="UserDashboard_error">{gradeError}</p>}
-      </div>
+                  <div className="UserDashboard_input_group">
+                    <label className="UserDashboard_label">پایه تحصیلی:</label>
+                    <input
+                      type="text"
+                      value={grade}
+                      onChange={handleGradeChange}
+                      readOnly={isReadOnly}
+                      className="UserDashboard_input"
+                    />
+                    {gradeError && <p className="UserDashboard_error">{gradeError}</p>}
+                  </div>
 
-      <div className="UserDashboard_input_group">
-        <label className="UserDashboard_label">تاریخ تولد:</label>
-        <DatePicker
-          value={birthday}
-          onChange={setBirthday}
-          calendar={persian}
-          locale={persian_fa}
-          format="YYYY/MM/DD"
-          placeholder="تاریخ را انتخاب کنید"
-          disabled={isReadOnly}
-          className="UserDashboard_date"
-        />
-      </div>
+                  <div className="UserDashboard_input_group">
+                    <label className="UserDashboard_label">تاریخ تولد:</label>
+                    <DatePicker
+                      value={birthday}
+                      onChange={setBirthday}
+                      calendar={persian}
+                      locale={persian_fa}
+                      format="YYYY/MM/DD"
+                      placeholder="تاریخ را انتخاب کنید"
+                      disabled={isReadOnly}
+                    />
+                  </div>
 
-      <div className="UserDashboard_button_group">
-          <button onClick={handleSubmit} disabled={isSubmitDisabled || isLoading} className="UserDashboard_button submit">
-                {isLoading ? <BeatLoader/> : "ثبت"}
-          </button>
-          <button onClick={handleEdit} className="UserDashboard_button edit" disabled={!isEditEnabled}>
-            ویرایش
-          </button>
-      </div>
+                  <div className="UserDashboard_button_group">
+                      <button onClick={handleSubmit} disabled={isSubmitDisabled || isLoading} className=" UserDashboard_button_submit">
+                            {isLoading ? <BeatLoader/> : "ثبت"}
+                      </button>
+                      <button onClick={handleEdit} className="UserDashboard_button_edit" disabled={!isEditEnabled}>
+                        ویرایش
+                      </button>
+                  </div>
+           </section>
+        </div>
     </div>
   </div>
 

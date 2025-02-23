@@ -69,7 +69,7 @@ function EditorExam() {
         }
       );
       
-      toast.success(`آزمون "${examData.title}" با موفقیت ایجاد شد`);
+      toast.success(`مسابقه "${examData.title}" با موفقیت ایجاد شد`);
       setExamTitle("");
       setExamType("test");
       setSelectedArticles([]);
@@ -79,12 +79,12 @@ function EditorExam() {
       
       navigate("/Dashboard/Exam/Question", { state: { examType, examId } });
     } catch (error) {
-      console.error("خطا در ایجاد آزمون:", error.response || error.message);
+      console.error("خطا در ایجاد مسابقه:", error.response || error.message);
 
       if (error.response?.status === 401) {
         toast.error("خطای احراز هویت. لطفاً دوباره وارد شوید");
       } else {
-        toast.error("خطایی در ایجاد آزمون رخ داد");
+        toast.error("خطایی در ایجاد مسابقه رخ داد");
       }
     } finally {
       setLoading(false);
@@ -92,18 +92,18 @@ function EditorExam() {
   };
 
   return (
-    <div className="EditorExam_container">
+    <div className="EditorExam_container" dir="rtl">
         <Toaster position="top-center" reverseOrder={false} />
         <div className="EditorExam_container_main">
-            <h1 className="EditorExam_container_main_h">ایجاد آزمون جدید</h1>
+            <h1 className="EditorExam_container_main_h">ایجاد مسابقه جدید</h1>
               <section className="EditorExam_container_main_section">
                   <div className="EditorExam_form_group">
-                    <label className="EditorExam_form_label">عنوان آزمون:</label>
+                    <label className="EditorExam_form_label">عنوان مسابقه:</label>
                     <input
                       type="text"
                       value={examTitle}
                       onChange={(e) => setExamTitle(e.target.value)}
-                      placeholder="عنوان آزمون را وارد کنید"
+                      placeholder="عنوان مسابقه را وارد کنید"
                       className="EditorExam_form_input"
                     />
                   </div>
@@ -121,13 +121,13 @@ function EditorExam() {
                   </div>
 
                   <div className="EditorExam_form_group">
-                    <label className="EditorExam_form_label">نوع آزمون:</label>
+                    <label className="EditorExam_form_label">نوع مسابقه:</label>
                     <Select
                       options={examTypeOptions}
                       value={examTypeOptions.find((option) => option.value === examType)}
                       onChange={(selectedOption) => setExamType(selectedOption.value)}
                       className="EditorExam_form_select"
-                      placeholder="نوع آزمون را انتخاب کنید"
+                      placeholder="نوع مسابقه را انتخاب کنید"
                     />
                   </div>
 
@@ -137,7 +137,7 @@ function EditorExam() {
                       onClick={handleCreateExam}
                       disabled={loading}
                     >
-                      {loading ? <BeatLoader /> : "ایجاد آزمون"}
+                      {loading ? <BeatLoader /> : "ایجاد مسابقه"}
                     </button>
                   </div>
               </section>            

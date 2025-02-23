@@ -32,6 +32,8 @@
                 toastShown.current = true;
               }
             }, [location.state]);
+
+
               useEffect(() => {
               const handleScroll = () => {
                 const nav = document.querySelector(".Main_Navigation");
@@ -46,6 +48,8 @@
                 window.removeEventListener("scroll", handleScroll);
               };
             }, []);
+
+
             useEffect(() => {
               if (cookies.access_token) {
                 try {
@@ -69,6 +73,8 @@
                 }
               }
             }, [cookies.access_token]);
+
+
             useEffect(() => {
               const fetchArticles = async () => {
                 try {
@@ -84,6 +90,8 @@
               };
               fetchArticles();
             }, []);
+
+
             const handleLogout = async () => {
               try {
                   console.log("Phone number value:", cookies.access_token);
@@ -107,10 +115,12 @@
                   
                             <div className="Navigation_Right">
                               <ul className="Nav_List">
-                                <li className="Nav_Item"><strong className="Nav_Item_strong" >خانه</strong></li>
-                                <li className="Nav_Item"><strong className="Nav_Item_strong" >درباره ما</strong></li>
                                 <li className="Nav_Item">
-                                  <Link to="/ListMatches" className="Nav_Item"><strong className="Nav_Item_strong" >مسابقات</strong></Link>
+                                       <Link to="/" className="Nav_Item">خانه</Link>
+                                </li>
+                                <li className="Nav_Item">درباره ما</li>
+                                <li className="Nav_Item">
+                                  <Link to="/ListMatches" className="Nav_Item">مسابقات</Link>
                                 </li>
                               </ul>
                             </div>
@@ -157,10 +167,12 @@
                             <div className="Sidebar_Menu"   onClick={(e) => e.stopPropagation()}>
                               <FiX className="Close_Icon" onClick={() => setIsMenuOpen(false)} />
                               <ul className="Sidebar_List">
-                                <li className="Sidebar_Item"><strong className="Sidebar_Item_strong" >خانه</strong></li>
-                                <li className="Sidebar_Item"><strong className="Sidebar_Item_strong">درباره ما</strong></li>
                                 <li className="Sidebar_Item">
-                                    <Link to="/ListMatches" className="Sidebar_Item"><strong className="Sidebar_Item_strong">مسابقات</strong></Link>
+                                     <Link to="/" className="Sidebar_Item">خانه</Link>
+                                </li>
+                                <li className="Sidebar_Item">درباره ما</li>
+                                <li className="Sidebar_Item">
+                                    <Link to="/ListMatches" className="Sidebar_Item">مسابقات</Link>
                                 </li>
                               </ul>
                             </div>

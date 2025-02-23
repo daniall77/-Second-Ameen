@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
-import { LuCirclePlus } from "react-icons/lu";
-import { FiTrash } from "react-icons/fi";
+import toast, { Toaster } from "react-hot-toast";
 import { useCookies } from "react-cookie";
 import { ScaleLoader, BeatLoader, ClipLoader } from "react-spinners";
-import toast, { Toaster } from "react-hot-toast";
+import { LuCirclePlus } from "react-icons/lu";
+import { FiTrash } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { IoChevronUpOutline } from "react-icons/io5";
@@ -333,7 +333,7 @@ function AdminContent() {
                                 <div className="AdminContent_dropdown">
                                 <button className="AdminContent_dropdown_button" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                                         <p> انتخاب  دسته بندی </p>  
-                                     {/* <span className={`AdminContent_chevron ${isDropdownOpen ? "rotate" : ""}`}> <IoChevronDownOutline className="AdminContent_IoChevronDownOutline" /> </span> */}
+                                     
                                         <span className="AdminContent_chevron" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                                                {isDropdownOpen ? (
                                                     <IoChevronUpOutline className="AdminContent_IoChevronUpOutline" />

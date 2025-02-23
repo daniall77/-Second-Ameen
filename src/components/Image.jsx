@@ -79,36 +79,43 @@ function Image() {
   return (
   <div className="Image_container_container">
     <div className="Image_container">
-      <Toaster position="top-center" reverseOrder={false} />
+        <Toaster position="top-center" reverseOrder={false} />
+        <div className="Image_container_main">
+              <h1 className="Image_h">آپلود تصویر پروفایل</h1>
+              <form className="Image_form" onSubmit={handleSubmit}>
+                <div className="Image_form_flex">
+                    <div className="Image_form_div">
+                      <input
+                        type="file"
+                        accept=".jpg,.png"
+                        onChange={handleFileChange}
+                        className="Image_form_div_input"
+                        id="image"
+                      />
+                      <label htmlFor="image" className="Image_form_div_label">انتخاب عکس</label>
+                      {imageError && <p className="Image_error_message">{imageError}</p>}
+                    </div>
 
-      <h1 className="Image_h">آپلود تصویر پروفایل</h1>
-      <form className="Image_form" onSubmit={handleSubmit}>
-        <div className="Image_form_div">
-          <input
-            type="file"
-            accept=".jpg,.png"
-            onChange={handleFileChange}
-            className="Image_form_div_input"
-          />
-          {imageError && <p className="Image_error_message">{imageError}</p>}
+                    {loadingPreview ? (
+                        <ClipLoader  />
+                      ) : (
+                        previewUrl && <img src={previewUrl} alt="Preview" className="Image_preview" />
+                      )}
+
+                </div>
+
+                <div className="Image_form_div_button">
+                  <button
+                    type="submit"
+                    className="Image_form_button"
+                    disabled={loadingUpload}
+                  >
+                    {loadingUpload ? <BeatLoader /> : "ثبت"}
+                  </button>
+
+                </div>
+              </form>
         </div>
-
-        <div className="Image_form_div_button">
-          <button
-            type="submit"
-            className="Image_form_button"
-            disabled={loadingUpload}
-          >
-            {loadingUpload ? <BeatLoader /> : "ثبت"}
-          </button>
-
-          {loadingPreview ? (
-            <ClipLoader  />
-          ) : (
-            previewUrl && <img src={previewUrl} alt="Preview" className="Image_preview" />
-          )}
-        </div>
-      </form>
     </div>
   </div>
   );
