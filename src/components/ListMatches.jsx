@@ -68,7 +68,7 @@ function ListMatches() {
       toast.success(`آزمون ${examId} شروع شد`);
       navigate(`/ListMatches/Matche`, { state: { examId, examType, questions } });
     } catch (error) {
-      toast.error("خطا در شروع آزمون");
+      toast.error("سوالی برای این مسابقه وجود ندارد");
       console.error("Error starting exam:", error);
     } finally {
       setLoadingExamId(null);

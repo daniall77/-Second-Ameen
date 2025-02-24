@@ -6,6 +6,7 @@ import { ScaleLoader, BeatLoader } from "react-spinners";
 
 function AdminConfirmContent() {
   const [articles, setArticles] = useState([]);
+  const [visibleArticles, setVisibleArticles] = useState(5); 
   const [cookies] = useCookies(["access_token"]);
   const [loading, setLoading] = useState(true);
   const [processingArticle, setProcessingArticle] = useState(null);
@@ -56,39 +57,57 @@ function AdminConfirmContent() {
     }
   };
 
+
+  const showMoreArticles = () => {
+    setVisibleArticles((prev) => prev + 5);
+  };
+
   return (
-    <div className="AdminConfirmContent_container">
-      <Toaster className="AdminConfirmContent_container_Toaster" position="top-center" reverseOrder={false} />
+    <div className="AdminConfirmContent_container" dir="rtl">
+      <Toaster position="top-center" reverseOrder={false} />
 
       <h2 className="AdminConfirmContent_container_h">مقالات در انتظار تایید</h2>
 
       {loading ? (
         <div className="AdminConfirmContent_container_loader">
-          <ScaleLoader  />
+          <ScaleLoader />
         </div>
       ) : articles.length === 0 ? (
         <p className="AdminConfirmContent_container_p">هیچ مقاله‌ای در انتظار تایید نیست</p>
       ) : (
         <div className="AdminConfirmContent_articles">
-          {articles.map((article) => (
+          {articles.slice(0, visibleArticles).map((article) => (
             <div key={article.id} className="AdminConfirmContent_article_card">
-              <h3 className="AdminConfirmContent_article_title">{article.title}</h3>
-              <img
-                src={`http://localhost:8000/articles/${article.photo}`}
-                alt="Article"
-                className="AdminConfirmContent_article_image"
-              />
-              <p className="Article_Text">متن:</p>
-              <div className="Article_Content" dangerouslySetInnerHTML={{ __html: article.text }}></div>
-              <p className="AdminConfirmContent_article_author">نویسنده: {article.author_id}</p>
-              <p className="AdminConfirmContent_article_date">تاریخ ایجاد: {article.created_at}</p>
-              <div className="AdminConfirmContent_article_categories">
-                        دسته‌بندی‌ها: <strong className="" >
-                                    {article.category.length > 0 ?
-                                     Object.entries(article.subcategory).map(([key, values]) => `${key}-${values.join("-")}`).join(" | ") :
-                                      "دسته بندی نشده"}
-                                      </strong>
+            
+              <div className="AdminConfirmContent_article_card_one">
+                <img
+                  src={`http://localhost:8000/articles/${article.photo}`}
+                  alt="Article"
+                  className="AdminConfirmContent_article_image"
+                />
+                <div className="AdminConfirmContent_article_info">
+                  <h3 className="AdminConfirmContent_article_title"> عنوان مقاله : {article.title}</h3>
+                  <p className="AdminConfirmContent_article_author">نویسنده : {article.author_id}</p>
+                  <p className="AdminConfirmContent_article_date">تاریخ ایجاد : {article.created_at}</p>
+                  <div className="AdminConfirmContent_article_categories">
+                    دسته‌بندی‌ها : {" "}
+                    <strong>
+                      {article.category.length > 0
+                        ? Object.entries(article.subcategory)
+                            .map(([key, values]) => `${key}-${values.join("-")}`)
+                            .join(" | ")
+                        : "دسته بندی نشده"}
+                    </strong>
+                  </div>
+                </div>
               </div>
+
+              <div className="AdminConfirmContent_article_card_two">
+                <p className="Article_Text">متن:</p>
+                <div className="Article_Content" dangerouslySetInnerHTML={{ __html: article.text }}></div>
+              </div>
+
+              
               <div className="AdminConfirmContent_buttons">
                 <button
                   className="AdminConfirmContent_approve_button"
@@ -97,18 +116,23 @@ function AdminConfirmContent() {
                 >
                   {processingArticle === article.id ? <BeatLoader /> : "تایید"}
                 </button>
-              </div>
-              <div className="AdminConfirmContent_buttons">
                 <button
                   className="AdminConfirmContent_reject_buttons"
                   onClick={() => handleAction(article.id, false)}
                   disabled={processingArticle === article.id}
                 >
-                  {processingArticle === article.id ? <BeatLoader  /> : "رد"}
+                  {processingArticle === article.id ? <BeatLoader /> : "رد"}
                 </button>
               </div>
             </div>
           ))}
+
+         
+          {visibleArticles < articles.length && (
+            <button className="AdminConfirmContent_show_more" onClick={showMoreArticles}>
+                       + بیشتر
+            </button>
+          )}
         </div>
       )}
     </div>
@@ -116,6 +140,11 @@ function AdminConfirmContent() {
 }
 
 export default AdminConfirmContent;
+
+
+
+
+
 
 
 
@@ -193,35 +222,42 @@ export default AdminConfirmContent;
 //         <div className="AdminConfirmContent_articles">
 //           {articles.map((article) => (
 //             <div key={article.id} className="AdminConfirmContent_article_card">
-//               <h3 className="AdminConfirmContent_article_title">{article.title}</h3>
-//               <img
-//                 src={`http://localhost:8000/articles/${article.photo}`}
-//                 alt="Article"
-//                 className="AdminConfirmContent_article_image"
-//               />
-//               <p className="AdminConfirmContent_article_text">{article.text}</p>
-//               <p className="AdminConfirmContent_article_author">نویسنده: {article.author_id}</p>
-//               <p className="AdminConfirmContent_article_date">تاریخ ایجاد: {article.created_at}</p>
-//               <div className="AdminConfirmContent_article_categories">
-//                 دسته‌بندی‌ها: {article.category.join(", ")}
+//               <div className="AdminConfirmContent_article_card_one">
+//                   <h3 className="AdminConfirmContent_article_title">{article.title}</h3>
+//                   <img
+//                     src={`http://localhost:8000/articles/${article.photo}`}
+//                     alt="Article"
+//                     className="AdminConfirmContent_article_image"
+//                   />
+//                   <p className="AdminConfirmContent_article_author">نویسنده: {article.author_id}</p>
+//                   <p className="AdminConfirmContent_article_date">تاریخ ایجاد: {article.created_at}</p>
+//                   <div className="AdminConfirmContent_article_categories">
+//                             دسته‌بندی‌ها: <strong className="" >
+//                                         {article.category.length > 0 ?
+//                                         Object.entries(article.subcategory).map(([key, values]) => `${key}-${values.join("-")}`).join(" | ") :
+//                                           "دسته بندی نشده"}
+//                                           </strong>
+//                   </div>
+//               </div>
+//               <div className="AdminConfirmContent_article_card_two">
+//                   <p className="Article_Text">متن:</p>
+//                   <div className="Article_Content" dangerouslySetInnerHTML={{ __html: article.text }}></div>
 //               </div>
 //               <div className="AdminConfirmContent_buttons">
-//                 <button
-//                   className="AdminConfirmContent_approve_button"
-//                   onClick={() => handleAction(article.id, true)}
-//                   disabled={processingArticle === article.id}
-//                 >
-//                   {processingArticle === article.id ? <BeatLoader /> : "تایید"}
-//                 </button>
-//               </div>
-//               <div className="AdminConfirmContent_buttons">
-//                 <button
-//                   className="AdminConfirmContent_reject_buttons"
-//                   onClick={() => handleAction(article.id, false)}
-//                   disabled={processingArticle === article.id}
-//                 >
-//                   {processingArticle === article.id ? <BeatLoader  /> : "رد"}
-//                 </button>
+//                   <button
+//                     className="AdminConfirmContent_approve_button"
+//                     onClick={() => handleAction(article.id, true)}
+//                     disabled={processingArticle === article.id}
+//                   >
+//                     {processingArticle === article.id ? <BeatLoader /> : "تایید"}
+//                   </button>
+//                   <button
+//                     className="AdminConfirmContent_reject_buttons"
+//                     onClick={() => handleAction(article.id, false)}
+//                     disabled={processingArticle === article.id}
+//                   >
+//                     {processingArticle === article.id ? <BeatLoader  /> : "رد"}
+//                   </button>
 //               </div>
 //             </div>
 //           ))}
