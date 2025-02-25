@@ -5,7 +5,8 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { ScaleLoader, BeatLoader } from "react-spinners";
 
-function EditorListExam() {
+function AdminListExam() {
+
   const [exams, setExams] = useState([]);
   const [cookies] = useCookies(["access_token"]);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,12 +25,12 @@ function EditorListExam() {
         console.log("لیست آزمون‌های تشریحی:", response.data);
         setExams(response.data);
       } catch (error) {
-        if (error.response?.status === 404) {
-          toast.error("هیچ آزمون تشریحی یافت نشد");
-        } else {
-          toast.error("خطا در دریافت لیست آزمون‌ها");
-        }
-        console.error("خطا در دریافت آزمون‌ها:", error);
+        // if (error.response?.status === 404) {
+        //   toast.error("هیچ مسابقه تشریحی یافت نشد");
+        // } else {
+        //   toast.error("خطا در دریافت لیست مسابقات");
+        // }
+        // console.error("خطا در دریافت آزمون‌ها:", error);
       } finally {
         setIsLoading(false);
       }
@@ -77,13 +78,13 @@ function EditorListExam() {
                    </section>
                 </div>
               ) : (
-                <p className="AdminListExam_no_exams_message">هیچ آزمون تشریحی یافت نشد</p>
+                <p className="AdminListExam_no_exams_message">هیچ مسابقه تشریحی یافت نشد</p>
                )}
         </div>
   );
 }
 
-export default EditorListExam;
+export default AdminListExam;
 
 
 

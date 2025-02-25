@@ -5,7 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useCookies } from "react-cookie";
 import { ScaleLoader, BeatLoader } from "react-spinners";
 
-function EditorListPhone() {
+function AdminListPhone() {
   const location = useLocation();
   const navigate = useNavigate();
   const { examId } = location.state || {};
@@ -23,12 +23,12 @@ function EditorListPhone() {
 
         setPhoneNumbers(response.data.data);
       } catch (error) {
-        if (error.response?.status === 404) {
-          toast.error("هیچ پاسخ تصحیح‌نشده‌ای برای این آزمون یافت نشد");
-        } else {
-          toast.error("خطا در دریافت لیست شرکت‌کنندگان");
-        }
-        console.error("خطا", error);
+        // if (error.response?.status === 404) {
+        //   toast.error("");
+        // } else {
+        //   toast.error("خطا در دریافت لیست شرکت‌کنندگان");
+        // }
+        // console.error("خطا", error);
       } finally {
         setIsLoading(false);
       }
@@ -50,7 +50,7 @@ function EditorListPhone() {
             <Toaster className="AdminListPhone_Toaster" position="top-center" reverseOrder={false} />
 
             <header className="AdminListPhone_header">
-                <h2 className="AdminListPhone_header_h" >شرکت‌کنندگان آزمون {examId}</h2>
+                <h2 className="AdminListPhone_header_h" >شرکت‌کنندگان مسابقه {examId}</h2>
             </header>
 
             {isLoading ? (
@@ -71,7 +71,7 @@ function EditorListPhone() {
                               onClick={() => handleViewAnswers(phone)}
                               disabled={loadingPhone === phone}
                               >
-                                  {loadingPhone === phone ? <BeatLoader className="AdminListPhone_BeatLoader" /> : "مشاهده پاسخ‌ها"}
+                                  {loadingPhone === phone ? <BeatLoader className="AdminListPhone_BeatLoader" /> : "مشاهده پاسخ"}
                               </button>
                         </footer>
                   </article>
@@ -79,14 +79,14 @@ function EditorListPhone() {
                 </section>
               ) : (
               <p className="AdminListPhone_no_participants_message">
-                    هیچ پاسخ تصحیح‌نشده‌ای برای این آزمون یافت نشد
+                    هیچ کاربری در این مسابقه شرکت نکرده است
               </p>
             )}
         </div>
   );
 }
 
-export default EditorListPhone;
+export default AdminListPhone;
 
 
 

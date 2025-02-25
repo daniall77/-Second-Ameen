@@ -3,6 +3,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import toast, { Toaster } from "react-hot-toast";
 import { ScaleLoader, BeatLoader } from "react-spinners";
+import Default from "/image/Default.jpg";
 
 function AdminConfirmContent() {
   const [articles, setArticles] = useState([]);
@@ -81,7 +82,7 @@ function AdminConfirmContent() {
             
               <div className="AdminConfirmContent_article_card_one">
                 <img
-                  src={`http://localhost:8000/articles/${article.photo}`}
+                  src={article.photo ? `http://localhost:8000/articles/${article.photo}` : Default}
                   alt="Article"
                   className="AdminConfirmContent_article_image"
                 />
@@ -92,19 +93,22 @@ function AdminConfirmContent() {
                   <div className="AdminConfirmContent_article_categories">
                     دسته‌بندی‌ها : {" "}
                     <strong>
-                      {article.category.length > 0
-                        ? Object.entries(article.subcategory)
-                            .map(([key, values]) => `${key}-${values.join("-")}`)
-                            .join(" | ")
-                        : "دسته بندی نشده"}
+                    {article.subcategory && Object.keys(article.subcategory).length > 0 
+                                       ? Object.entries(article.subcategory)
+                                       .map(([key , values]) =>  values.length > 0 
+                                         ? `${key}-${values.join("-")}` : key )
+                                         .join(" | ")
+                                        : 
+                                        "دسته بندی نشده"
+                    }
                     </strong>
                   </div>
                 </div>
               </div>
 
               <div className="AdminConfirmContent_article_card_two">
-                <p className="Article_Text">متن:</p>
-                <div className="Article_Content" dangerouslySetInnerHTML={{ __html: article.text }}></div>
+                <p className="AdminConfirmContent_Article_Text">متن:</p>
+                <div className="AdminConfirmContent_Article_Content" dangerouslySetInnerHTML={{ __html: article.text }}></div>
               </div>
 
               

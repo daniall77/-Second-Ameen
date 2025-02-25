@@ -25,7 +25,12 @@ function AdminListExam() {
         console.log("لیست آزمون‌های تشریحی:", response.data);
         setExams(response.data);
       } catch (error) {
-        console.error("خطا در دریافت آزمون‌ها:", error);
+        // if (error.response?.status === 404) {
+        //   toast.error("هیچ مسابقه تشریحی یافت نشد");
+        // } else {
+        //   toast.error("خطا در دریافت لیست مسابقات");
+        // }
+        // console.error("خطا در دریافت آزمون‌ها:", error);
       } finally {
         setIsLoading(false);
       }
@@ -73,7 +78,7 @@ function AdminListExam() {
                    </section>
                 </div>
               ) : (
-                <p className="AdminListExam_no_exams_message">هیچ آزمون تشریحی یافت نشد</p>
+                <p className="AdminListExam_no_exams_message">هیچ مسابقه تشریحی یافت نشد</p>
                )}
         </div>
   );

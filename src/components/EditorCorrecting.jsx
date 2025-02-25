@@ -31,7 +31,7 @@ function EditorCorrecting() {
         setGrades(initialGrades);
       } catch (error) {
         if (error.response?.status === 404) {
-          toast.error("هیچ پاسخی برای این آزمون یافت نشد");
+          toast.error("هیچ پاسخی برای این مسابقه یافت نشد");
         } else {
           toast.error("خطا در دریافت پاسخ‌های دانش‌آموز");
         }
@@ -64,18 +64,18 @@ function EditorCorrecting() {
         headers: { Authorization: `Bearer ${cookies.access_token}` },
       });
 
+      navigate("/Dashboard/ListExam");
       toast.success("نمره ثبت شد");
-      setTimeout(() => {
-        navigate("/Dashboard/ListExam");
-      }, 1000);
+      
     } catch (error) {
-      toast.error("خطا در ارسال نمرات!");
+      toast.error("خطا در ارسال نمرات");
       console.error("خطا:", error);
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  
   return (
           <div className="AdminCorrecting_container">
                 <Toaster className="AdminCorrecting_Toaster"  position="top-center" reverseOrder={false} />
@@ -91,7 +91,6 @@ function EditorCorrecting() {
                 ) : studentData ? (
                 <section className="AdminCorrecting_student_info_section">
                     <header className="AdminCorrecting_student_header">
-                          <h3 className="AdminCorrecting_student_header_h">{studentData.firstname} {studentData.lastname}</h3>
                           <p className="AdminCorrecting_student_header_p"><strong className="AdminCorrecting_student_header_strong">شماره تلفن:</strong> {studentData.phone_number}</p>
                     </header>
 
@@ -111,7 +110,7 @@ function EditorCorrecting() {
                                 <strong className="AdminCorrecting_strong">پاسخ:</strong> {studentData.answers.find(a => a.question_number === q.question_number)?.answer_text || "بدون پاسخ"}
                               </p>
 
-                              <div className="AdminCorrecting_grade_input">
+                              <div className="AdminCorrecting_grade">
                                     <label className="AdminCorrecting_grade_label"><strong className="AdminCorrecting_grade_strong" >نمره:</strong></label>
                                         <input
                                           className="AdminCorrecting_grade_input"
@@ -120,7 +119,7 @@ function EditorCorrecting() {
                                           max={q.question_score}
                                           value={grades[q.question_number]}
                                           onChange={(e) => handleGradeChange(q.question_number, e.target.value)}
-                                          placeholder={`حداکثر ${q.question_score}`}
+                                          placeholder={`${q.question_score}`}
                                         />
                               </div>
                           </article>
@@ -134,14 +133,13 @@ function EditorCorrecting() {
                       </footer>
                 </section>
               ) : (
-                  <p className="AdminCorrecting_no_answers_message">هیچ پاسخی برای این آزمون یافت نشد</p>
+                  <p className="AdminCorrecting_no_answers_message">هیچ پاسخی برای این مسابقه یافت نشد</p>
               )}
           </div>
   );
 }
 
 export default EditorCorrecting;
-
 
 
 

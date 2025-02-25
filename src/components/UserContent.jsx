@@ -161,7 +161,7 @@ function UserContent() {
   
 
   return (
-    <div className="AdminContent_container">
+    <div className="AdminContent_container" dir="rtl">
 
 <Toaster position="top-center" reverseOrder={false} />
       {pageLoading ? (

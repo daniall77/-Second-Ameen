@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { ScaleLoader } from "react-spinners"; 
+import Default from "/image/Default.jpg";
 
 function UserViewContent() {
   const [pendingArticles, setPendingArticles] = useState([]); 
@@ -70,7 +71,7 @@ function UserViewContent() {
                   <div key={article.id} className="UserViewContent_article_card">
                       <div className="UserViewContent_article_card_one">
                           <img
-                            src={`http://localhost:8000/articles/${article.photo}`}
+                            src={article.photo ? `http://localhost:8000/articles/${article.photo}` : Default}
                             alt="Article"
                             className="UserViewContent_article_image"
                           />
@@ -79,10 +80,15 @@ function UserViewContent() {
                               <p className="UserViewContent_article_date">تاریخ ایجاد : {article.created_at}</p>
                               <div className="UserViewContent_article_categories">
                                   دسته‌بندی‌ها: <strong className="" >
-                                              {article.category.length > 0 ?
-                                              Object.entries(article.subcategory).map(([key, values]) => `${key}-${values.join("-")}`).join(" | ") :
-                                                "دسته بندی نشده"}
-                                                </strong>
+                                  {article.subcategory && Object.keys(article.subcategory).length > 0 
+                                       ? Object.entries(article.subcategory)
+                                       .map(([key , values]) =>  values.length > 0 
+                                         ? `${key}-${values.join("-")}` : key )
+                                         .join(" | ")
+                                        : 
+                                        "دسته بندی نشده"
+                                    }
+                                          </strong>
                               </div>
                           </div>
                       </div>
@@ -112,7 +118,7 @@ function UserViewContent() {
                       <div className="UserViewContent_article_card_one">
 
                           <img
-                            src={`http://localhost:8000/articles/${article.photo}`}
+                            src={article.photo ? `http://localhost:8000/articles/${article.photo}` : Default}
                             alt="Article"
                             className="UserViewContent_article_image"
                           />
@@ -121,9 +127,14 @@ function UserViewContent() {
                               <p className="UserViewContent_article_date"> تاریخ تایید : {article.created_at}</p>
                               <div className="UserViewContent_article_categories">
                                   دسته‌بندی‌ها: <strong className="" >
-                                              {article.subcategory.length > 0 ?
-                                              Object.entries(article.subcategory).map(([key, values]) => `${key}-${values.join("-")}`).join(" | ") :
-                                                "دسته بندی نشده"}
+                                  {article.subcategory && Object.keys(article.subcategory).length > 0 
+                                       ? Object.entries(article.subcategory)
+                                       .map(([key , values]) =>  values.length > 0 
+                                         ? `${key}-${values.join("-")}` : key )
+                                         .join(" | ")
+                                        : 
+                                        "دسته بندی نشده"
+                                    }
                                                 </strong>
                               </div>
                           </div>
@@ -153,7 +164,7 @@ function UserViewContent() {
 
                      <div className="UserViewContent_article_card_one">
                           <img
-                            src={`http://localhost:8000/articles/${article.photo}`}
+                            src={article.photo ? `http://localhost:8000/articles/${article.photo}` : Default}
                             alt="Article"
                             className="UserViewContent_article_image"
                           />
@@ -162,9 +173,14 @@ function UserViewContent() {
                                 <p className="UserViewContent_article_date">تاریخ رد : {article.created_at}</p>
                                 <div className="UserViewContent_article_categories">
                                       دسته‌بندی‌ها: <strong className="" >
-                                                {article.subcategory.length > 0 ?
-                                                Object.entries(article.subcategory).map(([key, values]) => `${key}-${values.join("-")}`).join(" | ") :
-                                                  "دسته بندی نشده"}
+                                      {article.subcategory && Object.keys(article.subcategory).length > 0 
+                                       ? Object.entries(article.subcategory)
+                                       .map(([key , values]) =>  values.length > 0 
+                                         ? `${key}-${values.join("-")}` : key )
+                                         .join(" | ")
+                                        : 
+                                        "دسته بندی نشده"
+                                    }
                                                   </strong>
                                 </div>
                             </div>

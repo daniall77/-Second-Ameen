@@ -6,7 +6,7 @@ import AdminDashboard from "./AdminDashboard.jsx";
 import EditorDashboard from "./EditorDashboard.jsx";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import avator from "/image/1.png";
+import avator from "/image/avator.png";
 import toast, { Toaster } from "react-hot-toast";
 
 function Dashboard() {

@@ -65,7 +65,7 @@ function ListMatches() {
         return;
       }
 
-      toast.success(`آزمون ${examId} شروع شد`);
+      toast.success(`مسابقه ${examId} شروع شد`);
       navigate(`/ListMatches/Matche`, { state: { examId, examType, questions } });
     } catch (error) {
       toast.error("سوالی برای این مسابقه وجود ندارد");
@@ -153,11 +153,11 @@ function ListMatches() {
                            <div className="Navigation_Right">
                              <ul className="Nav_List">
                                <li className="Nav_Item">
-                                      <Link to="/" className="Nav_Item">خانه</Link>
+                                      <Link to="/" className="Nav_Item_link">خانه</Link>
                                </li>
                                <li className="Nav_Item">درباره ما</li>
                                <li className="Nav_Item">
-                                 <Link to="/ListMatches" className="Nav_Item">مسابقات</Link>
+                                 <Link to="/ListMatches" className="Nav_Item_link">مسابقات</Link>
                                </li>
                              </ul>
                            </div>
@@ -168,7 +168,7 @@ function ListMatches() {
                            <div className="Navigation_Left">
                              {!cookies.access_token ? (
                                <Link to="/Login">
-                                 <button className="Button_Login"><strong className="Button_Login_strong" >ورود | عضویت</strong></button>
+                                 <button className="Button_Login">ورود | عضویت</button>
                                </Link>
                              ) : (
                                <>
@@ -178,18 +178,18 @@ function ListMatches() {
                                  {showDetails && (
                                    <div className="User_Details_Dropdown">
                                      <div className="User_Welcome_Message">
-                                       خوش آمدی <strong className="User_Welcome_strong" >{userData.firstName} {userData.lastName}</strong>
+                                          <strong className="User_Welcome_strong" >{userData.firstName}  {userData.lastName} خوش آمدی  </strong> 
                                      </div>
                                      <div className="User_Panel_Link">
                                        <AiOutlineHome className="User_Panel_Icon" />
-                                       <Link to="/Dashboard">
+                                       <Link to="/Dashboard" className="User_link" >
                                          <div className="User_Welcome_Message" ><strong className="User_Welcome_strong" >پنل کاربری</strong></div>
                                        </Link>
                                      </div>
                                      <div className="User_Logout">
-                                       <IoExitOutline className="Logout_Icon" />
+                                       <IoExitOutline className="User_Panel" />
                                        <button className="Logout_Button" onClick={handleLogout}>
-                                            <strong className="Logout_Button_strong">خروج</strong>
+                                               خروج
                                        </button>
                                      </div>
                                    </div>
@@ -203,19 +203,19 @@ function ListMatches() {
                          <div className="Sidebar_Overlay"  onClick={() => setIsMenuOpen(false)}>
                            <div className="Sidebar_Menu"   onClick={(e) => e.stopPropagation()}>
                              <FiX className="Close_Icon" onClick={() => setIsMenuOpen(false)} />
-                              <ul className="Sidebar_List">
-                                <li className="Sidebar_Item">
-                                     <Link to="/" className="Sidebar_Item">خانه</Link>
-                                </li>
-                                <li className="Sidebar_Item">درباره ما</li>
-                                <li className="Sidebar_Item">
-                                    <Link to="/ListMatches" className="Sidebar_Item">مسابقات</Link>
-                                </li>
-                              </ul>
+                             <ul className="Sidebar_List">
+                               <li className="Sidebar_Item">
+                                    <Link to="/" className="Sidebar_Item Nav_Item_link">خانه</Link>
+                               </li>
+                               <li className="Sidebar_Item">درباره ما</li>
+                               <li className="Sidebar_Item">
+                                   <Link to="/ListMatches" className="Sidebar_Item Nav_Item_link">مسابقات</Link>
+                               </li>
+                             </ul>
                            </div>
                          </div>
                        )}
-                  </header>
+                 </header>
 
 
                   {/*  end section 1 */}
