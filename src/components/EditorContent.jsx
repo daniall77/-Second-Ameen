@@ -165,7 +165,7 @@ function EditorContent() {
 <Toaster position="top-center" reverseOrder={false} />
       {pageLoading ? (
            <div className="Loader_Container">
-               <ScaleLoader className="ScaleLoader" />
+               <ScaleLoader color=" #0073e6" height={25}   width={3} />
           </div>
       ) : (
         <>
@@ -243,7 +243,7 @@ function EditorContent() {
                                 
                                 <div className="AdminContent_submit">
                                       <button className="AdminContent_submit_button" onClick={handleSubmit} disabled={loading}>
-                                            {loading ? <BeatLoader className="AdminContent_BeatLoader" /> : "ارسال مقاله"}
+                                            {loading ? <BeatLoader color="#fff"  /> : "ارسال مقاله"}
                                       </button>
                                 </div>
                         </div>

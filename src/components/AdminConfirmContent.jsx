@@ -118,14 +118,14 @@ function AdminConfirmContent() {
                   onClick={() => handleAction(article.id, true)}
                   disabled={processingArticle === article.id}
                 >
-                  {processingArticle === article.id ? <BeatLoader /> : "تایید"}
+                  {processingArticle === article.id ? <BeatLoader color="#fff" /> : "تایید"}
                 </button>
                 <button
                   className="AdminConfirmContent_reject_buttons"
                   onClick={() => handleAction(article.id, false)}
                   disabled={processingArticle === article.id}
                 >
-                  {processingArticle === article.id ? <BeatLoader /> : "رد"}
+                  {processingArticle === article.id ? <BeatLoader color="#fff"  /> : "رد"}
                 </button>
               </div>
             </div>

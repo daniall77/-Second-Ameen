@@ -55,7 +55,7 @@ function AdminListPhone() {
 
             {isLoading ? (
                 <div className="Loader_Container">
-                     <ScaleLoader className="ScaleLoader" />
+                     <ScaleLoader color=" #0073e6" height={25}   width={3} />
                </div>
                 ) : phoneNumbers.length > 0 ? (
                 <section className="AdminListPhone_participants_section">
@@ -71,7 +71,7 @@ function AdminListPhone() {
                               onClick={() => handleViewAnswers(phone)}
                               disabled={loadingPhone === phone}
                               >
-                                  {loadingPhone === phone ? <BeatLoader className="AdminListPhone_BeatLoader" /> : "مشاهده پاسخ"}
+                                  {loadingPhone === phone ? <BeatLoader color="#fff"  /> : "مشاهده پاسخ"}
                               </button>
                         </footer>
                   </article>

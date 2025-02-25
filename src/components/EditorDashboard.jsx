@@ -72,7 +72,7 @@ function EditorDashboard() {
   if (loading) {
     return (
       <div className="Loader_Container">
-          <ScaleLoader className="ScaleLoader" />
+          <ScaleLoader color=" #0073e6" height={25}   width={3} />
      </div>
     );
   }
@@ -257,7 +257,7 @@ function EditorDashboard() {
                             <td className="AdminDashboard_none">{user.grade}</td>
                             <td>
                                 {convertingUserId === user.id ? (
-                                    <BeatLoader  />
+                                    <BeatLoader color="#fff"   />
                                   ) : (
                                     <div className="AdminDashboard_container_button">
                                         <button className="AdminDashboard_button" onClick={() => convertToEditor(user.id)}>ادیتور</button>

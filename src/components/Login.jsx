@@ -92,7 +92,7 @@ function Login() {
               disabled={isLoading}
             >
               {isLoading ? (
-                <BeatLoader  className="Login_button_div_BeatLoader"  />
+                <BeatLoader  color="#fff"  />
               ) : (
                 "ورود"
               )}

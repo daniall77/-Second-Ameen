@@ -181,7 +181,7 @@ function Matche() {
 
                 <footer className="Matches_exam_footer">
                   <button className="Matches_submit_button" onClick={handleSubmit} disabled={submitting}>
-                    {submitting ? <BeatLoader /> : "پایان مسابقه"}
+                    {submitting ? <BeatLoader color="#fff"  /> : "پایان مسابقه"}
                   </button>
                 </footer>
               </section>

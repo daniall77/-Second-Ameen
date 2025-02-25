@@ -110,7 +110,7 @@ function Image() {
                     className="Image_form_button"
                     disabled={loadingUpload}
                   >
-                    {loadingUpload ? <BeatLoader /> : "ثبت"}
+                    {loadingUpload ? <BeatLoader color="#fff" /> : "ثبت"}
                   </button>
 
                 </div>

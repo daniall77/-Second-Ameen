@@ -193,7 +193,7 @@ import Default from "/image/Default.jpg";
                    <main className="Content_Wrapper">
                      {loading ? (
                        <div className="Loader_Container">
-                         <ScaleLoader className="ScaleLoader" />
+                         <ScaleLoader color=" #0073e6" height={25}   width={3} />
                        </div>
                      ) : error ? (
                        <p className="Error_Message">{error}</p>

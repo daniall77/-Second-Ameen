@@ -98,7 +98,7 @@ function UserDashboard() {
   if (loading) {
     return (
       <div className="Loader_Container">
-          <ScaleLoader className="ScaleLoader" />
+          <ScaleLoader color=" #0073e6" height={25}   width={3} />
       </div>
     );
   }
@@ -248,7 +248,7 @@ function UserDashboard() {
 
                   <div className="UserDashboard_button_group">
                       <button onClick={handleSubmit} disabled={isSubmitDisabled || isLoading} className=" UserDashboard_button_submit">
-                            {isLoading ? <BeatLoader/> : "ثبت"}
+                            {isLoading ? <BeatLoader color="#fff" /> : "ثبت"}
                       </button>
                       <button onClick={handleEdit} className="UserDashboard_button_edit" disabled={!isEditEnabled}>
                         ویرایش

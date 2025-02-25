@@ -282,7 +282,7 @@ function ListMatches() {
                         disabled={loadingExamId === exam.ID}
                       >
                         {loadingExamId === exam.ID ? (
-                          <BeatLoader className="ListMatches_BeatLoader" />
+                          <BeatLoader color="#fff"  />
                         ) : (
                           "شروع آزمون"
                         )}

@@ -126,7 +126,7 @@ function Register() {
                 disabled={isLoading}
               >
                 {isLoading ? (
-                  <BeatLoader className='Register_button_div_BeatLoader' />
+                  <BeatLoader color="#fff"  />
                 ) : (
                   'ثبت‌نام'
                 )}

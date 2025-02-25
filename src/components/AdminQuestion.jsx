@@ -199,7 +199,7 @@ function AdminQuestion() {
 
                 <div className="AdminQuestion_button_div">
                   <button className="AdminQuestion_button" onClick={handleAddQuestion} disabled={loadingAdd}>
-                    {loadingAdd ? <BeatLoader /> : "افزودن سوال"}
+                    {loadingAdd ? <BeatLoader color="#fff"  /> : "افزودن سوال"}
                   </button>
                 </div>
 
@@ -208,7 +208,7 @@ function AdminQuestion() {
             <h3 className="AdminQuestion_container_main_h1">لیست سوالات</h3>
             {loadingList ? (
                     <div className="Loader_Container">
-                          <ScaleLoader className="ScaleLoader" />
+                          <ScaleLoader color=" #0073e6" height={25}   width={3} />
                     </div>
             ) : (
                   <ul className="AdminQuestion_ul">
@@ -238,7 +238,7 @@ function AdminQuestion() {
 
             <div className="AdminQuestion_button_div_one">
                 <button className="AdminQuestion_button_one" onClick={handleSendQuestions} disabled={loadingSend}>
-                    {loadingSend ? <BeatLoader  /> : "ارسال سوالات"}
+                    {loadingSend ? <BeatLoader color="#fff"   /> : "ارسال سوالات"}
                 </button>
             </div>
        </div>

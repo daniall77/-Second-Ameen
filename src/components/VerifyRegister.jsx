@@ -156,7 +156,7 @@ function VerifyRegister() {
         ) : (
           <div className="Verify_div_button_one">
             <button type="button" className="Verify_button_one" onClick={handleResendCode} disabled={isResending}>
-              {isResending ? <BeatLoader className="Verify_container_BeatLoader" /> : 'ارسال مجدد کد'}
+              {isResending ? <BeatLoader color="#fff"  /> : 'ارسال مجدد کد'}
             </button>
           </div>
         )}
@@ -168,7 +168,7 @@ function VerifyRegister() {
             onClick={() => handleVerify(verificationCode.join(''))}
             disabled={isVerifyDisabled || isLoading}
           >
-            {isLoading ? <BeatLoader className="Verify_container_BeatLoader" /> : 'تأیید'}
+            {isLoading ? <BeatLoader color="#fff"  /> : 'تأیید'}
           </button>
         </div>
       </div>

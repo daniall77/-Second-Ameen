@@ -52,7 +52,7 @@ function AdminListExam() {
              <Toaster className="AdminListExam_Toaster"  position="top-center" reverseOrder={false} />
               {isLoading ? (
                 <div className="Loader_Container">
-                    <ScaleLoader className="ScaleLoader" />
+                    <ScaleLoader color=" #0073e6" height={25}   width={3} />
                </div>
               ) : exams.length > 0 ? (
                 <div className="AdminListExam_container_main">
@@ -70,7 +70,7 @@ function AdminListExam() {
                                         onClick={() => handleViewParticipants(exam.id)}
                                         disabled={loadingExamId === exam.id}
                                       >
-                                        {loadingExamId === exam.id ? <BeatLoader className="AdminListExam_BeatLoader" /> : "مشاهده"}
+                                        {loadingExamId === exam.id ? <BeatLoader color="#fff"  /> : "مشاهده"}
                                       </button>
                                 </div>
                          </div>

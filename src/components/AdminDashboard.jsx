@@ -111,7 +111,7 @@ function AdminDashboard() {
   if (loading) {
     return (
       <div className="Loader_Container">
-          <ScaleLoader className="ScaleLoader" />
+          <ScaleLoader color=" #0073e6" height={25}   width={3} />
       </div>
     );
   }
@@ -292,7 +292,7 @@ function AdminDashboard() {
                                         onClick={() => changeUserRole(editor.id, "admin")} 
                                         disabled={changingUserId === editor.id}
                                       >
-                                        {changingUserId === editor.id ? <BeatLoader /> : "ادمین"}
+                                        {changingUserId === editor.id ? <BeatLoader color="#fff"  /> : "ادمین"}
                                       </button>
                                 </div>
                                 <div className="AdminDashboard_container_button">
@@ -301,7 +301,7 @@ function AdminDashboard() {
                                           onClick={() => changeUserRole(editor.id, "user")} 
                                           disabled={changingUserId === editor.id}
                                         >
-                                          {changingUserId === editor.id ? <BeatLoader /> : "کاربر"}
+                                          {changingUserId === editor.id ? <BeatLoader color="#fff"  /> : "کاربر"}
                                         </button>
                                 </div>
                             </td>
@@ -356,12 +356,12 @@ function AdminDashboard() {
                             <td>
                                   <div className="AdminDashboard_container_button">
                                         <button className="AdminDashboard_button" onClick={() => changeUserRole(user.id, "admin")} disabled={changingUserId === user.id}>
-                                              {changingUserId === user.id ? <BeatLoader /> : "ادمین"}
+                                              {changingUserId === user.id ? <BeatLoader color="#fff"  /> : "ادمین"}
                                         </button>
                                   </div>
                                   <div className="AdminDashboard_container_button">
                                         <button className="AdminDashboard_button" onClick={() => changeUserRole(user.id, "editor")} disabled={changingUserId === user.id}>
-                                            {changingUserId === user.id ? <BeatLoader /> : "ادیتور"}
+                                            {changingUserId === user.id ? <BeatLoader color="#fff"  /> : "ادیتور"}
                                         </button>
                                   </div>
                             </td>

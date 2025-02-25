@@ -240,7 +240,7 @@ function AdminContent() {
          <Toaster position="top-center" reverseOrder={false} />
       {pageLoading ? (
            <div className="Loader_Container">
-                <ScaleLoader className="ScaleLoader" />
+                <ScaleLoader color=" #0073e6" height={25}   width={3} />
           </div>
       ) : (
 
@@ -302,7 +302,7 @@ function AdminContent() {
 
                               <div className="AdminContent_modal_div">
                                   <button className="AdminContent_modal_div_button" onClick={handleSubmitTest}  disabled={loading} >
-                                        {loading ? <BeatLoader className="AdminContent_BeatLoader" /> : " ثبت"}
+                                        {loading ? <BeatLoader color="#fff"  /> : " ثبت"}
                                   </button>
                               </div>
                             </div>

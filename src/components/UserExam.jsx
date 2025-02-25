@@ -23,6 +23,7 @@ function UserExam() {
 
         console.log(" داده‌های دریافتی:", response.data);
         setExams(response.data.data);
+
       } catch (error) {
         toast.error(" خطا در دریافت مسابقات");
         console.error(" خطا در دریافت مسابقات:", error);
@@ -51,7 +52,7 @@ function UserExam() {
       });
 
       console.log(" نتیجه مسابقه:", response.data);
-      setModalData({ examId, examType, result: response.data });
+      setModalData({ examId, examType  , result: response.data });
     } catch (error) {
       if (examType === "descriptive" && error.response?.status === 403) {
         toast.error(" این مسابقه هنوز تصحیح نشده است");
@@ -78,11 +79,11 @@ function UserExam() {
 
         {isLoading ? (
            <div className="Loader_Container">
-              <ScaleLoader className="ScaleLoader" />
+              <ScaleLoader color=" #0073e6" height={25}   width={3} />
           </div>
         ) : Object.keys(exams).length > 0 ? (
           <div className="UserExam_list">
-            {Object.entries(exams).map(([examId, examType]) => (
+            {Object.entries(exams).map(([examId, examType ]) => (
               <div key={examId} className="UserExam_card">
                 <p className="UserExam_card_title"> کد مسابقه: <span className="UserExam_card_title_span">{examId} </span> </p>
                 <p className="UserExam_card_type">نوع مسابقه: <span className="UserExam_card_type_span"> {examType === "test" ? "تستی" : "تشریحی"} </span></p>
@@ -91,7 +92,7 @@ function UserExam() {
                   onClick={() => handleShowResult(examId, examType)}
                   disabled={loadingResult}
                 >
-                  {loadingResult ? <BeatLoader  /> : "مشاهده نتیجه"}
+                  {loadingResult ? <BeatLoader color="#fff" /> : "مشاهده نتیجه"}
                 </button>
               </div>
             ))}

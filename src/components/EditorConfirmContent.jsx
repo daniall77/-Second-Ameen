@@ -71,7 +71,7 @@ function EditorConfirmContent() {
 
       {loading ? (
             <div className="Loader_Container">
-                  <ScaleLoader className="ScaleLoader" />
+                  <ScaleLoader color=" #0073e6" height={25}   width={3} />
            </div>
       ) : articles.length === 0 ? (
         <p className="AdminConfirmContent_container_p">هیچ مقاله‌ای در انتظار تایید نیست</p>
@@ -119,14 +119,14 @@ function EditorConfirmContent() {
                   onClick={() => handleAction(article.id, true)}
                   disabled={processingArticle === article.id}
                 >
-                  {processingArticle === article.id ? <BeatLoader /> : "تایید"}
+                  {processingArticle === article.id ? <BeatLoader color="#fff"  /> : "تایید"}
                 </button>
                 <button
                   className="AdminConfirmContent_reject_buttons"
                   onClick={() => handleAction(article.id, false)}
                   disabled={processingArticle === article.id}
                 >
-                  {processingArticle === article.id ? <BeatLoader /> : "رد"}
+                  {processingArticle === article.id ? <BeatLoader color="#fff"  /> : "رد"}
                 </button>
               </div>
             </div>

@@ -53,7 +53,7 @@ function UserViewContent() {
   if (loading) {
     return (
       <div className="Loader_Container">
-          <ScaleLoader className="ScaleLoader" />
+          <ScaleLoader color=" #0073e6" height={25}   width={3} />
       </div>
     );
   }

@@ -6,7 +6,7 @@ import Select from "react-select";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import { IoClose } from "react-icons/io5";
-import { ScaleLoader, BeatLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 
 
 
@@ -271,7 +271,7 @@ try {
         <section className="AdminViewContent_container_main_section">
         {loading ? (  
           <div className="Loader_Container">
-              <ScaleLoader className="ScaleLoader" />
+              <ScaleLoader color=" #0073e6" height={25}   width={3} />
           </div>
     ) :   articles.length > 0 ? (
             <>

@@ -86,7 +86,7 @@ function AdminCorrecting() {
 
                 {isLoading ? (
                    <div className="Loader_Container">
-                       <BounceLoader className="ScaleLoader" />
+                       <BounceLoader color=" #0073e6" height={25}   width={3} />
                   </div>
                 ) : studentData ? (
                 <section className="AdminCorrecting_student_info_section">
@@ -128,7 +128,7 @@ function AdminCorrecting() {
 
                       <footer className="AdminCorrecting_footer">
                         <button className="AdminCorrecting_finish_button" onClick={handleFinishCorrection} disabled={isSubmitting}>
-                          {isSubmitting ? <BeatLoader className="AdminCorrecting_BeatLoader" /> : "پایان تصحیح"}
+                          {isSubmitting ? <BeatLoader color="#fff"  /> : "پایان تصحیح"}
                         </button>
                       </footer>
                 </section>

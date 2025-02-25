@@ -137,7 +137,7 @@ function EditorExam() {
                       onClick={handleCreateExam}
                       disabled={loading}
                     >
-                      {loading ? <BeatLoader /> : "ایجاد مسابقه"}
+                      {loading ? <BeatLoader color="#fff"  /> : "ایجاد مسابقه"}
                     </button>
                   </div>
               </section>            
