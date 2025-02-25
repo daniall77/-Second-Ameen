@@ -103,14 +103,15 @@ body{
 }
 
 .Button_Login {
-  background-color: var(--accent-yellow);
-  color: var(--primary-light);
+  background-color: var(--primary-light);
+  color: var(--white);
   border: none;
-  padding: 10px 20px;
+  padding: 7px 12px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   font-family: "vazir";
+  font-size: 14px;
 }
 .Button_Login:hover {
   background-color: var(--white);
@@ -2399,75 +2400,6 @@ body{
 
 
 
-/* modal */
-
-/* .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-.modal_overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  font-family: "vazir";
-}
-
-.modal_content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
-  max-width: 90%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  text-align: center;
-}
-
-.modal_content h2 {
-  margin-bottom: 15px;
-}
-
-.modal_content label {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-.modal_content input {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.modal_content button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  margin-top: 15px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.modal_content button:hover {
-  background-color: #0056b3;
-} */
-
-
-/* modal */
-
 
 
 
@@ -4649,7 +4581,7 @@ body{
   font-family: "vazir";
 }
 
-
+.UserExam_card_id ,
 .UserExam_card_title,
 .UserExam_card_type {
   font-size: 16px;
@@ -4658,7 +4590,7 @@ body{
   margin-bottom: 5px;
   font-family: "vazir";
 }
-
+.UserExam_card_id_span,
 .UserExam_card_title_span,
 .UserExam_card_type_span {
   color: var(--accent-yellow);
