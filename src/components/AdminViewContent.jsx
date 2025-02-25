@@ -6,6 +6,7 @@ import Select from "react-select";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import { IoClose } from "react-icons/io5";
+import { ScaleLoader } from "react-spinners";
 
 
 
@@ -43,6 +44,7 @@ const [initialContent, setInitialContent] = useState("");
 
 
 const fetchArticles = async () => {
+  setLoading(true); 
   try {
     const response = await axios.get("http://localhost:8000/userArticles", {
       headers: { Authorization: `Bearer ${cookies.access_token}` },
@@ -282,7 +284,11 @@ try {
         <div className="AdminViewContent_container_main">
           <h1 className="AdminViewContent_container_main_h">لیست مقالات من</h1>
           <section className="AdminViewContent_container_main_section">
-            {articles.length > 0 ? (
+           {loading ? (  
+                <div className="Loader_Container">
+                    <ScaleLoader className="ScaleLoader" />
+                </div>
+      ) :    articles.length > 0 ? (
               <>
                 <table className="AdminViewContent_container_table">
                   <thead className="AdminViewContent_container_thead" >

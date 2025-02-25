@@ -6,9 +6,11 @@ import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import toast, { Toaster } from "react-hot-toast";
-import { BeatLoader } from "react-spinners";
+import { BeatLoader ,  ScaleLoader } from "react-spinners";
+
 
 function UserDashboard() {
+  const [loading, setLoading] = useState(true);
   const [province, setProvince] = useState("");
   const [city, setCity] = useState("");
   const [school, setSchool] = useState("");
@@ -86,11 +88,20 @@ function UserDashboard() {
       } catch (error) {
         console.error("Error fetching user info:", error);
       }
+      setLoading(false);
     };
 
     fetchProvinceCityData();
     fetchUserInfo();
   }, [cookies.access_token]);
+
+  if (loading) {
+    return (
+      <div className="Loader_Container">
+          <ScaleLoader className="ScaleLoader" />
+      </div>
+    );
+  }
 
   const handleSchoolChange = (e) => {
     const value = e.target.value;

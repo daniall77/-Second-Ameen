@@ -71,9 +71,9 @@ function EditorDashboard() {
   
   if (loading) {
     return (
-      <div className="loader-container">
-        <ScaleLoader />
-      </div>
+      <div className="Loader_Container">
+          <ScaleLoader className="ScaleLoader" />
+     </div>
     );
   }
 

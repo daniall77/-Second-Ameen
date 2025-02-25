@@ -70,9 +70,9 @@ function EditorConfirmContent() {
       <h2 className="AdminConfirmContent_container_h">مقالات در انتظار تایید</h2>
 
       {loading ? (
-        <div className="AdminConfirmContent_container_loader">
-          <ScaleLoader />
-        </div>
+            <div className="Loader_Container">
+                  <ScaleLoader className="ScaleLoader" />
+           </div>
       ) : articles.length === 0 ? (
         <p className="AdminConfirmContent_container_p">هیچ مقاله‌ای در انتظار تایید نیست</p>
       ) : (

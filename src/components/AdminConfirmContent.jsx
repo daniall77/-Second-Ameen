@@ -70,9 +70,9 @@ function AdminConfirmContent() {
       <h2 className="AdminConfirmContent_container_h">مقالات در انتظار تایید</h2>
 
       {loading ? (
-        <div className="AdminConfirmContent_container_loader">
-          <ScaleLoader />
-        </div>
+              <div className="Loader_Container">
+                  <ScaleLoader color=" #0073e6" height={25}   width={3} />
+             </div>
       ) : articles.length === 0 ? (
         <p className="AdminConfirmContent_container_p">هیچ مقاله‌ای در انتظار تایید نیست</p>
       ) : (

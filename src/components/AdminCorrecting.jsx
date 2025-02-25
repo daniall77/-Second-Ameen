@@ -79,14 +79,14 @@ function AdminCorrecting() {
   return (
           <div className="AdminCorrecting_container">
                 <Toaster className="AdminCorrecting_Toaster"  position="top-center" reverseOrder={false} />
-
+                
                 <header className="AdminCorrecting_header">
                     <h2 className="AdminCorrecting_header_h" >پاسخ‌های دانش‌آموز</h2>
                 </header>
 
                 {isLoading ? (
-                  <div className="AdminCorrecting_loader_container">
-                      <BounceLoader className="AdminCorrecting_BounceLoader" />
+                   <div className="Loader_Container">
+                       <BounceLoader className="ScaleLoader" />
                   </div>
                 ) : studentData ? (
                 <section className="AdminCorrecting_student_info_section">

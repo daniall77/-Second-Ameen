@@ -164,7 +164,9 @@ function EditorContent() {
 
 <Toaster position="top-center" reverseOrder={false} />
       {pageLoading ? (
-        <ScaleLoader />
+           <div className="Loader_Container">
+               <ScaleLoader className="ScaleLoader" />
+          </div>
       ) : (
         <>
 

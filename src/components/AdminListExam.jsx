@@ -51,9 +51,9 @@ function AdminListExam() {
         <div className="AdminListExam_container">
              <Toaster className="AdminListExam_Toaster"  position="top-center" reverseOrder={false} />
               {isLoading ? (
-                    <div className="AdminListExam_loader_container">
-                        <ScaleLoader  className="AdminListExam_ScaleLoader" />
-                    </div>
+                <div className="Loader_Container">
+                    <ScaleLoader className="ScaleLoader" />
+               </div>
               ) : exams.length > 0 ? (
                 <div className="AdminListExam_container_main">
                    <h2 className="AdminListExam_container_main_header" >لیست مسابقات تشریحی</h2>

@@ -6,6 +6,7 @@ import Select from "react-select";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import { IoClose } from "react-icons/io5";
+import { ScaleLoader, BeatLoader } from "react-spinners";
 
 
 
@@ -38,6 +39,8 @@ const [initialContent, setInitialContent] = useState("");
 
 
 const fetchArticles = async () => {
+
+  setLoading(true); 
   try {
     const response = await axios.get("http://localhost:8000/articles");
     setArticles(response.data);
@@ -46,7 +49,7 @@ const fetchArticles = async () => {
     console.error("Error fetching articles:", err.message || err);
     setError("Failed to fetch articles.");
   } finally {
-    setLoading(false);
+    setLoading(false);  
   }
 };
 
@@ -161,10 +164,6 @@ try {
 };
 
 
-
-
-
-
   const paginate = (data, page, rowsPerPage) => {
     const startIndex = (page - 1) * rowsPerPage;
     const endIndex = startIndex + rowsPerPage;
@@ -268,8 +267,13 @@ try {
     <Toaster position="top-center" reverseOrder={false} />
       <div className="AdminViewContent_container_main">
         <h1 className="AdminViewContent_container_main_h">لیست همه مقالات</h1>
+        
         <section className="AdminViewContent_container_main_section">
-          {articles.length > 0 ? (
+        {loading ? (  
+          <div className="Loader_Container">
+              <ScaleLoader className="ScaleLoader" />
+          </div>
+    ) :   articles.length > 0 ? (
             <>
               <table className="AdminViewContent_container_table">
                 <thead className="AdminViewContent_container_thead" >

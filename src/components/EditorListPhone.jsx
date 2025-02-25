@@ -54,9 +54,9 @@ function AdminListPhone() {
             </header>
 
             {isLoading ? (
-                <div className="AdminListPhone_loader_container">
-                  <ScaleLoader className="AdminListPhone_ScaleLoader" />
-                </div>
+                <div className="Loader_Container">
+                     <ScaleLoader className="ScaleLoader" />
+               </div>
                 ) : phoneNumbers.length > 0 ? (
                 <section className="AdminListPhone_participants_section">
                     {phoneNumbers.map((phone) => (

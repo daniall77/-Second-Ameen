@@ -37,6 +37,7 @@ function ListMatches() {
   // end section 1
 
 
+
   useEffect(() => {
     const fetchExams = async () => {
       try {
@@ -139,6 +140,9 @@ function ListMatches() {
         };
 
         // end section 1
+
+
+
  
 
   return (
@@ -223,8 +227,8 @@ function ListMatches() {
 
 
             {loading ? (
-              <div className="ListMatches_loader_container">
-                <ScaleLoader className="ListMatches_ScaleLoader" />
+             <div className="Loader_Container">
+                 <ScaleLoader color=" #0073e6" height={25}   width={3} />
               </div>
             ) : exams.length > 0 ? (
               <div className="ListMatches_exams_list">

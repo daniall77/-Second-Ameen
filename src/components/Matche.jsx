@@ -97,8 +97,8 @@ function Matche() {
       <Toaster position="top-center" reverseOrder={false} />
       <div className="Matches_container">
         {loading ? (
-          <div className="Matches_loader_container">
-            <BounceLoader />
+          <div className="Loader_Container">
+            <BounceLoader className="ScaleLoader" />
           </div>
         ) : (
           <main className="Matches_main_content">

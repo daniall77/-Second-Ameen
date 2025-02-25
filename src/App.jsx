@@ -211,6 +211,7 @@ import Default from "/image/Default.jpg";
                                           />
                                     </div>
                                     <div className="Article_section_one_left">
+                                          <p className="Article_Author">کد مقاله: <strong className="Article_strong" >{article.id}</strong></p>
                                           <p className="Article_Author">نویسنده: <strong className="Article_strong" >{article.author_id}</strong></p>
                                           <p className="Article_Date">تاریخ ایجاد: <strong className="Article_strong" >{article.created_at}</strong></p>
                                           {article.updated_at && (

@@ -165,7 +165,9 @@ function UserContent() {
 
 <Toaster position="top-center" reverseOrder={false} />
       {pageLoading ? (
-        <ScaleLoader />
+           <div className="Loader_Container">
+               <ScaleLoader className="ScaleLoader" />
+          </div>
       ) : (
        
             <div className="AdminContent_box">

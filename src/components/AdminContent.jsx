@@ -239,7 +239,9 @@ function AdminContent() {
 
          <Toaster position="top-center" reverseOrder={false} />
       {pageLoading ? (
-        <ScaleLoader className="AdminContent_ScaleLoader" />
+           <div className="Loader_Container">
+                <ScaleLoader className="ScaleLoader" />
+          </div>
       ) : (
 
         <>

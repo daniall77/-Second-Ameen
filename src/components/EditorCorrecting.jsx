@@ -85,9 +85,9 @@ function EditorCorrecting() {
                 </header>
 
                 {isLoading ? (
-                  <div className="AdminCorrecting_loader_container">
-                      <BounceLoader className="AdminCorrecting_BounceLoader" />
-                  </div>
+                   <div className="Loader_Container">
+                      <BounceLoader className="ScaleLoader" />
+                   </div>
                 ) : studentData ? (
                 <section className="AdminCorrecting_student_info_section">
                     <header className="AdminCorrecting_student_header">

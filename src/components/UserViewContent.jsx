@@ -20,6 +20,7 @@ function UserViewContent() {
 
   useEffect(() => {
     const fetchArticles = async () => {
+      setLoading(true); 
       try {
         const [pendingRes, approvedRes, rejectedRes] = await Promise.all([
           axios.get("http://localhost:8000/checklistUserArticles", {
@@ -51,9 +52,8 @@ function UserViewContent() {
 
   if (loading) {
     return (
-      <div className="loader-container">
-        <ScaleLoader  />
-    
+      <div className="Loader_Container">
+          <ScaleLoader className="ScaleLoader" />
       </div>
     );
   }

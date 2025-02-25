@@ -110,8 +110,8 @@ function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="loader-container">
-        <ScaleLoader />
+      <div className="Loader_Container">
+          <ScaleLoader className="ScaleLoader" />
       </div>
     );
   }

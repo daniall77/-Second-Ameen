@@ -144,8 +144,8 @@ function EditorQuestion() {
             <h2 className="AdminQuestion_container_main_h">ایجاد سوالات</h2>
             <section className="AdminQuestion_container_main_section">
               <div className="AdminQuestion_flex">
-                <p className="AdminQuestion_examId">کد آزمون: {examId}</p>
-                <p className="AdminQuestion_examType">نوع آزمون: {examType === "test" ? "تستی" : "تشریحی"}</p>
+                <p className="AdminQuestion_examId">کد مسابقه: {examId}</p>
+                <p className="AdminQuestion_examType">نوع مسابقه: {examType === "test" ? "تستی" : "تشریحی"}</p>
               </div>
                 <div className="AdminQuestion_div">
                   <label className="AdminQuestion_div_label">متن سوال:</label>
@@ -207,7 +207,9 @@ function EditorQuestion() {
 
             <h3 className="AdminQuestion_container_main_h1">لیست سوالات</h3>
             {loadingList ? (
-              <ScaleLoader />
+                 <div className="Loader_Container">
+                       <ScaleLoader className="ScaleLoader" />
+                  </div>
             ) : (
                   <ul className="AdminQuestion_ul">
                     {questions.map((q, index) => (

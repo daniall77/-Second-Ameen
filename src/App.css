@@ -5,6 +5,16 @@
   url("/font/Farsi-Digits-Without-Latin/Vazir-FD-WOL.ttf") ;
 }
 
+:root {
+  --primary-dark: #023E8A;
+  --primary-light: #0073e6;
+  --accent-yellow: #FFC107;
+  --white: #ffffff;
+  --success-green: #28a745; 
+  --error-red:  #ff0921;
+}
+
+
 
 *{
   margin: 0;
@@ -16,6 +26,9 @@ body{
   background-color: #e3eaf5;
 }
 
+
+
+/* start page App  */
 
 .Container {
   font-family: "vazir";
@@ -203,6 +216,7 @@ body{
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: flex-end;
+  z-index: 2000;
 }
 .Sidebar_Menu {
   width: 250px;
@@ -251,31 +265,23 @@ body{
 
 .Content_Wrapper {
   width: 90%;
-  width: 1000px;
-  margin: 140px auto;
+  width: 1040px;
+  margin: 150px auto;
   padding: 25px;
   border-radius: 12px;
-
 }
 
-
-
 .Error_Message {
-  color: var(--white);
-  background: var(--accent-yellow);
-  padding: 12px;
-  border-radius: 10px;
+  color: #000;
   text-align: center;
   font-weight: bold;
 }
-
 
 .Articles_Section {
   display: flex;
   flex-direction: column;
   gap: 22px;
 }
-
 
 .Article_Card {
   background: var(--white);
@@ -289,20 +295,17 @@ body{
   overflow: hidden;
 }
 
-
 .Article_Card:hover {
   transform: translateY(-7px);
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-
 .Article_Title {
   font-size: 22px;
   font-weight: bold;
-  color: var(--primary-light);
+  color: #000;
   margin-bottom: 12px;
 }
-
 
 .Article_section_one {
   display: flex;
@@ -313,7 +316,6 @@ body{
   color: var(--white);
 }
 
-
 .Article_section_one_right {
   flex: 1;
   display: flex;
@@ -321,8 +323,8 @@ body{
 }
 
 .Article_Image {
-  width: 110px;
-  height: 110px;
+  width: 130px;
+  height: 130px;
   object-fit: cover;
   border-radius: 10px;
   border: 3px solid var(--primary-light);
@@ -332,7 +334,6 @@ body{
 .Article_Image:hover {
   transform: scale(1.1);
 }
-
 
 .Article_section_one_left {
   flex: 2;
@@ -357,13 +358,13 @@ body{
 
 .Article_section_two {
   background: #e1eaf8;
-  padding: 18px;
+  padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
   margin-top: 12px;
   text-align: justify;
-  font-size: 17px;
-  line-height: 1.8;
+  font-size: 15px;
+  line-height: 1.3;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -377,6 +378,26 @@ body{
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+
+
+
+@media (max-width: 1024px) {
+
+  .Main_Navigation {
+    width: 95%;
+    padding: 0 40px;
+  }
+  .Nav_List {
+    gap: 15px; 
+  }
+  .Button_Login {
+    padding: 8px 15px;
+  }
+  .sticky {
+    width: 100%;
   }
 }
 
@@ -405,55 +426,10 @@ body{
   }
 
   .Article_section_two {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
-
-@media (max-width: 600px) {
-  .Article_Card {
-    padding: 14px;
-    border-left: 4px solid var(--accent-yellow);
-  }
-
-  .Article_Title {
-    font-size: 20px;
-  }
-
-  .Article_section_one {
-    padding: 12px;
-  }
-
-  .Article_Image {
-    width: 80px;
-    height: 80px;
-  }
-
-  .Article_section_two {
-    font-size: 15px;
-    padding: 12px;
-  }
-}
-
-
-
-
-@media (max-width: 1024px) {
-
-  .Main_Navigation {
-    width: 95%;
-    padding: 0 40px;
-  }
-  .Nav_List {
-    gap: 15px; 
-  }
-  .Button_Login {
-    padding: 8px 15px;
-  }
-  .sticky {
-    width: 100%;
-  }
-}
 
 @media (max-width: 768px) {
 
@@ -481,10 +457,39 @@ body{
     font-size: 20px;
   }
   .User_Details_Dropdown {
-    width: 180px;
+    width: 220px;
   }
 
 }
+
+
+
+@media (max-width: 600px) {
+  .Article_Card {
+    padding: 14px;
+    border-left: 4px solid var(--accent-yellow);
+  }
+
+  .Article_Title {
+    font-size: 20px;
+  }
+
+  .Article_section_one {
+    padding: 12px;
+  }
+
+  .Article_Image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .Article_section_two {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+
 
 @media (max-width: 480px) {
   .Main_Navigation {
@@ -511,6 +516,9 @@ body{
     border-radius: 0  0  20px 20px;
   }
 } 
+
+
+
 
  @media (max-width: 360px) {
   .Main_Navigation {
@@ -540,37 +548,7 @@ body{
 
 
 
-
-
-
-
-
-
-
-
-/* gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggh */
-/* gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggh */
-/* gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggh */
-/* gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggh */
-/* gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggh */
-/* gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggh */
-/* gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggh */
-
-
-
-
-
-:root {
-  --primary-dark: #023E8A;
-  --primary-light: #0073e6;
-  --accent-yellow: #FFC107;
-  --white: #ffffff;
-  --success-green: #28a745; 
-  --error-red:  #ff0921;
-}
-
-
-
+/* start page App  */
 
 
 
@@ -2010,6 +1988,16 @@ body{
 }
 
 
+@media (max-width: 768px) {
+
+  .AdminContent_box {
+    margin-top: 50px;
+  }
+  
+
+}
+
+
 
 /* end page AdminContent  */
 
@@ -2242,10 +2230,12 @@ body{
 
 .AdminViewContent_modal_input {
   flex: 1;
-  padding: 8px;
+  width: 65%;
+  padding: 6px;
   border: 1px solid var(--primary-light);
   border-radius: 5px;
   font-family: "vazir";
+  margin-bottom: 10px;
 }
 .AdminViewContent_modal_input:focus {
   border-color: var(--accent-yellow);
@@ -3006,6 +2996,17 @@ body{
   background-color: #00851d;
 }
 
+@media (max-width: 768px) {
+
+  .AdminQuestion_container_main {
+      margin-top: 50px;
+  }
+  
+
+}
+
+
+
 
 /* end page AdminQuestion &&  EditorQuestion  */
 
@@ -3236,6 +3237,19 @@ body{
 }
 
 
+@media (max-width: 768px) {
+
+
+
+  .AdminListExam_container_main {
+    text-align: center;
+    margin-top: 70px;
+    font-family: "vazir";
+  }
+
+}
+
+
 @media (max-width: 900px) {
   .AdminListExam_container_main_section {
     grid-template-columns: repeat(1, 1fr);
@@ -3258,7 +3272,7 @@ body{
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 170px;
+  gap: 150px;
   background-color: #e3eaf5;
   min-height: 100vh;
   font-family: "vazir";
@@ -3578,6 +3592,16 @@ body{
 }
 
 
+@media (max-width: 768px) {
+
+  .UserDashboard_container_main {
+    text-align: center;
+    font-family: "vazir";
+    margin-top: 50px;
+  }
+
+}
+
 
 
 
@@ -3790,6 +3814,15 @@ body{
 }
 
 
+@media (max-width: 768px) {
+
+  .AdminConfirmContent_container_h {
+      margin-top: 55px;
+  }
+
+}
+
+
 /* end page AdminConfirmContent  && EditorConfirmContent  */
 
 
@@ -3961,6 +3994,16 @@ body{
   
   .UserViewContent_show_more:hover {
     background: #e0a800;
+  }
+
+
+
+  @media (max-width: 768px) {
+
+    .UserViewContent_section {
+        margin-top: 80px;
+    }
+  
   }
   
   
@@ -4193,9 +4236,6 @@ body{
     font-family: "vazir";
   }
   
-  
-  
-  
 
 /* end page Matche  */
 
@@ -4220,22 +4260,16 @@ body{
   background-color:  #e3eaf5;;
   font-family: "vazir";
   margin-bottom: 200px;
-  animation: fadeInUp 0.7s ease-in-out forwards;
 }
 
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+
 
 
 .AdminListPhone_header_h {
   font-size: 24px;
   color: var(--primary-light);
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 40px;
   text-align: center;
   font-family: "vazir";
 }
@@ -4316,6 +4350,13 @@ body{
   }
 }
 
+@media (max-width: 768px) {
+
+  .AdminListPhone_header {
+      margin-top: 80px;
+  }
+
+}
 
 @media (max-width: 600px) {
   .AdminListPhone_participants_section {
@@ -4360,7 +4401,7 @@ body{
   font-size: 24px;
   color: var(--primary-light);
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   font-family: "vazir";
   text-align: center;
 }
@@ -4380,10 +4421,12 @@ body{
 
 .AdminCorrecting_student_info_section {
   background: #f4f4f4;
-  padding: 15px;
+  padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
   font-family: "vazir";
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .AdminCorrecting_student_header_p {
@@ -4522,11 +4565,16 @@ body{
 }
 
 
+@media (max-width: 768px) {
+
+  .AdminCorrecting_header_h{
+    margin-top: 80px;
+  }
+
+}
 
 
 /* end page AdminCorrecting &&  EditorCorrecting  */
-
-
 
 
 
@@ -4724,6 +4772,16 @@ body{
   }
 }
 
+@media (max-width: 768px) {
+
+  .UserExam_container_main {
+    text-align: center;
+    font-family: "vazir";
+    margin-top: 80px;
+  }
+
+}
+
 @media (max-width: 600px) {
   .UserExam_list {
     grid-template-columns: repeat(1, 1fr);
@@ -4737,6 +4795,8 @@ body{
 
 
 
+/* ReactQuill */
+
 .ql-editor {
   font-family: "vazir";
    font-size: 13px;
@@ -4745,5 +4805,17 @@ body{
 }
 
 
+/* loader */
 
+.Loader_Container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+  background-color: var(--white);
+  margin-right: auto;
+  margin-left: auto;
+}
 

@@ -67,7 +67,7 @@ function UserExam() {
   const closeModal = () => setModalData(null);
 
   return (
-    <div className="UserExam_container">
+    <div className="UserExam_container" dir="rtl" >
       <Toaster position="top-center" reverseOrder={false} />
 
       <div className="UserExam_container_main">
@@ -77,8 +77,8 @@ function UserExam() {
       <section className="UserExam_section">
 
         {isLoading ? (
-          <div className="UserExam_loader">
-            <ScaleLoader />
+           <div className="Loader_Container">
+              <ScaleLoader className="ScaleLoader" />
           </div>
         ) : Object.keys(exams).length > 0 ? (
           <div className="UserExam_list">
