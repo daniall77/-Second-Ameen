@@ -186,7 +186,7 @@ function UserContent() {
                                   <input type="file" id="fileInput" onChange={handleImageChange} className="AdminContent_file_input" />
                                   <label for="fileInput" className="AdminContent_file_label">انتخاب فایل</label>
                             </div>
-                            {imageLoading ? <ClipLoader className="AdminContent_ClipLoader" /> : imagePreview && <img src={imagePreview} alt="Preview" className="AdminContent_image_preview" />}
+                            {imageLoading ? <ClipLoader color=" #0073e6" /> : imagePreview && <img src={imagePreview} alt="Preview" className="AdminContent_image_preview" />}
                     </div>
                     <label className="AdminContent_label"> دسته بندی:</label>
                     <div className="AdminContent_dropdown">

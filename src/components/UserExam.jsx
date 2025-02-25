@@ -118,7 +118,7 @@ function UserExam() {
             <h3 className="UserExam_modal_title">نتیجه مسابقه</h3>
             {loadingResult ? (
               <div className="modal_loading">
-                <BounceLoader />
+                <BounceLoader color=" #0073e6" />
               </div>
             ) : error ? (
               <p className="UserExam_modal_error">{error}</p>

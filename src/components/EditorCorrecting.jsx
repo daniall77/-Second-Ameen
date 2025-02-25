@@ -86,7 +86,7 @@ function EditorCorrecting() {
 
                 {isLoading ? (
                    <div className="Loader_Container">
-                      <BounceLoader color=" #0073e6" height={25}   width={3}  />
+                      <BounceLoader color=" #0073e6"  />
                    </div>
                 ) : studentData ? (
                 <section className="AdminCorrecting_student_info_section">

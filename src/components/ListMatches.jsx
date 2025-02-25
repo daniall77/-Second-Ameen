@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { ScaleLoader, BeatLoader } from "react-spinners";
 
 
+
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import jwt_decode from "jwt-decode";
@@ -229,6 +230,7 @@ function ListMatches() {
             {loading ? (
              <div className="Loader_Container">
                  <ScaleLoader color=" #0073e6" height={25}   width={3} />
+                 
               </div>
             ) : exams.length > 0 ? (
               <div className="ListMatches_exams_list">

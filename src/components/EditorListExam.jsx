@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import toast, { Toaster } from "react-hot-toast";
+import  { Toaster } from "react-hot-toast";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { ScaleLoader, BeatLoader } from "react-spinners";

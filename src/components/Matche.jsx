@@ -106,7 +106,7 @@ function Matche() {
       <div className="Matches_container">
         {loading ? (
           <div className="Loader_Container">
-            <BounceLoader  />
+            <BounceLoader color=" #0073e6" />
           </div>
         ) : (
           <main className="Matches_main_content">

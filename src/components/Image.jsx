@@ -97,7 +97,7 @@ function Image() {
                     </div>
 
                     {loadingPreview ? (
-                        <ClipLoader  />
+                        <ClipLoader color=" #0073e6" />
                       ) : (
                         previewUrl && <img src={previewUrl} alt="Preview" className="Image_preview" />
                       )}
