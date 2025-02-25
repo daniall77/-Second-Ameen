@@ -25,12 +25,7 @@ function AdminListExam() {
         console.log("لیست آزمون‌های تشریحی:", response.data);
         setExams(response.data);
       } catch (error) {
-        // if (error.response?.status === 404) {
-        //   toast.error("هیچ مسابقه تشریحی یافت نشد");
-        // } else {
-        //   toast.error("خطا در دریافت لیست مسابقات");
-        // }
-        // console.error("خطا در دریافت آزمون‌ها:", error);
+
       } finally {
         setIsLoading(false);
       }

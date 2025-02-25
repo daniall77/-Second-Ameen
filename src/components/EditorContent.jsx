@@ -119,8 +119,7 @@ function EditorContent() {
         formData.append("subcategory_ids", selectedSubcategoryIds.join(","));
       }
 
-      // formData.append("category_ids", selectedCategoryIds.length > 0 ? selectedCategoryIds.join(",") : null);
-      // formData.append("subcategory_ids", selectedSubcategoryIds.length > 0 ? selectedSubcategoryIds.join(",") : null);
+
       
 
       console.log(" ارسال اطلاعات به بک‌اند:");

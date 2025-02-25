@@ -23,12 +23,7 @@ function AdminListPhone() {
 
         setPhoneNumbers(response.data.data);
       } catch (error) {
-        // if (error.response?.status === 404) {
-        //   toast.error("");
-        // } else {
-        //   toast.error("خطا در دریافت لیست شرکت‌کنندگان");
-        // }
-        // console.error("خطا", error);
+
       } finally {
         setIsLoading(false);
       }

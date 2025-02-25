@@ -89,10 +89,10 @@ function VerifyLogin() {
 
       if (error.response && error.response.status === 400) {
         toast.error('کد تأیید نادرست است', { duration: 4000 });
-        // setErrorMessage('کد تأیید نادرست است یا کاربر پیدا نشد');
+       
       } else {
         toast.error('خطایی رخ داده است. لطفاً دوباره تلاش کنید', { duration: 4000 });
-        // setErrorMessage('خطایی رخ داده است. لطفاً دوباره تلاش کنید');
+       
       }
     } finally {
       setIsLoading(false);
@@ -118,10 +118,10 @@ function VerifyLogin() {
 
       if (error.response && error.response.status === 400) {
         toast.error('کد تأیید نادرست است ', { duration: 4000 });
-        // setErrorMessage('کد تأیید نادرست است یا کاربر پیدا نشد');
+       
       } else {
         toast.error('خطایی رخ داده است. لطفاً دوباره تلاش کنید', { duration: 4000 });
-        // setErrorMessage('خطایی رخ داده است. لطفاً دوباره تلاش کنید');
+       
       }
     } finally {
       setIsResending(false); 
